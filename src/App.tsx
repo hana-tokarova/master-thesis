@@ -1,35 +1,18 @@
+import { ChakraProvider, theme } from "@chakra-ui/react"
 import { Canvas } from "@react-three/fiber"
 
 export const App = () => (
-  <Canvas>
-    <ambientLight intensity={0.1} />
-    <directionalLight color="red" position={[0, 0, 5]} />
-    <mesh>
-      <boxGeometry />
-      <meshStandardMaterial />
-    </mesh>
-  </Canvas>
+  <ChakraProvider theme={theme}>
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Canvas>
+        <pointLight intensity={0.01} />
+        <directionalLight color="purple" position={[0, 0, 5]} />
+        <mesh position={[0, 0, 0]} scale={1} rotation={[180, 0, 180]}>
+          <torusGeometry args={[2, 0.4, 8, 20, Math.PI * 2]} />
 
-  // <ChakraProvider theme={theme}>
-  //   <Box textAlign="center" fontSize="xl">
-  //     <Grid minH="100vh" p={3}>
-  //       <ColorModeSwitcher justifySelf="flex-end" />
-  //       <VStack spacing={8}>
-  //         <Logo h="40vmin" pointerEvents="none" />
-  //         <Text>
-  //           Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-  //         </Text>
-  //         <Link
-  //           color="teal.500"
-  //           href="https://chakra-ui.com"
-  //           fontSize="2xl"
-  //           target="_blank"
-  //           rel="noopener noreferrer"
-  //         >
-  //           Learn Chakra
-  //         </Link>
-  //       </VStack>
-  //     </Grid>
-  //   </Box>
-  // </ChakraProvider>
+          <meshPhongMaterial />
+        </mesh>
+      </Canvas>
+    </div>
+  </ChakraProvider>
 )
