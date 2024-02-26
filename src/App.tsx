@@ -1,50 +1,14 @@
 import { Button, ChakraProvider, HStack, IconButton, theme } from "@chakra-ui/react";
 import { Canvas } from '@react-three/fiber';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
+import * as THREE from 'three';
+import { Euler } from 'three';
+import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
 export const App = () => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [rotation, setRotation] = useState([0, 0, 0]);
-  const ref = useRef({
-    mouseX: 0,
-    mouseY: 0,
-    rotationX: 0,
-    rotationY: 0
-  });
-
-  const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
-    setIsDragging(true);
-    ref.current.mouseX = event.clientX;
-    ref.current.mouseY = event.clientY;
-    ref.current.rotationX = rotation[0];
-    ref.current.rotationY = rotation[1];
-  };
-
-  const onMouseMove = (event: React.MouseEvent<HTMLElement>) => {
-    if (isDragging) {
-      const deltaX = event.clientX - ref.current.mouseX;
-      const deltaY = event.clientY - ref.current.mouseY;
-      setRotation([ref.current.rotationX + deltaY * 0.01, ref.current.rotationY + deltaX * 0.01, 0]);
-    }
-  };
-
-  const onMouseUp = (event: React.MouseEvent<HTMLElement>) => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener('mousemove', onMouseMove as any);
-    window.addEventListener('mouseup', onMouseUp as any);
-
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove as any);
-      window.removeEventListener('mouseup', onMouseUp as any);
-    };
-  }, [isDragging]); // Re-run the effect if isDragging changes
-
-  const myMesh = React.useRef();
+  const rotation = new Euler(-180, 0, 0);
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
@@ -53,10 +17,32 @@ export const App = () => {
     setMeshColor(changeColor);
   };
 
+  const link = document.createElement('a');
+  link.style.display = 'none';
+  document.body.appendChild(link);
+
+  function save(blob: Blob, filename: string) {
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+  }
+
+  function saveArrayBuffer(buffer: DataView, filename: string) {
+    save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
+  }
+
+  const exportMesh = (mesh: THREE.Scene) => {
+    const exporter = new STLExporter();
+    const stlString = exporter.parse(mesh, { binary: true });
+    saveArrayBuffer(stlString, 'kek.stl');
+  };
+
+  const myMesh = React.useRef<THREE.Mesh>(null);
+
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-        <Canvas onMouseDown={onMouseDown}>
+        <Canvas >
           <color attach="background" args={["white"]} />
           <pointLight intensity={0.01} />
           <directionalLight color="white" position={[0, 0, 5]} />
@@ -77,7 +63,10 @@ export const App = () => {
             )}
           </HStack>
 
-          <Button rightIcon={<HiOutlineDownload />}>
+          <Button
+            rightIcon={<HiOutlineDownload />}
+            onClick={() => exportMesh(myMesh.current?.parent as THREE.Scene)}
+          >
             Export to .STL
           </Button>
 
