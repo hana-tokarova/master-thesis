@@ -8,7 +8,7 @@ export const App = () => (
         <color attach="background" args={["white"]} />
         <pointLight intensity={0.01} />
         <directionalLight color="white" position={[0, 0, 5]} />
-        <mesh position={[0, 0, 0]} rotation={[180, 180, 180]}>
+        <mesh position={[0, 0, 0]} rotation={[- 180, 0, 0]}>
           <torusGeometry radius={4} radialSegments={8} tubularSegments={10} />
           <meshStandardMaterial flatShading={true} color="pink" />
         </mesh>
