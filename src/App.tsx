@@ -1,6 +1,8 @@
-import { Button, ChakraProvider, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, HStack, IconButton, theme } from "@chakra-ui/react";
 import { Canvas } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
+import { FaSquare } from "react-icons/fa";
+import { HiOutlineDownload } from "react-icons/hi";
 
 export const App = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -42,6 +44,15 @@ export const App = () => {
     };
   }, [isDragging]); // Re-run the effect if isDragging changes
 
+  const myMesh = React.useRef();
+
+  const [meshColor, setMeshColor] = React.useState("white");
+  const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
+
+  const changeColor = (changeColor: string) => {
+    setMeshColor(changeColor);
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
@@ -49,13 +60,27 @@ export const App = () => {
           <color attach="background" args={["white"]} />
           <pointLight intensity={0.01} />
           <directionalLight color="white" position={[0, 0, 5]} />
-          <mesh position={[0, 0, 0]} rotation={rotation}>
-            <torusGeometry radius={4} radialSegments={8} tubularSegments={10} />
-            <meshStandardMaterial flatShading={true} color="pink" />
+          <mesh ref={myMesh} position={[0, 0, 0]} rotation={rotation}>
+            <torusGeometry attach="geometry" args={[0.8, 0.3, 16, 16]} />
+            <meshStandardMaterial attach="material" flatShading={true} color={meshColor} />
           </mesh>
         </Canvas>
         <div style={{ position: "absolute", top: "10px", left: "10px" }}>
-          <Button colorScheme="blue">Click Me</Button>
+          <HStack marginBottom={2}>
+            {colors.map((buttonColor) =>
+              <IconButton
+                aria-label='Change color'
+                icon={<FaSquare />}
+                color={buttonColor}
+                onClick={() => changeColor(buttonColor)}
+              />
+            )}
+          </HStack>
+
+          <Button rightIcon={<HiOutlineDownload />}>
+            Export to .STL
+          </Button>
+
         </div>
       </div>
     </ChakraProvider>
