@@ -23,8 +23,8 @@ const makeLissajous3DPoints = (nbSteps: number, s: number, a: number, b: number,
 const LissajouCurve = () => {
   const myMesh = React.useRef<THREE.Mesh>(null);
 
-  const points = makeLissajous3DPoints(300, 2, 4, 5, 5, Math.PI, Math.PI / 2);
-  const path = new THREE.CatmullRomCurve3(points); // CatmullRomCurve3 zmenit nejak na inu krivku
+  const points = makeLissajous3DPoints(100, 2, 4, 5, 5, Math.PI, Math.PI / 2);
+  const path = new THREE.CatmullRomCurve3(points); // CatmullRomCurve3 zmenit nejak na inu krivku, napisat si extending classy na Curve
 
   return (
     <mesh ref={myMesh} position={[0, 0, 0]} rotation={new THREE.Euler(-180, 180, 0)}>
