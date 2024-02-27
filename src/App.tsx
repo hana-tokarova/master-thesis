@@ -38,13 +38,14 @@ export const App = () => {
 
   const myMesh = React.useRef<THREE.Mesh>(null);
 
+
+
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
         <Canvas >
           <color attach="background" args={["white"]} />
-          <pointLight intensity={0.01} />
-          <directionalLight color="white" position={[0, 0, 5]} />
+          <directionalLight position={[0, 0, 5]} intensity={2} />
           <mesh ref={myMesh} position={[0, 0, 0]} rotation={rotation}>
             <torusGeometry attach="geometry" args={[0.8, 0.3, 16, 16]} />
             <meshStandardMaterial attach="material" flatShading={true} color={meshColor} />
