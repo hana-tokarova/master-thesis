@@ -4,11 +4,10 @@ import React from 'react';
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import * as THREE from 'three';
-import { Euler } from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
 export const App = () => {
-  const rotation = new Euler(-180, 0, 0);
+  const rotation = new THREE.Euler(-180, 0, 0);
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
