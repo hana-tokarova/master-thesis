@@ -20,16 +20,21 @@ const makeLissajous3DPoints = (nbSteps: number, s: number, a: number, b: number,
   return points;
 };
 
-const LissajouCurve = () => {
+type LissajouCurveProps = {
+  meshColor: string;
+  meshRotation: THREE.Euler;
+};
+
+const LissajouCurve = (props: LissajouCurveProps) => {
   const myMesh = React.useRef<THREE.Mesh>(null);
 
   const points = makeLissajous3DPoints(100, 2, 4, 5, 5, Math.PI, Math.PI / 2);
   const path = new THREE.CatmullRomCurve3(points); // CatmullRomCurve3 zmenit nejak na inu krivku, napisat si extending classy na Curve
 
   return (
-    <mesh ref={myMesh} position={[0, 0, 0]} rotation={new THREE.Euler(-180, 180, 0)}>
+    <mesh ref={myMesh} position={[0, 0, 0]} rotation={props.meshRotation}>
       <tubeGeometry attach="geometry" args={[path, 256, 0.05, 20, true]} />
-      <meshStandardMaterial attach="material" flatShading={true} color={"white"} />
+      <meshStandardMaterial attach="material" flatShading={true} color={props.meshColor} />
     </mesh>
   );
 };
@@ -70,11 +75,7 @@ export const App = () => {
         <Canvas >
           <color attach="background" args={["white"]} />
           <directionalLight position={[0, 0, 5]} intensity={2} />
-          {/* <mesh ref={myMesh} position={[0, 0, 0]} rotation={rotation}>
-            <torusGeometry attach="geometry" args={[0.8, 0.3, 16, 16]} />
-            <meshStandardMaterial attach="material" flatShading={true} color={meshColor} />
-          </mesh> */}
-          <LissajouCurve />
+          <LissajouCurve meshColor="pink" meshRotation={new THREE.Euler(-180, 180, 0)} />
         </Canvas>
         {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <HStack marginBottom={2}>
