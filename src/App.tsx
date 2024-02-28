@@ -1,8 +1,12 @@
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, HStack, IconButton, theme } from "@chakra-ui/react";
 import { Canvas } from '@react-three/fiber';
 import React from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
+
+import { FaSquare } from "react-icons/fa";
+import { HiOutlineDownload } from "react-icons/hi";
+import { Object3D } from "three";
 
 const makeLissajous3DPoints = (nbSteps: number, s: number, a: number, b: number, c: number, delta: number, gamma: number) => {
   const points = [];
@@ -21,27 +25,29 @@ const makeLissajous3DPoints = (nbSteps: number, s: number, a: number, b: number,
 };
 
 type LissajouCurveProps = {
+  mesh: MeshRef;
   meshColor: string;
   meshRotation: THREE.Euler;
 };
 
 const LissajouCurve = (props: LissajouCurveProps) => {
-  const myMesh = React.useRef<THREE.Mesh>(null);
-
   const points = makeLissajous3DPoints(100, 2, 4, 5, 5, Math.PI, Math.PI / 2);
   const path = new THREE.CatmullRomCurve3(points); // CatmullRomCurve3 zmenit nejak na inu krivku, napisat si extending classy na Curve
 
   return (
-    <mesh ref={myMesh} position={[0, 0, 0]} rotation={props.meshRotation}>
+    <mesh ref={props.mesh} position={[0, 0, 0]} rotation={props.meshRotation}>
       <tubeGeometry attach="geometry" args={[path, 256, 0.05, 20, true]} />
       <meshStandardMaterial attach="material" flatShading={true} color={props.meshColor} />
     </mesh>
   );
 };
 
-export const App = () => {
-  const rotation = new THREE.Euler(-180, 0, 0);
+type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
 
+export const App = () => {
+  const myMesh = React.useRef<THREE.Mesh>(null);
+
+  const meshRotation = new THREE.Euler(-180, 180, 0);
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
 
@@ -63,7 +69,7 @@ export const App = () => {
     save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
   }
 
-  const exportMesh = (mesh: THREE.Scene) => {
+  const exportMesh = (mesh: Object3D) => {
     const exporter = new STLExporter();
     const stlString = exporter.parse(mesh, { binary: true });
     saveArrayBuffer(stlString, 'kek.stl');
@@ -75,9 +81,9 @@ export const App = () => {
         <Canvas >
           <color attach="background" args={["white"]} />
           <directionalLight position={[0, 0, 5]} intensity={2} />
-          <LissajouCurve meshColor="pink" meshRotation={new THREE.Euler(-180, 180, 0)} />
+          <LissajouCurve mesh={myMesh} meshColor={meshColor} meshRotation={meshRotation} />
         </Canvas>
-        {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+        <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <HStack marginBottom={2}>
             {colors.map((buttonColor) =>
               <IconButton
@@ -91,12 +97,12 @@ export const App = () => {
 
           <Button
             rightIcon={<HiOutlineDownload />}
-            onClick={() => exportMesh(myMesh.current?.parent as THREE.Scene)}
+            onClick={() => exportMesh(myMesh.current?.parent!)} // is this ok? i hope so
           >
             Export to .STL
           </Button>
 
-        </div> */}
+        </div>
       </div>
     </ChakraProvider>
   );
