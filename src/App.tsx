@@ -8,13 +8,13 @@ import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { Object3D } from "three";
 
-const makeLissajous3DPoints = (nbSteps: number, s: number, a: number, b: number, c: number, delta: number, gamma: number) => {
+const makeLissajousCurve3D = (nbSteps: number, s: number, a: number, b: number, c: number, delta: number, gamma: number) => {
   const points = [];
   const range = 2 * Math.PI;
   const stepSize = range / nbSteps;
 
   for (let t = -range / 2; t <= range / 2; t += stepSize) {
-    const x = (s / 2) * Math.sin(a * t);
+    const x = s * Math.sin(a * t);
     const y = s * Math.sin(b * t + delta);
     const z = s * Math.sin(c * t + gamma);
 
@@ -31,8 +31,8 @@ type LissajouCurveProps = {
 };
 
 const LissajouCurve = (props: LissajouCurveProps) => {
-  const points = makeLissajous3DPoints(100, 2, 4, 5, 5, Math.PI, Math.PI / 2);
-  const path = new THREE.CatmullRomCurve3(points); // CatmullRomCurve3 zmenit nejak na inu krivku, napisat si extending classy na Curve
+  const points = makeLissajousCurve3D(100, 2, 5, 4, 5, Math.PI, Math.PI / 2);
+  const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
 
   return (
     <mesh ref={props.mesh} position={[0, 0, 0]} rotation={props.meshRotation}>
@@ -97,7 +97,7 @@ export const App = () => {
 
           <Button
             rightIcon={<HiOutlineDownload />}
-            onClick={() => exportMesh(myMesh.current?.parent!)} // is this ok? i hope so
+            onClick={() => exportMesh(myMesh.current!.parent!)} // is this ok? i hope so
           >
             Export to .STL
           </Button>
