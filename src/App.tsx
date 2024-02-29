@@ -1,13 +1,13 @@
 import { Button, ChakraProvider, HStack, IconButton, theme } from "@chakra-ui/react";
-import { Canvas } from '@react-three/fiber';
-import React from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
 import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
-import { Object3D } from "three";
+import { DirectionalLight, Mesh, Object3D } from "three";
 
 const makeLissajousCurve3D = (nbSteps: number, s: number, a: number, b: number, c: number, delta: number, gamma: number) => {
   const points = [];
@@ -42,10 +42,23 @@ const LissajouCurve = (props: LissajouCurveProps) => {
   );
 };
 
+function FollowCameraLight() {
+  const lightRef = useRef<DirectionalLight | null>(null);
+  const { camera } = useThree();
+
+  useFrame(() => {
+    lightRef.current!.position.copy(camera.position);
+  });
+
+  return (
+    <directionalLight ref={lightRef} intensity={2} />
+  );
+}
+
 type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
 
 export const App = () => {
-  const myMesh = React.useRef<THREE.Mesh>(null);
+  const myMesh = React.useRef<Mesh>(null);
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
@@ -77,12 +90,12 @@ export const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-        <Canvas >
+        <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [5, 5, 0] }} >
           <color attach="background" args={["white"]} />
-          <pointLight position={[0, 0, 0]} intensity={3} />
+          <FollowCameraLight />
           <ambientLight intensity={0.1} />
           <LissajouCurve mesh={myMesh} meshColor={meshColor} />
-          <OrbitControls />
+          <OrbitControls enableRotate={true} enableZoom={false} minPolarAngle={Math.PI / 3} maxPolarAngle={Math.PI / 3} />
         </Canvas>
         <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <HStack marginBottom={2}>
