@@ -42,7 +42,7 @@ const LissajouCurve = (props: LissajouCurveProps) => {
   );
 };
 
-function FollowCameraLight() {
+const FollowCameraLight = () => {
   const lightRef = useRef<DirectionalLight | null>(null);
   const { camera } = useThree();
 
