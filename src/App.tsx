@@ -46,6 +46,7 @@ const LissajouCurve = (props: LissajouCurveProps) => {
   );
 };
 
+// eslint-disable-next-line
 const Floor = () => {
   return (
     <mesh rotation-x={-Math.PI / 2} position={[0, -1.5, 0]} >
@@ -98,20 +99,20 @@ export const App = () => {
   link.style.display = 'none';
   document.body.appendChild(link);
 
-  function save(blob: Blob, filename: string) {
+  const save = (blob: Blob, filename: string) => {
     link.href = URL.createObjectURL(blob);
     link.download = filename;
     link.click();
   }
 
-  function saveArrayBuffer(buffer: DataView, filename: string) {
+  const saveArrayBuffer = (buffer: DataView, filename: string) => {
     save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
   }
 
   const exportMesh = (mesh: Object3D) => {
     const exporter = new STLExporter();
     const stlString = exporter.parse(mesh, { binary: true });
-    saveArrayBuffer(stlString, 'kek.stl');
+    saveArrayBuffer(stlString, "model.stl");
   };
 
   return (
@@ -134,6 +135,7 @@ export const App = () => {
           <HStack marginBottom={2}>
             {colors.map((buttonColor) =>
               <IconButton
+                key={buttonColor}
                 aria-label='Change color'
                 icon={<FaSquare />}
                 color={buttonColor}
@@ -143,6 +145,7 @@ export const App = () => {
           </HStack>
 
           <Button
+            key={"export"}
             rightIcon={<HiOutlineDownload />}
             onClick={() => exportMesh(myMesh.current!.parent!)}
           >
