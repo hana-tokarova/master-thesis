@@ -1,8 +1,9 @@
-import { Button, ChakraProvider, HStack, IconButton, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, HStack, IconButton, theme } from "@chakra-ui/react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
+import { ParametricSurface, parametricTwistedTorus } from "./ParametricGeometry";
 
 import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
@@ -31,11 +32,10 @@ type LissajouCurveProps = {
   meshRadius: number;
   parameterA: number;
   parameterB: number;
-  parameterC: number;
 };
 
 const LissajouCurve = (props: LissajouCurveProps) => {
-  const points = makeLissajousCurve3D(100, 20, props.parameterA, props.parameterB, props.parameterC, Math.PI, Math.PI / 2);
+  const points = makeLissajousCurve3D(100, 20, props.parameterA, props.parameterB, props.parameterA, Math.PI, Math.PI / 2);
   const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
 
   return (
@@ -75,9 +75,8 @@ export const App = () => {
   const myMesh = React.useRef<Mesh>(null);
 
   const [parameters, setParameters] = React.useState({
-    a: { value: 5, min: 1, max: 10, step: 1 },
-    b: { value: 4, min: 1, max: 10, step: 1 },
-    c: { value: 5, min: 1, max: 10, step: 1 },
+    a: { value: 5, min: 1, max: 10, step: 0.1 },
+    b: { value: 4, min: 1, max: 10, step: 0.1 },
     r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
   });
 
@@ -122,14 +121,26 @@ export const App = () => {
           <color attach="background" args={["white"]} />
           <FollowCameraLight />
           <ambientLight intensity={0.1} />
-          <LissajouCurve
+          {/* <LissajouCurve
             mesh={myMesh}
             meshColor={meshColor}
             meshRadius={parameters.r.value}
             parameterA={parameters.a.value}
             parameterB={parameters.b.value}
-            parameterC={parameters.c.value} />
-          <OrbitControls enableRotate={true} enableZoom={false} minPolarAngle={Math.PI / 2 - Math.PI / 6} maxPolarAngle={Math.PI / 2 + Math.PI / 6} />
+          /> */}
+          <ParametricSurface
+            parametricFunction={parametricTwistedTorus(4, 5, 0.3)}
+            mesh={myMesh}
+            meshColor={meshColor}
+            slices={100}
+            stacks={100}
+          />
+          <OrbitControls
+            enablePan={false}
+            enableRotate={true}
+            enableZoom={false}
+            minPolarAngle={Math.PI / 2 - Math.PI / 6}
+            maxPolarAngle={Math.PI / 2 + Math.PI / 6} />
         </Canvas>
         <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <HStack marginBottom={2}>
@@ -152,9 +163,11 @@ export const App = () => {
             Export to .STL
           </Button>
 
-          <>
+          {/* sliders for the lissajou */}
+          {/* <>
             {Object.entries(parameters).map(([parameterName, parameterDetails]) => (
               <div key={parameterName}>
+                {parameterName}
                 <Slider
                   margin={2}
                   colorScheme='cyan'
@@ -176,9 +189,8 @@ export const App = () => {
                   <SliderThumb />
                 </Slider>
               </div>
-
             ))}
-          </>
+          </> */}
 
         </div>
       </div>
