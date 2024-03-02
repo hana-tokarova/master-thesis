@@ -30,7 +30,7 @@ export const parametricTwistedTorus = (s: number, majorR: number, minorR: number
             x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
             // Evaluate polynomial
             // 3x^2 - 2x^3
-            return -3 * x ** 3 + 3 * x ** 2;
+            return x * x;
         };
 
         // Define start and end of the twist section

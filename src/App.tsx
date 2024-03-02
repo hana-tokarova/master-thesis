@@ -129,7 +129,7 @@ export const App = () => {
             parameterB={parameters.b.value}
           /> */}
           <ParametricSurface
-            parametricFunction={parametricTwistedTorus(4, 5, 0.3)}
+            parametricFunction={parametricTwistedTorus(4, 5, 0.2)}
             mesh={myMesh}
             meshColor={meshColor}
             slices={100}
