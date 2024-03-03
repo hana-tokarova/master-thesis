@@ -3,9 +3,11 @@ import * as THREE from 'three';
 import { Euler } from 'three';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
 
+type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
+
 type ParametricSurfaceProps = {
     parametricFunction: (u: number, v: number, target: THREE.Vector3) => void;
-    mesh: React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
+    mesh: MeshRef;
     meshColor: string;
     slices: number;
     stacks: number;

@@ -1,4 +1,4 @@
-import { Button, ChakraProvider, HStack, IconButton, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, HStack, IconButton, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, theme } from "@chakra-ui/react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
@@ -37,9 +37,9 @@ export const App = () => {
   const myMesh = React.useRef<Mesh>(null);
 
   const [parameters, setParameters] = React.useState({
-    a: { value: 1, min: 1, max: 10, step: 0.1 },
-    b: { value: 4, min: 1, max: 10, step: 0.1 },
-    c: { value: 4, min: 1, max: 10, step: 0.1 },
+    a: { value: 5, min: 1, max: 10, step: 1 },
+    b: { value: 4, min: 1, max: 10, step: 1 },
+    c: { value: 5, min: 1, max: 10, step: 1 },
     r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
   });
 
@@ -134,8 +134,7 @@ export const App = () => {
             Export to .STL
           </Button>
 
-          {/* sliders for the lissajou */}
-          {/* <>
+          <>
             {Object.entries(parameters).map(([parameterName, parameterDetails]) => (
               <div key={parameterName}>
                 {parameterName}
@@ -161,7 +160,7 @@ export const App = () => {
                 </Slider>
               </div>
             ))}
-          </> */}
+          </>
 
         </div>
       </div>
