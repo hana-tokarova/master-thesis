@@ -18,7 +18,7 @@ export const ParametricSurface = ({ parametricFunction, mesh, meshColor, slices,
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
-            <meshStandardMaterial attach="material" flatShading={false} color={meshColor} side={0} />
+            <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
 };
@@ -28,22 +28,20 @@ export const parametricTwistedTorus = (s: number, majorR: number, minorR: number
 
         const smoothStep = (edge0: number, edge1: number, x: number): number => {
             x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
-            // Evaluate polynomial
-            // 3x^2 - 2x^3
-            return x * x;
+            return x * x * (3 - 3 * x * x);
+            // return x * x;
         };
 
-        // Define start and end of the twist section
-        const startTwistU = 0.25;
-        const endTwistU = 0.75;
-        // Calculate smooth transition for twisting
+        const startTwistU = 0.10;
+        const endTwistU = 0.90;
+
         let t;
         if (u >= startTwistU && u <= endTwistU) {
             t = 10 * Math.sin(u * Math.PI * 2);
         } else {
             t = 0; // No twist outside the specified range
         }
-        // Apply smooth step to t for a smoother transition
+
         const smoothT = t * smoothStep(startTwistU, endTwistU, u) * smoothStep(endTwistU, startTwistU, u);
 
         u *= 2 * Math.PI;

@@ -3,48 +3,12 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
-import { ParametricSurface, parametricTwistedTorus } from "./ParametricGeometry";
 
 import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { DirectionalLight, Mesh, Object3D } from "three";
-
-const makeLissajousCurve3D = (nbSteps: number, s: number, a: number, b: number, c: number, delta: number, gamma: number) => {
-  const points = [];
-  const range = 2 * Math.PI;
-  const stepSize = range / nbSteps;
-
-  for (let t = -range / 2; t <= range / 2; t += stepSize) {
-    const x = s * Math.sin(a * t);
-    const y = (s / 2) * Math.sin(b * t + delta);
-    const z = s * Math.sin(c * t + gamma);
-
-    points.push(new THREE.Vector3(x, y, z));
-  }
-
-  return points;
-};
-
-type LissajouCurveProps = {
-  mesh: MeshRef;
-  meshColor: string;
-  meshRadius: number;
-  parameterA: number;
-  parameterB: number;
-};
-
-const LissajouCurve = (props: LissajouCurveProps) => {
-  const points = makeLissajousCurve3D(100, 20, props.parameterA, props.parameterB, props.parameterA, Math.PI, Math.PI / 2);
-  const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
-
-  return (
-    <mesh ref={props.mesh} position={[0, 0, 0]} >
-      <tubeGeometry attach="geometry" args={[path, 512, props.meshRadius, 20, true]} />
-      <meshStandardMaterial attach="material" flatShading={false} color={props.meshColor} />
-    </mesh>
-  );
-};
+import { LissajouCurve } from "./LissajouCurve";
 
 // eslint-disable-next-line
 const Floor = () => {
@@ -69,14 +33,13 @@ const FollowCameraLight = () => {
   );
 }
 
-type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
-
 export const App = () => {
   const myMesh = React.useRef<Mesh>(null);
 
   const [parameters, setParameters] = React.useState({
-    a: { value: 5, min: 1, max: 10, step: 0.1 },
+    a: { value: 1, min: 1, max: 10, step: 0.1 },
     b: { value: 4, min: 1, max: 10, step: 0.1 },
+    c: { value: 4, min: 1, max: 10, step: 0.1 },
     r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
   });
 
@@ -109,8 +72,15 @@ export const App = () => {
   }
 
   const exportMesh = (mesh: Object3D) => {
+    const clonedMesh = mesh.clone();
+
+    const rotationMatrix = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+    clonedMesh.applyMatrix4(rotationMatrix);
+    clonedMesh.updateMatrixWorld();
+
     const exporter = new STLExporter();
-    const stlString = exporter.parse(mesh, { binary: true });
+    const stlString = exporter.parse(clonedMesh, { binary: true });
+
     saveArrayBuffer(stlString, "model.stl");
   };
 
@@ -121,20 +91,21 @@ export const App = () => {
           <color attach="background" args={["white"]} />
           <FollowCameraLight />
           <ambientLight intensity={0.1} />
-          {/* <LissajouCurve
+          <LissajouCurve
             mesh={myMesh}
             meshColor={meshColor}
             meshRadius={parameters.r.value}
             parameterA={parameters.a.value}
             parameterB={parameters.b.value}
-          /> */}
-          <ParametricSurface
-            parametricFunction={parametricTwistedTorus(4, 5, 0.2)}
+            parameterC={parameters.c.value}
+          />
+          {/* <ParametricSurface
+            parametricFunction={parametricTwistedTorus(4, 4, 0.1)}
             mesh={myMesh}
             meshColor={meshColor}
-            slices={100}
-            stacks={100}
-          />
+            slices={200}
+            stacks={200}
+          /> */}
           <OrbitControls
             enablePan={false}
             enableRotate={true}
