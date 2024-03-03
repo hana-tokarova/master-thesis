@@ -29,30 +29,27 @@ const makeLissajousCurve3D = (nbSteps: number, s: number, a: number, b: number, 
     return points;
 };
 
-const squareShape = new Shape()
-    .moveTo(-0.5, -0.5)
-    .lineTo(-0.5, 0.5)
-    .lineTo(0.5, 0.5)
-    .lineTo(0.5, -0.5)
-    .closePath();
-
-export const LissajouCurve = (props: LissajouCurveProps) => {
-    const points = makeLissajousCurve3D(100, 20, props.parameterA, props.parameterB, props.parameterC, Math.PI, Math.PI / 2);
-    const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
-
-    const extrudeSettings = {
-        steps: 512,
-        bevelEnabled: true,
-        extrudePath: path,
-    };
+export const LissajouCurve = ({ parameterA, parameterB, parameterC, meshRadius, mesh, meshColor }: LissajouCurveProps) => {
+    const points = makeLissajousCurve3D(100, 20, parameterA, parameterB, parameterC, Math.PI, Math.PI / 2);
 
     const geometry = useMemo(() => {
-        return new ExtrudeGeometry(squareShape, extrudeSettings);
-    }, [squareShape, extrudeSettings]);
+        const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
+
+        const semicircleShape = new Shape();
+        semicircleShape.absarc(0, 0, meshRadius, -Math.PI / 2, Math.PI / 2, false); // Draw half-circle
+        // semicircleShape.lineTo(-props.meshRadius, 0);
+
+        const extrudeSettings = {
+            steps: 1024,
+            extrudePath: path,
+        };
+
+        return new ExtrudeGeometry(semicircleShape, extrudeSettings);
+    }, [points, meshRadius]);
 
     return (
-        <mesh ref={props.mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
-            <meshStandardMaterial attach="material" color={props.meshColor} />
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
+            <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
 
