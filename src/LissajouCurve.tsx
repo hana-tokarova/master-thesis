@@ -36,11 +36,10 @@ export const LissajouCurve = ({ parameterA, parameterB, parameterC, meshRadius, 
         const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
 
         const semicircleShape = new Shape();
-        semicircleShape.absarc(0, 0, meshRadius, -Math.PI / 2, Math.PI / 2, false); // Draw half-circle
-        // semicircleShape.lineTo(-props.meshRadius, 0);
+        semicircleShape.arc(0, 0, meshRadius, Math.PI / 2, -Math.PI / 2, true); // Draw half-circle
 
         const extrudeSettings = {
-            steps: 1024,
+            steps: 2000,
             extrudePath: path,
         };
 

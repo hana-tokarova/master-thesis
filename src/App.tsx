@@ -8,7 +8,19 @@ import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { DirectionalLight, Mesh, Object3D } from "three";
-import { LissajouCurve } from "./LissajouCurve";
+import { ParametricSurface, parametricTwistedTorus } from "./ParametricGeometry";
+
+
+type Parameter = {
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+}
+
+type Parameters = {
+  [key: string]: Parameter;
+}
 
 // eslint-disable-next-line
 const Floor = () => {
@@ -36,12 +48,20 @@ const FollowCameraLight = () => {
 export const App = () => {
   const myMesh = React.useRef<Mesh>(null);
 
-  const [parameters, setParameters] = React.useState({
+  const [parameters, setParameters] = React.useState<Parameters>({
     a: { value: 5, min: 1, max: 10, step: 1 },
     b: { value: 4, min: 1, max: 10, step: 1 },
     c: { value: 5, min: 1, max: 10, step: 1 },
     r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
   });
+
+  const [twistedTorusParameters, setTwistedTorusParameters] = React.useState<Parameters>({
+    s: { value: 4, min: 1, max: 10, step: 1 },
+    majorR: { value: 4, min: 1, max: 10, step: 1 },
+    minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
+  });
+
+  const [twistAll, setTwistAll] = React.useState(false);
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
@@ -50,12 +70,17 @@ export const App = () => {
     setMeshColor(changeColor);
   };
 
-  const changeParameter = (parameterName: string, newValue: number) => {
-    setParameters(prevParams => ({
+  const changeParameter = (
+    parameterName: string,
+    newValue: number,
+    setAction: React.Dispatch<React.SetStateAction<Parameters>>
+  ): void => {
+    setAction((prevParams) => ({
       ...prevParams,
-      [parameterName]: { ...prevParams[parameterName as keyof typeof prevParams], value: newValue },
+      [parameterName]: { ...prevParams[parameterName], value: newValue },
     }));
   };
+
 
   const link = document.createElement('a');
   link.style.display = 'none';
@@ -81,7 +106,7 @@ export const App = () => {
     const exporter = new STLExporter();
     const stlString = exporter.parse(clonedMesh, { binary: true });
 
-    saveArrayBuffer(stlString, "model.stl");
+    saveArrayBuffer(stlString, clonedMesh.uuid + '.stl');
   };
 
   return (
@@ -91,21 +116,21 @@ export const App = () => {
           <color attach="background" args={["white"]} />
           <FollowCameraLight />
           <ambientLight intensity={0.1} />
-          <LissajouCurve
+          {/* <LissajouCurve
             mesh={myMesh}
             meshColor={meshColor}
             meshRadius={parameters.r.value}
             parameterA={parameters.a.value}
             parameterB={parameters.b.value}
             parameterC={parameters.c.value}
-          />
-          {/* <ParametricSurface
-            parametricFunction={parametricTwistedTorus(4, 4, 0.1)}
+          /> */}
+          <ParametricSurface
+            parametricFunction={parametricTwistedTorus(4, 4, 0.3, false)}
             mesh={myMesh}
             meshColor={meshColor}
             slices={200}
             stacks={200}
-          /> */}
+          />
           <OrbitControls
             enablePan={false}
             enableRotate={true}
@@ -134,7 +159,8 @@ export const App = () => {
             Export to .STL
           </Button>
 
-          <>
+          {/* LissajouCurve parameters */}
+          {/* <>
             {Object.entries(parameters).map(([parameterName, parameterDetails]) => (
               <div key={parameterName}>
                 {parameterName}
@@ -145,7 +171,35 @@ export const App = () => {
                   min={parameterDetails.min}
                   max={parameterDetails.max}
                   step={parameterDetails.step}
-                  onChange={(newValue) => changeParameter(parameterName, newValue)}>
+                  onChange={(newValue) => changeParameter(parameterName, newValue, setParameters)}>
+
+                  <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
+                    {parameterDetails.min}
+                  </SliderMark>
+                  <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
+                    {parameterDetails.max}
+                  </SliderMark>
+                  <SliderTrack>
+                    <SliderFilledTrack />
+                  </SliderTrack>
+                  <SliderThumb />
+                </Slider>
+              </div>
+            ))}
+          </> */}
+
+          <>
+            {Object.entries(twistedTorusParameters).map(([parameterName, parameterDetails]) => (
+              <div key={parameterName}>
+                {parameterName}
+                <Slider
+                  margin={2}
+                  colorScheme='cyan'
+                  defaultValue={parameterDetails.value}
+                  min={parameterDetails.min}
+                  max={parameterDetails.max}
+                  step={parameterDetails.step}
+                  onChange={(newValue) => changeParameter(parameterName, newValue, setTwistedTorusParameters)}>
 
                   <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
                     {parameterDetails.min}
