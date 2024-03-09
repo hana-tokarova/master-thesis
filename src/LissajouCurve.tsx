@@ -20,7 +20,7 @@ const makeLissajousCurve3D = (nbSteps: number, s: number, a: number, b: number, 
 
     for (let t = -range / 2; t <= range / 2; t += stepSize) {
         const x = s * Math.sin(a * t);
-        const y = (s / 2) * Math.sin(b * t + delta);
+        const y = (s / 4) * Math.sin(b * t + delta);
         const z = s * Math.sin(c * t + gamma);
 
         points.push(new THREE.Vector3(x, y, z));
@@ -36,7 +36,7 @@ export const LissajouCurve = ({ parameterA, parameterB, parameterC, meshRadius, 
         const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
 
         const semicircleShape = new Shape();
-        semicircleShape.arc(0, 0, meshRadius, Math.PI / 2, -Math.PI / 2, true); // Draw half-circle
+        semicircleShape.arc(0, 0, meshRadius, Math.PI, -Math.PI, true); // Draw half-circle
 
         const extrudeSettings = {
             steps: 2000,

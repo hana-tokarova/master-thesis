@@ -6,17 +6,20 @@ import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeom
 type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
 
 type ParametricSurfaceProps = {
-    parametricFunction: (u: number, v: number, target: THREE.Vector3) => void;
+    // parametricFunction: (u: number, v: number, target: THREE.Vector3) => void;
     mesh: MeshRef;
     meshColor: string;
     slices: number;
     stacks: number;
+    majorR: number;
+    minorR: number;
 }
 
-export const ParametricSurface = ({ parametricFunction, mesh, meshColor, slices, stacks }: ParametricSurfaceProps) => {
+export const ParametricSurface = ({ mesh, meshColor, slices, stacks, majorR, minorR }: ParametricSurfaceProps) => {
     const geometry = useMemo(() => {
-        return new ParametricGeometry(parametricFunction, slices, stacks);
-    }, [parametricFunction, slices, stacks]);
+        const func = parametricTwistedTorus(4, majorR, minorR, false);
+        return new ParametricGeometry(func, slices, stacks);
+    }, [majorR, minorR, slices, stacks]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
@@ -48,7 +51,7 @@ export const parametricTwistedTorus = (s: number, majorR: number, minorR: number
         } else {
 
             if (u >= startTwistU && u <= endTwistU) {
-                t = 10 * Math.sin(u * Math.PI * 4);
+                t = 10 * Math.sin(u * Math.PI * 2);
             } else {
                 t = 0; // No twist outside the specified range
             }

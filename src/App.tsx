@@ -8,7 +8,7 @@ import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { DirectionalLight, Mesh, Object3D } from "three";
-import { ParametricSurface, parametricTwistedTorus } from "./ParametricGeometry";
+import { ParametricSurface } from "./ParametricGeometry";
 
 
 type Parameter = {
@@ -56,7 +56,6 @@ export const App = () => {
   });
 
   const [twistedTorusParameters, setTwistedTorusParameters] = React.useState<Parameters>({
-    s: { value: 4, min: 1, max: 10, step: 1 },
     majorR: { value: 4, min: 1, max: 10, step: 1 },
     minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
   });
@@ -125,11 +124,12 @@ export const App = () => {
             parameterC={parameters.c.value}
           /> */}
           <ParametricSurface
-            parametricFunction={parametricTwistedTorus(4, 4, 0.3, false)}
             mesh={myMesh}
             meshColor={meshColor}
             slices={200}
             stacks={200}
+            majorR={twistedTorusParameters.majorR.value}
+            minorR={twistedTorusParameters.minorR.value}
           />
           <OrbitControls
             enablePan={false}
