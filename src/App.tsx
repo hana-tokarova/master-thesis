@@ -1,14 +1,14 @@
 import { Button, ChakraProvider, HStack, IconButton, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, theme } from "@chakra-ui/react";
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import React, { useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+import React from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
 import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
-import { DirectionalLight, Mesh, Object3D } from "three";
-import { ParametricSurface } from "./ParametricGeometry";
+import { Mesh, Object3D } from "three";
+import { LissajouCurve } from "./LissajouCurve";
 
 
 type Parameter = {
@@ -22,27 +22,13 @@ type Parameters = {
   [key: string]: Parameter;
 }
 
-// eslint-disable-next-line
 const Floor = () => {
   return (
-    <mesh rotation-x={-Math.PI / 2} position={[0, -1.5, 0]} >
-      <circleGeometry attach="geometry" args={[5]} />
-      <meshStandardMaterial transparent={true} />
+    <mesh rotation-x={-Math.PI / 2} position={[0, -6.5, 0]} receiveShadow >
+      <circleGeometry attach="geometry" args={[50]} />
+      <shadowMaterial color="white" />
     </mesh>
   )
-}
-
-const FollowCameraLight = () => {
-  const lightRef = useRef<DirectionalLight | null>(null);
-  const { camera } = useThree();
-
-  useFrame(() => {
-    lightRef.current!.position.copy(camera.position);
-  });
-
-  return (
-    <directionalLight ref={lightRef} intensity={2} />
-  );
 }
 
 export const App = () => {
@@ -50,8 +36,8 @@ export const App = () => {
 
   const [parameters, setParameters] = React.useState<Parameters>({
     a: { value: 5, min: 1, max: 10, step: 1 },
-    b: { value: 4, min: 1, max: 10, step: 1 },
-    c: { value: 5, min: 1, max: 10, step: 1 },
+    b: { value: 5, min: 1, max: 10, step: 1 },
+    c: { value: 3, min: 1, max: 10, step: 1 },
     r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
   });
 
@@ -79,7 +65,6 @@ export const App = () => {
       [parameterName]: { ...prevParams[parameterName], value: newValue },
     }));
   };
-
 
   const link = document.createElement('a');
   link.style.display = 'none';
@@ -111,30 +96,42 @@ export const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [50, 50, 0] }} >
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [50, 50, 0] }} shadows >
           <color attach="background" args={["white"]} />
-          <FollowCameraLight />
+
+          <directionalLight ref={(light) => {
+            if (!light) return;
+
+            light.shadow.camera.left = -15;
+            light.shadow.camera.right = 15;
+            light.shadow.camera.top = 15;
+            light.shadow.camera.bottom = -15;
+            light.shadow.radius = 100;
+          }} intensity={3} castShadow position={[3, 10, 3]}
+          />
           <ambientLight intensity={0.1} />
-          {/* <LissajouCurve
+          <LissajouCurve
             mesh={myMesh}
             meshColor={meshColor}
             meshRadius={parameters.r.value}
             parameterA={parameters.a.value}
             parameterB={parameters.b.value}
             parameterC={parameters.c.value}
-          /> */}
-          <ParametricSurface
+          />
+          {/* {templates.lissajous.renderer(parameters, meshColor, myMesh)} */}
+          {/* <ParametricSurface
             mesh={myMesh}
             meshColor={meshColor}
             slices={200}
             stacks={200}
             majorR={twistedTorusParameters.majorR.value}
             minorR={twistedTorusParameters.minorR.value}
-          />
+          /> */}
+          <Floor />
           <OrbitControls
             enablePan={false}
             enableRotate={true}
-            enableZoom={false}
+            enableZoom={true}
             minPolarAngle={Math.PI / 2 - Math.PI / 6}
             maxPolarAngle={Math.PI / 2 + Math.PI / 6} />
         </Canvas>
@@ -154,13 +151,13 @@ export const App = () => {
           <Button
             key={"export"}
             rightIcon={<HiOutlineDownload />}
-            onClick={() => exportMesh(myMesh.current!.parent!)}
+            onClick={() => exportMesh(myMesh.current!)}
           >
             Export to .STL
           </Button>
 
           {/* LissajouCurve parameters */}
-          {/* <>
+          <>
             {Object.entries(parameters).map(([parameterName, parameterDetails]) => (
               <div key={parameterName}>
                 {parameterName}
@@ -186,9 +183,9 @@ export const App = () => {
                 </Slider>
               </div>
             ))}
-          </> */}
+          </>
 
-          <>
+          {/* <>
             {Object.entries(twistedTorusParameters).map(([parameterName, parameterDetails]) => (
               <div key={parameterName}>
                 {parameterName}
@@ -214,7 +211,7 @@ export const App = () => {
                 </Slider>
               </div>
             ))}
-          </>
+          </> */}
 
         </div>
       </div>
