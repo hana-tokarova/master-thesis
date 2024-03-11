@@ -76,10 +76,11 @@ export const LissajouCurve = ({ parameterA, parameterB, parameterC, meshRadius, 
         semicircleShape.arc(0, 0, meshRadius, Math.PI, -Math.PI, true); // Draw half-circle
 
         const extrudeSettings = {
-            steps: 10000,
+            steps: 2000,
             extrudePath: path,
         };
 
+        console.log(semicircleShape, meshRadius)
         const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
 
         // Apply bending to the geometry

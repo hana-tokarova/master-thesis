@@ -6,7 +6,6 @@ import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeom
 type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
 
 type ParametricSurfaceProps = {
-    // parametricFunction: (u: number, v: number, target: THREE.Vector3) => void;
     mesh: MeshRef;
     meshColor: string;
     slices: number;
