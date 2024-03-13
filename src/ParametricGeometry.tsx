@@ -21,7 +21,7 @@ export const ParametricSurface = ({ mesh, meshColor, slices, stacks, majorR, min
     }, [majorR, minorR, slices, stacks]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)} castShadow receiveShadow>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );

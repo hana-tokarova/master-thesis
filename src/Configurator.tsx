@@ -8,7 +8,7 @@ import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
-import { collections, CollectionType } from "./Collections";
+import { collections, CollectionType, JewelryType } from "./Collections";
 
 const Floor = () => {
   return (
@@ -21,20 +21,23 @@ const Floor = () => {
 
 type ConfiguratorProps = {
   collection: CollectionType;
+  jewelry: JewelryType;
 }
 
 export const Configurator = (props: ConfiguratorProps) => {
   const myMesh = React.useRef<Mesh>(null);
 
-  const collection = collections[props.collection];
+  const jewelryMesh = collections[props.collection].meshes[props.jewelry];
 
   const [parameters, setParameters] = React.useState<{ [key: string]: number }>();
-  const [currentCollection, setCurrentCollection] = React.useState<string>(props.collection);
+  const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(props.collection);
+  const [currentJewelry, setCurrentJewelry] = React.useState<JewelryType>(props.jewelry);
 
   React.useEffect(() => {
-    setParameters(() => Object.entries(collection.parameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+    setParameters(() => Object.entries(jewelryMesh!.parameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
     setCurrentCollection(props.collection);
-  }, [props.collection, collection.parameters]);
+    setCurrentJewelry(props.jewelry);
+  }, [props.collection, props.jewelry, jewelryMesh]);
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
@@ -80,7 +83,7 @@ export const Configurator = (props: ConfiguratorProps) => {
     saveArrayBuffer(stlString, clonedMesh.uuid + '.stl');
   };
 
-  if (!parameters || currentCollection !== props.collection) {
+  if (!parameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
     return <></>;
   }
 
@@ -93,16 +96,16 @@ export const Configurator = (props: ConfiguratorProps) => {
           <directionalLight ref={(light) => {
             if (!light) return;
 
-            light.shadow.camera.left = -15;
-            light.shadow.camera.right = 15;
-            light.shadow.camera.top = 15;
-            light.shadow.camera.bottom = -15;
+            light.shadow.camera.left = -30;
+            light.shadow.camera.right = 30;
+            light.shadow.camera.top = 30;
+            light.shadow.camera.bottom = -30;
             light.shadow.radius = 100;
-          }} intensity={3} castShadow position={[3, 10, 3]}
+          }} intensity={3} position={[3, 10, 3]} castShadow
           />
           <ambientLight intensity={0.1} />
 
-          {collection.render(parameters, meshColor, myMesh)}
+          {jewelryMesh!.render(parameters, meshColor, myMesh)}
 
           <Floor />
           <OrbitControls
@@ -133,34 +136,31 @@ export const Configurator = (props: ConfiguratorProps) => {
             Export to .STL
           </Button>
 
-          <>
-            {Object.entries(collection.parameters).map(([parameterName, parameterDetails]) => (
-              <div key={parameterName}>
-                {parameterName}
-                <Slider
-                  margin={2}
-                  colorScheme='cyan'
-                  value={parameters[parameterName]}
-                  min={parameterDetails.min}
-                  max={parameterDetails.max}
-                  step={parameterDetails.step}
-                  onChange={(newValue) => changeParameter(parameterName, newValue)}>
+          {jewelryMesh && Object.entries(jewelryMesh.parameters).map(([parameterName, parameterDetails]) => (
+            <div key={parameterName}>
+              {parameterName}
+              <Slider
+                margin={2}
+                colorScheme='cyan'
+                value={parameters[parameterName]}
+                min={parameterDetails.min}
+                max={parameterDetails.max}
+                step={parameterDetails.step}
+                onChange={(newValue) => changeParameter(parameterName, newValue)}>
 
-                  <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
-                    {parameterDetails.min}
-                  </SliderMark>
-                  <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
-                    {parameterDetails.max}
-                  </SliderMark>
-                  <SliderTrack>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb />
-                </Slider>
-              </div>
-            ))}
-          </>
-
+                <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
+                  {parameterDetails.min}
+                </SliderMark>
+                <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
+                  {parameterDetails.max}
+                </SliderMark>
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+            </div>
+          ))}
         </div>
       </div>
     </ChakraProvider>
