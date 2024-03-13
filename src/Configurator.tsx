@@ -100,6 +100,8 @@ export const Configurator = (props: ConfiguratorProps) => {
             light.shadow.camera.right = 30;
             light.shadow.camera.top = 30;
             light.shadow.camera.bottom = -30;
+            light.shadow.mapSize.width = 2048;
+            light.shadow.mapSize.height = 2048;
             light.shadow.radius = 100;
           }} intensity={3} position={[3, 10, 3]} castShadow
           />
