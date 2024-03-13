@@ -27,13 +27,17 @@ type ConfiguratorProps = {
 export const Configurator = (props: ConfiguratorProps) => {
   const myMesh = React.useRef<Mesh>(null);
 
-  const jewelryMesh = collections[props.collection].meshes[props.jewelry];
+  const jewelryMesh = collections[props.collection]?.meshes[props.jewelry];
 
   const [parameters, setParameters] = React.useState<{ [key: string]: number }>();
   const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(props.collection);
   const [currentJewelry, setCurrentJewelry] = React.useState<JewelryType>(props.jewelry);
 
   React.useEffect(() => {
+    if (!jewelryMesh) {
+      return;
+    }
+
     setParameters(() => Object.entries(jewelryMesh!.parameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
     setCurrentCollection(props.collection);
     setCurrentJewelry(props.jewelry);
@@ -41,6 +45,10 @@ export const Configurator = (props: ConfiguratorProps) => {
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
+
+  if (!jewelryMesh) {
+    return <></>;
+  }
 
   const changeColor = (changeColor: string) => {
     setMeshColor(changeColor);
@@ -113,7 +121,7 @@ export const Configurator = (props: ConfiguratorProps) => {
           <OrbitControls
             enablePan={false}
             enableRotate={true}
-            enableZoom={true}
+            enableZoom={false}
             minPolarAngle={Math.PI / 2 - Math.PI / 6}
             maxPolarAngle={Math.PI / 2 + Math.PI / 6} />
         </Canvas>

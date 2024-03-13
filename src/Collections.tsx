@@ -1,5 +1,6 @@
-import { LissajouCurve } from "./LissajouCurve";
-import { ParametricSurface } from "./ParametricGeometry";
+import { LissajousBracelet, LissajousRing } from "./LissajousCollection";
+import { TorsionRing } from "./TorsionCollection";
+import { RandomIntFromInterval } from "./Utils";
 
 export enum CollectionType {
     Lissajous = 'lissajous',
@@ -38,41 +39,53 @@ type Jewelry = {
 export const collections: {
     [key in CollectionType]: Jewelry
 } = {
-    lissajous: {
+    [CollectionType.Lissajous]: {
         name: 'Lissajous',
         description: 'Lissajous surface',
         meshes: {
-            ring: {
+            [JewelryType.Ring]: {
                 parameters: {
-                    a: { value: 5, min: 1, max: 10, step: 1 },
-                    b: { value: 5, min: 1, max: 10, step: 1 },
-                    c: { value: 3, min: 1, max: 10, step: 1 },
-                    r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
+                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
-                render: (params, color, ref) => <LissajouCurve
+                render: (params, color, ref) => <LissajousRing
                     mesh={ref}
                     meshColor={color}
                     meshRadius={params.r}
                     parameterA={params.a}
                     parameterB={params.b}
-                    parameterC={params.c}
+                />
+            },
+            [JewelryType.Bracelet]: {
+                parameters: {
+                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                },
+                render: (params, color, ref) => <LissajousBracelet
+                    mesh={ref}
+                    meshColor={color}
+                    meshRadius={params.r}
+                    parameterA={params.a}
+                    parameterB={params.b}
                 />
             },
         }
     },
 
-    torsion: {
+    [CollectionType.Torsion]: {
         name: 'Torsion',
         description: 'Twisted surface',
         meshes: {
-            ring: {
+            [JewelryType.Ring]: {
                 parameters: {
                     slices: { value: 75, min: 50, max: 100, step: 1 },
                     stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { value: 4, min: 1, max: 10, step: 1 },
                     minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
                 },
-                render: (params, color, ref) => <ParametricSurface
+                render: (params, color, ref) => <TorsionRing
                     mesh={ref}
                     meshColor={color}
                     slices={params.slices}

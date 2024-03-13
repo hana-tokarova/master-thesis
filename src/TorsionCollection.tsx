@@ -3,9 +3,9 @@ import * as THREE from 'three';
 import { Euler } from 'three';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
 
-type MeshRef = React.RefObject<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>;
+type MeshRef = React.RefObject<THREE.Mesh>;
 
-type ParametricSurfaceProps = {
+type TorsionProps = {
     mesh: MeshRef;
     meshColor: string;
     slices: number;
@@ -14,9 +14,9 @@ type ParametricSurfaceProps = {
     minorR: number;
 }
 
-export const ParametricSurface = ({ mesh, meshColor, slices, stacks, majorR, minorR }: ParametricSurfaceProps) => {
+export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR }: TorsionProps) => {
     const geometry = useMemo(() => {
-        const func = parametricTwistedTorus(4, majorR, minorR, false);
+        const func = twisting(4, majorR, minorR, false);
         return new ParametricGeometry(func, slices, stacks);
     }, [majorR, minorR, slices, stacks]);
 
@@ -27,13 +27,13 @@ export const ParametricSurface = ({ mesh, meshColor, slices, stacks, majorR, min
     );
 };
 
-export const parametricTwistedTorus = (s: number, majorR: number, minorR: number, twistAll: boolean) => {
+const twisting = (s: number, majorR: number, minorR: number, twistAll: boolean) => {
     return (u: number, v: number, target: THREE.Vector3) => {
 
         const smoothStep = (edge0: number, edge1: number, x: number): number => {
             x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
-            // return x * x * (3 - 3 * x * x);
-            return x * x;
+            return x * x * (3 - 3 * x * x);
+            // return x * x;
         };
 
         const startTwistU = 0.10;
@@ -50,7 +50,7 @@ export const parametricTwistedTorus = (s: number, majorR: number, minorR: number
         } else {
 
             if (u >= startTwistU && u <= endTwistU) {
-                t = 10 * Math.sin(u * Math.PI * 2);
+                t = 4 * Math.sin(u * Math.PI * 2);
             } else {
                 t = 0; // No twist outside the specified range
             }

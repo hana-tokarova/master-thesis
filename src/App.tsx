@@ -1,4 +1,4 @@
-import { Button, ChakraProvider, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, HStack, theme } from "@chakra-ui/react";
 import React from "react";
 import { CollectionType, JewelryType } from "./Collections";
 import { Configurator } from "./Configurator";
@@ -7,20 +7,24 @@ export const App = () => {
     const [collection, setCollection] = React.useState<CollectionType>(CollectionType.Lissajous);
     const [jewelry, setJewelry] = React.useState<JewelryType>(JewelryType.Ring);
 
-    const handleCollectionChange = (newCollection: CollectionType) => {
+    const handleCollectionChange = (newCollection: CollectionType, newJewelry: JewelryType) => {
         setCollection(newCollection);
-        setJewelry(JewelryType.Ring);
+        setJewelry(newJewelry);
     };
 
     return (
         <ChakraProvider theme={theme}>
             <Configurator collection={collection} jewelry={jewelry} />
-            <Button margin={2} onClick={() => handleCollectionChange(CollectionType.Lissajous)}>
-                {CollectionType.Lissajous}
-            </Button>
-            <Button onClick={() => handleCollectionChange(CollectionType.Torsion)}>
-                {CollectionType.Torsion}
-            </Button>
+
+            <HStack margin={2}>
+                {Object.values(CollectionType).map((collectionValue) => (
+                    Object.values(JewelryType).map((jewelryValue) => (
+                        <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)}>
+                            {collectionValue} {jewelryValue}
+                        </Button>
+                    )
+                    )))}
+            </HStack>
         </ChakraProvider>
     );
 };
