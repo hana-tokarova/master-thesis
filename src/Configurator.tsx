@@ -8,7 +8,7 @@ import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
-import { templates } from "./templates";
+import { collections } from "./Collections";
 
 const Floor = () => {
   return (
@@ -19,22 +19,22 @@ const Floor = () => {
   )
 }
 
-type RootProps = {
-  template: string;
+type ConfiguratorProps = {
+  collection: string;
 }
 
-export const Root = (props: RootProps) => {
+export const Configurator = (props: ConfiguratorProps) => {
   const myMesh = React.useRef<Mesh>(null);
 
-  const template = templates[props.template];
+  const collection = collections[props.collection];
 
   const [parameters, setParameters] = React.useState<{ [key: string]: number }>();
-  const [currentTemplate, setCurrentTemplate] = React.useState<string>(props.template);
+  const [currentCollection, setCurrentCollection] = React.useState<string>(props.collection);
 
   React.useEffect(() => {
-    setParameters(() => Object.entries(template.parameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
-    setCurrentTemplate(props.template);
-  }, [props.template, template.parameters]);
+    setParameters(() => Object.entries(collection.parameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+    setCurrentCollection(props.collection);
+  }, [props.collection, collection.parameters]);
 
   const [meshColor, setMeshColor] = React.useState("white");
   const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
@@ -80,13 +80,13 @@ export const Root = (props: RootProps) => {
     saveArrayBuffer(stlString, clonedMesh.uuid + '.stl');
   };
 
-  if (!parameters || currentTemplate !== props.template) {
+  if (!parameters || currentCollection !== props.collection) {
     return <></>;
   }
 
   return (
     <ChakraProvider theme={theme}>
-      <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      <div style={{ width: "100vw", height: "90vh" }}>
         <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [50, 50, 0] }} shadows >
           <color attach="background" args={["white"]} />
 
@@ -101,7 +101,9 @@ export const Root = (props: RootProps) => {
           }} intensity={3} castShadow position={[3, 10, 3]}
           />
           <ambientLight intensity={0.1} />
-          {template.renderer(parameters, meshColor, myMesh)}
+
+          {collection.render(parameters, meshColor, myMesh)}
+
           <Floor />
           <OrbitControls
             enablePan={false}
@@ -131,9 +133,8 @@ export const Root = (props: RootProps) => {
             Export to .STL
           </Button>
 
-          {/* LissajouCurve parameters */}
           <>
-            {Object.entries(template.parameters).map(([parameterName, parameterDetails]) => (
+            {Object.entries(collection.parameters).map(([parameterName, parameterDetails]) => (
               <div key={parameterName}>
                 {parameterName}
                 <Slider
@@ -159,6 +160,7 @@ export const Root = (props: RootProps) => {
               </div>
             ))}
           </>
+
         </div>
       </div>
     </ChakraProvider>

@@ -8,17 +8,17 @@ type Parameter = {
     step: number;
 }
 
-type Template = {
+type Collection = {
     name: string;
     description: string;
     parameters: {
         [key: string]: Parameter;
     };
-    renderer: (params: { [key: string]: number }, color: string, ref: React.RefObject<THREE.Mesh>) => JSX.Element;
+    render: (params: { [key: string]: number }, color: string, ref: React.RefObject<THREE.Mesh>) => JSX.Element;
 }
 
-export const templates: {
-    [key: string]: Template
+export const collections: {
+    [key: string]: Collection
 } = {
     lissajous: {
         name: 'Lissajous',
@@ -29,7 +29,7 @@ export const templates: {
             c: { value: 3, min: 1, max: 10, step: 1 },
             r: { value: 0.5, min: 0.1, max: 1, step: 0.1 },
         },
-        renderer: (params, color, ref) => <LissajouCurve
+        render: (params, color, ref) => <LissajouCurve
             mesh={ref}
             meshColor={color}
             meshRadius={params.r}
@@ -38,6 +38,7 @@ export const templates: {
             parameterC={params.c}
         />
     },
+
     twistedTorus: {
         name: 'Twisted Torus',
         description: 'Twisted torus',
@@ -45,7 +46,7 @@ export const templates: {
             majorR: { value: 4, min: 1, max: 10, step: 1 },
             minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
         },
-        renderer: (params, color, ref) => <ParametricSurface
+        render: (params, color, ref) => <ParametricSurface
             mesh={ref}
             meshColor={color}
             slices={200}
