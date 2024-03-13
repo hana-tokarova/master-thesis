@@ -1,9 +1,16 @@
 import { LissajouCurve } from "./LissajouCurve";
 import { ParametricSurface } from "./ParametricGeometry";
 
-export enum CollectionName {
+export enum CollectionType {
     Lissajous = 'lissajous',
-    TwistedTorus = 'twistedTorus'
+    Torsion = 'torsion'
+}
+
+enum JewelryType {
+    Ring = 'ring',
+    Bracelet = 'bracelet',
+    Earring = 'earring',
+    Pendant = 'pendant'
 }
 
 type Parameter = {
@@ -13,9 +20,10 @@ type Parameter = {
     step: number;
 }
 
-type Collection = {
+type Jewelry = {
     name: string;
     description: string;
+    // type: { [key in JewelryType]: JewelryType; }
     parameters: {
         [key: string]: Parameter;
     };
@@ -23,7 +31,7 @@ type Collection = {
 }
 
 export const collections: {
-    [key in CollectionName]: Collection
+    [key in CollectionType]: Jewelry
 } = {
     lissajous: {
         name: 'Lissajous',
@@ -44,9 +52,9 @@ export const collections: {
         />
     },
 
-    twistedTorus: {
-        name: 'Twisted Torus',
-        description: 'Twisted torus',
+    torsion: {
+        name: 'Torsion',
+        description: 'Twisted parametric surface',
         parameters: {
             majorR: { value: 4, min: 1, max: 10, step: 1 },
             minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },

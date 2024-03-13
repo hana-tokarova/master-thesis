@@ -8,7 +8,7 @@ import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
-import { CollectionName, collections } from "./Collections";
+import { collections, CollectionType } from "./Collections";
 
 const Floor = () => {
   return (
@@ -20,7 +20,7 @@ const Floor = () => {
 }
 
 type ConfiguratorProps = {
-  collection: CollectionName;
+  collection: CollectionType;
 }
 
 export const Configurator = (props: ConfiguratorProps) => {
