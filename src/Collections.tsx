@@ -1,6 +1,11 @@
 import { LissajouCurve } from "./LissajouCurve";
 import { ParametricSurface } from "./ParametricGeometry";
 
+export enum CollectionName {
+    Lissajous = 'lissajous',
+    TwistedTorus = 'twistedTorus'
+}
+
 type Parameter = {
     value: number;
     min: number;
@@ -18,7 +23,7 @@ type Collection = {
 }
 
 export const collections: {
-    [key: string]: Collection
+    [key in CollectionName]: Collection
 } = {
     lissajous: {
         name: 'Lissajous',
