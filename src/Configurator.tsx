@@ -4,7 +4,7 @@ import React from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, SoftShadows } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
@@ -98,22 +98,27 @@ export const Configurator = (props: ConfiguratorProps) => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "90vh" }}>
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [50, 50, 0] }} shadows >
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} shadows >
           <color attach="background" args={["white"]} />
 
-          <directionalLight ref={(light) => {
-            if (!light) return;
-
-            light.shadow.camera.left = -30;
-            light.shadow.camera.right = 30;
-            light.shadow.camera.top = 30;
-            light.shadow.camera.bottom = -30;
-            light.shadow.mapSize.width = 2048;
-            light.shadow.mapSize.height = 2048;
-            light.shadow.radius = 100;
-          }} intensity={3} position={[3, 10, 3]} castShadow
+          <directionalLight intensity={2}
+            position={[3, 12, 3]}
+            shadow-camera-left={-30}
+            shadow-camera-right={30}
+            shadow-camera-top={30}
+            shadow-camera-bottom={-30}
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+            shadow-radius={100}
+            castShadow
           />
-          <ambientLight intensity={0.1} />
+          <directionalLight position={[-3, 12, -3]} intensity={1.5} />
+          <ambientLight
+            intensity={0.1}
+            castShadow
+          />
+
+          <SoftShadows focus={5} samples={10} />
 
           {jewelryMesh!.render(parameters, meshColor, myMesh)}
 
@@ -121,7 +126,7 @@ export const Configurator = (props: ConfiguratorProps) => {
           <OrbitControls
             enablePan={false}
             enableRotate={true}
-            enableZoom={false}
+            enableZoom={true}
             minPolarAngle={Math.PI / 2 - Math.PI / 6}
             maxPolarAngle={Math.PI / 2 + Math.PI / 6} />
         </Canvas>

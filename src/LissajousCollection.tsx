@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { Euler, ExtrudeGeometry, Shape } from 'three';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
+
 type MeshRef = React.RefObject<THREE.Mesh>;
 
 type LissajousProps = {
@@ -37,16 +38,16 @@ const makeLissajousCurve2D = (nbSteps: number, s: number, a: number, b: number, 
     const stepSize = range / nbSteps;
 
     for (let t = -range / 2; t <= range / 2; t += stepSize) {
-        const x = (s / 5) * Math.sin(a * t);
-        const y = s * Math.sin(b * t + delta);
+        const x = s * Math.sin(a * t + delta);
+        const y = (s / 5) * Math.sin(b * t);
 
-        points.push(new THREE.Vector3(y, x, 0));
+        points.push(new THREE.Vector3(x, y, 0));
     }
 
     return points;
 };
 
-const bendGeometry = (geometry: THREE.BufferGeometry, angle: number) => {
+const bendLissajous = (geometry: THREE.BufferGeometry, angle: number) => {
     const positionAttribute = geometry.attributes.position as THREE.BufferAttribute;
     const v = positionAttribute.array;
 
@@ -84,7 +85,7 @@ export const LissajousBracelet = ({ parameterA, parameterB, meshRadius, mesh, me
         console.log(semicircleShape, meshRadius)
         const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
 
-        bendGeometry(extrudeGeometry, 0.09); // Adjust the bending angle as needed
+        bendLissajous(extrudeGeometry, 0.09); // Adjust the bending angle as needed
 
         extrudeGeometry.deleteAttribute('normal');
         extrudeGeometry.deleteAttribute('uv');
@@ -99,7 +100,49 @@ export const LissajousBracelet = ({ parameterA, parameterB, meshRadius, mesh, me
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
+}
 
+export const LissajousPendant = ({ parameterA, parameterB, meshRadius, mesh, meshColor }: LissajousProps) => {
+    const points2D = makeLissajousCurve2D(200, 30, parameterA, parameterB, Math.PI / 2);
+
+    const geometry = useMemo(() => {
+        const path = new THREE.CatmullRomCurve3(points2D, true, "centripetal");
+
+        const semicircleShape = new Shape();
+        semicircleShape.arc(0, 0, meshRadius, -Math.PI, Math.PI, true);
+
+        const extrudeSettings = {
+            steps: 2000,
+            extrudePath: path,
+        };
+
+        const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
+
+        extrudeGeometry.deleteAttribute('normal');
+        extrudeGeometry.deleteAttribute('uv');
+        const mergedGeometry = BufferGeometryUtils.mergeVertices(extrudeGeometry);
+        mergedGeometry.computeVertexNormals();
+
+        const x = 30 * Math.sin(Math.PI);
+        const y = 30 / 5 * Math.sin(0);
+        const z = 0;
+
+        const hole = new THREE.SphereGeometry(meshRadius, 32, 32).translate(x, y, z);
+        hole.deleteAttribute('normal');
+        hole.deleteAttribute('uv');
+        const mergedGeometry2 = BufferGeometryUtils.mergeVertices(hole);
+        mergedGeometry2.computeVertexNormals();
+
+        const mergedGeometry3 = BufferGeometryUtils.mergeGeometries([mergedGeometry, mergedGeometry2]);
+
+        return mergedGeometry3;
+    }, [points2D, meshRadius]);
+
+    return (
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)} castShadow receiveShadow>
+            <meshStandardMaterial attach="material" color={meshColor} />
+        </mesh>
+    );
 }
 
 export const LissajousRing = ({ parameterA, parameterB, meshRadius, mesh, meshColor }: LissajousProps) => {
@@ -109,7 +152,7 @@ export const LissajousRing = ({ parameterA, parameterB, meshRadius, mesh, meshCo
         const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
 
         const semicircleShape = new Shape();
-        semicircleShape.arc(0, 0, meshRadius, Math.PI / 2 + Math.PI / 4, -Math.PI / 2 - Math.PI / 4, true); // Draw half-circle
+        semicircleShape.arc(0, 0, meshRadius, -Math.PI, Math.PI, true);
 
         const extrudeSettings = {
             steps: 2000,

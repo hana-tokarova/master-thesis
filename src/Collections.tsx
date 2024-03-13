@@ -1,4 +1,4 @@
-import { LissajousBracelet, LissajousRing } from "./LissajousCollection";
+import { LissajousBracelet, LissajousPendant, LissajousRing } from "./LissajousCollection";
 import { TorsionRing } from "./TorsionCollection";
 import { RandomIntFromInterval } from "./Utils";
 
@@ -64,6 +64,20 @@ export const collections: {
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 render: (params, color, ref) => <LissajousBracelet
+                    mesh={ref}
+                    meshColor={color}
+                    meshRadius={params.r}
+                    parameterA={params.a}
+                    parameterB={params.b}
+                />
+            },
+            [JewelryType.Pendant]: {
+                parameters: {
+                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                },
+                render: (params, color, ref) => <LissajousPendant
                     mesh={ref}
                     meshColor={color}
                     meshRadius={params.r}
