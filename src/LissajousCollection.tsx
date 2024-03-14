@@ -15,7 +15,6 @@ type LissajousProps = {
     parameterC?: number;
 };
 
-// ked dosadim za t = 0, tak dostavam ten bod kde chcem dat kruzok, to iste aj pre 2d
 const makeLissajousCurve3D = (nbSteps: number, s: number, a: number, b: number, c: number, delta: number, gamma: number) => {
     const points = [];
     const range = 2 * Math.PI;
@@ -141,7 +140,55 @@ export const LissajousPendant = ({ parameterA, parameterB, meshRadius, mesh, mes
     }, [points2D, meshRadius]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, Math.PI / 2)} castShadow receiveShadow>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)} castShadow receiveShadow>
+            <meshStandardMaterial attach="material" color={meshColor} />
+        </mesh>
+    );
+}
+
+export const LissajousEarring = ({ parameterA, parameterB, parameterC, meshRadius, mesh, meshColor }: LissajousProps) => {
+    const points = makeLissajousCurve3D(200, 6, parameterA, parameterB, parameterC!, Math.PI, Math.PI / 2);
+
+    const geometry = useMemo(() => {
+        const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
+
+        const semicircleShape = new Shape();
+        semicircleShape.arc(0, 0, meshRadius, -Math.PI, Math.PI, true);
+
+        const extrudeSettings = {
+            steps: 2000,
+            extrudePath: path,
+        };
+
+        const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
+        extrudeGeometry.deleteAttribute('normal');
+        extrudeGeometry.deleteAttribute('uv');
+
+        const mergedGeometry = BufferGeometryUtils.mergeVertices(extrudeGeometry);
+        mergedGeometry.computeVertexNormals();
+
+        const hole = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 16, 32);
+        hole.deleteAttribute('normal');
+        hole.deleteAttribute('uv');
+
+
+        const rotationMatrix = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        hole.applyMatrix4(rotationMatrix);
+        const translationMatrix = new THREE.Matrix4().makeTranslation(0, 0, 6 * Math.sin(Math.PI / 2) + meshRadius + 0.7);
+        hole.applyMatrix4(translationMatrix);
+        const rotationMatrix2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
+        hole.applyMatrix4(rotationMatrix2);
+
+        const mergedGeometry2 = BufferGeometryUtils.mergeVertices(hole);
+        mergedGeometry2.computeVertexNormals();
+
+        const mergedGeometry3 = BufferGeometryUtils.mergeGeometries([mergedGeometry, mergedGeometry2]);
+
+        return mergedGeometry3;
+    }, [points, meshRadius]);
+
+    return (
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)} castShadow receiveShadow>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
