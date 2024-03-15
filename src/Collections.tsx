@@ -47,6 +47,8 @@ export const collections: {
                 parameters: {
                     a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
                     b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 render: (params, color, ref) => <LissajousRing
@@ -55,12 +57,16 @@ export const collections: {
                     meshRadius={params.r}
                     parameterA={params.a}
                     parameterB={params.b}
+                    scaleA={params.scaleA}
+                    scaleB={params.scaleB}
                 />
             },
             [JewelryType.Bracelet]: {
                 parameters: {
                     a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
                     b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    scaleA: { value: 30, min: 20, max: 40, step: 1 },
+                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 render: (params, color, ref) => <LissajousBracelet
@@ -69,20 +75,8 @@ export const collections: {
                     meshRadius={params.r}
                     parameterA={params.a}
                     parameterB={params.b}
-                />
-            },
-            [JewelryType.Pendant]: {
-                parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
-                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
-                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
-                },
-                render: (params, color, ref) => <LissajousPendant
-                    mesh={ref}
-                    meshColor={color}
-                    meshRadius={params.r}
-                    parameterA={params.a}
-                    parameterB={params.b}
+                    scaleA={params.scaleA}
+                    scaleB={params.scaleB}
                 />
             },
             [JewelryType.Earring]: {
@@ -90,6 +84,9 @@ export const collections: {
                     a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
                     b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
                     c: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
+                    scaleC: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 render: (params, color, ref) => <LissajousEarring
@@ -99,6 +96,27 @@ export const collections: {
                     parameterA={params.a}
                     parameterB={params.b}
                     parameterC={params.c}
+                    scaleA={params.scaleA}
+                    scaleB={params.scaleB}
+                    scaleC={params.scaleC}
+                />
+            },
+            [JewelryType.Pendant]: {
+                parameters: {
+                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
+                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
+                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                },
+                render: (params, color, ref) => <LissajousPendant
+                    mesh={ref}
+                    meshColor={color}
+                    meshRadius={params.r}
+                    parameterA={params.a}
+                    parameterB={params.b}
+                    scaleA={params.scaleA}
+                    scaleB={params.scaleB}
                 />
             },
         }

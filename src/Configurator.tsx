@@ -10,9 +10,13 @@ import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
 import { collections, CollectionType, JewelryType } from "./Collections";
 
-const Floor = () => {
+type FloorProps = {
+  position: THREE.Vector3;
+}
+
+const Floor = (props: FloorProps) => {
   return (
-    <mesh rotation-x={-Math.PI / 2} position={[0, -6.5, 0]} receiveShadow >
+    <mesh rotation-x={-Math.PI / 2} position={[0, props.position.y, 0]} receiveShadow >
       <circleGeometry attach="geometry" args={[50]} />
       <shadowMaterial color="white" />
     </mesh>
@@ -122,7 +126,8 @@ export const Configurator = (props: ConfiguratorProps) => {
 
           {jewelryMesh!.render(parameters, meshColor, myMesh)}
 
-          <Floor />
+          <Floor position={new THREE.Vector3(0, -6.5, 0)} />
+
           <OrbitControls
             enablePan={false}
             enableRotate={true}
