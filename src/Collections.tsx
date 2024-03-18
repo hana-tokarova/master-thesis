@@ -1,5 +1,5 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
-import { TorsionRing } from "./TorsionCollection";
+import { TorsionEarring, TorsionRing } from "./TorsionCollection";
 import { RandomIntFromInterval } from "./Utils";
 
 export enum CollectionType {
@@ -63,7 +63,7 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
+                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 2 },
                     b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
                     scaleA: { value: 30, min: 20, max: 40, step: 1 },
                     scaleB: { value: 20, min: 10, max: 30, step: 1 },
@@ -140,8 +140,46 @@ export const collections: {
                     stacks={params.stacks}
                     majorR={params.majorR}
                     minorR={params.minorR}
+                    twistAll={false}
+                    taper={false}
                 />
             },
+            [JewelryType.Bracelet]: {
+                parameters: {
+                    slices: { value: 75, min: 50, max: 100, step: 1 },
+                    stacks: { value: 75, min: 50, max: 100, step: 1 },
+                    majorR: { value: 4, min: 1, max: 10, step: 1 },
+                    minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
+                },
+                render: (params, color, ref) => <TorsionRing
+                    mesh={ref}
+                    meshColor={color}
+                    slices={params.slices}
+                    stacks={params.stacks}
+                    majorR={params.majorR}
+                    minorR={params.minorR}
+                    twistAll={false}
+                    taper={true}
+                />
+            },
+            [JewelryType.Earring]: {
+                parameters: {
+                    slices: { value: 75, min: 50, max: 100, step: 1 },
+                    stacks: { value: 75, min: 50, max: 100, step: 1 },
+                    majorR: { value: 4, min: 1, max: 10, step: 1 },
+                    minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
+                },
+                render: (params, color, ref) => <TorsionEarring
+                    mesh={ref}
+                    meshColor={color}
+                    slices={params.slices}
+                    stacks={params.stacks}
+                    majorR={params.majorR}
+                    minorR={params.minorR}
+                    twistAll={true}
+                    taper={false}
+                />
+            }
         },
     }
 }

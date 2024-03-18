@@ -74,32 +74,41 @@ export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, mesh
     const points2D = makeLissajousCurve2D(200, scaleA, scaleB, 1, 5, parameterA, parameterB, Math.PI / 2);
 
     const geometry = useMemo(() => {
-        const path = new THREE.CatmullRomCurve3(points2D, true, "centripetal");
+        const path = new THREE.CatmullRomCurve3(points2D, true);
 
         const semicircleShape = new Shape();
-        semicircleShape.arc(0, 0, meshRadius, Math.PI / 2 + Math.PI / 4, -Math.PI / 2 - Math.PI / 4, true); // Draw half-circle
+        semicircleShape.arc(0, 0, meshRadius, Math.PI / 2, -Math.PI / 2, true); // Draw half-circle
 
         const extrudeSettings = {
-            steps: 2000,
+            steps: 4000,
             extrudePath: path,
         };
 
-        console.log(semicircleShape, meshRadius)
         const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
 
-        // bendLissajous(extrudeGeometry, 2.0622 * Math.pow(scaleA, -0.8962));
-        bendLissajous(extrudeGeometry, 2 * Math.pow(scaleA, -0.9));
-
+        // Soft surface in the making
         extrudeGeometry.deleteAttribute('normal');
         extrudeGeometry.deleteAttribute('uv');
         const mergedGeometry = BufferGeometryUtils.mergeVertices(extrudeGeometry);
         mergedGeometry.computeVertexNormals();
 
-        return mergedGeometry;
-    }, [points2D, meshRadius, scaleA]);
+        const ending1 = new THREE.SphereGeometry(meshRadius + 0.5, 16, 16);
+        ending1.deleteAttribute('normal');
+        ending1.deleteAttribute('uv');
+        const t = Math.PI / 2;
+        const translationMatrix = new THREE.Matrix4().makeTranslation(new THREE.Vector3((scaleA / 1) * (Math.sin(parameterA * t + Math.PI / 2)), (scaleB / 5) * Math.sin(parameterB * t), 0));
+        ending1.applyMatrix4(translationMatrix);
+        const mergedGeometry2 = BufferGeometryUtils.mergeVertices(ending1);
+        mergedGeometry2.computeVertexNormals();
+        const mergedGeometry3 = BufferGeometryUtils.mergeGeometries([mergedGeometry, mergedGeometry2]);
+
+        bendLissajous(mergedGeometry3, 2 * Math.pow(scaleA, -0.9));
+
+        return mergedGeometry3;
+    }, [points2D, meshRadius, scaleA, scaleB, parameterA, parameterB]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)} castShadow receiveShadow>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
@@ -144,7 +153,7 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
     }, [points2D, meshRadius, scaleA]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)} castShadow receiveShadow>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)}>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
@@ -191,7 +200,7 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
     }, [points, meshRadius, scaleC]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)} castShadow receiveShadow>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
@@ -221,7 +230,7 @@ export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadi
     }, [points, meshRadius]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)} castShadow receiveShadow>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );

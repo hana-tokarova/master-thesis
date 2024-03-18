@@ -4,24 +4,12 @@ import React from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
-import { OrbitControls, SoftShadows } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
 import { collections, CollectionType, JewelryType } from "./Collections";
 
-type FloorProps = {
-  position: THREE.Vector3;
-}
-
-const Floor = (props: FloorProps) => {
-  return (
-    <mesh rotation-x={-Math.PI / 2} position={[0, props.position.y, 0]} receiveShadow >
-      <circleGeometry attach="geometry" args={[50]} />
-      <shadowMaterial color="white" />
-    </mesh>
-  )
-}
 
 type ConfiguratorProps = {
   collection: CollectionType;
@@ -102,15 +90,26 @@ export const Configurator = (props: ConfiguratorProps) => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "90vh" }}>
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} shadows >
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} >
           <color attach="background" args={["white"]} />
 
           <directionalLight intensity={2}
-            position={[3, 12, 3]}
+            position={[10, 12, 3]}
             shadow-camera-left={-30}
             shadow-camera-right={30}
             shadow-camera-top={30}
             shadow-camera-bottom={-30}
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+            shadow-radius={100}
+            castShadow
+          />
+          <directionalLight intensity={1}
+            position={[2, -12, -3]}
+            shadow-camera-left={30}
+            shadow-camera-right={-30}
+            shadow-camera-top={-30}
+            shadow-camera-bottom={30}
             shadow-mapSize-width={2048}
             shadow-mapSize-height={2048}
             shadow-radius={100}
@@ -122,11 +121,7 @@ export const Configurator = (props: ConfiguratorProps) => {
             castShadow
           />
 
-          <SoftShadows focus={5} samples={10} />
-
           {jewelryMesh!.render(parameters, meshColor, myMesh)}
-
-          <Floor position={new THREE.Vector3(0, -6.5, 0)} />
 
           <OrbitControls
             enablePan={false}
