@@ -84,8 +84,8 @@ export const collections: {
                 parameters: {
                     a: { value: 4, min: 2, max: 8, step: 2 },
                     b: { value: 3, min: 1, max: 5, step: 1 },
-                    c: { value: 3, min: 1, max: 5, step: 1 },
-                    scaleA: { value: 5, min: 3, max: 7, step: 1 },
+                    c: { value: 3, min: 1, max: 5, step: 2 },
+                    scaleA: { value: 15, min: 5, max: 10, step: 1 },
                     scaleB: { value: 15, min: 10, max: 20, step: 1 },
                     scaleC: { value: 15, min: 10, max: 20, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
