@@ -63,9 +63,9 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 2 },
+                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 9, step: 2 },
                     b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
-                    scaleA: { value: 30, min: 20, max: 40, step: 1 },
+                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
                     scaleB: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },

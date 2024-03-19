@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import * as THREE from 'three';
 import { Euler } from 'three';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 type MeshRef = React.RefObject<THREE.Mesh>;
 
@@ -56,7 +57,7 @@ const twisting = (s: number, majorR: number, minorR: number, twistAll: boolean, 
         }
 
         if (taper) {
-            edgeTaper = edgeTaper === 1 ? 1 : 1 - Math.pow(2, -10 * edgeTaper);
+            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.01, 1 - Math.pow(2, -10 * edgeTaper));
             u *= 1.5 * Math.PI; // Adjust for 3/4 of a circle
         } else {
             edgeTaper = 1;
@@ -95,7 +96,14 @@ export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, t
 export const TorsionBracelet = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper }: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = twisting(4, majorR, minorR, twistAll, taper);
-        return new ParametricGeometry(func, slices, stacks);
+        const braceletMesh = new ParametricGeometry(func, slices, stacks);
+        braceletMesh.computeVertexNormals();
+        braceletMesh.deleteAttribute('normal');
+        braceletMesh.deleteAttribute('uv');
+        const mergedGeometry = BufferGeometryUtils.mergeVertices(braceletMesh);
+        mergedGeometry.computeVertexNormals();
+        return mergedGeometry;
+
     }, [majorR, minorR, slices, stacks, twistAll, taper]);
 
     return (
