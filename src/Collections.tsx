@@ -1,6 +1,5 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
 import { TorsionEarring, TorsionRing } from "./TorsionCollection";
-import { RandomIntFromInterval } from "./Utils";
 
 export enum CollectionType {
     Lissajous = 'lissajous',
@@ -45,8 +44,8 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
-                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    a: { value: 3, min: 1, max: 5, step: 1 },
+                    b: { value: 5, min: 1, max: 10, step: 1 },
                     scaleA: { value: 20, min: 10, max: 30, step: 1 },
                     scaleB: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
@@ -59,12 +58,13 @@ export const collections: {
                     parameterB={params.b}
                     scaleA={params.scaleA}
                     scaleB={params.scaleB}
+                    detail={1000}
                 />
             },
             [JewelryType.Bracelet]: {
                 parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 9, step: 2 },
-                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    a: { value: 3, min: 1, max: 5, step: 2 },
+                    b: { value: 5, min: 1, max: 10, step: 1 },
                     scaleA: { value: 20, min: 10, max: 30, step: 1 },
                     scaleB: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
@@ -77,16 +77,17 @@ export const collections: {
                     parameterB={params.b}
                     scaleA={params.scaleA}
                     scaleB={params.scaleB}
+                    detail={1000}
                 />
             },
             [JewelryType.Earring]: {
                 parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
-                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
-                    c: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
-                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
-                    scaleC: { value: 20, min: 10, max: 30, step: 1 },
+                    a: { value: 4, min: 2, max: 8, step: 2 },
+                    b: { value: 3, min: 1, max: 5, step: 1 },
+                    c: { value: 3, min: 1, max: 5, step: 1 },
+                    scaleA: { value: 5, min: 3, max: 7, step: 1 },
+                    scaleB: { value: 15, min: 10, max: 20, step: 1 },
+                    scaleC: { value: 15, min: 10, max: 20, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 render: (params, color, ref) => <LissajousEarring
@@ -99,12 +100,13 @@ export const collections: {
                     scaleA={params.scaleA}
                     scaleB={params.scaleB}
                     scaleC={params.scaleC}
+                    detail={1000}
                 />
             },
             [JewelryType.Pendant]: {
                 parameters: {
-                    a: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 5, step: 1 },
-                    b: { value: Math.floor(RandomIntFromInterval(1, 11)), min: 1, max: 10, step: 1 },
+                    a: { value: 3, min: 1, max: 5, step: 2 },
+                    b: { value: 3, min: 1, max: 5, step: 1 },
                     scaleA: { value: 20, min: 10, max: 30, step: 1 },
                     scaleB: { value: 20, min: 10, max: 30, step: 1 },
                     r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
@@ -117,6 +119,7 @@ export const collections: {
                     parameterB={params.b}
                     scaleA={params.scaleA}
                     scaleB={params.scaleB}
+                    detail={1000}
                 />
             },
         }

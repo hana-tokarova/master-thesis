@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import { Euler, ExtrudeGeometry, Shape, TubeGeometry } from 'three';
+import { Euler, TubeGeometry } from 'three';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { lcm } from './Utils';
 
 
 type MeshRef = React.RefObject<THREE.Mesh>;
@@ -17,17 +16,21 @@ type LissajousProps = {
     scaleA: number;
     scaleB: number;
     scaleC?: number;
+    detail: number;
 };
 
 const makeLissajousCurve3D = (nbSteps: number, sA: number, sB: number, sC: number, lA: number, lB: number, lC: number, a: number, b: number, c: number, delta: number, gamma: number) => {
-    const points = [];
-    const range = 2 * Math.PI//((2 * Math.PI) * (lcm(a, b))) / (a * b)
-    const stepSize = range / nbSteps;
+    if (a > 1) {
+        b += Math.floor((b - 1) / (a - 1)); // TODO opravit, funguje v 2D ale nie v 3D
+    }
 
-    for (let t = 0; t <= range; t += stepSize) {
-        const x = (sA / lA) * Math.sin(a * t);
-        const y = (sB / lB) * Math.sin(b * t + delta);
-        const z = (sC / lC) * Math.sin(c * t + gamma);
+    const points = [];
+    const stepSize = Math.PI * 2 / nbSteps;
+
+    for (let t = 0; t <= nbSteps; t++) {
+        const x = (sA / lA) * Math.sin(a * t * stepSize);
+        const y = (sB / lB) * Math.sin(b * t * stepSize + delta);
+        const z = (sC / lC) * Math.sin(c * t * stepSize + gamma);
 
         points.push(new THREE.Vector3(x, y, z));
     }
@@ -36,20 +39,16 @@ const makeLissajousCurve3D = (nbSteps: number, sA: number, sB: number, sC: numbe
 };
 
 const makeLissajousCurve2D = (nbSteps: number, sA: number, sB: number, lA: number, lB: number, a: number, b: number, delta: number) => {
-
     if (a > 1) { // skipping those that were already in the sequence
         b += Math.floor((b - 1) / (a - 1));
     }
 
-    // b *= a & (~(a - 1));
-
     const points = [];
-    const range = (2 * Math.PI) * ((lcm(a, b)) / (a * b));
-    const stepSize = range / nbSteps;
+    const stepSize = Math.PI * 2 / nbSteps;
 
-    for (let t = 0; t <= range; t += stepSize) {
-        const x = (sA / lA) * Math.sin(a * t + delta);
-        const y = (sB / lB) * Math.sin(b * t);
+    for (let t = 0; t <= nbSteps; t++) {
+        const x = (sA / lA) * Math.sin(a * t * stepSize + delta);
+        const y = (sB / lB) * Math.sin(b * t * stepSize);
 
         points.push(new THREE.Vector3(x, y, 0));
     }
@@ -78,15 +77,15 @@ const bendLissajous = (geometry: THREE.BufferGeometry, angle: number) => {
     }
 };
 
-export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor }: LissajousProps) => {
-    const lissajousPoints = makeLissajousCurve3D(200, scaleA, scaleB, scaleA, 1, 4, 1, parameterA, parameterB, parameterA, Math.PI, Math.PI / 2);
+export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor, detail }: LissajousProps) => {
+    const lissajousPoints = makeLissajousCurve3D(detail, scaleA, scaleB, scaleA, 1, 4, 1, parameterA, parameterB, parameterA, Math.PI, Math.PI / 2);
 
     const geometry = useMemo(() => {
         const ringPath = new THREE.CatmullRomCurve3(lissajousPoints, true);
-        const ringMesh = new TubeGeometry(ringPath, 800, meshRadius, 800, true);
+        const ringMesh = new TubeGeometry(ringPath, detail, meshRadius, 32, true);
 
         return ringMesh;
-    }, [lissajousPoints, meshRadius]);
+    }, [lissajousPoints, meshRadius, detail]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
@@ -95,17 +94,17 @@ export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadi
     );
 };
 
-export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor }: LissajousProps) => {
-    const lissajousPoints = makeLissajousCurve2D(100, scaleA, scaleB, 1, 5, parameterA, parameterB, Math.PI / 2);
+export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor, detail }: LissajousProps) => {
+    const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 1, 5, parameterA, parameterB, Math.PI / 2);
 
     const geometry = useMemo(() => {
         const braceletPath = new THREE.CatmullRomCurve3(lissajousPoints, true);
-        const braceletMesh = new TubeGeometry(braceletPath, 800, meshRadius, 800, true);
+        const braceletMesh = new TubeGeometry(braceletPath, detail, meshRadius, 32, true);
 
         bendLissajous(braceletMesh, 2 * Math.pow(scaleA, -0.9));
 
         return braceletMesh;
-    }, [lissajousPoints, meshRadius, scaleA]);
+    }, [lissajousPoints, meshRadius, scaleA, detail]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
@@ -114,93 +113,49 @@ export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, mesh
     );
 }
 
-export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor }: LissajousProps) => {
-    const points2D = makeLissajousCurve2D(200, scaleA, scaleB, 5, 5, parameterA, parameterB, Math.PI / 2);
+export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, scaleB, scaleC, meshRadius, mesh, meshColor, detail }: LissajousProps) => {
+    const lissajousPoints = makeLissajousCurve3D(detail, scaleA, scaleB, scaleC!, 4, 4, 4, parameterA, parameterB, parameterC!, Math.PI, Math.PI / 2);
 
     const geometry = useMemo(() => {
-        const path = new THREE.CatmullRomCurve3(points2D, true, "centripetal");
+        const earringPath = new THREE.CatmullRomCurve3(lissajousPoints, true);
+        const earringMesh = new TubeGeometry(earringPath, detail, meshRadius, 32, true);
 
-        const semicircleShape = new Shape();
-        semicircleShape.arc(0, 0, meshRadius, -Math.PI, Math.PI, true);
+        const holderMesh = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 16, 32);
+        const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        holderMesh.applyMatrix4(rotationHolder);
+        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, scaleC! / 4 * Math.sin(Math.PI / 2) + meshRadius + 0.7);
+        holderMesh.applyMatrix4(translateHolder);
 
-        const extrudeSettings = {
-            steps: 2000,
-            extrudePath: path,
-        };
-
-        const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
-        extrudeGeometry.deleteAttribute('normal');
-        extrudeGeometry.deleteAttribute('uv');
-
-        const mergedGeometry = BufferGeometryUtils.mergeVertices(extrudeGeometry);
-        mergedGeometry.computeVertexNormals();
-
-        const holder = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 16, 32);
-        holder.deleteAttribute('normal');
-        holder.deleteAttribute('uv');
-
-        const translationMatrix = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + meshRadius + 0.7, 0, 0);
-        holder.applyMatrix4(translationMatrix);
-        const rotationMatrix = new THREE.Matrix4().makeRotationX(Math.PI / 2);
-        holder.applyMatrix4(rotationMatrix);
-
-        const mergedGeometry2 = BufferGeometryUtils.mergeVertices(holder);
-        mergedGeometry2.computeVertexNormals();
-
-        const mergedGeometry3 = BufferGeometryUtils.mergeGeometries([mergedGeometry, mergedGeometry2]);
-
-        return mergedGeometry3;
-    }, [points2D, meshRadius, scaleA]);
+        const mergedMesh = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
+        return mergedMesh;
+    }, [lissajousPoints, meshRadius, scaleC, detail]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );
 }
 
-export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, scaleB, scaleC, meshRadius, mesh, meshColor }: LissajousProps) => {
-    const points = makeLissajousCurve3D(200, scaleA, scaleB, scaleC!, 4, 4, 4, parameterA, parameterB, parameterC!, Math.PI, Math.PI / 2);
+export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor, detail }: LissajousProps) => {
+    const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 5, 5, parameterA, parameterB, Math.PI / 2);
 
     const geometry = useMemo(() => {
-        const path = new THREE.CatmullRomCurve3(points, true, "centripetal");
+        const pendantPath = new THREE.CatmullRomCurve3(lissajousPoints, true);
+        const pendantMesh = new TubeGeometry(pendantPath, detail, meshRadius, 32, true);
 
-        const semicircleShape = new Shape();
-        semicircleShape.arc(0, 0, meshRadius, -Math.PI, Math.PI, true);
+        const holderMesh = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 16, 32);
+        const translateHolder = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + meshRadius + 0.7, 0, 0);
+        holderMesh.applyMatrix4(translateHolder);
+        const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        holderMesh.applyMatrix4(rotateHolder);
 
-        const extrudeSettings = {
-            steps: 2000,
-            extrudePath: path,
-        };
-
-        const extrudeGeometry = new ExtrudeGeometry(semicircleShape, extrudeSettings);
-        extrudeGeometry.deleteAttribute('normal');
-        extrudeGeometry.deleteAttribute('uv');
-
-        const mergedGeometry = BufferGeometryUtils.mergeVertices(extrudeGeometry);
-        mergedGeometry.computeVertexNormals();
-
-        const holder = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 16, 32);
-        holder.deleteAttribute('normal');
-        holder.deleteAttribute('uv');
-
-        const rotationMatrix = new THREE.Matrix4().makeRotationX(Math.PI / 2);
-        holder.applyMatrix4(rotationMatrix);
-        const translationMatrix = new THREE.Matrix4().makeTranslation(0, 0, scaleC! / 4 * Math.sin(Math.PI / 2) + meshRadius + 0.7);
-        holder.applyMatrix4(translationMatrix);
-        const rotationMatrix2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
-        holder.applyMatrix4(rotationMatrix2);
-
-        const mergedGeometry2 = BufferGeometryUtils.mergeVertices(holder);
-        mergedGeometry2.computeVertexNormals();
-
-        const mergedGeometry3 = BufferGeometryUtils.mergeGeometries([mergedGeometry, mergedGeometry2]);
-
-        return mergedGeometry3;
-    }, [points, meshRadius, scaleC]);
+        const mergedMesh = BufferGeometryUtils.mergeGeometries([pendantMesh, holderMesh]);
+        return mergedMesh;
+    }, [lissajousPoints, meshRadius, scaleA, detail]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)}>
             <meshStandardMaterial attach="material" color={meshColor} />
         </mesh>
     );

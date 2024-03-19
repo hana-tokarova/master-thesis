@@ -57,7 +57,7 @@ const twisting = (s: number, majorR: number, minorR: number, twistAll: boolean, 
         }
 
         if (taper) {
-            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.01, 1 - Math.pow(2, -10 * edgeTaper));
+            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0, 1 - Math.pow(2, -10 * edgeTaper));
             u *= 1.5 * Math.PI; // Adjust for 3/4 of a circle
         } else {
             edgeTaper = 1;
