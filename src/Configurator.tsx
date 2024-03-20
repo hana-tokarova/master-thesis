@@ -35,8 +35,8 @@ export const Configurator = (props: ConfiguratorProps) => {
     setCurrentJewelry(props.jewelry);
   }, [props.collection, props.jewelry, jewelryMesh]);
 
-  const [meshColor, setMeshColor] = React.useState("white");
-  const colors = ["red", "orange", "yellow", "green", "blue", "purple", "black", "white"];
+  const [meshColor, setMeshColor] = React.useState("ghostwhite");
+  const colors = ["gold", "yellowgreen", "royalblue", "maroon", "ghostwhite"];
 
   if (!jewelryMesh) {
     return <></>;
@@ -90,35 +90,31 @@ export const Configurator = (props: ConfiguratorProps) => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "90vh" }}>
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} >
-          <color attach="background" args={["white"]} />
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }} >
 
-          <directionalLight intensity={2}
-            position={[10, 12, 3]}
-            shadow-camera-left={-30}
-            shadow-camera-right={30}
-            shadow-camera-top={30}
-            shadow-camera-bottom={-30}
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-            shadow-radius={100}
-            castShadow
+          <directionalLight
+            intensity={1.5}
+            position={[3, 3, 3]}
           />
-          <directionalLight intensity={1}
-            position={[2, -12, -3]}
-            shadow-camera-left={30}
-            shadow-camera-right={-30}
-            shadow-camera-top={-30}
-            shadow-camera-bottom={30}
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-            shadow-radius={100}
-            castShadow
+
+          <directionalLight
+            intensity={1.5}
+            position={[-3, 3, -3]}
           />
-          <directionalLight position={[-3, 12, -3]} intensity={1.5} />
+
+          <directionalLight
+            intensity={1.5}
+            position={[3, 3, -3]}
+          />
+
+          <directionalLight
+            intensity={1.5}
+            position={[-3, 3, 3]}
+          />
+
           <ambientLight
-            intensity={0.1}
-            castShadow
+            intensity={1}
+            color="dimgray"
           />
 
           {jewelryMesh!.render(parameters, meshColor, myMesh)}

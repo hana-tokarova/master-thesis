@@ -100,7 +100,7 @@ export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadi
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 };
@@ -119,7 +119,7 @@ export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, mesh
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 }
@@ -145,11 +145,11 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
 
         const mergedMesh = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
         return mergedMesh;
-    }, [lissajousPoints, meshRadius, scaleC, detail]);
+    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB, parameterA, parameterB, parameterC, detail]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 }
@@ -177,7 +177,7 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 }
