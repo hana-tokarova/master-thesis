@@ -1,5 +1,6 @@
 {
   "name": "master-thesis",
+  "homepage": "/master-thesis/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
