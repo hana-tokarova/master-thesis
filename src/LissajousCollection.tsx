@@ -100,7 +100,6 @@ export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadi
         }
 
         const ringMesh = new TubeGeometry(ringPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
-
         return ringMesh;
     }, [lissajousPoints, meshRadius, scaleA, scaleB]);
 
@@ -144,21 +143,21 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
 
         const earringMesh = new TubeGeometry(earringPath, calculateDetail3D(scaleA, scaleB, scaleC!), meshRadius, 32, true);
 
-        // const holderMesh = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 32, 64);
-        // const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
-        // holderMesh.applyMatrix4(rotationHolder);
-        // const t = 0;
-        // const stepSize = Math.PI * 2 / detail;
-        // const translateHolder = new THREE.Matrix4().makeTranslation(
-        //     (scaleA / 4) * Math.sin(parameterA * t * stepSize),
-        //     (scaleB / 4) * Math.sin(parameterB * t * stepSize + Math.PI),
-        //     (scaleC! / 4) * Math.sin(parameterC! * t * stepSize + Math.PI / 2) + meshRadius + 0.7
-        // );
-        // holderMesh.applyMatrix4(translateHolder);
+        const holderMesh = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 32, 64);
+        const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        holderMesh.applyMatrix4(rotationHolder);
+        const t = 0;
+        const stepSize = Math.PI * 2 / detail;
+        const translateHolder = new THREE.Matrix4().makeTranslation(
+            (scaleA / 4) * Math.sin(parameterA * t * stepSize),
+            (scaleB / 4) * Math.sin(parameterB * t * stepSize + Math.PI),
+            (scaleC! / 4) * Math.sin(parameterC! * t * stepSize + Math.PI / 2) + meshRadius + 0.7
+        );
+        holderMesh.applyMatrix4(translateHolder);
 
-        // const mergedMesh = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
-        return earringMesh;
-    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB]);
+        const mergedMesh = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
+        return mergedMesh;
+    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB, detail, parameterA, parameterB, parameterC]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>

@@ -1,5 +1,5 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
-import { TorsionEarring, TorsionRing } from "./TorsionCollection";
+import { TorsionBracelet, TorsionEarring, TorsionRing } from "./TorsionCollection";
 
 export enum CollectionType {
     Lissajous = 'lissajous',
@@ -132,7 +132,7 @@ export const collections: {
             [JewelryType.Ring]: {
                 parameters: {
                     slices: { value: 75, min: 50, max: 100, step: 1 },
-                    stacks: { value: 75, min: 50, max: 100, step: 1 },
+                    // stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { value: 4, min: 1, max: 10, step: 1 },
                     minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
                 },
@@ -140,7 +140,7 @@ export const collections: {
                     mesh={ref}
                     meshColor={color}
                     slices={params.slices}
-                    stacks={params.stacks}
+                    stacks={32}
                     majorR={params.majorR}
                     minorR={params.minorR}
                     twistAll={false}
@@ -149,16 +149,16 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 parameters: {
-                    slices: { value: 75, min: 50, max: 100, step: 1 },
-                    stacks: { value: 75, min: 50, max: 100, step: 1 },
-                    majorR: { value: 4, min: 1, max: 10, step: 1 },
+                    // slices: { value: 75, min: 50, max: 100, step: 1 },
+                    // stacks: { value: 75, min: 50, max: 100, step: 1 },
+                    majorR: { value: 3, min: 1, max: 5, step: 1 },
                     minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
                 },
-                render: (params, color, ref) => <TorsionRing
+                render: (params, color, ref) => <TorsionBracelet
                     mesh={ref}
                     meshColor={color}
-                    slices={params.slices}
-                    stacks={params.stacks}
+                    slices={200}
+                    stacks={32}
                     majorR={params.majorR}
                     minorR={params.minorR}
                     twistAll={false}
@@ -167,8 +167,8 @@ export const collections: {
             },
             [JewelryType.Earring]: {
                 parameters: {
-                    slices: { value: 75, min: 50, max: 100, step: 1 },
-                    stacks: { value: 75, min: 50, max: 100, step: 1 },
+                    slices: { value: 75, min: 50, max: 500, step: 1 },
+                    // stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { value: 4, min: 1, max: 10, step: 1 },
                     minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
                 },
@@ -176,7 +176,7 @@ export const collections: {
                     mesh={ref}
                     meshColor={color}
                     slices={params.slices}
-                    stacks={params.stacks}
+                    stacks={32}
                     majorR={params.majorR}
                     minorR={params.minorR}
                     twistAll={true}

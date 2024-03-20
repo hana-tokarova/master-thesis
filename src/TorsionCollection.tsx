@@ -45,7 +45,7 @@ const twisting = (s: number, majorR: number, minorR: number, twistAll: boolean, 
 
         let edgeTaper = 1;
 
-        const upperEdgeFalloff = 0.9;
+        const upperEdgeFalloff = 0.90;
         const lowerEdgeFalloff = 1 - upperEdgeFalloff;
 
         if (u > upperEdgeFalloff) {
@@ -57,8 +57,8 @@ const twisting = (s: number, majorR: number, minorR: number, twistAll: boolean, 
         }
 
         if (taper) {
-            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.01, 1 - Math.pow(2, -10 * edgeTaper));
-            u *= 1.5 * Math.PI; // Adjust for 3/4 of a circle
+            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.00001, 1 - Math.pow(2, -15 * edgeTaper));
+            u *= 1.8 * Math.PI; // Adjust for 3/4 of a circle
         } else {
             edgeTaper = 1;
             u *= 2 * Math.PI;
@@ -83,12 +83,14 @@ const twisting = (s: number, majorR: number, minorR: number, twistAll: boolean, 
 export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper }: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = twisting(4, majorR, minorR, twistAll, taper);
-        return new ParametricGeometry(func, slices, stacks);
+        const ringMesh = new ParametricGeometry(func, slices, stacks);
+
+        return ringMesh;
     }, [majorR, minorR, slices, stacks, twistAll, taper]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 };
@@ -96,19 +98,19 @@ export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, t
 export const TorsionBracelet = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper }: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = twisting(4, majorR, minorR, twistAll, taper);
+
         const braceletMesh = new ParametricGeometry(func, slices, stacks);
-        braceletMesh.computeVertexNormals();
         braceletMesh.deleteAttribute('normal');
         braceletMesh.deleteAttribute('uv');
-        const mergedGeometry = BufferGeometryUtils.mergeVertices(braceletMesh);
-        mergedGeometry.computeVertexNormals();
-        return mergedGeometry;
+        const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
+        mergedVertices.computeVertexNormals();
+        return mergedVertices;
 
     }, [majorR, minorR, slices, stacks, twistAll, taper]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 }
@@ -121,7 +123,7 @@ export const TorsionEarring = ({ mesh, meshColor, slices, stacks, majorR, minorR
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 4, Math.PI / 2)}>
-            <meshStandardMaterial attach="material" color={meshColor} />
+            <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 };
