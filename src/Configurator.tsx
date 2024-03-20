@@ -90,30 +90,15 @@ export const Configurator = (props: ConfiguratorProps) => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "90vh" }}>
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }} >
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }}>
 
-          <directionalLight
-            intensity={1.5}
-            position={[3, 3, 3]}
-          />
-
-          <directionalLight
-            intensity={1.5}
-            position={[-3, 3, -3]}
-          />
-
-          <directionalLight
-            intensity={1.5}
-            position={[3, 3, -3]}
-          />
-
-          <directionalLight
-            intensity={1.5}
-            position={[-3, 3, 3]}
-          />
+          <directionalLight intensity={2} position={[3, 3, 3]} />
+          <directionalLight intensity={2} position={[-3, 3, -3]} />
+          <directionalLight intensity={2} position={[3, 3, -3]} />
+          <directionalLight intensity={2} position={[-3, 3, 3]} />
 
           <ambientLight
-            intensity={1}
+            intensity={0.5}
             color="dimgray"
           />
 
