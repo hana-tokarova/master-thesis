@@ -158,7 +158,7 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
 
         // const mergedMesh = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
         return earringMesh;
-    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB, parameterA, parameterB, parameterC, detail]);
+    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>
