@@ -16,9 +16,11 @@ type TorsionProps = {
     twistAll: boolean;
     taper: boolean;
     twist: number;
+    height: number;
+    inflate?: number;
 }
 
-const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boolean, taper: boolean, twist: number) => {
+const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boolean, taper: boolean, twist: number, height: number, inflate?: number) => {
     return (u: number, v: number, target: THREE.Vector3) => {
         const smoothStep = (edge0: number, edge1: number, x: number) => {
             x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
@@ -74,24 +76,29 @@ const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boole
         const cosV = Math.cos(v + smoothT * u);
         const sinV = Math.sin(v + smoothT * u);
 
+        let inflateX;
+        let inflateZ;
 
-        const x = s * (majorR + edge * minorR * cosV * edgeTaper) * Math.cos(u);
-        const y = s * (majorR + edge * minorR * cosV * edgeTaper) * Math.sin(u);
-        const z = s * edgeTaper * edge * sinV * 0.5;
+        if (inflate === undefined) {
+            inflateX = 1;
+            inflateZ = 1;
+        } else {
+            inflateX = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? inflate! * (u / 2) : 1;
+            inflateZ = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? (1 + inflate! * (Math.cos(u - Math.PI))) : 1;
+        }
 
-        // Torus
-        // x = (R+r*cos(v)) * Math.cos(u)
-        // y = (R+r*cos(v)) * Math.sin(u)
-        // z = r*sin(v)
+        const x = (majorR + edge * minorR * inflateX * cosV * edgeTaper) * Math.cos(u);
+        const y = (majorR + edge * minorR * cosV * edgeTaper) * Math.sin(u);
+        const z = height * edgeTaper * edge * inflateZ * sinV;
 
         target.set(x, y, z);
     };
 };
 
 
-export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist }: TorsionProps) => {
+export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist, inflate, height }: TorsionProps) => {
     const geometry = useMemo(() => {
-        const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist);
+        const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist, height, inflate!);
 
         const ringMesh = new ParametricGeometry(func, slices, stacks);
         ringMesh.deleteAttribute('normal');
@@ -100,7 +107,7 @@ export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, t
         mergedVertices.computeVertexNormals();
 
         return mergedVertices;
-    }, [majorR, minorR, slices, stacks, twistAll, taper, twist]);
+    }, [majorR, minorR, slices, stacks, twistAll, taper, twist, inflate, height]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
@@ -109,35 +116,35 @@ export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, t
     );
 };
 
-export const TorsionBracelet = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist }: TorsionProps) => {
-    const geometry = useMemo(() => {
-        const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist);
+// export const TorsionBracelet = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist, inflate }: TorsionProps) => {
+//     const geometry = useMemo(() => {
+//         const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist, inflate!);
 
-        const braceletMesh = new ParametricGeometry(func, slices, stacks);
-        braceletMesh.deleteAttribute('normal');
-        braceletMesh.deleteAttribute('uv');
-        const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
-        mergedVertices.computeVertexNormals();
-        return mergedVertices;
+//         const braceletMesh = new ParametricGeometry(func, slices, stacks);
+//         braceletMesh.deleteAttribute('normal');
+//         braceletMesh.deleteAttribute('uv');
+//         const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
+//         mergedVertices.computeVertexNormals();
+//         return mergedVertices;
 
-    }, [majorR, minorR, slices, stacks, twistAll, taper, twist]);
+//     }, [majorR, minorR, slices, stacks, twistAll, taper, twist, inflate]);
 
-    return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
-            <meshLambertMaterial attach="material" color={meshColor} />
-        </mesh>
-    );
-}
+//     return (
+//         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
+//             <meshLambertMaterial attach="material" color={meshColor} />
+//         </mesh>
+//     );
+// }
 
-export const TorsionEarring = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist }: TorsionProps) => {
-    const geometry = useMemo(() => {
-        const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist);
-        return new ParametricGeometry(func, slices, stacks);
-    }, [majorR, minorR, slices, stacks, twistAll, taper, twist]);
+// export const TorsionEarring = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist }: TorsionProps) => {
+//     const geometry = useMemo(() => {
+//         const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist);
+//         return new ParametricGeometry(func, slices, stacks);
+//     }, [majorR, minorR, slices, stacks, twistAll, taper, twist]);
 
-    return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 4, Math.PI / 2)}>
-            <meshLambertMaterial attach="material" color={meshColor} />
-        </mesh>
-    );
-};
+//     return (
+//         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 4, Math.PI / 2)}>
+//             <meshLambertMaterial attach="material" color={meshColor} />
+//         </mesh>
+//     );
+// };
