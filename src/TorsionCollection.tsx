@@ -18,15 +18,16 @@ type TorsionProps = {
     twist: number;
     height: number;
     inflate?: number;
+    screw?: number
 }
 
-const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boolean, taper: boolean, twist: number, height: number, inflate?: number) => {
+const ringTwist = (majorR: number, minorR: number, twistAll: boolean, taper: boolean, twist: number, height: number, inflate?: number) => {
     return (u: number, v: number, target: THREE.Vector3) => {
         const smoothStep = (edge0: number, edge1: number, x: number) => {
             x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
             // return x * x * (3 - 2 * x);
-            // return x * x * x * (x * (x * 6 - 15) + 10);
-            return x * x * x * 5;
+            return x * x * x * (x * (x * 6 - 15) + 10);
+            // return x * x * x * 5;
         };
 
         const startTwistU = 0.10;
@@ -40,7 +41,7 @@ const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boole
             smoothT = t;
         } else {
             if (u >= startTwistU && u <= endTwistU) {
-                t = twist * Math.sin(u * Math.PI * twist); // tu sa da opravovat twisting
+                t = twist * Math.sin(u * Math.PI * twist);
             } else {
                 t = 0;
             }
@@ -62,7 +63,7 @@ const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boole
         }
 
         if (taper) {
-            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.00001, 1 - Math.pow(2, -15 * edgeTaper));
+            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.00001, 1 - Math.pow(majorR, -5 * edgeTaper));
             u *= 1.8 * Math.PI; // Adjust for 3/4 of a circle
         } else {
             edgeTaper = 1;
@@ -95,19 +96,85 @@ const torsionTwist = (s: number, majorR: number, minorR: number, twistAll: boole
     };
 };
 
+const braceletTwist = (majorR: number, minorR: number, taper: boolean, twistAll: boolean, twist: number, height: number, screw: number) => {
+    return (u: number, v: number, target: THREE.Vector3) => {
+        const smoothStep = (edge0: number, edge1: number, x: number) => {
+            x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+            // return x * x * (3 - 2 * x);
+            return x * x * x * (x * (x * 6 - 15) + 10);
+            // return x * x * x * 5;
+        };
 
-export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist, inflate, height }: TorsionProps) => {
+        const startTwistU = 0.10;
+        const endTwistU = 0.90;
+
+        let t;
+        let smoothT;
+
+        if (twistAll) {
+            t = twist;
+            smoothT = t;
+        } else {
+            if (u >= startTwistU && u <= endTwistU) {
+                t = twist * Math.sin(u * Math.PI);
+            } else {
+                t = 0;
+            }
+
+            smoothT = t * smoothStep(startTwistU, endTwistU, u) * smoothStep(endTwistU, startTwistU, u);
+        }
+
+        let edgeTaper = 1;
+
+        const upperEdgeFalloff = 0.90;
+        const lowerEdgeFalloff = 1 - upperEdgeFalloff;
+
+        if (u > upperEdgeFalloff) {
+            // When we are ending the twist, we want to taper the edge
+            edgeTaper = (1 - u) / (1 - upperEdgeFalloff);
+        } else if (u < lowerEdgeFalloff) {
+            // When we are starting the twist, we want to taper the edge
+            edgeTaper = u / (lowerEdgeFalloff);
+        }
+
+        if (taper) {
+            edgeTaper = edgeTaper === 1 ? 1 : Math.max(0.00001, 1 - Math.pow(majorR, -5 * edgeTaper));
+            u *= 1.8 * Math.PI; // Adjust for 3/4 of a circle
+        } else {
+            edgeTaper = 1;
+            u *= 2 * Math.PI;
+        }
+
+        v *= 2 * Math.PI;
+
+        const edge = (Math.cos(v) ** 10 + Math.sin(v) ** 10) ** (-1 / 10);
+
+        const x = (majorR + minorR * Math.cos(v + smoothT * u) * edgeTaper * edge) * Math.cos(u);
+        const y = (majorR + minorR * Math.cos(v + smoothT * u) * edgeTaper * edge) * Math.sin(u);
+        const z = height * edgeTaper * edge * minorR * Math.sin(v + smoothT * u) + ((screw * u) / Math.PI);
+
+        target.set(x, y, z);
+    };
+}
+
+
+export const TorsionRing = ({ mesh, meshColor, majorR, minorR, twistAll, taper, twist, inflate, height, stacks }: TorsionProps) => {
     const geometry = useMemo(() => {
-        const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist, height, inflate!);
+        const func = ringTwist(majorR, minorR, twistAll, taper, twist, height, inflate!);
 
-        const ringMesh = new ParametricGeometry(func, slices, stacks);
+        const calculateDetail2D = (majorR: number, height: number) => {
+            const detail = Math.floor((majorR * 2 * Math.PI * Math.abs(twist === 0 ? 1 : twist) * height * inflate!));
+            return detail > 1000 ? 1000 : detail;
+        }
+
+        const ringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, height), stacks);
         ringMesh.deleteAttribute('normal');
         ringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(ringMesh, 0.01);
         mergedVertices.computeVertexNormals();
 
         return mergedVertices;
-    }, [majorR, minorR, slices, stacks, twistAll, taper, twist, inflate, height]);
+    }, [majorR, minorR, twistAll, taper, twist, inflate, height, stacks]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, Math.PI)}>
@@ -116,25 +183,25 @@ export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, t
     );
 };
 
-// export const TorsionBracelet = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist, inflate }: TorsionProps) => {
-//     const geometry = useMemo(() => {
-//         const func = torsionTwist(4, majorR, minorR, twistAll, taper, twist, inflate!);
+export const TorsionBracelet = ({ mesh, meshColor, stacks, majorR, minorR, twistAll, taper, twist, height, slices, screw }: TorsionProps) => {
+    const geometry = useMemo(() => {
+        const func = braceletTwist(majorR, minorR, taper, twistAll, twist, height, screw!);
 
-//         const braceletMesh = new ParametricGeometry(func, slices, stacks);
-//         braceletMesh.deleteAttribute('normal');
-//         braceletMesh.deleteAttribute('uv');
-//         const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
-//         mergedVertices.computeVertexNormals();
-//         return mergedVertices;
+        const braceletMesh = new ParametricGeometry(func, slices, stacks);
+        braceletMesh.deleteAttribute('normal');
+        braceletMesh.deleteAttribute('uv');
+        const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
+        mergedVertices.computeVertexNormals();
 
-//     }, [majorR, minorR, slices, stacks, twistAll, taper, twist, inflate]);
+        return mergedVertices;
+    }, [majorR, minorR, stacks, taper, slices, twist, twistAll, screw, height]);
 
-//     return (
-//         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
-//             <meshLambertMaterial attach="material" color={meshColor} />
-//         </mesh>
-//     );
-// }
+    return (
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
+            <meshLambertMaterial attach="material" color={meshColor} />
+        </mesh>
+    );
+}
 
 // export const TorsionEarring = ({ mesh, meshColor, slices, stacks, majorR, minorR, twistAll, taper, twist }: TorsionProps) => {
 //     const geometry = useMemo(() => {

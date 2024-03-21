@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { Euler, TubeGeometry } from 'three';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
-
 type MeshRef = React.RefObject<THREE.Mesh>;
 
 type LissajousProps = {
@@ -136,7 +135,6 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
         const earringPath = new THREE.CatmullRomCurve3(lissajousPoints, false, "catmullrom", 0.2);
 
         const calculateDetail3D = (sA: number, sB: number, sC: number) => {
-            console.log(sA, sB, sC);
             const detail = Math.max(1, Math.floor(Math.PI * sA * sB * sC / 30));
             return detail > 1000 ? 1000 : detail;
         }

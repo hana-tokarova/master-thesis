@@ -1,5 +1,5 @@
 import { LissajousRing } from "./LissajousCollection";
-import { TorsionRing } from "./TorsionCollection";
+import { TorsionBracelet, TorsionRing } from "./TorsionCollection";
 
 export enum CollectionType {
     Lissajous = 'lissajous',
@@ -145,13 +145,10 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 numericParameters: {
-                    slices: { type: 'slider', value: 150, min: 100, max: 400, step: 1 },
-                    // stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    // minorR: { value: 0.3, min: 0.1, max: 0.5, step: 0.1 },
-                    twist: { type: 'slider', value: 0, min: -5, max: 5, step: 1 },
-                    inflate: { type: 'slider', value: 2, min: 0.1, max: 3, step: 0.01 },
-                    height: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    twist: { type: 'slider', value: 3, min: 0, max: 5, step: 1 },
+                    inflate: { type: 'slider', value: 2, min: 1, max: 3, step: 0.01 },
+                    height: { type: 'slider', value: 0.7, min: 0.5, max: 1, step: 0.01 },
                 },
                 booleanParameters: {
                     twistAll: { type: 'toggle', value: false },
@@ -170,33 +167,31 @@ export const collections: {
                     height={numParams.height}
                 />
             },
-            // [JewelryType.Bracelet]: {
-            //     parameters: {
-            //         // slices: { value: 75, min: 50, max: 100, step: 1 },
-            //         // stacks: { value: 75, min: 50, max: 100, step: 1 },
-            //         majorR: { value: 3, min: 1, max: 5, step: 1 },
-            //         minorR: { value: 0.3, min: 0.1, max: 0.5, step: 0.1 },
-            //         twist: { value: 3, min: 0, max: 5, step: 0.1 },
-            //         scaleA: { value: 15, min: 5, max: 10, step: 1 },
-            //         scaleB: { value: 15, min: 10, max: 20, step: 1 },
-            //         scaleC: { value: 15, min: 10, max: 20, step: 1 },
-            //     },
-            //     render: (params, color, ref) => <TorsionBracelet
-            //         mesh={ref}
-            //         meshColor={color}
-            //         slices={200}
-            //         stacks={32}
-            //         majorR={params.majorR}
-            //         minorR={params.minorR}
-            //         twistAll={true}
-            //         taper={true}
-            //         twist={params.twist}
-            //         inflate={2}
-            //         scaleA={params.scaleA}
-            //         scaleB={params.scaleB}
-            //         scaleC={params.scaleC}
-            //     />
-            // },
+            [JewelryType.Bracelet]: {
+                numericParameters: {
+                    majorR: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    twist: { type: 'slider', value: 3, min: 0, max: 5, step: 1 },
+                    height: { type: 'slider', value: 4, min: 3, max: 5, step: 0.01 },
+                    screw: { type: 'slider', value: 0, min: -3, max: 3, step: 0.1 },
+                },
+                booleanParameters: {
+                    twistAll: { type: 'toggle', value: true },
+                },
+                render: (numParams, togParams, color, ref) => <TorsionBracelet
+                    mesh={ref}
+                    meshColor={color}
+                    slices={400}
+                    stacks={32}
+                    majorR={numParams.majorR}
+                    minorR={0.8}
+                    twistAll={togParams.twistAll}
+                    taper={true}
+                    twist={numParams.twist}
+                    inflate={0.1}
+                    height={numParams.height}
+                    screw={numParams.screw}
+                />
+            },
             // [JewelryType.Earring]: {
             //     parameters: {
             //         slices: { value: 75, min: 50, max: 500, step: 1 },
