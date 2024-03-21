@@ -134,7 +134,8 @@ export const collections: {
                     slices: { value: 75, min: 50, max: 100, step: 1 },
                     // stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { value: 4, min: 1, max: 10, step: 1 },
-                    minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
+                    minorR: { value: 0.3, min: 0.1, max: 0.5, step: 0.1 },
+                    twist: { value: 3, min: 0, max: 5, step: 0.1 },
                 },
                 render: (params, color, ref) => <TorsionRing
                     mesh={ref}
@@ -144,6 +145,7 @@ export const collections: {
                     majorR={params.majorR}
                     minorR={params.minorR}
                     twistAll={false}
+                    twist={params.twist}
                     taper={false}
                 />
             },
@@ -152,7 +154,8 @@ export const collections: {
                     // slices: { value: 75, min: 50, max: 100, step: 1 },
                     // stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { value: 3, min: 1, max: 5, step: 1 },
-                    minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
+                    minorR: { value: 0.3, min: 0.1, max: 0.5, step: 0.1 },
+                    twist: { value: 3, min: 0, max: 5, step: 0.1 },
                 },
                 render: (params, color, ref) => <TorsionBracelet
                     mesh={ref}
@@ -163,6 +166,7 @@ export const collections: {
                     minorR={params.minorR}
                     twistAll={false}
                     taper={true}
+                    twist={params.twist}
                 />
             },
             [JewelryType.Earring]: {
@@ -170,7 +174,8 @@ export const collections: {
                     slices: { value: 75, min: 50, max: 500, step: 1 },
                     // stacks: { value: 75, min: 50, max: 100, step: 1 },
                     majorR: { value: 4, min: 1, max: 10, step: 1 },
-                    minorR: { value: 0.3, min: 0.1, max: 1, step: 0.1 },
+                    minorR: { value: 0.3, min: 0.1, max: 0.5, step: 0.1 },
+                    twist: { value: 3, min: 0, max: 5, step: 1 },
                 },
                 render: (params, color, ref) => <TorsionEarring
                     mesh={ref}
@@ -181,6 +186,7 @@ export const collections: {
                     minorR={params.minorR}
                     twistAll={true}
                     taper={false}
+                    twist={params.twist}
                 />
             }
         },
