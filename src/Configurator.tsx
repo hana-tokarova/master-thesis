@@ -1,4 +1,4 @@
-import { Button, ChakraProvider, HStack, IconButton, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, HStack, IconButton, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, theme } from "@chakra-ui/react";
 import { Canvas } from '@react-three/fiber';
 import React from 'react';
 import * as THREE from 'three';
@@ -21,7 +21,9 @@ export const Configurator = (props: ConfiguratorProps) => {
 
   const jewelryMesh = collections[props.collection]?.meshes[props.jewelry];
 
-  const [parameters, setParameters] = React.useState<{ [key: string]: number }>();
+  const [numericParameters, setNumericParameters] = React.useState<{ [key: string]: number }>();
+  const [booleanParameters, setBooleanParameters] = React.useState<{ [key: string]: boolean }>();
+
   const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(props.collection);
   const [currentJewelry, setCurrentJewelry] = React.useState<JewelryType>(props.jewelry);
 
@@ -30,7 +32,9 @@ export const Configurator = (props: ConfiguratorProps) => {
       return;
     }
 
-    setParameters(() => Object.entries(jewelryMesh!.parameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+    setNumericParameters(() => Object.entries(jewelryMesh!.numericParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+    setBooleanParameters(() => Object.entries(jewelryMesh!.booleanParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+
     setCurrentCollection(props.collection);
     setCurrentJewelry(props.jewelry);
   }, [props.collection, props.jewelry, jewelryMesh]);
@@ -46,15 +50,25 @@ export const Configurator = (props: ConfiguratorProps) => {
     setMeshColor(changeColor);
   };
 
-  const changeParameter = (
+  const changeNumericParameter = (
     parameterName: string,
     newValue: number,
   ): void => {
-    setParameters((prevParams) => ({
+    setNumericParameters((prevParams) => ({
       ...prevParams,
       [parameterName]: newValue,
     }));
   };
+
+  const changeBooleanParameter = (
+    parameterName: string,
+    newValue: boolean,
+  ): void => {
+    setBooleanParameters((prevParams) => ({
+      ...prevParams,
+      [parameterName]: newValue,
+    }));
+  }
 
   const link = document.createElement('a');
   link.style.display = 'none';
@@ -83,7 +97,7 @@ export const Configurator = (props: ConfiguratorProps) => {
     saveArrayBuffer(stlString, clonedMesh.uuid + '.stl');
   };
 
-  if (!parameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
+  if (!booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
     return <></>;
   }
 
@@ -102,7 +116,7 @@ export const Configurator = (props: ConfiguratorProps) => {
             color="dimgray"
           />
 
-          {jewelryMesh!.render(parameters, meshColor, myMesh)}
+          {jewelryMesh!.render(numericParameters, booleanParameters, meshColor, myMesh)}
 
           <OrbitControls
             enablePan={false}
@@ -132,17 +146,17 @@ export const Configurator = (props: ConfiguratorProps) => {
             Export to .STL
           </Button>
 
-          {jewelryMesh && Object.entries(jewelryMesh.parameters).map(([parameterName, parameterDetails]) => (
+          {jewelryMesh && Object.entries(jewelryMesh.numericParameters).map(([parameterName, parameterDetails]) => (
             <div key={parameterName}>
               {parameterName}
               <Slider
                 margin={2}
                 colorScheme='cyan'
-                value={parameters[parameterName]}
+                value={numericParameters[parameterName]}
                 min={parameterDetails.min}
                 max={parameterDetails.max}
                 step={parameterDetails.step}
-                onChange={(newValue) => changeParameter(parameterName, newValue)}>
+                onChange={(newValue) => changeNumericParameter(parameterName, newValue)}>
 
                 <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
                   {parameterDetails.min}
@@ -155,6 +169,18 @@ export const Configurator = (props: ConfiguratorProps) => {
                 </SliderTrack>
                 <SliderThumb />
               </Slider>
+            </div>
+          ))}
+
+          {jewelryMesh && Object.entries(jewelryMesh.booleanParameters).map(([parameterName, parameterDetails]) => (
+            <div key={parameterName} >
+              {parameterName}
+              <Switch
+                margin={2}
+                colorScheme='cyan'
+                isChecked={booleanParameters[parameterName]}
+                onChange={(newValue) => changeBooleanParameter(parameterName, newValue.target.checked)}
+              />
             </div>
           ))}
         </div>

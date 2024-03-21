@@ -1,4 +1,4 @@
-import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
+import { LissajousRing } from "./LissajousCollection";
 import { TorsionRing } from "./TorsionCollection";
 
 export enum CollectionType {
@@ -13,19 +13,31 @@ export enum JewelryType {
     Pendant = 'pendant'
 }
 
-type Parameter = {
+type SliderParameter = {
+    type: 'slider';
     value: number;
     min: number;
     max: number;
     step: number;
-}
+};
+
+type ToggleParameter = {
+    type: 'toggle';
+    value: boolean;
+};
 
 type JewelryMesh = {
-    parameters: {
-        [key: string]: Parameter;
+    numericParameters: {
+        [key: string]: SliderParameter;
     };
-    render: (params: { [key: string]: number }, color: string, ref: React.RefObject<THREE.Mesh>) => JSX.Element;
-}
+    booleanParameters: {
+        [key: string]: ToggleParameter;
+    };
+    render: (numericParams: { [key: string]: number },
+        booleanParams: { [key: string]: boolean },
+        color: string,
+        ref: React.RefObject<THREE.Mesh>) => JSX.Element;
+};
 
 type Jewelry = {
     name: string;
@@ -43,85 +55,87 @@ export const collections: {
         description: 'Lissajous surface',
         meshes: {
             [JewelryType.Ring]: {
-                parameters: {
-                    a: { value: 3, min: 1, max: 5, step: 1 },
-                    b: { value: 5, min: 1, max: 10, step: 1 },
-                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
-                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                numericParameters: {
+                    a: { type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    b: { type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+                    scaleA: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
-                render: (params, color, ref) => <LissajousRing
+                booleanParameters: {},
+                render: (numParams, togParams, color, ref) => <LissajousRing
                     mesh={ref}
                     meshColor={color}
-                    meshRadius={params.r}
-                    parameterA={params.a}
-                    parameterB={params.b}
-                    scaleA={params.scaleA}
-                    scaleB={params.scaleB}
+                    meshRadius={numParams.r}
+                    parameterA={numParams.a}
+                    parameterB={numParams.b}
+                    scaleA={numParams.scaleA}
+                    scaleB={numParams.scaleB}
                     detail={1000}
                 />
             },
-            [JewelryType.Bracelet]: {
-                parameters: {
-                    a: { value: 3, min: 1, max: 5, step: 2 },
-                    b: { value: 5, min: 1, max: 10, step: 1 },
-                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
-                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
-                },
-                render: (params, color, ref) => <LissajousBracelet
-                    mesh={ref}
-                    meshColor={color}
-                    meshRadius={params.r}
-                    parameterA={params.a}
-                    parameterB={params.b}
-                    scaleA={params.scaleA}
-                    scaleB={params.scaleB}
-                    detail={1000}
-                />
-            },
-            [JewelryType.Earring]: {
-                parameters: {
-                    a: { value: 4, min: 2, max: 8, step: 2 },
-                    b: { value: 3, min: 1, max: 5, step: 1 },
-                    c: { value: 3, min: 1, max: 5, step: 2 },
-                    scaleA: { value: 15, min: 5, max: 10, step: 1 },
-                    scaleB: { value: 15, min: 10, max: 20, step: 1 },
-                    scaleC: { value: 15, min: 10, max: 20, step: 1 },
-                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
-                },
-                render: (params, color, ref) => <LissajousEarring
-                    mesh={ref}
-                    meshColor={color}
-                    meshRadius={params.r}
-                    parameterA={params.a}
-                    parameterB={params.b}
-                    parameterC={params.c}
-                    scaleA={params.scaleA}
-                    scaleB={params.scaleB}
-                    scaleC={params.scaleC}
-                    detail={1000}
-                />
-            },
-            [JewelryType.Pendant]: {
-                parameters: {
-                    a: { value: 3, min: 1, max: 5, step: 2 },
-                    b: { value: 3, min: 1, max: 5, step: 1 },
-                    scaleA: { value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { value: 20, min: 10, max: 30, step: 1 },
-                    r: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
-                },
-                render: (params, color, ref) => <LissajousPendant
-                    mesh={ref}
-                    meshColor={color}
-                    meshRadius={params.r}
-                    parameterA={params.a}
-                    parameterB={params.b}
-                    scaleA={params.scaleA}
-                    scaleB={params.scaleB}
-                    detail={1000}
-                />
-            },
+            // [JewelryType.Bracelet]: {
+            //     numericParameters: {
+            //         a: { type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+            //         b: { type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+            //         scaleA: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+            //         scaleB: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+            //         r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+            //     },
+            //     booleanParameters: {},
+            //     render: (params, color, ref) => <LissajousBracelet
+            //         mesh={ref}
+            //         meshColor={color}
+            //         meshRadius={params.r}
+            //         parameterA={params.a}
+            //         parameterB={params.b}
+            //         scaleA={params.scaleA}
+            //         scaleB={params.scaleB}
+            //         detail={1000}
+            //     />
+            // },
+            // [JewelryType.Earring]: {
+            //     parameters: {
+            //         a: { type: 'slider', value: 4, min: 2, max: 8, step: 2 },
+            //         b: { type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+            //         c: { type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+            //         scaleA: { type: 'slider', value: 15, min: 5, max: 10, step: 1 },
+            //         scaleB: { type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+            //         scaleC: { type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+            //         r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+            //     },
+            //     render: (params, color, ref) => <LissajousEarring
+            //         mesh={ref}
+            //         meshColor={color}
+            //         meshRadius={params.r}
+            //         parameterA={params.a}
+            //         parameterB={params.b}
+            //         parameterC={params.c}
+            //         scaleA={params.scaleA}
+            //         scaleB={params.scaleB}
+            //         scaleC={params.scaleC}
+            //         detail={1000}
+            //     />
+            // },
+            // [JewelryType.Pendant]: {
+            //     parameters: {
+            //         a: { type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+            //         b: { type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+            //         scaleA: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+            //         scaleB: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+            //         r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+            //     },
+            //     render: (params, color, ref) => <LissajousPendant
+            //         mesh={ref}
+            //         meshColor={color}
+            //         meshRadius={params.r}
+            //         parameterA={params.a}
+            //         parameterB={params.b}
+            //         scaleA={params.scaleA}
+            //         scaleB={params.scaleB}
+            //         detail={1000}
+            //     />
+            // },
         }
     },
 
@@ -130,27 +144,30 @@ export const collections: {
         description: 'Twisted surface',
         meshes: {
             [JewelryType.Ring]: {
-                parameters: {
-                    slices: { value: 150, min: 100, max: 400, step: 1 },
+                numericParameters: {
+                    slices: { type: 'slider', value: 150, min: 100, max: 400, step: 1 },
                     // stacks: { value: 75, min: 50, max: 100, step: 1 },
-                    majorR: { value: 4, min: 1, max: 10, step: 1 },
+                    majorR: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     // minorR: { value: 0.3, min: 0.1, max: 0.5, step: 0.1 },
-                    twist: { value: 3, min: 0, max: 4.3, step: 0.1 },
-                    inflate: { value: 2, min: 0.1, max: 3, step: 0.01 },
-                    height: { value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    twist: { type: 'slider', value: 0, min: -5, max: 5, step: 1 },
+                    inflate: { type: 'slider', value: 2, min: 0.1, max: 3, step: 0.01 },
+                    height: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
-                render: (params, color, ref) => <TorsionRing
+                booleanParameters: {
+                    twistAll: { type: 'toggle', value: false },
+                },
+                render: (numParams, togParams, color, ref) => <TorsionRing
                     mesh={ref}
                     meshColor={color}
-                    slices={params.slices}
+                    slices={numParams.slices}
                     stacks={64}
-                    majorR={params.majorR}
-                    minorR={0.1}
-                    twistAll={false}
-                    twist={params.twist}
+                    majorR={numParams.majorR}
+                    minorR={0.3}
+                    twistAll={togParams.twistAll}
+                    twist={numParams.twist}
                     taper={false}
-                    inflate={params.inflate}
-                    height={params.height}
+                    inflate={numParams.inflate}
+                    height={numParams.height}
                 />
             },
             // [JewelryType.Bracelet]: {

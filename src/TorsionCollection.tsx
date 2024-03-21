@@ -110,7 +110,7 @@ export const TorsionRing = ({ mesh, meshColor, slices, stacks, majorR, minorR, t
     }, [majorR, minorR, slices, stacks, twistAll, taper, twist, inflate, height]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, Math.PI)}>
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
