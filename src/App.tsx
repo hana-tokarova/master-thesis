@@ -19,7 +19,7 @@ export const App = () => {
             <HStack margin={2}>
                 {Object.values(CollectionType).map((collectionValue) => (
                     Object.values(JewelryType).map((jewelryValue) => (
-                        <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)}>
+                        <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)} >
                             {collectionValue} {jewelryValue}
                         </Button>
                     )

@@ -1,5 +1,5 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
-import { TorsionBracelet, TorsionEarring, TorsionRing } from "./TorsionCollection";
+import { TorsionBracelet, TorsionEarring, TorsionPendant, TorsionRing } from "./TorsionCollection";
 
 export enum CollectionType {
     Lissajous = 'lissajous',
@@ -14,6 +14,7 @@ export enum JewelryType {
 }
 
 type SliderParameter = {
+    name: string;
     type: 'slider';
     value: number;
     min: number;
@@ -22,6 +23,7 @@ type SliderParameter = {
 };
 
 type ToggleParameter = {
+    name: string;
     type: 'toggle';
     value: boolean;
 };
@@ -56,11 +58,11 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 numericParameters: {
-                    a: { type: 'slider', value: 3, min: 1, max: 5, step: 1 },
-                    b: { type: 'slider', value: 5, min: 1, max: 10, step: 1 },
-                    scaleA: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    b: { name: "Vertical lines", type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+                    scaleA: { name: "Scaling A", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: "Scaling B", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 booleanParameters: {},
                 render: (numParams, togParams, color, ref) => <LissajousRing
@@ -76,11 +78,11 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 numericParameters: {
-                    a: { type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-                    b: { type: 'slider', value: 5, min: 1, max: 10, step: 1 },
-                    scaleA: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    b: { name: "Vertical lines", type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+                    scaleA: { name: "Scaling A", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: "Scaling B", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 booleanParameters: {},
                 render: (numParams, togParams, color, ref) => <LissajousBracelet
@@ -96,13 +98,13 @@ export const collections: {
             },
             [JewelryType.Earring]: {
                 numericParameters: {
-                    a: { type: 'slider', value: 4, min: 2, max: 8, step: 2 },
-                    b: { type: 'slider', value: 3, min: 1, max: 5, step: 1 },
-                    c: { type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-                    scaleA: { type: 'slider', value: 15, min: 5, max: 10, step: 1 },
-                    scaleB: { type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-                    scaleC: { type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-                    r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    a: { name: "Vertical lines", type: 'slider', value: 4, min: 2, max: 8, step: 2 },
+                    b: { name: "Twisting ", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    c: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    scaleA: { name: "Scale A", type: 'slider', value: 15, min: 5, max: 10, step: 1 },
+                    scaleB: { name: "Scale B", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    scaleC: { name: "Scale C", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 booleanParameters: {},
                 render: (numParams, togParams, color, ref) => <LissajousEarring
@@ -120,11 +122,11 @@ export const collections: {
             },
             [JewelryType.Pendant]: {
                 numericParameters: {
-                    a: { type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-                    b: { type: 'slider', value: 3, min: 1, max: 5, step: 1 },
-                    scaleA: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    r: { type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    b: { name: "Vertical lines", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    scaleA: { name: "Scale A", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: "Scale B", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 booleanParameters: {},
                 render: (numParams, togParams, color, ref) => <LissajousPendant
@@ -147,14 +149,14 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 numericParameters: {
-                    majorR: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    minorR: { type: 'slider', value: 0.3, min: 0.1, max: 0.5, step: 0.01 },
-                    twist: { type: 'slider', value: 3, min: -5, max: 5, step: 0.5 },
-                    inflate: { type: 'slider', value: 2, min: 1, max: 3, step: 0.01 },
-                    scaleC: { type: 'slider', value: 0.7, min: 0.5, max: 1, step: 0.01 },
+                    majorR: { name: "Radius", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    minorR: { name: "Thickness", type: 'slider', value: 0.3, min: 0.1, max: 0.5, step: 0.01 },
+                    twist: { name: "Twistiness", type: 'slider', value: 3, min: -5, max: 5, step: 0.5 },
+                    inflate: { name: "Inflation", type: 'slider', value: 2, min: 1, max: 3, step: 0.01 },
+                    scaleC: { name: "Height", type: 'slider', value: 0.7, min: 0.5, max: 1, step: 0.01 },
                 },
                 booleanParameters: {
-                    twistAll: { type: 'toggle', value: false },
+                    twistAll: { name: "Twist all?", type: 'toggle', value: false },
                 },
                 render: (numParams, togParams, color, ref) => <TorsionRing
                     mesh={ref}
@@ -172,14 +174,14 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 numericParameters: {
-                    majorR: { type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    minorR: { type: 'slider', value: 0.6, min: 0.2, max: 1, step: 0.01 },
-                    twist: { type: 'slider', value: 3, min: 0, max: 5, step: 1 },
-                    scaleC: { type: 'slider', value: 4, min: 3, max: 5, step: 0.01 },
-                    screw: { type: 'slider', value: 1.5, min: 0, max: 3, step: 0.1 },
+                    majorR: { name: "Radius", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    minorR: { name: "Thickness", type: 'slider', value: 0.6, min: 0.2, max: 1, step: 0.01 },
+                    twist: { name: "Twistiness", type: 'slider', value: 3, min: 0, max: 5, step: 1 },
+                    scaleC: { name: "Height", type: 'slider', value: 4, min: 3, max: 5, step: 0.01 },
+                    screw: { name: "Screwness", type: 'slider', value: 1.5, min: 0, max: 3, step: 0.1 },
                 },
                 booleanParameters: {
-                    twistAll: { type: 'toggle', value: true },
+                    twistAll: { name: "Twist all?", type: 'toggle', value: true },
                 },
                 render: (numParams, togParams, color, ref) => <TorsionBracelet
                     mesh={ref}
@@ -197,14 +199,14 @@ export const collections: {
             },
             [JewelryType.Earring]: {
                 numericParameters: {
-                    majorR: { type: 'slider', value: 8, min: 3, max: 9, step: 1 },
-                    minorR: { type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
-                    twist: { type: "slider", value: 3, min: 0, max: 5, step: 1 },
-                    inflate: { type: 'slider', value: 2, min: 1, max: 3, step: 0.01 },
-                    scaleC: { type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
+                    majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
+                    minorR: { name: "Thickness", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
+                    twist: { name: "Twistiness", type: "slider", value: 3, min: 0, max: 5, step: 1 },
+                    inflate: { name: "Inflation", type: 'slider', value: 1, min: 1, max: 3, step: 0.01 },
+                    scaleC: { name: "Height", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
                 },
                 booleanParameters: {
-                    twistAll: { type: 'toggle', value: true },
+                    twistAll: { name: "Twist all?", type: 'toggle', value: true },
                 },
                 render: (numParams, togParams, color, ref) => <TorsionEarring
                     mesh={ref}
@@ -222,15 +224,15 @@ export const collections: {
             },
             [JewelryType.Pendant]: {
                 numericParameters: {
-                    majorR: { type: 'slider', value: 8, min: 3, max: 9, step: 1 },
-                    minorR: { type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
-                    twist: { type: "slider", value: 3, min: 0, max: 5, step: 1 },
-                    scaleC: { type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
+                    majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
+                    minorR: { name: "Thickness", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
+                    twist: { name: "Twistiness", type: "slider", value: 3, min: 0, max: 5, step: 1 },
+                    scaleC: { name: "Height", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
                 },
                 booleanParameters: {
-                    twistAll: { type: 'toggle', value: true },
+                    twistAll: { name: "Twist all?", type: 'toggle', value: true },
                 },
-                render: (numParams, togParams, color, ref) => <TorsionEarring
+                render: (numParams, togParams, color, ref) => <TorsionPendant
                     mesh={ref}
                     meshColor={color}
                     stacks={64}

@@ -148,7 +148,7 @@ export const Configurator = (props: ConfiguratorProps) => {
 
           {jewelryMesh && Object.entries(jewelryMesh.numericParameters).map(([parameterName, parameterDetails]) => (
             <div key={parameterName}>
-              {parameterName}
+              {parameterDetails.name}
               <Slider
                 margin={2}
                 colorScheme='cyan'
@@ -174,7 +174,7 @@ export const Configurator = (props: ConfiguratorProps) => {
 
           {jewelryMesh && Object.entries(jewelryMesh.booleanParameters).map(([parameterName, parameterDetails]) => (
             <div key={parameterName} >
-              {parameterName}
+              {parameterDetails.name}
               <Switch
                 margin={2}
                 colorScheme='cyan'
