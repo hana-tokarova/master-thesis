@@ -87,17 +87,21 @@ const bendLissajous = (geometry: THREE.BufferGeometry, angle: number) => {
     }
 };
 
+const calculateDetail2D = (scaleA: number, scaleB: number) => {
+    const detail = Math.floor(scaleA * Math.PI * scaleB);
+    return detail > 1000 ? 1000 : detail;
+};
+
+const calculateDetail3D = (sA: number, sB: number, sC: number) => {
+    const detail = Math.max(1, Math.floor(Math.PI * sA * sB * sC / 30));
+    return detail > 1000 ? 1000 : detail;
+};
+
 export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor, detail }: LissajousProps) => {
     const lissajousPoints = makeLissajousCurve3D(detail, scaleA, scaleB, scaleA, 1, 4, 1, parameterA, parameterB, parameterA, Math.PI, Math.PI / 2, true);
 
     const geometry = useMemo(() => {
         const ringPath = new THREE.CatmullRomCurve3(lissajousPoints);
-
-        const calculateDetail2D = (scaleA: number, scaleB: number) => {
-            const detail = Math.floor(scaleA * Math.PI * scaleB);
-            return detail > 1000 ? 1000 : detail;
-        }
-
         const ringMesh = new TubeGeometry(ringPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
         return ringMesh;
     }, [lissajousPoints, meshRadius, scaleA, scaleB]);
@@ -114,12 +118,12 @@ export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, mesh
 
     const geometry = useMemo(() => {
         const braceletPath = new THREE.CatmullRomCurve3(lissajousPoints);
-        const braceletMesh = new TubeGeometry(braceletPath, detail, meshRadius, 32, true);
+        const braceletMesh = new TubeGeometry(braceletPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
 
         bendLissajous(braceletMesh, 2 * Math.pow(scaleA, -0.9));
 
         return braceletMesh;
-    }, [lissajousPoints, meshRadius, detail, scaleA]);
+    }, [lissajousPoints, meshRadius, scaleA, scaleB]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, 0, 0)}>
@@ -133,29 +137,17 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
 
     const geometry = useMemo(() => {
         const earringPath = new THREE.CatmullRomCurve3(lissajousPoints, false, "catmullrom", 0.2);
-
-        const calculateDetail3D = (sA: number, sB: number, sC: number) => {
-            const detail = Math.max(1, Math.floor(Math.PI * sA * sB * sC / 30));
-            return detail > 1000 ? 1000 : detail;
-        }
-
         const earringMesh = new TubeGeometry(earringPath, calculateDetail3D(scaleA, scaleB, scaleC!), meshRadius, 32, true);
 
         const holderMesh = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 32, 64);
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
-        const t = 0;
-        const stepSize = Math.PI * 2 / detail;
-        const translateHolder = new THREE.Matrix4().makeTranslation(
-            (scaleA / 4) * Math.sin(parameterA * t * stepSize),
-            (scaleB / 4) * Math.sin(parameterB * t * stepSize + Math.PI),
-            (scaleC! / 4) * Math.sin(parameterC! * t * stepSize + Math.PI / 2) + meshRadius + 0.7
-        );
+        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, (scaleC! / 4) * Math.sin(Math.PI / 2) + meshRadius + 0.7);
         holderMesh.applyMatrix4(translateHolder);
 
         const mergedMesh = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
         return mergedMesh;
-    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB, detail, parameterA, parameterB, parameterC]);
+    }, [lissajousPoints, meshRadius, scaleC, scaleA, scaleB]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(-Math.PI / 2, 0, Math.PI / 3)}>
@@ -169,21 +161,17 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
 
     const geometry = useMemo(() => {
         const pendantPath = new THREE.CatmullRomCurve3(lissajousPoints);
-        const pendantMesh = new TubeGeometry(pendantPath, detail, meshRadius, 32, true);
+        const pendantMesh = new TubeGeometry(pendantPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
 
-        const t = 0;
-        const stepSize = Math.PI * 2 / detail;
         const holderMesh = new THREE.TorusGeometry(0.7 + meshRadius, meshRadius, 32, 64);
-        const translateHolder = new THREE.Matrix4().makeTranslation(
-            (scaleA / 5) * Math.sin(parameterA * t * stepSize + Math.PI / 2) + meshRadius + 0.7,
-            (scaleB / 5) * Math.sin(parameterB * t * stepSize), 0);
+        const translateHolder = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + meshRadius + 0.7, 0, 0);
         holderMesh.applyMatrix4(translateHolder);
         const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotateHolder);
 
         const mergedMesh = BufferGeometryUtils.mergeGeometries([pendantMesh, holderMesh]);
         return mergedMesh;
-    }, [lissajousPoints, meshRadius, scaleA, scaleB, parameterA, parameterB, detail]);
+    }, [lissajousPoints, meshRadius, scaleA, scaleB]);
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 3, Math.PI / 2)}>
