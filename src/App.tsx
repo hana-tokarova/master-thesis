@@ -1,4 +1,4 @@
-import { Button, ChakraProvider, HStack, theme } from "@chakra-ui/react";
+import { Button, ChakraProvider, Grid, theme } from "@chakra-ui/react";
 import React from "react";
 import { CollectionType, JewelryType } from "./Collections";
 import { Configurator } from "./Configurator";
@@ -16,7 +16,7 @@ export const App = () => {
         <ChakraProvider theme={theme}>
             <Configurator collection={collection} jewelry={jewelry} />
 
-            <HStack margin={2}>
+            <Grid templateRows='repeat(3, 1fr)' templateColumns='repeat(4, 1fr)' gap={4} margin={3}>
                 {Object.values(CollectionType).map((collectionValue) => (
                     Object.values(JewelryType).map((jewelryValue) => (
                         <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)} >
@@ -24,7 +24,7 @@ export const App = () => {
                         </Button>
                     )
                     )))}
-            </HStack>
+            </Grid>
         </ChakraProvider>
     );
 };
