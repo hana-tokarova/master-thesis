@@ -26,26 +26,23 @@ const smoothStep = (edge0: number, edge1: number, x: number) => {
     return x * x * x * (x * (x * 6 - 15) + 10);
 };
 
-const inflateMesh = (inflate: number, u: number) => {
-    let inflateX;
-    let inflateZ;
+const inflateMesh = (i: number, u: number) => {
+    let inflate;
 
-    if (inflate === undefined) {
-        inflateX = 1;
-        inflateZ = 1;
+    if (i === undefined) {
+        inflate = 1;
     } else {
-        inflateX = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? inflate * (u / 2) : 1;
-        inflateZ = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? inflate * 0.5 * (1 - (Math.cos(u * 2 - Math.PI))) + 1 : 1;
+        inflate = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? i * 0.5 * (1 - (Math.cos(u * 2 - Math.PI))) + 1 : 1;
     }
 
-    return { inflateX, inflateZ };
+    return inflate;
 }
 
 const twistMesh = (twistAll: boolean, u: number, twist: number, start: number, end: number) => {
     let smoothTwist;
 
     if (twistAll) {
-        smoothTwist = u * twist;
+        smoothTwist = Math.PI * u * twist / 5;
     } else {
         let t;
 
@@ -99,12 +96,12 @@ const torsion = (
         u *= 2 * Math.PI;
         v *= 2 * Math.PI;
 
-        const { inflateX, inflateZ } = inflateMesh(inflate, u);
+        const inflation = inflateMesh(inflate, u);
         const squared = (Math.cos(v) ** 10 + Math.sin(v) ** 10) ** (-1 / 10);
 
-        const x = scaleA * (majorR + minorR * squared * inflateX * Math.cos(v + smoothTwist)) * Math.cos(u);
+        const x = scaleA * (majorR + minorR * squared * inflation * Math.cos(v + smoothTwist)) * Math.cos(u);
         const y = scaleB * (majorR + minorR * squared * Math.cos(v + smoothTwist)) * Math.sin(u);
-        const z = scaleC * squared * inflateZ * Math.sin(v + smoothTwist);
+        const z = scaleC * squared * inflation * Math.sin(v + smoothTwist);
 
         target.set(x, y, z);
     };
