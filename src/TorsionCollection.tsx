@@ -23,9 +23,6 @@ type TorsionProps = {
 
 const smoothStep = (edge0: number, edge1: number, x: number) => {
     x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
-
-    // return x * x * (3 - 2 * x);
-    // return x * x * x * 5;
     return x * x * x * (x * (x * 6 - 15) + 10);
 };
 
@@ -38,7 +35,7 @@ const inflateMesh = (inflate: number, u: number) => {
         inflateZ = 1;
     } else {
         inflateX = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? inflate * (u / 2) : 1;
-        inflateZ = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? (1 + inflate * (Math.cos(u - Math.PI))) : 1;
+        inflateZ = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? inflate * 0.5 * (1 - (Math.cos(u * 2 - Math.PI))) + 1 : 1;
     }
 
     return { inflateX, inflateZ };
@@ -48,18 +45,20 @@ const twistMesh = (twistAll: boolean, u: number, twist: number, start: number, e
     let smoothTwist;
 
     if (twistAll) {
-        smoothTwist = twist;
+        smoothTwist = u * twist;
     } else {
         let t;
 
         if (u >= start && u <= end) {
-            t = twist * Math.sin(u * Math.PI);
+            t = twist;
         } else {
             t = 0;
         }
 
         smoothTwist = t * smoothStep(start, end, u) * smoothStep(end, start, u);
     }
+
+    smoothTwist *= 10;
 
     return smoothTwist;
 }
@@ -69,7 +68,7 @@ const calculateDetail2D = (majorR: number, twist: number) => {
     return detail > 1000 ? 1000 : detail;
 }
 
-const taperEdge = (majorR: number, u: number, lowerFallOff: number, upperFallOff: number) => {
+const taperEdge = (u: number, lowerFallOff: number, upperFallOff: number) => {
     let edgeTaper = 1;
 
     if (u > upperFallOff) {
@@ -78,7 +77,10 @@ const taperEdge = (majorR: number, u: number, lowerFallOff: number, upperFallOff
         edgeTaper = u / (lowerFallOff);
     }
 
-    return edgeTaper === 1 ? 1 : Math.max(0.00001, 1 - Math.pow(majorR, -5 * edgeTaper));
+    edgeTaper = 1 - edgeTaper;
+    edgeTaper = Math.min(Math.max(0.00001, edgeTaper), 0.99999);
+
+    return edgeTaper === 1 ? 1 : Math.sqrt(1 - edgeTaper * edgeTaper);//1 - Math.pow(majorR, -5 * edgeTaper));
 }
 
 const torsion = (
@@ -92,7 +94,7 @@ const torsion = (
     inflate: number
 ) => {
     return (u: number, v: number, target: THREE.Vector3) => {
-        const smoothTwist = twistMesh(twistAll, u, twist, 0.10, 0.90);
+        const smoothTwist = twistMesh(twistAll, u, twist, 0, 1);
 
         u *= 2 * Math.PI;
         v *= 2 * Math.PI;
@@ -100,9 +102,9 @@ const torsion = (
         const { inflateX, inflateZ } = inflateMesh(inflate, u);
         const squared = (Math.cos(v) ** 10 + Math.sin(v) ** 10) ** (-1 / 10);
 
-        const x = scaleA * (majorR + minorR * squared * inflateX * Math.cos(v + smoothTwist * u)) * Math.cos(u);
-        const y = scaleB * (majorR + minorR * squared * Math.cos(v + smoothTwist * u)) * Math.sin(u);
-        const z = scaleC * squared * inflateZ * Math.sin(v + smoothTwist * u);
+        const x = scaleA * (majorR + minorR * squared * inflateX * Math.cos(v + smoothTwist)) * Math.cos(u);
+        const y = scaleB * (majorR + minorR * squared * Math.cos(v + smoothTwist)) * Math.sin(u);
+        const z = scaleC * squared * inflateZ * Math.sin(v + smoothTwist);
 
         target.set(x, y, z);
     };
@@ -119,17 +121,17 @@ const taperedTorsion = (
     screw: number
 ) => {
     return (u: number, v: number, target: THREE.Vector3) => {
-        const smoothTwist = twistMesh(twistAll, u, twist, 0.10, 0.90);
-        const taper = taperEdge(majorR, u, 0.10, 0.90);
+        const smoothTwist = twistMesh(twistAll, u, twist, 0, 1);
+        const taper = taperEdge(u, 0.10, 0.90);
 
         u *= 1.8 * Math.PI;
         v *= 2 * Math.PI;
 
         const squared = (Math.cos(v) ** 10 + Math.sin(v) ** 10) ** (-1 / 10);
 
-        const x = scaleA * (majorR + minorR * taper * squared * Math.cos(v + smoothTwist * u)) * Math.cos(u);
-        const y = scaleB * (majorR + minorR * taper * squared * Math.cos(v + smoothTwist * u)) * Math.sin(u);
-        const z = scaleC * taper * squared * Math.sin(v + smoothTwist * u) + ((screw * u) / Math.PI);
+        const x = scaleA * (majorR + minorR * taper * squared * Math.cos(v + smoothTwist)) * Math.cos(u);
+        const y = scaleB * (majorR + minorR * taper * squared * Math.cos(v + smoothTwist)) * Math.sin(u);
+        const z = scaleC * taper * squared * Math.sin(v + smoothTwist) + ((screw * u) / Math.PI);
 
         target.set(x, y, z);
     };
