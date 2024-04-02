@@ -75,12 +75,10 @@ const bendLissajous = (geometry: THREE.BufferGeometry, angle: number) => {
         const y = v[i + 1];
         const z = v[i + 2];
 
-        // Bending along the y-axis
         const theta = x * angle;
         const sinTheta = Math.sin(theta);
         const cosTheta = Math.cos(theta);
 
-        // Applying bending calculations
         v[i] = (z - 1.0 / angle) * sinTheta;
         v[i + 1] = y;
         v[i + 2] = -(z - 1.0 / angle) * cosTheta;

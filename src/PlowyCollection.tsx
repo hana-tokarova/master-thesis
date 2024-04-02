@@ -1,8 +1,5 @@
 import { useMemo } from "react";
-import { Euler } from "three";
-import { ParametricGeometry } from "three/examples/jsm/geometries/ParametricGeometry";
-import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise.js';
-import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
+import * as THREE from 'three';
 
 type MeshRef = React.RefObject<THREE.Mesh>;
 
@@ -16,45 +13,64 @@ type PlowyProps = {
     scaleC: number;
 }
 
-const torus = (majorR: number, minorR: number, scaleA: number, scaleB: number, scaleC: number) => {
-    return (u: number, v: number, target: THREE.Vector3) => {
-        u *= 2 * Math.PI;
-        v *= 2 * Math.PI;
+const createSpiralPoints = (index: number, initialSideLength: number, offset: number, initialAngleRadians: number, angleIncrement: number) => {
+    const points = [];
 
-        let x = scaleA * (majorR + minorR * Math.cos(v)) * Math.cos(u);
-        let y = scaleB * (majorR + minorR * Math.cos(v)) * Math.sin(u);
-        let z = scaleC * Math.sin(v);
+    let currentPosition = new THREE.Vector3(0, 0, 0);
+    let direction = new THREE.Vector3(1, 0, 0);
+    let sideLength = initialSideLength;
+    let angleRadians = initialAngleRadians;
 
-        const noise = new ImprovedNoise();
-        const scale = 0.3;
-        let p = noise.noise(x * scale, y * scale, z * scale);
+    points.push(currentPosition.clone());
 
-        const quantizationStep = 2;
-        p = Math.floor(p * quantizationStep) / quantizationStep;
+    const axisOfRotation = new THREE.Vector3(0, 0, 1);
 
-        if (((v >= 0 && v <= Math.PI / 2) || (v >= 3 * Math.PI / 2 && v <= 2 * Math.PI)) && (u >= Math.PI / 2 && u <= 3 * Math.PI / 2)) {
-            x += p * 5;
-            y += p * 5;
-            z += p;
+    for (let i = 0; i < index; i++) {
+        // Calculate next point based on the current direction and side length
+        const nextPoint = currentPosition.clone().add(direction.clone().multiplyScalar(sideLength));
+        points.push(nextPoint.clone());
+        currentPosition = nextPoint; // Update current position
+
+        // Rotate direction for the next side
+        direction.applyAxisAngle(axisOfRotation, angleRadians);
+
+        if (i % 4 === 1) {
+            angleRadians += angleIncrement;
+            sideLength -= offset;
         }
+    }
 
-        target.set(x, y, z);
-    };
-};
+    return points;
+}
 
 export const PlowyRing = ({ mesh, meshColor, majorR, minorR, scaleA, scaleB, scaleC }: PlowyProps) => {
     const geometry = useMemo(() => {
-        const func = torus(majorR, minorR, scaleA, scaleB, scaleC);
-        const ringMesh = new ParametricGeometry(func, 10, 8);
+        const path = createSpiralPoints(4, 100, 5, Math.PI / 2, Math.PI / 180);
+        const curve = new THREE.CatmullRomCurve3(path, false, 'catmullrom', 0.01);
 
-        const changedNormals = BufferGeometryUtils.toCreasedNormals(ringMesh, Math.PI / 96);
-        const mergedVertices = BufferGeometryUtils.mergeVertices(changedNormals, 0.01);
-        mergedVertices.computeVertexNormals();
-        return mergedVertices;
-    }, [majorR, minorR, scaleA, scaleB, scaleC]);
+        const shape = new THREE.Shape();
+        shape.moveTo(0, 0);
+        shape.lineTo(0, 3);
+        shape.lineTo(3, 3);
+        shape.lineTo(3, 0);
+        shape.lineTo(0, 0);
+
+        const extrudeSettings = {
+            steps: 1000,
+            bevelEnabled: false,
+            extrudePath: curve,
+        };
+
+        const ringM = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+
+        // const changedNormals = BufferGeometryUtils.toCreasedNormals(ringMesh, Math.PI / 96);
+        // const mergedVertices = BufferGeometryUtils.mergeVertices(changedNormals, 0.01);
+        // mergedVertices.computeVertexNormals();
+        return ringM;
+    }, []);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, 0, 0)}>
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
