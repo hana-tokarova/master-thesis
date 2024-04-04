@@ -159,6 +159,8 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
         holderMesh.applyMatrix4(rotationHolder);
         const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, (scaleC! / 4) * Math.sin(Math.PI / 2) + meshRadius + 0.5);
         holderMesh.applyMatrix4(translateHolder);
+        const rotationHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
+        holderMesh.applyMatrix4(rotationHolder2);
 
         const mergedGeometries = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
         return mergedGeometries;
