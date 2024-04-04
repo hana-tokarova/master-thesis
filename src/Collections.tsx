@@ -227,7 +227,9 @@ export const collections: {
                     majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
                     minorR: { name: "Thickness", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
                     twist: { name: "Twistiness", type: "slider", value: 3, min: 0, max: 5, step: 1 },
-                    scaleC: { name: "Height", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
+                    scaleA: { name: "Height", type: 'slider', value: 1, min: 1, max: 1.5, step: 0.1 },
+                    scaleB: { name: "Width", type: 'slider', value: 1, min: 1, max: 1.5, step: 0.1 },
+                    scaleC: { name: "Depth", type: 'slider', value: 1, min: 1, max: 1.5, step: 0.1 },
                 },
                 booleanParameters: {
                     twistAll: { name: "Twist all?", type: 'toggle', value: true },
@@ -240,8 +242,8 @@ export const collections: {
                     twist={numParams.twist}
                     majorR={numParams.majorR}
                     minorR={numParams.minorR}
-                    scaleA={1}
-                    scaleB={1}
+                    scaleA={numParams.scaleA}
+                    scaleB={numParams.scaleB}
                     scaleC={numParams.scaleC}
                 />
             }

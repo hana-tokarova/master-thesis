@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import { Euler } from 'three';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
@@ -20,6 +19,20 @@ type TorsionProps = {
     inflate?: number;
     screw?: number;
 }
+
+const makeCircleCurve2D = (nbSteps: number) => {
+    const points = [];
+    const stepSize = Math.PI * 2 / nbSteps;
+
+    for (let t = 0; t <= nbSteps; t++) {
+        const x = Math.cos(t * stepSize);
+        const y = Math.sin(t * stepSize);
+
+        points.push(new THREE.Vector3(x, y, 0));
+    }
+
+    return points;
+};
 
 const smoothStep = (edge0: number, edge1: number, x: number) => {
     x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
@@ -148,7 +161,7 @@ export const TorsionRing = ({ mesh, meshColor, majorR, minorR, twistAll, twist, 
     }, [majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, Math.PI)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(Math.PI / 2, 0, Math.PI)}>
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
@@ -168,13 +181,15 @@ export const TorsionBracelet = ({ mesh, meshColor, majorR, minorR, twistAll, twi
     }, [majorR, minorR, stacks, twist, twistAll, screw, scaleA, scaleB, scaleC]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(Math.PI / 2, 0, 0)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 }
 
 export const TorsionEarring = ({ mesh, meshColor, majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks }: TorsionProps) => {
+    const holderPoints = makeCircleCurve2D(100);
+
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
 
@@ -183,28 +198,32 @@ export const TorsionEarring = ({ mesh, meshColor, majorR, minorR, twistAll, twis
         earringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
 
-        const holderMesh = new THREE.TorusGeometry(1, 0.5, 32, 64);
+        const holderPath = new THREE.CatmullRomCurve3(holderPoints);
+        const holderMesh = new THREE.TubeGeometry(holderPath, 32, 0.5, 32, true);
+        holderMesh.deleteAttribute('uv');
+        holderMesh.deleteAttribute('normal');
+
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
         const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(majorR + minorR + 0.7, 0, 0));
         holderMesh.applyMatrix4(translateHolder);
-        holderMesh.deleteAttribute('uv');
-        holderMesh.deleteAttribute('normal');
 
-        const mergedMesh = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
-        mergedMesh.computeVertexNormals();
+        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
+        mergedGeometries.computeVertexNormals();
 
-        return mergedMesh;
-    }, [stacks, twistAll, twist, scaleA, scaleB, scaleC, majorR, minorR, inflate]);
+        return mergedGeometries;
+    }, [holderPoints, stacks, twistAll, twist, scaleA, scaleB, scaleC, majorR, minorR, inflate]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 4, Math.PI / 2)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}>
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 };
 
 export const TorsionPendant = ({ mesh, meshColor, majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks }: TorsionProps) => {
+    const holderPoints = makeCircleCurve2D(100);
+
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
 
@@ -213,22 +232,24 @@ export const TorsionPendant = ({ mesh, meshColor, majorR, minorR, twistAll, twis
         earringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
 
-        const holderMesh = new THREE.TorusGeometry(1, 0.5, 32, 64);
-        const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
-        holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(majorR + minorR + 0.7, 0, 0));
-        holderMesh.applyMatrix4(translateHolder);
+        const holderPath = new THREE.CatmullRomCurve3(holderPoints);
+        const holderMesh = new THREE.TubeGeometry(holderPath, 32, 0.5, 32, true);
         holderMesh.deleteAttribute('uv');
         holderMesh.deleteAttribute('normal');
 
-        const mergedMesh = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
-        mergedMesh.computeVertexNormals();
+        const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        holderMesh.applyMatrix4(rotationHolder);
+        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(scaleA * (majorR + minorR), 0, 0));
+        holderMesh.applyMatrix4(translateHolder);
 
-        return mergedMesh;
-    }, [stacks, twistAll, twist, scaleA, scaleB, scaleC, majorR, minorR, inflate]);
+        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
+        mergedGeometries.computeVertexNormals();
+
+        return mergedGeometries;
+    }, [holderPoints, stacks, twistAll, twist, scaleA, scaleB, scaleC, majorR, minorR, inflate]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new Euler(0, Math.PI / 4, Math.PI / 2)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}>
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
