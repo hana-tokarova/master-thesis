@@ -1,11 +1,9 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
-import { PlowyRing } from "./PlowyCollection";
 import { TorsionBracelet, TorsionEarring, TorsionPendant, TorsionRing } from "./TorsionCollection";
 
 export enum CollectionType {
     Lissajous = 'lissaje',
     Torsion = 'torsion',
-    Plowy = 'plowy'
 }
 
 export enum JewelryType {
@@ -249,29 +247,4 @@ export const collections: {
             }
         },
     },
-    [CollectionType.Plowy]: {
-        name: 'Plowy',
-        description: 'Low poly surface',
-        meshes: {
-            [JewelryType.Ring]: {
-                numericParameters: {
-                    majorR: { name: "Radius", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    minorR: { name: "Thickness", type: 'slider', value: 3, min: 1, max: 5, step: 0.01 },
-                    height: { name: "Height", type: 'slider', value: 7, min: 5, max: 10, step: 0.01 },
-                },
-                booleanParameters: {
-                },
-                render: (numParams, togParams, color, ref) => <PlowyRing
-                    mesh={ref}
-                    meshColor={color}
-                    majorR={numParams.majorR}
-                    minorR={numParams.minorR}
-                    scaleA={1}
-                    scaleB={1}
-                    scaleC={numParams.height}
-                />
-            },
-
-        }
-    }
 }
