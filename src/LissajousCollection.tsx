@@ -161,9 +161,7 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
         const earringMesh = new THREE.TubeGeometry(earringPath, calculateDetail3D(scaleA, scaleB, scaleC!), meshRadius, 32, true);
         earringMesh.deleteAttribute('normal');
         earringMesh.deleteAttribute('uv');
-
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
-        mergedVertices.computeVertexNormals();
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
         const holderMesh = new THREE.TubeGeometry(holderPath, 32, meshRadius, 32, true);
@@ -177,10 +175,9 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
         const rotationHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder2);
 
-        const mergedVertices2 = BufferGeometryUtils.mergeVertices(holderMesh, 0.01);
-        mergedVertices2.computeVertexNormals();
+        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
+        mergedGeometries.computeVertexNormals();
 
-        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, mergedVertices2]);
         return mergedGeometries;
     }, [lissajousPoints, holderPoints, meshRadius, scaleC, scaleA, scaleB]);
 
@@ -200,9 +197,7 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
         const pendantMesh = new THREE.TubeGeometry(pendantPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
         pendantMesh.deleteAttribute('normal');
         pendantMesh.deleteAttribute('uv');
-
         const mergedVertices = BufferGeometryUtils.mergeVertices(pendantMesh, 0.01);
-        mergedVertices.computeVertexNormals();
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
         const holderMesh = new THREE.TubeGeometry(holderPath, 32, meshRadius, 32, true);
@@ -214,10 +209,9 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
         const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotateHolder);
 
-        const mergedVertices2 = BufferGeometryUtils.mergeVertices(holderMesh, 0.01);
-        mergedVertices2.computeVertexNormals();
+        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
+        mergedGeometries.computeVertexNormals();
 
-        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, mergedVertices2]);
         return mergedGeometries;
     }, [lissajousPoints, holderPoints, meshRadius, scaleA, scaleB]);
 
