@@ -114,8 +114,12 @@ export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadi
     const geometry = useMemo(() => {
         const ringPath = new THREE.CatmullRomCurve3(lissajousPoints);
         const ringMesh = new THREE.TubeGeometry(ringPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
+        ringMesh.deleteAttribute('normal');
+        ringMesh.deleteAttribute('uv');
+        const mergedVertices = BufferGeometryUtils.mergeVertices(ringMesh, 0.01);
+        mergedVertices.computeVertexNormals();
 
-        return ringMesh;
+        return mergedVertices;
     }, [lissajousPoints, meshRadius, scaleA, scaleB]);
 
     return (
@@ -131,10 +135,14 @@ export const LissajousBracelet = ({ parameterA, parameterB, scaleA, scaleB, mesh
     const geometry = useMemo(() => {
         const braceletPath = new THREE.CatmullRomCurve3(lissajousPoints);
         const braceletMesh = new THREE.TubeGeometry(braceletPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
+        braceletMesh.deleteAttribute('normal');
+        braceletMesh.deleteAttribute('uv');
+        const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
 
-        bendLissajous(braceletMesh, 2 * Math.pow(scaleA, -0.9));
+        bendLissajous(mergedVertices, 2 * Math.pow(scaleA, -0.9));
+        mergedVertices.computeVertexNormals();
 
-        return braceletMesh;
+        return mergedVertices;
     }, [lissajousPoints, meshRadius, scaleA, scaleB]);
 
     return (
@@ -151,9 +159,16 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
     const geometry = useMemo(() => {
         const earringPath = new THREE.CatmullRomCurve3(lissajousPoints);
         const earringMesh = new THREE.TubeGeometry(earringPath, calculateDetail3D(scaleA, scaleB, scaleC!), meshRadius, 32, true);
+        earringMesh.deleteAttribute('normal');
+        earringMesh.deleteAttribute('uv');
+
+        const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
+        mergedVertices.computeVertexNormals();
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
         const holderMesh = new THREE.TubeGeometry(holderPath, 32, meshRadius, 32, true);
+        holderMesh.deleteAttribute('normal');
+        holderMesh.deleteAttribute('uv');
 
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
@@ -162,7 +177,10 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
         const rotationHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder2);
 
-        const mergedGeometries = BufferGeometryUtils.mergeGeometries([earringMesh, holderMesh]);
+        const mergedVertices2 = BufferGeometryUtils.mergeVertices(holderMesh, 0.01);
+        mergedVertices2.computeVertexNormals();
+
+        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, mergedVertices2]);
         return mergedGeometries;
     }, [lissajousPoints, holderPoints, meshRadius, scaleC, scaleA, scaleB]);
 
@@ -180,16 +198,26 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
     const geometry = useMemo(() => {
         const pendantPath = new THREE.CatmullRomCurve3(lissajousPoints);
         const pendantMesh = new THREE.TubeGeometry(pendantPath, calculateDetail2D(scaleA, scaleB), meshRadius, 32, true);
+        pendantMesh.deleteAttribute('normal');
+        pendantMesh.deleteAttribute('uv');
+
+        const mergedVertices = BufferGeometryUtils.mergeVertices(pendantMesh, 0.01);
+        mergedVertices.computeVertexNormals();
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
         const holderMesh = new THREE.TubeGeometry(holderPath, 32, meshRadius, 32, true);
+        holderMesh.deleteAttribute('normal');
+        holderMesh.deleteAttribute('uv');
 
         const translateHolder = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + meshRadius + 0.5, 0, 0);
         holderMesh.applyMatrix4(translateHolder);
         const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotateHolder);
 
-        const mergedGeometries = BufferGeometryUtils.mergeGeometries([pendantMesh, holderMesh]);
+        const mergedVertices2 = BufferGeometryUtils.mergeVertices(holderMesh, 0.01);
+        mergedVertices2.computeVertexNormals();
+
+        const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, mergedVertices2]);
         return mergedGeometries;
     }, [lissajousPoints, holderPoints, meshRadius, scaleA, scaleB]);
 
