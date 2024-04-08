@@ -1,4 +1,4 @@
-import { Button, HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
+import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
@@ -8,7 +8,6 @@ import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
 import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
-import { HiOutlineDownload } from "react-icons/hi";
 import { Mesh, Object3D } from "three";
 import { collections, CollectionType, JewelryType } from "./Collections";
 
@@ -208,14 +207,6 @@ export const Configurator = (props: ConfiguratorProps) => {
             />
           )}
         </HStack>
-
-        <Button
-          key={"STLexport"}
-          rightIcon={<HiOutlineDownload />}
-          onClick={() => exportMeshSTL(myMesh.current!)}
-        >
-          Export to .STL
-        </Button>
 
         <Select placeholder='Export to:' size='sm' variant='filled'>
           <option value='stl' onClick={() => exportMeshSTL(myMesh.current!)}>.STL</option>
