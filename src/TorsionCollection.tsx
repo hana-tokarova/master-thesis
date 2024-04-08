@@ -174,7 +174,7 @@ export const TorsionBracelet = ({ mesh, meshColor, majorR, minorR, twistAll, twi
         const braceletMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist), stacks);
         braceletMesh.deleteAttribute('normal');
         braceletMesh.deleteAttribute('uv');
-        const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
+        const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.02);
         mergedVertices.computeVertexNormals();
 
         return mergedVertices;
