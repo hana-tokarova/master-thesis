@@ -1,6 +1,6 @@
 import { Button, ChakraProvider, HStack, IconButton, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, theme } from "@chakra-ui/react";
-import { Canvas } from '@react-three/fiber';
-import React from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
@@ -97,6 +97,25 @@ export const Configurator = (props: ConfiguratorProps) => {
     saveArrayBuffer(stlString, clonedMesh.uuid + '.stl');
   };
 
+  const FollowCameraLight = () => {
+    const lightRef = useRef<THREE.DirectionalLight | null>(null);
+    const { camera } = useThree();
+
+    useFrame(() => {
+      lightRef.current!.position.copy(camera.position);
+    });
+
+    return (
+      <>
+        <directionalLight ref={lightRef} intensity={2} />
+        <directionalLight intensity={1} position={[3, 3, 3]} />
+        <directionalLight intensity={1} position={[-3, 3, -3]} />
+        <directionalLight intensity={1} position={[3, 3, -3]} />
+        <directionalLight intensity={1} position={[-3, 3, 3]} />
+      </>
+    );
+  }
+
   if (!booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
     return <></>;
   }
@@ -106,13 +125,10 @@ export const Configurator = (props: ConfiguratorProps) => {
       <div style={{ width: "100vw", height: "80vh" }}>
         <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }}>
 
-          <directionalLight intensity={2} position={[3, 3, 3]} />
-          <directionalLight intensity={2} position={[-3, 3, -3]} />
-          <directionalLight intensity={2} position={[3, 3, -3]} />
-          <directionalLight intensity={2} position={[-3, 3, 3]} />
+          <FollowCameraLight />
 
           <ambientLight
-            intensity={0.5}
+            intensity={1}
             color="dimgray"
           />
 
@@ -121,9 +137,10 @@ export const Configurator = (props: ConfiguratorProps) => {
           <OrbitControls
             enablePan={false}
             enableRotate={true}
-            enableZoom={true}
-            minPolarAngle={Math.PI / 2 - Math.PI / 6}
-            maxPolarAngle={Math.PI / 2 + Math.PI / 6}
+            enableZoom={false}
+            enableDamping={true}
+            minPolarAngle={Math.PI / 2 - Math.PI / 5}
+            maxPolarAngle={Math.PI / 2 + Math.PI / 5}
           />
         </Canvas>
         <div style={{ position: "absolute", top: "10px", left: "10px" }}>
