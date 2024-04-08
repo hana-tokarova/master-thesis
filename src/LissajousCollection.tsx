@@ -170,7 +170,7 @@ export const LissajousEarring = ({ parameterA, parameterB, parameterC, scaleA, s
 
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, (scaleC! / 4) * Math.sin(Math.PI / 2) + meshRadius + 0.5);
+        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, (scaleC! / 4) * Math.sin(Math.PI / 2) + 1);
         holderMesh.applyMatrix4(translateHolder);
         const rotationHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder2);
@@ -204,7 +204,7 @@ export const LissajousPendant = ({ parameterA, parameterB, scaleA, scaleB, meshR
         holderMesh.deleteAttribute('normal');
         holderMesh.deleteAttribute('uv');
 
-        const translateHolder = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + meshRadius + 0.5, 0, 0);
+        const translateHolder = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + 1, 0, 0);
         holderMesh.applyMatrix4(translateHolder);
         const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotateHolder);
