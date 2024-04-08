@@ -1,7 +1,7 @@
 import { Button, ChakraProvider, Grid, theme } from "@chakra-ui/react";
 import React from "react";
-import { CollectionType, JewelryType } from "./Collections";
-import { Configurator } from "./Configurator";
+import { CollectionType, JewelryType } from "./components/Collections";
+import { Configurator } from "./components/Configurator";
 
 export const App = () => {
     const [collection, setCollection] = React.useState<CollectionType>(CollectionType.Lissajous);

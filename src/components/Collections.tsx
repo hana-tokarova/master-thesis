@@ -1,5 +1,5 @@
-import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
-import { TorsionBracelet, TorsionEarring, TorsionPendant, TorsionRing } from "./TorsionCollection";
+import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "../LissajousCollection";
+import { TorsionBracelet, TorsionEarring, TorsionPendant, TorsionRing } from "../TorsionCollection";
 
 export enum CollectionType {
     Lissajous = 'lissaje',

@@ -123,7 +123,7 @@ export const Configurator = (props: ConfiguratorProps) => {
   return (
     <ChakraProvider theme={theme}>
       <div style={{ width: "100vw", height: "80vh" }}>
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }}>
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} >
 
           <FollowCameraLight />
 
