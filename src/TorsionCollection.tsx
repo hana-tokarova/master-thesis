@@ -205,7 +205,7 @@ export const TorsionEarring = ({ mesh, meshColor, majorR, minorR, twistAll, twis
 
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(majorR + minorR + 0.7, 0, 0));
+        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(majorR + minorR + 0.5, 0, 0));
         holderMesh.applyMatrix4(translateHolder);
 
         const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
@@ -239,7 +239,7 @@ export const TorsionPendant = ({ mesh, meshColor, majorR, minorR, twistAll, twis
 
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(scaleA * (majorR + minorR), 0, 0));
+        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(scaleA * (majorR + minorR + 0.5), 0, 0));
         holderMesh.applyMatrix4(translateHolder);
 
         const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);

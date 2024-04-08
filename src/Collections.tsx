@@ -200,10 +200,10 @@ export const collections: {
             [JewelryType.Earring]: {
                 numericParameters: {
                     majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
-                    minorR: { name: "Thickness", type: 'slider', value: 2, min: 0.5, max: 2, step: 0.1 },
+                    minorR: { name: "Radius of ring", type: 'slider', value: 2, min: 0.5, max: 2, step: 0.1 },
                     twist: { name: "Twistiness", type: "slider", value: 3, min: 0, max: 5, step: 1 },
                     inflate: { name: "Inflation", type: 'slider', value: 1, min: 0.01, max: 1, step: 0.01 },
-                    scaleC: { name: "Height", type: 'slider', value: 2, min: 1, max: 2, step: 0.1 },
+                    scaleC: { name: "Depth", type: 'slider', value: 2, min: 1, max: 2, step: 0.1 },
                 },
                 booleanParameters: {
                     twistAll: { name: "Twist all?", type: 'toggle', value: true },
@@ -225,7 +225,7 @@ export const collections: {
             [JewelryType.Pendant]: {
                 numericParameters: {
                     majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
-                    minorR: { name: "Thickness", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
+                    minorR: { name: "Radius of ring", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
                     twist: { name: "Twistiness", type: "slider", value: 3, min: 0, max: 5, step: 1 },
                     scaleA: { name: "Height", type: 'slider', value: 1, min: 1, max: 1.5, step: 0.1 },
                     scaleB: { name: "Width", type: 'slider', value: 1, min: 1, max: 1.5, step: 0.1 },
