@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(container);
 
 const router = createBrowserRouter([
     {
-        path: "/master-thesis/",
+        path: "/master-thesis",
         element: <App />,
         children: [
             {
