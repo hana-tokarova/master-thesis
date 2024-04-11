@@ -1,7 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 
-type PageName = "" | "create" | "about" | "showcase";
+type PageName = "/master-thesis" | "/master-thesis/create" | "/master-thesis/about" | "/master-thesis/showcase";
 
 type SidebarButtonProps = {
     pageName: PageName;
@@ -10,17 +10,17 @@ type SidebarButtonProps = {
 
 export const MenuButton = ({ pageName, text }: SidebarButtonProps) => {
     const location = useLocation();
-    const openedPage = location.pathname.split('/')[1];
+    const isActive = location.pathname === pageName;
 
     return (
         <Button
             as={Link}
-            to={`/${pageName}`}
+            to={pageName}
             variant="link"
         >
             <Text
                 fontSize="md"
-                fontWeight={openedPage === pageName ? "600" : "400"}
+                fontWeight={isActive ? "600" : "400"}
                 color={"brand.50"}
             >
                 {text}

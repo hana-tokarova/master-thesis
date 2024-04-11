@@ -16,11 +16,11 @@ const root = ReactDOM.createRoot(container);
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/master-thesis/",
         element: <App />,
         children: [
             {
-                path: "create",
+                path: "/master-thesis/create",
                 element: (
                     <Configurator
                         collection={CollectionType.Lissajous}
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "*",
+                path: "/master-thesis/*",
                 element: <NotFound />,
             },
         ],

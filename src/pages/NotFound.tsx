@@ -38,7 +38,7 @@ export const NotFound = () => {
                 <Button
                     size='md'
                     as={Link}
-                    to={"/"}
+                    to={"/master-thesis"}
                     fontFamily={"heading"}
                     variant="link"
                     color={"brand.50"}
