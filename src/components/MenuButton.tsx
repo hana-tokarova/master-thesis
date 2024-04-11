@@ -1,7 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 
-type PageName = "/master-thesis" | "/master-thesis/create" | "/master-thesis/about" | "/master-thesis/showcase";
+type PageName = "/" | "/create" | "/about" | "/showcase";
 
 type SidebarButtonProps = {
     pageName: PageName;

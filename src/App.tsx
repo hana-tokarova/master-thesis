@@ -41,13 +41,13 @@ export const App = () => {
 
                 <Spacer />
 
-                <MenuButton pageName="/master-thesis" text={"Home"} />
+                <MenuButton pageName="/" text={"Home"} />
 
-                <MenuButton pageName="/master-thesis/create" text={"Create"} />
+                <MenuButton pageName="/create" text={"Create"} />
 
-                <MenuButton pageName="/master-thesis/about" text={"About"} />
+                <MenuButton pageName="/about" text={"About"} />
 
-                <MenuButton pageName="/master-thesis/showcase" text={"Showcase"} />
+                <MenuButton pageName="/showcase" text={"Showcase"} />
             </HStack>
 
             <div id="detail">
