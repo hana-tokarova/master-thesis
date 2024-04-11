@@ -3,8 +3,8 @@
 import { HStack, Image, Spacer } from "@chakra-ui/react";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { CollectionType, JewelryType } from "./components/Collections";
-import { MenuButton } from "./components/MenuButton";
+import { CollectionType, JewelryType } from "../components/Collections";
+import { MenuButton } from "../components/MenuButton";
 
 export const App = () => {
     const [collection, setCollection] = React.useState<CollectionType>(

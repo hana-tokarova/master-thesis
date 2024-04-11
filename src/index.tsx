@@ -1,10 +1,10 @@
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { App } from "./App";
 import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
+import { App } from "./pages/App";
 import NotFound from "./pages/NotFound";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
 root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
-            <ColorModeScript />
             <RouterProvider router={router} />
         </ChakraProvider>
     </React.StrictMode>
