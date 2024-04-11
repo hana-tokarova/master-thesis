@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
 import { App } from "./pages/App";
@@ -14,7 +14,7 @@ const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(container);
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <App />,
