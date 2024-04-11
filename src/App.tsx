@@ -1,3 +1,5 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HStack, Image, Spacer } from "@chakra-ui/react";
 import React from "react";
 import { Outlet } from "react-router-dom";
@@ -17,6 +19,20 @@ export const App = () => {
         setCollection(newCollection);
         setJewelry(newJewelry);
     };
+
+    {
+        /* <Configurator collection={collection} jewelry={jewelry} />
+    
+                <Grid width={"600px"} templateRows='repeat(3, 1fr)' templateColumns='repeat(4, 1fr)' gap={4} margin={3}>
+                    {Object.values(CollectionType).map((collectionValue) => (
+                        Object.values(JewelryType).map((jewelryValue) => (
+                            <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)} >
+                                {collectionValue} {jewelryValue}
+                            </Button>
+                        )
+                        )))}
+                </Grid> */
+    }
 
     return (
         <>
@@ -39,18 +55,4 @@ export const App = () => {
             </div>
         </>
     );
-
-    {
-        /* <Configurator collection={collection} jewelry={jewelry} />
-    
-                <Grid width={"600px"} templateRows='repeat(3, 1fr)' templateColumns='repeat(4, 1fr)' gap={4} margin={3}>
-                    {Object.values(CollectionType).map((collectionValue) => (
-                        Object.values(JewelryType).map((jewelryValue) => (
-                            <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)} >
-                                {collectionValue} {jewelryValue}
-                            </Button>
-                        )
-                        )))}
-                </Grid> */
-    }
 };

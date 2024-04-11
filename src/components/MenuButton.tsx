@@ -10,27 +10,18 @@ type SidebarButtonProps = {
 
 export const MenuButton = ({ pageName, text }: SidebarButtonProps) => {
     const location = useLocation();
-    const openedPage = location.pathname.split("/")[1];
+    const openedPage = location.pathname.split('/')[1];
 
     return (
         <Button
             as={Link}
             to={`/${pageName}`}
-            variant="ghost"
-        // _focus={{
-        //     color:
-        //         openedPage == pageName
-        //             ? useColorModeValue('brand.500', 'brand.400')
-        //             : useColorModeValue('gray.900', 'gray.50'),
-        // }}
-        // _hover={{
-        //     textDecoration: 'none',
-        // }}
+            variant="link"
         >
             <Text
                 fontSize="md"
-                color={"green"}
-            // fontWeight={'regular'}
+                fontWeight={openedPage === pageName ? "600" : "400"}
+                color={"brand.50"}
             >
                 {text}
             </Text>

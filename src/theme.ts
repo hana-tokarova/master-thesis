@@ -1,5 +1,4 @@
-import { extendTheme, StyleProps } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
+import { extendTheme } from '@chakra-ui/react';
 
 // see https://chakra-ui.com/docs/styled-system/theme
 const theme = extendTheme({
@@ -9,7 +8,7 @@ const theme = extendTheme({
     },
     colors: {
         brand: {
-            // 50: '#ebf8ff',
+            50: '#1E1E1E',
             // 100: '#bee3f8',
             // 200: '#90cdf4',
             // 300: '#63b3ed',
@@ -37,14 +36,6 @@ const theme = extendTheme({
     fonts: {
         body: "'Noto Sans Khmer', sans-serif",
         heading: "'Outfit', sans-serif",
-    },
-    styles: {
-        global: (props: StyleProps) => ({
-            body: {
-                color: mode('gray.800', 'whiteAlpha.900')(props),
-                bg: mode('gray.100', 'gray.800')(props),
-            },
-        }),
     },
 });
 
