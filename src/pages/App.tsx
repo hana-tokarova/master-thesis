@@ -37,7 +37,7 @@ export const App = () => {
     return (
         <>
             <HStack p={7} h="14" spacing="16" fontFamily={"heading"} boxShadow="md">
-                <Image src="/images/logo/logo-full-lines.png" alt="NEOTAKU JEWELRY" />
+                <Image h="10" src="/images/logo/logo-full-lines.png" alt="NEOTAKU JEWELRY" />
 
                 <Spacer />
 
