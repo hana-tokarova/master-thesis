@@ -6,6 +6,7 @@ import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
 import { WebsiteLayout } from "./components/layout/WebsiteLayout";
 import { AboutPage } from "./pages/AboutPage";
+import { CreatePage } from "./pages/CreatePage";
 import { HomePage } from "./pages/HomePage";
 import { LookbookPage } from "./pages/LookbookPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -30,6 +31,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "create",
+                element: (
+                    <CreatePage />
+                ),
+            },
+            {
+                path: "configurator",
                 element: (
                     <Configurator
                         collection={CollectionType.Lissajous}
