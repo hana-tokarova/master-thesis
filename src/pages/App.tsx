@@ -1,58 +1,40 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { HStack, Image, Spacer } from "@chakra-ui/react";
-import React from "react";
+import { Box, HStack, Image, Spacer } from "@chakra-ui/react";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { Outlet } from "react-router-dom";
-import { CollectionType, JewelryType } from "../components/Collections";
 import { MenuButton } from "../components/MenuButton";
 
 export const App = () => {
-    const [collection, setCollection] = React.useState<CollectionType>(
-        CollectionType.Lissajous
-    );
-    const [jewelry, setJewelry] = React.useState<JewelryType>(JewelryType.Ring);
-
-    const handleCollectionChange = (
-        newCollection: CollectionType,
-        newJewelry: JewelryType
-    ) => {
-        setCollection(newCollection);
-        setJewelry(newJewelry);
-    };
-
-    {
-        /* <Configurator collection={collection} jewelry={jewelry} />
-    
-                <Grid width={"600px"} templateRows='repeat(3, 1fr)' templateColumns='repeat(4, 1fr)' gap={4} margin={3}>
-                    {Object.values(CollectionType).map((collectionValue) => (
-                        Object.values(JewelryType).map((jewelryValue) => (
-                            <Button key={collectionValue + jewelryValue} onClick={() => handleCollectionChange(collectionValue, jewelryValue)} >
-                                {collectionValue} {jewelryValue}
-                            </Button>
-                        )
-                        )))}
-                </Grid> */
-    }
+    const { scrollY } = useViewportScroll();
+    const menuHeight = useTransform(scrollY, [0, 100], ['90px', '60px']);
+    const shadow = useTransform(scrollY, [0, 100], ['md', 'none']); //preco nefunguje shadow?
 
     return (
         <>
-            <HStack p={7} h="14" spacing="16" fontFamily={"heading"} boxShadow="md">
+            <HStack
+                as={motion.div}
+                style={{ height: menuHeight as unknown as string, boxShadow: shadow as unknown as string }}
+                position="fixed"
+                paddingTop={0}
+                w="100vw"
+                paddingLeft={7}
+                paddingRight={7}
+                bg="white"
+                spacing="16"
+                fontFamily="heading"
+            >
                 <Image h="10" src="/images/logo/logo-full-lines.png" alt="NEOTAKU JEWELRY" />
-
                 <Spacer />
-
-                <MenuButton pageName="/" text={"Home"} />
-
-                <MenuButton pageName="/create" text={"Create"} />
-
-                <MenuButton pageName="/about" text={"About"} />
-
-                <MenuButton pageName="/showcase" text={"Showcase"} />
+                <MenuButton pageName="/" text="Home" />
+                <MenuButton pageName="/create" text="Create" />
+                <MenuButton pageName="/about" text="About" />
+                <MenuButton pageName="/showcase" text="Showcase" />
             </HStack>
 
-            <div id="detail">
-                <Outlet />
-            </div>
+            <Box pt="90px" transition="padding-top 0.3s ease-in-out">
+                <div id="detail">
+                    <Outlet />
+                </div>
+            </Box>
         </>
     );
 };
