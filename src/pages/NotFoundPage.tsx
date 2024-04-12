@@ -1,7 +1,7 @@
 import { Button, Text, VStack } from "@chakra-ui/react";
 import { Link, useRouteError } from "react-router-dom";
 
-export const NotFound = () => {
+export const NotFoundPage = () => {
     const error = useRouteError();
     console.error(error);
 
@@ -49,4 +49,4 @@ export const NotFound = () => {
     );
 };
 
-export default NotFound;
+export default NotFoundPage;

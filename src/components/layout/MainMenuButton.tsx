@@ -8,7 +8,7 @@ type SidebarButtonProps = {
     text: string;
 };
 
-export const MenuButton = ({ pageName, text }: SidebarButtonProps) => {
+export const MainMenuButton = ({ pageName, text }: SidebarButtonProps) => {
     const location = useLocation();
     const isActive = location.pathname === pageName;
 
