@@ -6,6 +6,7 @@ import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
 import { WebsiteLayout } from "./components/layout/WebsiteLayout";
 import { HomePage } from "./pages/HomePage";
+import { LookbookPage } from "./pages/LookbookPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ScrollableListPage } from "./pages/ScrollPage";
 import reportWebVitals from "./reportWebVitals";
@@ -40,6 +41,12 @@ const router = createBrowserRouter([
                 path: "about",
                 element: (
                     <ScrollableListPage />
+                ),
+            },
+            {
+                path: "showcase",
+                element: (
+                    <LookbookPage />
                 ),
             },
             {
