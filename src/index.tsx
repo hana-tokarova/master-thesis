@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
 import { WebsiteLayout } from "./components/layout/WebsiteLayout";
+import { AboutPage } from "./pages/AboutPage";
 import { HomePage } from "./pages/HomePage";
 import { LookbookPage } from "./pages/LookbookPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { ScrollableListPage } from "./pages/ScrollPage";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./theme";
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             {
                 path: "about",
                 element: (
-                    <ScrollableListPage />
+                    <AboutPage />
                 ),
             },
             {

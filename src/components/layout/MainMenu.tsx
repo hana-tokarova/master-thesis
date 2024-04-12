@@ -34,7 +34,7 @@ export const MainMenu = () => {
             paddingLeft={7}
             paddingRight={7}
             bg="white"
-            spacing="16"
+            spacing={{ base: 4, md: 9, lg: 14 }}
             fontFamily="heading"
         >
             <Image h="9" src="/images/logo/logo-full.png" alt="NEOTAKU JEWELRY" />
