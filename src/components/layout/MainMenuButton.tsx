@@ -3,12 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 
 type PageName = "/" | "/create" | "/about" | "/showcase";
 
-type SidebarButtonProps = {
+type MainMenuButtonProps = {
     pageName: PageName;
     text: string;
 };
 
-export const MainMenuButton = ({ pageName, text }: SidebarButtonProps) => {
+export const MainMenuButton = ({ pageName, text }: MainMenuButtonProps) => {
     const location = useLocation();
     const isActive = location.pathname === pageName;
 

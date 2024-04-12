@@ -4,9 +4,10 @@ import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
+import { WebsiteLayout } from "./components/layout/WebsiteLayout";
 import { HomePage } from "./pages/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import ScrollableList from "./pages/ScrollPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { ScrollableListPage } from "./pages/ScrollPage";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./theme";
@@ -18,8 +19,14 @@ const root = ReactDOM.createRoot(container);
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />,
+        element: <WebsiteLayout />,
         children: [
+            {
+                index: true,
+                element: (
+                    <HomePage />
+                ),
+            },
             {
                 path: "create",
                 element: (
@@ -32,7 +39,7 @@ const router = createBrowserRouter([
             {
                 path: "about",
                 element: (
-                    <ScrollableList />
+                    <ScrollableListPage />
                 ),
             },
             {

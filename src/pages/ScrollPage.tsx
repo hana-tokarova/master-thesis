@@ -1,12 +1,10 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
 
-const ScrollableList = () => {
-    // Example data for the list
+export const ScrollableListPage = () => {
     const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
 
     return (
         <Box
-            // maxH="400px" // Maximum height of the scrollable area
             overflowY="scroll" // Enable vertical scrolling
             p={4}
             borderWidth="1px"
@@ -24,4 +22,3 @@ const ScrollableList = () => {
     );
 };
 
-export default ScrollableList;
