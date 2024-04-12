@@ -1,9 +1,7 @@
 import { Button, Text, VStack } from "@chakra-ui/react";
-import { Link, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const NotFoundPage = () => {
-    const error = useRouteError();
-    console.error(error);
 
     return (
         <VStack

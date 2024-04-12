@@ -5,7 +5,6 @@ export const ScrollableListPage = () => {
 
     return (
         <Box
-            overflowY="scroll" // Enable vertical scrolling
             p={4}
             borderWidth="1px"
             borderRadius="lg"

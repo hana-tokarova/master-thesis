@@ -1,5 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+import { Footer } from "./Footer";
 import { MainMenu } from "./MainMenu";
 
 export const WebsiteLayout = () => {
@@ -11,11 +12,13 @@ export const WebsiteLayout = () => {
         >
             <MainMenu />
 
-            <Box pt="90px">
+            <Box pt="90px" >
                 <div id="detail">
                     <Outlet />
                 </div>
             </Box>
+
+            <Footer />
         </Flex>
     );
 }
