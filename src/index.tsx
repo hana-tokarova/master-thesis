@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CollectionType, JewelryType } from "./components/Collections";
 import { Configurator } from "./components/Configurator";
-import { App } from "./pages/App";
+import { MainMenu } from "./pages/MainMenu";
 import NotFound from "./pages/NotFound";
 import ScrollableList from "./pages/ScrollPage";
 import reportWebVitals from "./reportWebVitals";
@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(container);
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: <MainMenu />,
         children: [
             {
                 path: "create",
