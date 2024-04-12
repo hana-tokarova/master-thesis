@@ -1,5 +1,5 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from "@chakra-ui/react";
-import { JewelryType } from "../components/Collections";
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from "@chakra-ui/react";
+import { CollectionType, JewelryType } from "../components/Collections";
 
 export const CreatePage = () => {
     return (
@@ -30,38 +30,56 @@ export const CreatePage = () => {
             </Text>
 
             <Tabs defaultIndex={0} variant='unstyled' isFitted>
-                <TabList>
+                <TabList
+                    maxW={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
+                >
                     {Object.values(JewelryType).map((jewelryValue) => (
                         <Tab
                             key={jewelryValue}
                             fontFamily={"heading"}
                             fontSize={{ base: "sm", sm: "md", md: "lg", lg: "xl" }}
+                            fontWeight="300"
                             sx={{
-                                borderBottom: '2px solid #ccc',
+                                borderBottom: '1px solid #ccc',
                                 _selected: {
                                     borderBottom: '3px solid black',
+                                    fontWeight: '500'
                                 }
                             }}
-                            _selected={{ fontWeight: '600' }}
                         >
                             {jewelryValue.charAt(0).toUpperCase() + jewelryValue.slice(1) + "s"}
                         </Tab>
                     ))}
                 </TabList>
 
-                <TabPanels>
-                    <TabPanel>
-                        <p>one!</p>
-                    </TabPanel>
-                    <TabPanel>
-                        <p>two!</p>
-                    </TabPanel>
-                    <TabPanel>
-                        <p>three!</p>
-                    </TabPanel>
-                    <TabPanel>
-                        <p>four!</p>
-                    </TabPanel>
+                <Text
+                    paddingTop={3}
+                    maxW="xl"
+                    fontSize={{ base: "xs", md: "sm", lg: "md" }}
+                >
+                    Each collection showcases different ways how given jewelry type could look like. If you like any of the types below, click on it and you will be able to customize it futher.
+                </Text>
+
+                <TabPanels >
+                    {Object.values(JewelryType).map((jewelryType) => (
+                        <TabPanel key={jewelryType} paddingLeft={0} paddingRight={0}>
+                            {Object.values(CollectionType).map((collectionType) => (
+                                <Box key={jewelryType + collectionType}>
+                                    <Text
+                                        paddingTop={2}
+                                        fontFamily={"heading"}
+                                        fontWeight="500"
+                                        fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
+                                    >
+                                        Collection {collectionType.charAt(0).toUpperCase() + collectionType.slice(1)}
+                                    </Text>
+                                    <Text color="brand.100">
+                                        {(collectionType === CollectionType.Lissajous) ? "/ Based on the Lissajous curves" : "/ Based on the twists of the torus geometry"}
+                                    </Text>
+                                </Box>
+                            ))}
+                        </TabPanel>
+                    ))}
                 </TabPanels>
             </Tabs>
         </VStack>
