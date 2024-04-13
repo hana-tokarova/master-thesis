@@ -7,7 +7,7 @@ import { ColorPicker } from "../components/layout/ColorPicker";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
-import { changeBooleanParameter, changeNumericParameter } from "../components/utils/mesh/ChangeMesh";
+import { changeBooleanParameter, changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
 import { RenderCanvas } from "../subpages/RenderCanvas";
 
 
@@ -20,28 +20,18 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
   const meshRef = React.useRef<Mesh>(null);
   const mesh = collections[props.collection]?.meshes[props.jewelry];
 
-  const [numericParameters, setNumericParameters] = React.useState<{ [key: string]: number }>({});
-  const [booleanParameters, setBooleanParameters] = React.useState<{ [key: string]: boolean }>({});
-
-  const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(props.collection);
-  const [currentJewelry, setCurrentJewelry] = React.useState<JewelryType>(props.jewelry);
-
-  React.useEffect(() => {
-    // TODO opravit pomocou react three pitfalls mutate, use deltas, alebo sa pozriet ci je to ok a pozriet sa aj na kolekciach
-    if (!mesh) {
-      return;
-    }
-
-    setNumericParameters(() => Object.entries(mesh!.numericParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
-    setBooleanParameters(() => Object.entries(mesh!.booleanParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
-
-    setCurrentCollection(props.collection);
-    setCurrentJewelry(props.jewelry);
-  }, [props.collection, props.jewelry, mesh]);
+  const
+    { numericParameters,
+      booleanParameters,
+      setNumericParameters,
+      setBooleanParameters,
+      currentCollection,
+      currentJewelryType
+    } = useMeshParameters(props.collection, props.jewelry, mesh);
 
   const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
-  if (!mesh || !booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
+  if (!mesh || !booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelryType !== props.jewelry) {
     return <></>;
   }
 
