@@ -39,7 +39,7 @@ const router = createBrowserRouter([
                 path: "configurator",
                 element: (
                     <Configurator
-                        collection={CollectionType.Lissajous}
+                        collection={CollectionType.Torsion}
                         jewelry={JewelryType.Ring}
                     />
                 ),
