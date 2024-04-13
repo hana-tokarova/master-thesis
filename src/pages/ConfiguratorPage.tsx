@@ -1,6 +1,8 @@
-import { HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
+import { Button, HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, Text } from "@chakra-ui/react";
 import React from 'react';
 
+import { MdKeyboardBackspace } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { Mesh } from "three";
 import { collections, CollectionType, JewelryType } from "../components/collections/Collections";
 import { ColorPicker } from "../components/layout/ColorPicker";
@@ -20,15 +22,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
   const meshRef = React.useRef<Mesh>(null);
   const mesh = collections[props.collection]?.meshes[props.jewelry];
 
-  const
-    { numericParameters,
-      booleanParameters,
-      setNumericParameters,
-      setBooleanParameters,
-      currentCollection,
-      currentJewelryType
-    } = useMeshParameters(props.collection, props.jewelry, mesh);
-
+  const { numericParameters, booleanParameters, setNumericParameters, setBooleanParameters, currentCollection, currentJewelryType } = useMeshParameters(props.collection, props.jewelry, mesh);
   const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
   if (!mesh || !booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelryType !== props.jewelry) {
@@ -40,11 +34,51 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
       spacing={2}
       paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
       paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
-      paddingTop={{ base: 2, sm: 10, md: 12, lg: 16 }}
+      paddingTop={{ base: 0, sm: 4, md: 4, lg: 6 }}
       paddingBottom={16}
       alignItems={"left"}
     >
       <div>
+        {/* TODO pridat ze ak chce clovek odist tak dostane popup ze are you sure lebo to bude lost */}
+        <Button
+          leftIcon={<MdKeyboardBackspace />}
+          size={{ base: "xs", md: "sm", lg: "md" }}
+          as={Link}
+          to={"/"}
+          fontFamily={"heading"}
+          fontWeight="400"
+          variant="link"
+          color={"brand.50"}
+          style={{ padding: 0 }}
+        >
+          Back to jewelry types
+        </Button>
+
+        <Text
+          fontFamily={"heading"}
+          fontWeight="500"
+          fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
+        >
+          / {props.collection.charAt(0).toUpperCase() + props.collection.slice(1)} {props.jewelry.charAt(0).toUpperCase() + props.jewelry.slice(1)}
+        </Text>
+
+        <Text
+          maxW="3xl"
+          fontSize={{ base: "xs", md: "sm", lg: "md" }}
+        >
+          {mesh.description}
+        </Text>
+
+        <Text
+          fontFamily={"heading"}
+          fontWeight="500"
+          fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
+          paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        >
+          / General
+        </Text>
+
+
         <ColorPicker
           colors={["gold", "yellowgreen", "royalblue", "maroon", "ghostwhite"]}
           setMeshColor={setMeshColor}
@@ -93,6 +127,12 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
             />
           </div>
         ))}
+
+        {/* <ButtonGroup variant='outline' spacing='6'>
+  <Button colorScheme='blue'>Save</Button>
+  <Button>Cancel</Button>
+</ButtonGroup> */}
+
       </div>
 
       <RenderCanvas

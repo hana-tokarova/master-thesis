@@ -29,6 +29,7 @@ export type ToggleParameter = {
 };
 
 export type JewelryMesh = {
+    description: string;
     numericParameters: {
         [key: string]: SliderParameter;
     };
@@ -43,7 +44,6 @@ export type JewelryMesh = {
 
 type Jewelry = {
     name: string;
-    description: string;
     meshes: {
         [key in JewelryType]?: JewelryMesh;
     };
@@ -54,9 +54,9 @@ export const collections: {
 } = {
     [CollectionType.Lissajous]: {
         name: 'Lissajous',
-        description: 'Lissajous curve surface',
         meshes: {
             [JewelryType.Ring]: {
+                description: 'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
                 numericParameters: {
                     a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
                     b: { name: "Vertical lines", type: 'slider', value: 5, min: 1, max: 10, step: 1 },
@@ -77,6 +77,7 @@ export const collections: {
                 />
             },
             [JewelryType.Bracelet]: {
+                description: 'Lissajous curve bracelet',
                 numericParameters: {
                     a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
                     b: { name: "Vertical lines", type: 'slider', value: 5, min: 1, max: 10, step: 1 },
@@ -97,6 +98,7 @@ export const collections: {
                 />
             },
             [JewelryType.Earring]: {
+                description: 'Lissajous curve earring',
                 numericParameters: {
                     a: { name: "Vertical lines", type: 'slider', value: 4, min: 2, max: 8, step: 2 },
                     b: { name: "Twisting ", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
@@ -121,6 +123,7 @@ export const collections: {
                 />
             },
             [JewelryType.Pendant]: {
+                description: 'Lissajous curve pendant',
                 numericParameters: {
                     a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
                     b: { name: "Vertical lines", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
@@ -145,9 +148,9 @@ export const collections: {
 
     [CollectionType.Torsion]: {
         name: 'Torsion',
-        description: 'Twisted surface',
         meshes: {
             [JewelryType.Ring]: {
+                description: 'Torsion ring',
                 numericParameters: {
                     majorR: { name: "Radius", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     minorR: { name: "Thickness", type: 'slider', value: 0.3, min: 0.1, max: 0.5, step: 0.01 },
@@ -173,6 +176,7 @@ export const collections: {
                 />
             },
             [JewelryType.Bracelet]: {
+                description: 'Torsion bracelet',
                 numericParameters: {
                     majorR: { name: "Radius", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     minorR: { name: "Thickness", type: 'slider', value: 0.6, min: 0.2, max: 1, step: 0.01 },
@@ -198,6 +202,7 @@ export const collections: {
                 />
             },
             [JewelryType.Earring]: {
+                description: 'Torsion earring',
                 numericParameters: {
                     majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
                     minorR: { name: "Radius of ring", type: 'slider', value: 2, min: 0.5, max: 2, step: 0.1 },
@@ -223,6 +228,7 @@ export const collections: {
                 />
             },
             [JewelryType.Pendant]: {
+                description: 'Torsion pendant',
                 numericParameters: {
                     majorR: { name: "Radius", type: 'slider', value: 8, min: 3, max: 9, step: 1 },
                     minorR: { name: "Radius of ring", type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
