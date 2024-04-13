@@ -19,7 +19,7 @@ export const MainMenuButton = ({ pageName, text }: MainMenuButtonProps) => {
             variant="link"
         >
             <Text
-                fontSize="md"
+                fontSize={{ base: "sm", md: "sm", lg: "md" }}
                 fontWeight={isActive ? "600" : "400"}
                 color={"brand.50"}
             >

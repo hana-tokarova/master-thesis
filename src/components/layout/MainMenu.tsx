@@ -31,14 +31,20 @@ export const MainMenu = () => {
             }}
             position="fixed"
             w="100vw"
-            paddingLeft={7}
-            paddingRight={7}
+            paddingLeft={{ base: 5, md: 6, lg: 7 }}
+            paddingRight={{ base: 5, md: 6, lg: 7 }}
             bg="white"
             spacing={{ base: 4, md: 9, lg: 14 }}
             fontFamily="heading"
         >
-            <Image h="9" src="/images/logo/logo-full.png" alt="NEOTAKU JEWELRY" />
+            <Image
+                h={{ base: "7", md: "8", lg: "9" }}
+                src="/images/logo/logo-full.png"
+                alt="NEOTAKU JEWELRY"
+            />
+
             <Spacer />
+
             <MainMenuButton pageName="/" text="Home" />
             <MainMenuButton pageName="/create" text="Create" />
             <MainMenuButton pageName="/about" text="About" />
