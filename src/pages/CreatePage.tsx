@@ -5,9 +5,9 @@ export const CreatePage = () => {
     return (
         <VStack
             spacing={2}
-            paddingLeft={28}
-            paddingRight={28}
-            paddingTop={16}
+            paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
+            paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
+            paddingTop={{ base: 8, sm: 10, md: 12, lg: 16 }}
             paddingBottom={16}
             alignItems={"left"}
             w="100vw"

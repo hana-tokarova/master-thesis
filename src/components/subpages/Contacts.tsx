@@ -7,7 +7,7 @@ export const Contacts = () => {
                 fontFamily={"heading"}
                 fontWeight="500"
                 fontSize={{ base: "lg", sm: "xl", md: "2xl", lg: "3xl" }}
-                paddingTop={20}
+                paddingTop={{ base: 10, sm: 14, md: 16, lg: 20 }}
             >
                 / Contacts
             </Text>
