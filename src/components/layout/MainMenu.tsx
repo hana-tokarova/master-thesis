@@ -36,6 +36,7 @@ export const MainMenu = () => {
             bg="white"
             spacing={{ base: 4, md: 9, lg: 14 }}
             fontFamily="heading"
+            zIndex={10}
         >
             <Image
                 h={{ base: "7", md: "8", lg: "9" }}

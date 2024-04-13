@@ -4,8 +4,8 @@ import { CollectionType, JewelryType } from "../components/Collections";
 type Project = {
     id: number;
     image: string;
-    collection?: CollectionType
-    jewelry?: JewelryType
+    collection?: CollectionType;
+    jewelry?: JewelryType;
 }
 
 const projects: Project[] = [
@@ -110,6 +110,7 @@ export const LookbookPage = () => {
                         mb={2}
                         src={image.image}
                         alt={image.id.toString()}
+                        borderRadius="sm"
                     />
                 ))}
             </Box>
