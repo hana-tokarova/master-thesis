@@ -1,13 +1,12 @@
 import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
 import React from 'react';
-import * as THREE from 'three';
-import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
-import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
-import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
 import { FaSquare } from "react-icons/fa";
-import { Mesh, Object3D } from "three";
+import { Mesh } from "three";
 import { collections, CollectionType, JewelryType } from "../components/collections/Collections";
+import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
+import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
+import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
 import { RenderCanvas } from "../subpages/RenderCanvas";
 
 
@@ -17,7 +16,7 @@ type ConfiguratorProps = {
 }
 
 export const ConfiguratorPage = (props: ConfiguratorProps) => {
-  const myMesh = React.useRef<Mesh>(null);
+  const meshRef = React.useRef<Mesh>(null);
 
   const jewelryMesh = collections[props.collection]?.meshes[props.jewelry];
 
@@ -71,86 +70,6 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
     }));
   }
 
-  const link = document.createElement('a');
-  link.style.display = 'none';
-  document.body.appendChild(link);
-
-  const save = (blob: Blob, filename: string) => {
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
-  }
-
-  const saveString = (text: string, filename: string) => {
-    save(new Blob([text], { type: 'text/plain' }), filename);
-  }
-
-  const saveArrayBuffer = (buffer: ArrayBuffer | DataView, filename: string) => {
-    save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
-  }
-
-  const exportMeshSTL = (mesh: Object3D) => {
-    const clonedMesh = mesh.clone();
-
-    const rotationMatrix = new THREE.Matrix4().makeRotationX(Math.PI / 2);
-    clonedMesh.applyMatrix4(rotationMatrix);
-    clonedMesh.updateMatrixWorld();
-
-    const exporter = new STLExporter();
-    const data = exporter.parse(clonedMesh, { binary: true });
-
-    saveArrayBuffer(data, clonedMesh.uuid + '.stl');
-  };
-
-  const exportMeshOBJ = (mesh: Object3D) => {
-    const clonedMesh = mesh.clone();
-    const scene = mesh.parent!;
-
-    const exporter = new OBJExporter();
-    const data = exporter.parse(scene);
-
-    saveString(data, clonedMesh.uuid + '.obj');
-  };
-
-  const exportMeshGlTF = (mesh: Object3D) => {
-    const clonedMesh = mesh.clone();
-    const scene = mesh.parent!;
-
-    const options = {
-      trs: false,
-      onlyVisible: true,
-      binary: false,
-      maxTextureSize: 4096
-    };
-
-    const exporter = new GLTFExporter();
-    exporter.parse(
-      scene,
-      function (data) {
-        if (data instanceof ArrayBuffer) {
-
-          saveArrayBuffer(data, clonedMesh.uuid + '.glb');
-
-        } else {
-
-          const output = JSON.stringify(data, null, 2);
-          console.log(output);
-          saveString(output, clonedMesh.uuid + '.gltf');
-
-        }
-
-      },
-      function (error) {
-
-        console.log('An error happened during parsing', error);
-
-      },
-      options
-    );
-  };
-
-
-
   if (!booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
     return <></>;
   }
@@ -178,9 +97,9 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
         </HStack>
 
         <Select placeholder='Export to:' size='sm' variant='filled'>
-          <option value='stl' onClick={() => exportMeshSTL(myMesh.current!)}>.STL</option>
-          <option value='obj' onClick={() => exportMeshOBJ(myMesh.current!)}>.OBJ</option>
-          <option value='gltf' onClick={() => exportMeshGlTF(myMesh.current!)}>.glTF</option>
+          <option value='stl' onClick={() => exportMeshSTL(meshRef.current!)}>.STL</option>
+          <option value='obj' onClick={() => exportMeshOBJ(meshRef.current!)}>.OBJ</option>
+          <option value='gltf' onClick={() => exportMeshGlTF(meshRef.current!)}>.glTF</option>
         </Select>
 
         {jewelryMesh && Object.entries(jewelryMesh.numericParameters).map(([parameterName, parameterDetails]) => (
@@ -222,7 +141,13 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
         ))}
       </div>
 
-      <RenderCanvas mesh={jewelryMesh!} color={meshColor} ref={myMesh} numParams={numericParameters} boolParams={booleanParameters} />
+      <RenderCanvas
+        mesh={jewelryMesh!}
+        color={meshColor}
+        ref={meshRef}
+        numParams={numericParameters}
+        boolParams={booleanParameters}
+      />
 
     </HStack>
   );
