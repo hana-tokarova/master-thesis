@@ -180,7 +180,8 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                 </Text>
 
                 <ColorPicker
-                    colors={[["yellow", "gold"], ["yellowgreen", "green"], ["royalblue", "darkblue"], ["red", "maroon"], ["ghostwhite", "gray"]]}
+                    activeColor={meshColor}
+                    colors={[["ghostwhite", "gray"], ["gold", "goldenrod"], ["greenyellow", "forestgreen"], ["cyan", "deepskyblue"], ["pink", "maroon"]]}
                     setMeshColor={setMeshColor}
                 />
 
@@ -203,7 +204,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                             boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.3)',
                         },
                         '.chakra-switch__track': {
-                            bg: 'brand.200',
+                            bg: 'brand.400',
                             boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
                             _checked: {
                                 bg: 'brand.100',
@@ -226,15 +227,15 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     fontFamily={"heading"}
                     fontWeight="500"
                     placeholder='Export model'
-                    bg='brand.100'
-                    color='brand.200'
+                    bg='brand.400'
+                    borderColor="brand.400"
+                    color='brand.50'
                     size='md'
-                    variant='filled'
                     shadow={'lg'}
                     paddingTop={2}
                     paddingBottom={4}
-                // _hover={{ bg: 'brand.400' }}
-                // _focus={{ bg: 'brand.300' }}
+                    _hover={{ bg: 'brand.400' }}
+                    _focus={{ bg: 'brand.300' }}
                 >
                     <option value='stl' onClick={() => exportMeshSTL(meshRef.current!)}>to .STL</option>
                     <option value='obj' onClick={() => exportMeshOBJ(meshRef.current!)}>to .OBJ</option>
@@ -245,8 +246,8 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     size='md'
                     fontFamily={"heading"}
                     fontWeight="500"
-                    bg='brand.100'
-                    color='brand.200'
+                    bg='brand.400'
+                    color='brand.50'
                     w={44}
                     shadow={'lg'}
                     _hover={{ bg: 'brand.400' }}
