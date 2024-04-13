@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, Text, Tooltip } from "@chakra-ui/react";
 import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
@@ -9,7 +9,7 @@ import { ColorPicker } from "../components/layout/ColorPicker";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
-import { changeBooleanParameter, changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
+import { changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
 import { RenderCanvas } from "../subpages/RenderCanvas";
 
 
@@ -38,7 +38,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
             paddingBottom={16}
             alignItems={"left"}
         >
-            <div>
+            <div style={{ width: "900px" }}>
                 {/* TODO pridat ze ak chce clovek odist tak dostane popup ze are you sure lebo to bude lost */}
                 <Button
                     leftIcon={<MdKeyboardBackspace />}
@@ -196,19 +196,18 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
 
                 <Switch
                     paddingTop={2}
-                    // isChecked={true}
                     size='lg'
                     style={{ margin: 0 }}
                     sx={{
                         '.chakra-switch__thumb': {
-                            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.3)', // Custom shadow for the thumb
+                            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.3)',
                         },
                         '.chakra-switch__track': {
                             bg: 'brand.200',
                             boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
                             _checked: {
                                 bg: 'brand.100',
-                            } // Outer shadow when checked
+                            }
                         }
                     }}
                 />
@@ -222,36 +221,39 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     / Finalize
                 </Text>
 
-
-
-
-
-                <div>old stuff now!</div>
-
-
-
-                <Select placeholder='Export to:' size='sm' variant='filled'>
-                    <option value='stl' onClick={() => exportMeshSTL(meshRef.current!)}>.STL</option>
-                    <option value='obj' onClick={() => exportMeshOBJ(meshRef.current!)}>.OBJ</option>
-                    <option value='gltf' onClick={() => exportMeshGlTF(meshRef.current!)}>.glTF</option>
+                <Select
+                    w={44}
+                    fontFamily={"heading"}
+                    fontWeight="500"
+                    placeholder='Export model'
+                    bg='brand.100'
+                    color='brand.200'
+                    size='md'
+                    variant='filled'
+                    shadow={'lg'}
+                    paddingTop={2}
+                    paddingBottom={4}
+                // _hover={{ bg: 'brand.400' }}
+                // _focus={{ bg: 'brand.300' }}
+                >
+                    <option value='stl' onClick={() => exportMeshSTL(meshRef.current!)}>to .STL</option>
+                    <option value='obj' onClick={() => exportMeshOBJ(meshRef.current!)}>to .OBJ</option>
+                    <option value='gltf' onClick={() => exportMeshGlTF(meshRef.current!)}>to .glTF</option>
                 </Select>
 
-                {mesh && Object.entries(mesh.booleanParameters).map(([parameterName, parameterDetails]) => (
-                    <div key={parameterName} >
-                        {parameterDetails.name}
-                        <Switch
-                            margin={2}
-                            colorScheme='cyan'
-                            isChecked={booleanParameters[parameterName]}
-                            onChange={(newValue) => changeBooleanParameter(setBooleanParameters, parameterName, newValue.target.checked)}
-                        />
-                    </div>
-                ))}
-
-                {/* <ButtonGroup variant='outline' spacing='6'>
-  <Button colorScheme='blue'>Save</Button>
-  <Button>Cancel</Button>
-</ButtonGroup> */}
+                <Button
+                    size='md'
+                    fontFamily={"heading"}
+                    fontWeight="500"
+                    bg='brand.100'
+                    color='brand.200'
+                    w={44}
+                    shadow={'lg'}
+                    _hover={{ bg: 'brand.400' }}
+                    _focus={{ bg: 'brand.300' }}
+                >
+                    <Box textAlign="left" w="full"> Share Design</Box>
+                </Button>
 
             </div>
 
