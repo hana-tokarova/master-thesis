@@ -1,12 +1,11 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { forwardRef, Suspense, useRef } from "react";
 import { JewelryMesh } from "../components/collections/Collections";
 
 type RenderCanvasProps = {
     mesh: JewelryMesh;
     color: string;
-    ref: React.RefObject<THREE.Mesh>;
     numParams: {
         [key: string]: number;
     };
@@ -34,33 +33,32 @@ const FollowCameraLight = () => {
     );
 }
 
-export const RenderCanvas = ({ mesh, color, ref, numParams, boolParams }: RenderCanvasProps) => {
-    return (
-        <div style={{ width: "100vw" }}>
-            <Suspense fallback={<span>loading...</span>}>
-                <Canvas
-                    camera={{ fov: 50, near: 0.1, far: 1000, position: [30, 30, 0] }}
-                    frameloop="demand"
-                >
-                    <FollowCameraLight />
+export const RenderCanvas = forwardRef<THREE.Mesh, RenderCanvasProps>(({ mesh, color, numParams, boolParams }, ref) => (
+    <div style={{ width: "100vw" }}>
+        <Suspense fallback={<span>loading...</span>}>
+            <Canvas
+                camera={{ fov: 50, near: 0.1, far: 1000, position: [30, 30, 0] }}
+                frameloop="demand"
+            >
+                <FollowCameraLight />
 
-                    <ambientLight
-                        intensity={1}
-                        color="dimgray"
-                    />
+                <ambientLight
+                    intensity={1}
+                    color="dimgray"
+                />
 
-                    {mesh.render(numParams, boolParams, color, ref)}
+                {mesh.render(numParams, boolParams, color, ref)}
 
-                    <OrbitControls
-                        enablePan={false}
-                        enableRotate={true}
-                        enableZoom={false}
-                        enableDamping={true}
-                        minPolarAngle={Math.PI / 2 - Math.PI / 5}
-                        maxPolarAngle={Math.PI / 2 + Math.PI / 5}
-                    />
-                </Canvas>
-            </Suspense>
-        </div>
-    );
-}
+                <OrbitControls
+                    enablePan={false}
+                    enableRotate={true}
+                    enableZoom={false}
+                    enableDamping={true}
+                    minPolarAngle={Math.PI / 2 - Math.PI / 5}
+                    maxPolarAngle={Math.PI / 2 + Math.PI / 5}
+                />
+            </Canvas>
+        </Suspense>
+    </div>
+));
+

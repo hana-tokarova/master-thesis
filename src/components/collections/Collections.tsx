@@ -38,7 +38,7 @@ export type JewelryMesh = {
     render: (numericParams: { [key: string]: number },
         booleanParams: { [key: string]: boolean },
         color: string,
-        ref: React.RefObject<THREE.Mesh>) => JSX.Element;
+        ref: React.Ref<THREE.Mesh>) => JSX.Element;
 };
 
 type Jewelry = {

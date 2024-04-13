@@ -2,10 +2,8 @@ import { useMemo } from 'react';
 import * as THREE from 'three';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
-type MeshRef = React.RefObject<THREE.Mesh>;
-
 type LissajousProps = {
-    mesh: MeshRef;
+    mesh: React.Ref<THREE.Mesh>;
     meshColor: string;
     meshRadius: number;
     parameterA: number;

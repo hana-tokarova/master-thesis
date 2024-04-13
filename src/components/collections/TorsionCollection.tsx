@@ -3,10 +3,8 @@ import * as THREE from 'three';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
-type MeshRef = React.RefObject<THREE.Mesh>;
-
 type TorsionProps = {
-    mesh: MeshRef;
+    mesh: React.Ref<THREE.Mesh>;
     meshColor: string;
     stacks: number;
     majorR: number;
