@@ -1,15 +1,14 @@
 import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import React, { Suspense, useRef } from 'react';
+import React from 'react';
 import * as THREE from 'three';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 
-import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { Mesh, Object3D } from "three";
 import { collections, CollectionType, JewelryType } from "../components/collections/Collections";
+import { RenderCanvas } from "../subpages/RenderCanvas";
 
 
 type ConfiguratorProps = {
@@ -86,7 +85,6 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
     save(new Blob([text], { type: 'text/plain' }), filename);
   }
 
-
   const saveArrayBuffer = (buffer: ArrayBuffer | DataView, filename: string) => {
     save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
   }
@@ -151,24 +149,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
     );
   };
 
-  const FollowCameraLight = () => {
-    const lightRef = useRef<THREE.DirectionalLight | null>(null);
-    const { camera } = useThree();
 
-    useFrame(() => {
-      lightRef.current!.position.copy(camera.position);
-    });
-
-    return (
-      <>
-        <directionalLight ref={lightRef} intensity={2} />
-        <directionalLight intensity={1} position={[3, 3, 3]} />
-        <directionalLight intensity={1} position={[-3, 3, -3]} />
-        <directionalLight intensity={1} position={[3, 3, -3]} />
-        <directionalLight intensity={1} position={[-3, 3, 3]} />
-      </>
-    );
-  }
 
   if (!booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelry !== props.jewelry) {
     return <></>;
@@ -241,35 +222,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
         ))}
       </div>
 
-
-      <div style={{ width: "100vw" }}>
-        <Suspense fallback={<span>loading...</span>}>
-          <Canvas
-            camera={{ fov: 50, near: 0.1, far: 1000, position: [30, 30, 0] }}
-            frameloop="demand"
-          >
-
-            <FollowCameraLight />
-
-            <ambientLight
-              intensity={1}
-              color="dimgray"
-            />
-
-            {jewelryMesh!.render(numericParameters, booleanParameters, meshColor, myMesh)}
-
-            <OrbitControls
-              enablePan={false}
-              enableRotate={true}
-              enableZoom={false}
-              enableDamping={true}
-              minPolarAngle={Math.PI / 2 - Math.PI / 5}
-              maxPolarAngle={Math.PI / 2 + Math.PI / 5}
-            />
-          </Canvas>
-        </Suspense>
-
-      </div>
+      <RenderCanvas mesh={jewelryMesh!} color={meshColor} ref={myMesh} numParams={numericParameters} boolParams={booleanParameters} />
 
     </HStack>
   );

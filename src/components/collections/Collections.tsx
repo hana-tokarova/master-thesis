@@ -13,7 +13,7 @@ export enum JewelryType {
     Pendant = 'pendant'
 }
 
-type SliderParameter = {
+export type SliderParameter = {
     name: string;
     type: 'slider';
     value: number;
@@ -22,13 +22,13 @@ type SliderParameter = {
     step: number;
 };
 
-type ToggleParameter = {
+export type ToggleParameter = {
     name: string;
     type: 'toggle';
     value: boolean;
 };
 
-type JewelryMesh = {
+export type JewelryMesh = {
     numericParameters: {
         [key: string]: SliderParameter;
     };
