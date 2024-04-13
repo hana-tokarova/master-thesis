@@ -12,7 +12,7 @@ export const WebsiteLayout = () => {
         >
             <MainMenu />
 
-            <Box pt="90px" >
+            <Box pt="80px" >
                 <div id="detail">
                     <Outlet />
                 </div>

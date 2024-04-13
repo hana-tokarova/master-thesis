@@ -1,6 +1,6 @@
-import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Spacer, Switch } from "@chakra-ui/react";
+import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import React, { useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
@@ -29,6 +29,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
   const [currentJewelry, setCurrentJewelry] = React.useState<JewelryType>(props.jewelry);
 
   React.useEffect(() => {
+    // TODO opravit pomocou react three pitfalls mutate, use deltas, alebo sa pozriet ci je to ok a pozriet sa aj na kolekciach
     if (!jewelryMesh) {
       return;
     }
@@ -178,7 +179,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
       spacing={2}
       paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
       paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
-      paddingTop={{ base: 8, sm: 10, md: 12, lg: 16 }}
+      paddingTop={{ base: 2, sm: 10, md: 12, lg: 16 }}
       paddingBottom={16}
       alignItems={"left"}
     >
@@ -240,29 +241,33 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
         ))}
       </div>
 
-      <Spacer />
 
-      <div >
-        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} >
+      <div style={{ width: "100vw" }}>
+        <Suspense fallback={<span>loading...</span>}>
+          <Canvas
+            camera={{ fov: 50, near: 0.1, far: 1000, position: [30, 30, 0] }}
+            frameloop="demand"
+          >
 
-          <FollowCameraLight />
+            <FollowCameraLight />
 
-          <ambientLight
-            intensity={1}
-            color="dimgray"
-          />
+            <ambientLight
+              intensity={1}
+              color="dimgray"
+            />
 
-          {jewelryMesh!.render(numericParameters, booleanParameters, meshColor, myMesh)}
+            {jewelryMesh!.render(numericParameters, booleanParameters, meshColor, myMesh)}
 
-          <OrbitControls
-            enablePan={false}
-            enableRotate={true}
-            enableZoom={false}
-            enableDamping={true}
-            minPolarAngle={Math.PI / 2 - Math.PI / 5}
-            maxPolarAngle={Math.PI / 2 + Math.PI / 5}
-          />
-        </Canvas>
+            <OrbitControls
+              enablePan={false}
+              enableRotate={true}
+              enableZoom={false}
+              enableDamping={true}
+              minPolarAngle={Math.PI / 2 - Math.PI / 5}
+              maxPolarAngle={Math.PI / 2 + Math.PI / 5}
+            />
+          </Canvas>
+        </Suspense>
 
       </div>
 

@@ -1,5 +1,5 @@
 import { ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react';
-import { Contacts } from '../components/subpages/Contacts';
+import { Contacts } from '../subpages/Contacts';
 
 export const AboutPage = () => {
 
@@ -8,7 +8,7 @@ export const AboutPage = () => {
             spacing={2}
             paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
-            paddingTop={{ base: 8, sm: 10, md: 12, lg: 16 }}
+            paddingTop={{ base: 2, sm: 10, md: 12, lg: 16 }}
             paddingBottom={16}
             alignItems={"left"}
             w="100vw"

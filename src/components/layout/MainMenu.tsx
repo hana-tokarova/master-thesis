@@ -5,14 +5,14 @@ import { MainMenuButton } from "./MainMenuButton";
 
 export const MainMenu = () => {
     const { scrollY } = useScroll();
-    const [menuHeight, setMenuHeight] = useState('90px');
+    const [menuHeight, setMenuHeight] = useState('80px');
     const [menuShadow, setMenuShadow] = useState('0px 0px 20px rgba(0, 0, 0, 0)');
 
     useEffect(() => {
         const updateStyles = () => {
             const yValue = scrollY.get();
             const newOpacity = Math.min(0.3, (yValue / 100) * 0.3);
-            const newHeight = `${90 - Math.min(30, (yValue / 100) * 30)}px`;
+            const newHeight = `${80 - Math.min(30, (yValue / 100) * 30)}px`;
 
             setMenuShadow(`0px 0px 20px rgba(0, 0, 0, ${newOpacity})`);
             setMenuHeight(newHeight);
