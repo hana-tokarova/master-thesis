@@ -34,10 +34,10 @@ const FollowCameraLight = () => {
 }
 
 export const RenderCanvas = forwardRef<THREE.Mesh, RenderCanvasProps>(({ mesh, color, numParams, boolParams }, ref) => (
-    <div style={{ width: "100vw" }}>
+    <div style={{ width: "100vw", height: "80vh" }}>
         <Suspense fallback={<span>loading...</span>}>
             <Canvas
-                camera={{ fov: 50, near: 0.1, far: 1000, position: [30, 30, 0] }}
+                camera={{ fov: 50, near: 0.1, far: 1000, position: [60, 60, 0] }}
                 frameloop="demand"
             >
                 <FollowCameraLight />

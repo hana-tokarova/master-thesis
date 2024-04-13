@@ -1,4 +1,4 @@
-import { Button, HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, Text, Tooltip } from "@chakra-ui/react";
 import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
@@ -78,6 +78,112 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
           / General
         </Text>
 
+        <Flex
+          paddingTop="2"
+          paddingBottom="4"
+          direction="row"
+          rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
+          columnGap={4}
+          wrap='wrap'
+        >
+          {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
+            parameterDetails.tag === 'general' && (
+              <Slider
+                margin={2}
+                colorScheme='cyan'
+                value={numericParameters[parameterName]}
+                min={parameterDetails.min}
+                max={parameterDetails.max}
+                step={parameterDetails.step}
+                onChange={(newValue) => changeNumericParameter(setNumericParameters, parameterName, newValue)}>
+
+                <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
+                  {parameterDetails.min}
+                </SliderMark>
+                <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
+                  {parameterDetails.max}
+                </SliderMark>
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+            )
+          ))}
+
+        </Flex>
+
+        <Text
+          fontFamily={"heading"}
+          fontWeight="500"
+          fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
+          paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        >
+          / {props.collection.charAt(0).toUpperCase() + props.collection.slice(1)} properties
+        </Text>
+
+        <Flex
+          paddingTop="2"
+          paddingBottom="4"
+          direction="row"
+          rowGap={{ base: 0, sm: 2, md: 4, lg: 6 }}
+          columnGap={4}
+          wrap='wrap'
+        >
+          {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
+            parameterDetails.tag === 'collection' && (
+              <Box>
+                <Text
+                  fontFamily={"heading"}
+                  fontWeight="400"
+                  fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}
+                  w={{ base: "28", sm: "32", md: "34", lg: "40" }}
+                >
+                  {parameterDetails.name}
+                </Text>
+                <Slider
+                  margin={2}
+                  w={{ base: "28", sm: "32", md: "34", lg: "40" }}
+                  colorScheme='cyan'
+                  value={numericParameters[parameterName]}
+                  min={parameterDetails.min}
+                  max={parameterDetails.max}
+                  step={parameterDetails.step}
+                  onChange={(newValue) => changeNumericParameter(setNumericParameters, parameterName, newValue)}
+                >
+
+                  <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
+                    {parameterDetails.min}
+                  </SliderMark>
+                  <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
+                    {parameterDetails.max}
+                  </SliderMark>
+                  <SliderTrack bg='brand.200' shadow='md'>
+                    <SliderFilledTrack bg='brand.100' />
+                  </SliderTrack>
+                  <Tooltip
+                    bg='brand.50'
+                    color='white'
+                    placement='bottom'
+                    // isOpen={showTooltip}
+                    label={numericParameters[parameterName]}
+                  >
+                    <SliderThumb />
+                  </Tooltip>
+
+                </Slider>
+              </Box>
+
+            )
+          ))}
+
+        </Flex>
+
+
+
+
+
+        <div>old stuff now!</div>
 
         <ColorPicker
           colors={["gold", "yellowgreen", "royalblue", "maroon", "ghostwhite"]}
@@ -89,32 +195,6 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
           <option value='obj' onClick={() => exportMeshOBJ(meshRef.current!)}>.OBJ</option>
           <option value='gltf' onClick={() => exportMeshGlTF(meshRef.current!)}>.glTF</option>
         </Select>
-
-        {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
-          <div key={parameterName}>
-            {parameterDetails.name}
-            <Slider
-              margin={2}
-              colorScheme='cyan'
-              value={numericParameters[parameterName]}
-              min={parameterDetails.min}
-              max={parameterDetails.max}
-              step={parameterDetails.step}
-              onChange={(newValue) => changeNumericParameter(setNumericParameters, parameterName, newValue)}>
-
-              <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
-                {parameterDetails.min}
-              </SliderMark>
-              <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
-                {parameterDetails.max}
-              </SliderMark>
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-          </div>
-        ))}
 
         {mesh && Object.entries(mesh.booleanParameters).map(([parameterName, parameterDetails]) => (
           <div key={parameterName} >
@@ -142,6 +222,6 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
         numParams={numericParameters}
         boolParams={booleanParameters}
       />
-    </HStack>
+    </HStack >
   );
 };
