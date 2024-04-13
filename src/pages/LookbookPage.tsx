@@ -1,5 +1,5 @@
 import { Box, Image, Text, VStack } from "@chakra-ui/react";
-import { CollectionType, JewelryType } from "../components/Collections";
+import { CollectionType, JewelryType } from "../components/collections/Collections";
 
 type Project = {
     id: number;

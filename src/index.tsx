@@ -2,10 +2,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { CollectionType, JewelryType } from "./components/Collections";
-import { Configurator } from "./components/Configurator";
+import { CollectionType, JewelryType } from "./components/collections/Collections";
 import { WebsiteLayout } from "./components/layout/WebsiteLayout";
 import { AboutPage } from "./pages/AboutPage";
+import { ConfiguratorPage } from "./pages/ConfiguratorPage";
 import { CreatePage } from "./pages/CreatePage";
 import { HomePage } from "./pages/HomePage";
 import { LookbookPage } from "./pages/LookbookPage";
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path: "configurator",
                 element: (
-                    <Configurator
+                    <ConfiguratorPage
                         collection={CollectionType.Torsion}
                         jewelry={JewelryType.Ring}
                     />

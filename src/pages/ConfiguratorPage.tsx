@@ -9,7 +9,7 @@ import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 import { OrbitControls } from "@react-three/drei";
 import { FaSquare } from "react-icons/fa";
 import { Mesh, Object3D } from "three";
-import { collections, CollectionType, JewelryType } from "./Collections";
+import { collections, CollectionType, JewelryType } from "../components/collections/Collections";
 
 
 type ConfiguratorProps = {
@@ -17,7 +17,7 @@ type ConfiguratorProps = {
   jewelry: JewelryType;
 }
 
-export const Configurator = (props: ConfiguratorProps) => {
+export const ConfiguratorPage = (props: ConfiguratorProps) => {
   const myMesh = React.useRef<Mesh>(null);
 
   const jewelryMesh = collections[props.collection]?.meshes[props.jewelry];
