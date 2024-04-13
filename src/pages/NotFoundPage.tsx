@@ -29,12 +29,12 @@ export const NotFoundPage = () => {
 
             <Text
                 fontFamily={"body"}
-                fontSize="md"
+                fontSize={{ base: "xs", md: "sm", lg: "md" }}
                 color={"brand.50"}
             >
-                Go to the {" "}
+                Go to the
                 <Button
-                    size='md'
+                    size={{ base: "xs", md: "sm", lg: "md" }}
                     as={Link}
                     to={"/"}
                     fontFamily={"heading"}

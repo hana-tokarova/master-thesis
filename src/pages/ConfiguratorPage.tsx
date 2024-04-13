@@ -1,4 +1,4 @@
-import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch } from "@chakra-ui/react";
+import { HStack, IconButton, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Spacer, Switch } from "@chakra-ui/react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
@@ -174,28 +174,15 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
   }
 
   return (
-    <div style={{ width: "100vw", height: "80vh" }}>
-      <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} >
-
-        <FollowCameraLight />
-
-        <ambientLight
-          intensity={1}
-          color="dimgray"
-        />
-
-        {jewelryMesh!.render(numericParameters, booleanParameters, meshColor, myMesh)}
-
-        <OrbitControls
-          enablePan={false}
-          enableRotate={true}
-          enableZoom={false}
-          enableDamping={true}
-          minPolarAngle={Math.PI / 2 - Math.PI / 5}
-          maxPolarAngle={Math.PI / 2 + Math.PI / 5}
-        />
-      </Canvas>
-      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+    <HStack
+      spacing={2}
+      paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
+      paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
+      paddingTop={{ base: 8, sm: 10, md: 12, lg: 16 }}
+      paddingBottom={16}
+      alignItems={"left"}
+    >
+      <div>
         <HStack marginBottom={2}>
           {colors.map((buttonColor) =>
             <IconButton
@@ -252,6 +239,33 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
           </div>
         ))}
       </div>
-    </div>
+
+      <Spacer />
+
+      <div >
+        <Canvas camera={{ fov: 50, near: 0.1, far: 1000, position: [75, 75, 0] }} >
+
+          <FollowCameraLight />
+
+          <ambientLight
+            intensity={1}
+            color="dimgray"
+          />
+
+          {jewelryMesh!.render(numericParameters, booleanParameters, meshColor, myMesh)}
+
+          <OrbitControls
+            enablePan={false}
+            enableRotate={true}
+            enableZoom={false}
+            enableDamping={true}
+            minPolarAngle={Math.PI / 2 - Math.PI / 5}
+            maxPolarAngle={Math.PI / 2 + Math.PI / 5}
+          />
+        </Canvas>
+
+      </div>
+
+    </HStack>
   );
 };
