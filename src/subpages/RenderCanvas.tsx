@@ -41,8 +41,9 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 const w = window.innerWidth;
                 const h = window.innerHeight;
 
-                const x = w / 25;
-                const y = h / 25;
+                // TODO doresit
+                const x = (w / h) * 40;
+                const y = 30;
                 const z = 0;
 
                 setCameraPosition(new Vector3(x, y, z));

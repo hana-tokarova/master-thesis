@@ -1,8 +1,7 @@
-import { Object3D } from "three";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
 import { saveArrayBuffer, saveString } from "./Saving";
 
-export const exportMeshGlTF = (mesh: Object3D) => {
+export const exportMeshGlTF = (mesh: THREE.Mesh) => {
     const clonedMesh = mesh.clone();
     const scene = mesh.parent!;
 

@@ -1,16 +1,16 @@
-import { Box, Button, Flex, HStack, Select, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Switch, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Text, Tooltip } from "@chakra-ui/react";
 import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { Mesh } from "three";
 import { collections, CollectionType, JewelryType } from "../components/collections/Collections";
-import { ColorPicker } from "../components/layout/ColorPicker";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
 import { changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
+import { Finalize } from "../subpages/Finalize";
 import { RenderCanvas } from "../subpages/RenderCanvas";
+import { Visualize } from "../subpages/Visualize";
 
 
 type ConfiguratorProps = {
@@ -19,7 +19,7 @@ type ConfiguratorProps = {
 }
 
 export const ConfiguratorPage = (props: ConfiguratorProps) => {
-    const meshRef = React.useRef<Mesh>(null);
+    const meshRef = React.useRef<THREE.Mesh>(null);
     const mesh = collections[props.collection]?.meshes[props.jewelry];
 
     const { numericParameters, booleanParameters, setNumericParameters, setBooleanParameters, currentCollection, currentJewelryType } = useMeshParameters(props.collection, props.jewelry, mesh);
@@ -152,7 +152,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                                         <SliderFilledTrack bg='brand.100' />
                                     </SliderTrack>
                                     <Tooltip
-                                        bg='brand.50'
+                                        bg='brand.100'
                                         color='white'
                                         placement='bottom'
                                         label={numericParameters[parameterName]}
@@ -167,140 +167,28 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     ))}
                 </Flex>
 
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
-                    paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                >
-                    / Visualize
-                </Text>
-
-                <Text
-                    paddingTop="2"
-                    paddingBottom="1"
-                    fontFamily={"heading"}
-                    fontWeight="400"
-                    fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}
-                    w={{ base: "28", sm: "30", md: "32", lg: "34" }}
-                >
-                    Materials
-                </Text>
-
-                <ColorPicker
-                    activeColor={meshColor}
+                <Visualize
                     colors={[["ghostwhite", "gray"], ["gold", "goldenrod"], ["greenyellow", "forestgreen"], ["cyan", "deepskyblue"], ["pink", "maroon"]]}
+                    meshColor={meshColor}
                     setMeshColor={setMeshColor}
                 />
 
-                <Text
-                    paddingTop="2"
-                    fontFamily={"heading"}
-                    fontWeight="400"
-                    fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}
-                    w={{ base: "28", sm: "30", md: "32", lg: "34" }}
-                >
-                    Mockup Viewer
-                </Text>
-
-                <Switch
-                    paddingTop={2}
-                    size='lg'
-                    style={{ margin: 0 }}
-                    sx={{
-                        '.chakra-switch__thumb': {
-                            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.3)',
-                        },
-                        '.chakra-switch__track': {
-                            bg: 'brand.400',
-                            boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
-                            _checked: {
-                                bg: 'brand.100',
-                            }
-                        }
-                    }}
+                <Finalize
+                    mesh={mesh}
+                    meshRef={meshRef}
+                    exportMeshSTL={exportMeshSTL}
+                    exportMeshOBJ={exportMeshOBJ}
+                    exportMeshGlTF={exportMeshGlTF}
                 />
 
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
-                    paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                >
-                    / Finalize
-                </Text>
-
-                <Select
-                    w={44}
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    placeholder='Export model'
-                    bg='brand.400'
-                    borderColor="brand.400"
-                    color='brand.50'
-                    size='md'
-                    shadow={'lg'}
-                    paddingTop={2}
-                    paddingBottom={4}
-                    _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.300' }}
-                >
-                    <option value='stl' onClick={() => exportMeshSTL(meshRef.current!)}>to .STL</option>
-                    <option value='obj' onClick={() => exportMeshOBJ(meshRef.current!)}>to .OBJ</option>
-                    <option value='gltf' onClick={() => exportMeshGlTF(meshRef.current!)}>to .glTF</option>
-                </Select>
-
-                <Button
-                    size='md'
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    bg='brand.400'
-                    color='brand.50'
-                    w={44}
-                    shadow={'lg'}
-                    _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.300' }}
-                >
-                    <Box textAlign="left" w="full"> Share Design</Box>
-                </Button>
-
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
-                    paddingTop={2}
-                >
-                    Dimensions:
-                </Text>
-                <Text>
-                    {mesh.dimensions().x} x {mesh.dimensions().y} x {mesh.dimensions().z} mm
-                </Text>
-
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="300"
-                    fontSize={{ base: "sm", sm: "md", md: "lg", lg: "xl" }}
-                    paddingTop={2}
-                >
-                    Estimated price total
-                </Text>
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="400"
-                    fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
-                    paddingBottom={10}
-                >
-                    €5,00
-                </Text>
-
-            </Box>
+            </Box >
 
             <Box
-                position="fixed"  // Fixing right component in place
-                right="0"  // Align to the right side of the viewport
-                top="0"  // Start from the top of the viewport
-                h="100vh"  // Full viewport height
-                w="65vw"  // 65% of the viewport width
+                position="fixed"
+                right="0"
+                top="0"
+                h="100vh"
+                w="65vw"
                 overflow="hidden"
             >
                 <RenderCanvas
@@ -311,7 +199,6 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     boolParams={booleanParameters}
                 />
             </Box>
-
-        </HStack>
+        </HStack >
     );
 };

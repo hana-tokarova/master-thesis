@@ -2,7 +2,7 @@ import { Box, HStack, Tooltip } from "@chakra-ui/react";
 import { FaCheck } from "react-icons/fa";
 import { changeMeshColor } from "../utils/mesh/ChangeMesh";
 
-type ColorPair = [string, string];
+export type ColorPair = [string, string];
 
 type ColorPickerProps = {
     activeColor: string;
@@ -15,7 +15,7 @@ export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerPr
         <HStack marginBottom={2}>
             {colors.map(([buttonColor, gradientColor], index) =>
                 <Tooltip
-                    bg='brand.50'
+                    bg='brand.100'
                     color='white'
                     placement='bottom'
                     label={buttonColor.charAt(0).toUpperCase() + buttonColor.slice(1)}

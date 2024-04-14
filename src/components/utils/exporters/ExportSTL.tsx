@@ -1,8 +1,8 @@
-import { Matrix4, Object3D } from "three";
+import { Matrix4 } from "three";
 import { STLExporter } from "three/examples/jsm/exporters/STLExporter";
 import { saveArrayBuffer } from "./Saving";
 
-export const exportMeshSTL = (mesh: Object3D) => {
+export const exportMeshSTL = (mesh: THREE.Mesh) => {
     const clonedMesh = mesh.clone();
 
     const rotationMatrix = new Matrix4().makeRotationX(Math.PI / 2);
