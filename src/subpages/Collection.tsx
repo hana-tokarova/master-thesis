@@ -1,14 +1,15 @@
 import { Box, Flex, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Text, Tooltip } from "@chakra-ui/react";
-import { JewelryMesh } from "../components/collections/Collections";
+import { CollectionType, JewelryMesh } from "../components/collections/Collections";
 import { changeNumericParameter } from "../components/utils/mesh/ChangeMesh";
 
 type LissajousProps = {
+    collection: CollectionType,
     mesh: JewelryMesh,
     numericParameters: { [key: string]: number },
     setNumericParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number; }>>,
 }
 
-export const Lissajous = ({ mesh, numericParameters, setNumericParameters }: LissajousProps) => {
+export const Collection = ({ collection, mesh, numericParameters, setNumericParameters }: LissajousProps) => {
     return (
         <Box>
             <Text
@@ -17,31 +18,30 @@ export const Lissajous = ({ mesh, numericParameters, setNumericParameters }: Lis
                 fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
                 paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
             >
-                / Lissajous properties
+                / {collection.charAt(0).toUpperCase() + collection.slice(1)} properties
             </Text>
 
             <Flex
                 paddingTop="2"
-                paddingBottom="4"
                 direction="row"
                 rowGap={{ base: 0, sm: 2, md: 4, lg: 6 }}
                 columnGap={4}
                 wrap='wrap'
+                w="88"
             >
                 {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
                     parameterDetails.tag === 'collection' && (
-                        <div key={parameterName + parameterDetails}>
+                        <Box key={parameterName + parameterDetails}>
                             <Text
                                 fontFamily={"heading"}
                                 fontWeight="400"
-                                fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}
-                                w={{ base: "28", sm: "30", md: "32", lg: "34" }}
+                                fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
                             >
                                 {parameterDetails.name}
                             </Text>
                             <Slider
                                 margin={2}
-                                w={{ base: "28", sm: "30", md: "32", lg: "34" }}
+                                w={{ base: "28", sm: "30", md: "32", lg: "40" }}
                                 value={numericParameters[parameterName]}
                                 min={parameterDetails.min}
                                 max={parameterDetails.max}
@@ -67,7 +67,7 @@ export const Lissajous = ({ mesh, numericParameters, setNumericParameters }: Lis
                                     <SliderThumb />
                                 </Tooltip>
                             </Slider>
-                        </div>
+                        </Box>
                     )
                 ))}
             </Flex>

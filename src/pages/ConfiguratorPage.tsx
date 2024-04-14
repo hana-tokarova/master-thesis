@@ -8,8 +8,9 @@ import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
 import { useMeshParameters } from "../components/utils/mesh/ChangeMesh";
+import { Collection } from "../subpages/Collection";
 import { Finalize } from "../subpages/Finalize";
-import { Lissajous } from "../subpages/Lissajous";
+import { Info } from "../subpages/Info";
 import { RenderCanvas } from "../subpages/RenderCanvas";
 import { Visualize } from "../subpages/Visualize";
 
@@ -63,20 +64,11 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     Back to jewelry types
                 </Button>
 
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
-                >
-                    / {props.collection.charAt(0).toUpperCase() + props.collection.slice(1)} {props.jewelry.charAt(0).toUpperCase() + props.jewelry.slice(1)}
-                </Text>
-
-                <Text
-                    maxW="3xl"
-                    fontSize={{ base: "xs", md: "sm", lg: "md" }}
-                >
-                    {mesh.description}
-                </Text>
+                <Info
+                    collection={props.collection}
+                    jewelry={props.jewelry}
+                    mesh={mesh}
+                />
 
                 <Text
                     fontFamily={"heading"}
@@ -105,14 +97,12 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
 
                 </Flex>
 
-                {props.collection === CollectionType.Lissajous && (
-                    <Lissajous
-                        mesh={mesh}
-                        numericParameters={numericParameters}
-                        setNumericParameters={setNumericParameters}
-                    />)}
-
-                {props.collection === CollectionType.Torsion && (<div></div>)}
+                <Collection
+                    collection={props.collection}
+                    mesh={mesh}
+                    numericParameters={numericParameters}
+                    setNumericParameters={setNumericParameters}
+                />
 
                 <Visualize
                     colors={[["ghostwhite", "gray"], ["gold", "goldenrod"], ["greenyellow", "forestgreen"], ["cyan", "deepskyblue"], ["pink", "maroon"]]}
