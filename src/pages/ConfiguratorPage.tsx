@@ -34,14 +34,20 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
             paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingTop={{ base: 0, sm: 4, md: 4, lg: 6 }}
-            paddingBottom={16}
             alignItems={"left"}
             spacing={5}
             w="100vw"
             h="100vh"
+            minH="100vh"
+            wrap="nowrap"
+            position="relative"
         >
-            <Box flex="0.35" >
-                {/* TODO pridat ze ak chce clovek odist tak dostane popup ze are you sure lebo to bude lost */}
+            <Box
+                flex="0.35"
+                paddingRight="20px"
+                w="35vw"
+                h="auto"
+            >
                 <Button
                     leftIcon={<MdKeyboardBackspace />}
                     size={{ base: "xs", md: "sm", lg: "md" }}
@@ -282,13 +288,21 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     fontFamily={"heading"}
                     fontWeight="400"
                     fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
+                    paddingBottom={10}
                 >
                     €5,00
                 </Text>
 
             </Box>
 
-            <Box flex="0.65" overflow="hidden" position="relative" height="70vh" >
+            <Box
+                position="fixed"  // Fixing right component in place
+                right="0"  // Align to the right side of the viewport
+                top="0"  // Start from the top of the viewport
+                h="100vh"  // Full viewport height
+                w="65vw"  // 65% of the viewport width
+                overflow="hidden"
+            >
                 <RenderCanvas
                     mesh={mesh!}
                     color={meshColor}
