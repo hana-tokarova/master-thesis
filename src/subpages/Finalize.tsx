@@ -60,7 +60,6 @@ export const Finalize = ({ mesh, meshRef, exportMeshSTL, exportMeshOBJ, exportMe
                 </Button>
             </Box>
 
-
             <Box
                 paddingTop={14}
             >

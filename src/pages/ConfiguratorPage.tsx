@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react";
 import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
@@ -7,8 +7,9 @@ import { collections, CollectionType, JewelryType } from "../components/collecti
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
-import { changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
+import { useMeshParameters } from "../components/utils/mesh/ChangeMesh";
 import { Finalize } from "../subpages/Finalize";
+import { Lissajous } from "../subpages/Lissajous";
 import { RenderCanvas } from "../subpages/RenderCanvas";
 import { Visualize } from "../subpages/Visualize";
 
@@ -104,68 +105,14 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
 
                 </Flex>
 
-                <Text
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
-                    paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                >
-                    / {props.collection.charAt(0).toUpperCase() + props.collection.slice(1)} properties
-                </Text>
+                {props.collection === CollectionType.Lissajous && (
+                    <Lissajous
+                        mesh={mesh}
+                        numericParameters={numericParameters}
+                        setNumericParameters={setNumericParameters}
+                    />)}
 
-                <Flex
-                    paddingTop="2"
-                    paddingBottom="4"
-                    direction="row"
-                    rowGap={{ base: 0, sm: 2, md: 4, lg: 6 }}
-                    columnGap={4}
-                    wrap='wrap'
-                >
-                    {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
-                        parameterDetails.tag === 'collection' && (
-                            <div key={parameterName + parameterDetails}>
-                                <Text
-                                    fontFamily={"heading"}
-                                    fontWeight="400"
-                                    fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}
-                                    w={{ base: "28", sm: "30", md: "32", lg: "34" }}
-                                >
-                                    {parameterDetails.name}
-                                </Text>
-                                <Slider
-                                    margin={2}
-                                    w={{ base: "28", sm: "30", md: "32", lg: "34" }}
-                                    value={numericParameters[parameterName]}
-                                    min={parameterDetails.min}
-                                    max={parameterDetails.max}
-                                    step={parameterDetails.step}
-                                    onChange={(newValue) => changeNumericParameter(setNumericParameters, parameterName, newValue)}
-                                >
-
-                                    <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
-                                        {parameterDetails.min}
-                                    </SliderMark>
-                                    <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
-                                        {parameterDetails.max}
-                                    </SliderMark>
-                                    <SliderTrack bg='brand.200' shadow='md'>
-                                        <SliderFilledTrack bg='brand.100' />
-                                    </SliderTrack>
-                                    <Tooltip
-                                        bg='brand.100'
-                                        color='white'
-                                        placement='bottom'
-                                        label={numericParameters[parameterName]}
-                                    >
-                                        <SliderThumb />
-                                    </Tooltip>
-
-                                </Slider>
-                            </div>
-
-                        )
-                    ))}
-                </Flex>
+                {props.collection === CollectionType.Torsion && (<div></div>)}
 
                 <Visualize
                     colors={[["ghostwhite", "gray"], ["gold", "goldenrod"], ["greenyellow", "forestgreen"], ["cyan", "deepskyblue"], ["pink", "maroon"]]}
@@ -180,8 +127,7 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}
                 />
-
-            </Box >
+            </Box>
 
             <Box
                 position="fixed"
@@ -199,6 +145,6 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     boolParams={booleanParameters}
                 />
             </Box>
-        </HStack >
+        </HStack>
     );
 };
