@@ -1,6 +1,7 @@
 import { HStack, Image, Spacer } from "@chakra-ui/react";
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { MainMenuButton } from "./MainMenuButton";
 
 export const MainMenu = () => {
@@ -38,11 +39,13 @@ export const MainMenu = () => {
             fontFamily="heading"
             zIndex={10}
         >
-            <Image
-                h={{ base: "7", md: "8", lg: "9" }}
-                src="/images/logo/logo-full.png"
-                alt="NEOTAKU JEWELRY"
-            />
+            <Link to="/">
+                <Image
+                    h={{ base: "7", md: "8", lg: "9" }}
+                    src="/images/logo/logo-full.png"
+                    alt="NEOTAKU JEWELRY"
+                />
+            </Link>
 
             <Spacer />
 

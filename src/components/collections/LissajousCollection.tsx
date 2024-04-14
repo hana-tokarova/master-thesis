@@ -107,7 +107,7 @@ const calculateDetail3D = (sA: number, sB: number, sC: number) => {
 };
 
 export const LissajousRing = ({ parameterA, parameterB, scaleA, scaleB, meshRadius, mesh, meshColor, detail }: LissajousProps) => {
-    const lissajousPoints = makeLissajousCurve3D(detail, scaleA, scaleB, scaleA, 1, 4, 1, parameterA, parameterB, parameterA, Math.PI, Math.PI / 2, true);
+    const lissajousPoints = makeLissajousCurve3D(detail, scaleA, scaleB, scaleA, 1, 1, 1, parameterA, parameterB, parameterA, Math.PI, Math.PI / 2, true);
 
     const geometry = useMemo(() => {
         const ringPath = new THREE.CatmullRomCurve3(lissajousPoints);

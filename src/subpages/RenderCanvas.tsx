@@ -41,8 +41,8 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 const w = window.innerWidth;
                 const h = window.innerHeight;
 
-                const x = w / 25; // Adjust the divisor as needed to scale
-                const y = h / 25; // Adjust the divisor as needed to scale
+                const x = w / 25;
+                const y = h / 25;
                 const z = 0;
 
                 setCameraPosition(new Vector3(x, y, z));
