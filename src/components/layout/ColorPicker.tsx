@@ -1,5 +1,5 @@
 import { Box, HStack, Tooltip } from "@chakra-ui/react";
-import { FaPaintBrush } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { changeMeshColor } from "../utils/mesh/ChangeMesh";
 
 type ColorPair = [string, string];
@@ -19,11 +19,11 @@ export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerPr
                     color='white'
                     placement='bottom'
                     label={buttonColor.charAt(0).toUpperCase() + buttonColor.slice(1)}
+                    key={buttonColor + gradientColor}
                 >
                     <Box
-                        w="8"  // Width of the Box
-                        h="8"  // Height of the Box
-                        key={index}
+                        w="8"
+                        h="8"
                         bg={`linear-gradient(to bottom, ${buttonColor}, ${gradientColor})`}
                         onClick={() => {
                             changeMeshColor(setMeshColor, buttonColor);
@@ -31,12 +31,11 @@ export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerPr
                         borderRadius="full"
                         shadow="md"
                         cursor="pointer"
-                        display="flex"  // Set the display to flex to use flexbox properties
-                        alignItems="center"  // Vertically center the contents of the box
-                        justifyContent="center"  // Horizontally center the contents of the box
-                        border={activeColor === buttonColor ? `2px solid ${gradientColor}` : "none"}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
                     >
-                        {activeColor === buttonColor && <FaPaintBrush color="white" />}
+                        {activeColor === buttonColor && <FaCheck color="white" />}
                     </Box>
                 </Tooltip>
             )}

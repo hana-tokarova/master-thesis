@@ -43,6 +43,7 @@ export type ToggleParameter = {
 
 export type JewelryMesh = {
     description: string;
+    dimensions: () => { x: number; y: number; z: number };
     numericParameters: {
         [key: string]: SliderParameter;
     };
@@ -74,10 +75,17 @@ export const collections: {
                     a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
                     b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
                     scaleA: { name: "Scaling A", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { name: "Scaling B", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: "Scaling B", tag: "general", type: 'slider', value: 10, min: 10, max: 30, step: 1 },
                     r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
                 booleanParameters: {},
+                dimensions: function () {
+                    return {
+                        x: this.numericParameters.scaleA.value,
+                        y: this.numericParameters.scaleA.value,
+                        z: this.numericParameters.scaleB.value
+                    };
+                },
                 render: (numParams, togParams, color, ref) => <LissajousRing
                     mesh={ref}
                     meshColor={color}

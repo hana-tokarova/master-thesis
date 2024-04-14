@@ -31,14 +31,16 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
 
     return (
         <HStack
-            spacing={2}
             paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingTop={{ base: 0, sm: 4, md: 4, lg: 6 }}
             paddingBottom={16}
             alignItems={"left"}
+            spacing={5}
+            w="100vw"
+            h="100vh"
         >
-            <div style={{ width: "900px" }}>
+            <Box flex="0.35" >
                 {/* TODO pridat ze ak chce clovek odist tak dostane popup ze are you sure lebo to bude lost */}
                 <Button
                     leftIcon={<MdKeyboardBackspace />}
@@ -256,15 +258,46 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     <Box textAlign="left" w="full"> Share Design</Box>
                 </Button>
 
-            </div>
+                <Text
+                    fontFamily={"heading"}
+                    fontWeight="500"
+                    fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
+                    paddingTop={2}
+                >
+                    Dimensions:
+                </Text>
+                <Text>
+                    {mesh.dimensions().x} x {mesh.dimensions().y} x {mesh.dimensions().z} mm
+                </Text>
 
-            <RenderCanvas
-                mesh={mesh!}
-                color={meshColor}
-                ref={meshRef}
-                numParams={numericParameters}
-                boolParams={booleanParameters}
-            />
-        </HStack >
+                <Text
+                    fontFamily={"heading"}
+                    fontWeight="300"
+                    fontSize={{ base: "sm", sm: "md", md: "lg", lg: "xl" }}
+                    paddingTop={2}
+                >
+                    Estimated price total
+                </Text>
+                <Text
+                    fontFamily={"heading"}
+                    fontWeight="400"
+                    fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
+                >
+                    €5,00
+                </Text>
+
+            </Box>
+
+            <Box flex="0.65" overflow="hidden" position="relative" height="70vh" >
+                <RenderCanvas
+                    mesh={mesh!}
+                    color={meshColor}
+                    ref={meshRef}
+                    numParams={numericParameters}
+                    boolParams={booleanParameters}
+                />
+            </Box>
+
+        </HStack>
     );
 };

@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { forwardRef, Suspense, useRef } from "react";
+import { forwardRef, useRef } from "react";
 import { JewelryMesh } from "../components/collections/Collections";
 
 type RenderCanvasProps = {
@@ -34,31 +34,28 @@ const FollowCameraLight = () => {
 }
 
 export const RenderCanvas = forwardRef<THREE.Mesh, RenderCanvasProps>(({ mesh, color, numParams, boolParams }, ref) => (
-    <div style={{ width: "100vw" }}>
-        <Suspense fallback={<span>loading...</span>}>
-            <Canvas
-                camera={{ fov: 50, near: 0.1, far: 1000, position: [60, 60, 0] }}
-                frameloop="demand"
-            >
-                <FollowCameraLight />
 
-                <ambientLight
-                    intensity={1}
-                    color="dimgray"
-                />
+    <Canvas
+        camera={{ fov: 50, near: 0.1, far: 1000, position: [40, 40, 0] }}
+        frameloop="demand"
+    >
+        <FollowCameraLight />
 
-                {mesh.render(numParams, boolParams, color, ref)}
+        <ambientLight
+            intensity={1}
+            color="dimgray"
+        />
 
-                <OrbitControls
-                    enablePan={false}
-                    enableRotate={true}
-                    enableZoom={false}
-                    enableDamping={true}
-                    minPolarAngle={Math.PI / 2 - Math.PI / 5}
-                    maxPolarAngle={Math.PI / 2 + Math.PI / 5}
-                />
-            </Canvas>
-        </Suspense>
-    </div>
+        {mesh.render(numParams, boolParams, color, ref)}
+
+        <OrbitControls
+            enablePan={false}
+            enableRotate={true}
+            enableZoom={false}
+            enableDamping={true}
+            minPolarAngle={Math.PI / 2 - Math.PI / 5}
+            maxPolarAngle={Math.PI / 2 + Math.PI / 5}
+        />
+    </Canvas>
 ));
 
