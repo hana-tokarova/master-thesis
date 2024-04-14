@@ -14,14 +14,14 @@ export enum JewelryType {
 
 export type ParameterTag = 'general' | 'collection';
 
-type ParameterInput = "slider" | "toggle" | "dropdown" | "number";
-
-export type DropdownParameter = {
+export type NumberInputParameter = {
     name: string;
     tag: ParameterTag;
-    type: 'dropdown';
-    value: string;
-    options: string[];
+    type: 'number-input';
+    value: number;
+    min: number;
+    max: number;
+    step: number;
 };
 
 export type SliderParameter = {
@@ -44,13 +44,17 @@ export type ToggleParameter = {
 export type JewelryMesh = {
     description: string;
     dimensions: () => { x: number; y: number; z: number };
-    numericParameters: {
+    sliderParameters: {
         [key: string]: SliderParameter;
     };
-    booleanParameters: {
+    switchParameters: {
         [key: string]: ToggleParameter;
     };
-    render: (numericParams: { [key: string]: number },
+    numberInputParameters: {
+        [key: string]: NumberInputParameter;
+    };
+    render: (sliderParams: { [key: string]: number },
+        numberInputParams: { [key: string]: number },
         booleanParams: { [key: string]: boolean },
         color: string,
         ref: React.Ref<THREE.Mesh>) => JSX.Element;
@@ -71,29 +75,31 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 description: 'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
-                numericParameters: {
+                sliderParameters: {
                     a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
                     b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
-                    scaleA: { name: "Scaling A", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { name: "Scaling B", tag: "general", type: 'slider', value: 10, min: 10, max: 30, step: 1 },
-                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
                 },
-                booleanParameters: {},
+                switchParameters: {},
+                numberInputParameters: {
+                    scaleA: { name: "Scaling A", tag: "general", type: 'number-input', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: "Scaling B", tag: "general", type: 'number-input', value: 10, min: 10, max: 30, step: 1 },
+                    r: { name: "Radius", tag: "general", type: 'number-input', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                },
                 dimensions: function () {
                     return {
-                        x: this.numericParameters.scaleA.value,
-                        y: this.numericParameters.scaleA.value,
-                        z: this.numericParameters.scaleB.value
+                        x: this.numberInputParameters.scaleA.value,
+                        y: this.numberInputParameters.scaleA.value,
+                        z: this.numberInputParameters.scaleB.value
                     };
                 },
-                render: (numParams, togParams, color, ref) => <LissajousRing
+                render: (slider, numberInput, _, color, ref) => <LissajousRing
                     mesh={ref}
                     meshColor={color}
-                    meshRadius={numParams.r}
-                    parameterA={numParams.a}
-                    parameterB={numParams.b}
-                    scaleA={numParams.scaleA}
-                    scaleB={numParams.scaleB}
+                    parameterA={slider.a}
+                    parameterB={slider.b}
+                    meshRadius={numberInput.r}
+                    scaleA={numberInput.scaleA}
+                    scaleB={numberInput.scaleB}
                     detail={1000}
                 />
             },

@@ -20,14 +20,19 @@ type ConfiguratorProps = {
     jewelry: JewelryType;
 }
 
-export const ConfiguratorPage = (props: ConfiguratorProps) => {
+export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => {
     const meshRef = React.useRef<THREE.Mesh>(null);
-    const mesh = collections[props.collection]?.meshes[props.jewelry];
+    const mesh = collections[collection]?.meshes[jewelry];
 
-    const { numericParameters, booleanParameters, setNumericParameters, setBooleanParameters, currentCollection, currentJewelryType } = useMeshParameters(props.collection, props.jewelry, mesh);
+    const {
+        sliderParameters, switchParameters, numberInputParameters,
+        setSliderParameters, setSwitchParameters, setNumberInputParameters,
+        currentCollection, currentJewelryType
+    } = useMeshParameters(collection, jewelry, mesh);
+
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
-    if (!mesh || !booleanParameters || !numericParameters || currentCollection !== props.collection || currentJewelryType !== props.jewelry) {
+    if (!mesh || !switchParameters || !sliderParameters || currentCollection !== collection || currentJewelryType !== jewelry) {
         return <></>;
     }
 
@@ -65,11 +70,12 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                 </Button>
 
                 <Info
-                    collection={props.collection}
-                    jewelry={props.jewelry}
+                    collection={collection}
+                    jewelry={jewelry}
                     mesh={mesh}
                 />
 
+                {/* // General */}
                 <Text
                     fontFamily={"heading"}
                     fontWeight="500"
@@ -87,21 +93,27 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     columnGap={4}
                     wrap='wrap'
                 >
-                    {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
+                    {mesh && Object.entries(mesh.numberInputParameters).map(([parameterName, parameterDetails]) => (
                         parameterDetails.tag === 'general' && (
-                            <div key={parameterName + parameterDetails}>
-
-                            </div>
+                            <Box key={parameterName + parameterDetails}>
+                                <Text
+                                    fontFamily={"heading"}
+                                    fontWeight="400"
+                                    fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
+                                >
+                                    {parameterDetails.name}
+                                </Text>
+                            </Box>
                         )
                     ))}
-
                 </Flex>
+                {/* // General */}
 
                 <Collection
-                    collection={props.collection}
+                    collection={collection}
                     mesh={mesh}
-                    numericParameters={numericParameters}
-                    setNumericParameters={setNumericParameters}
+                    sliderParameters={sliderParameters}
+                    setSliderParameters={setSliderParameters}
                 />
 
                 <Visualize
@@ -131,8 +143,9 @@ export const ConfiguratorPage = (props: ConfiguratorProps) => {
                     mesh={mesh!}
                     color={meshColor}
                     ref={meshRef}
-                    numParams={numericParameters}
-                    boolParams={booleanParameters}
+                    sliderParams={sliderParameters}
+                    switchParams={switchParameters}
+                    numberInputParams={numberInputParameters}
                 />
             </Box>
         </HStack>

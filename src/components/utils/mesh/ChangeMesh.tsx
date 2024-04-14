@@ -52,8 +52,9 @@ export const changeBooleanParameter = (
  * @returns The numeric and boolean parameters, and their setter functions.
  */
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType, mesh?: JewelryMesh) => {
-    const [numericParameters, setNumericParameters] = React.useState<{ [key: string]: number }>({});
-    const [booleanParameters, setBooleanParameters] = React.useState<{ [key: string]: boolean }>({});
+    const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
+    const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
+    const [numberInputParameters, setNumberInputParameters] = React.useState<{ [key: string]: number }>({});
 
     const [currentCollection, setCurrentCollection] = React.useState<CollectionType>();
     const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>();
@@ -61,11 +62,13 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
     React.useEffect(() => {
         // TODO opravit pomocou react three pitfalls mutate, use deltas, alebo sa pozriet ci je to ok a pozriet sa aj na kolekciach
         if (!mesh) return;
-        setNumericParameters(() => Object.entries(mesh.numericParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
-        setBooleanParameters(() => Object.entries(mesh.booleanParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+        setSliderParameters(() => Object.entries(mesh.sliderParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+        setSwitchParameters(() => Object.entries(mesh.switchParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+        setNumberInputParameters(() => Object.entries(mesh.numberInputParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+
         setCurrentCollection(collection);
         setCurrentJewelryType(jewelry);
     }, [mesh, collection, jewelry]);
 
-    return { numericParameters, booleanParameters, setNumericParameters, setBooleanParameters, currentCollection, currentJewelryType };
+    return { sliderParameters, switchParameters, numberInputParameters, setSliderParameters, setSwitchParameters, setNumberInputParameters, currentCollection, currentJewelryType };
 };

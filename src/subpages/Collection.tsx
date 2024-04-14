@@ -5,11 +5,11 @@ import { changeNumericParameter } from "../components/utils/mesh/ChangeMesh";
 type LissajousProps = {
     collection: CollectionType,
     mesh: JewelryMesh,
-    numericParameters: { [key: string]: number },
-    setNumericParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number; }>>,
+    sliderParameters: { [key: string]: number },
+    setSliderParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number; }>>,
 }
 
-export const Collection = ({ collection, mesh, numericParameters, setNumericParameters }: LissajousProps) => {
+export const Collection = ({ collection, mesh, sliderParameters, setSliderParameters }: LissajousProps) => {
     return (
         <Box>
             <Text
@@ -29,7 +29,7 @@ export const Collection = ({ collection, mesh, numericParameters, setNumericPara
                 wrap='wrap'
                 w="88"
             >
-                {mesh && Object.entries(mesh.numericParameters).map(([parameterName, parameterDetails]) => (
+                {mesh && Object.entries(mesh.sliderParameters).map(([parameterName, parameterDetails]) => (
                     parameterDetails.tag === 'collection' && (
                         <Box key={parameterName + parameterDetails}>
                             <Text
@@ -42,11 +42,11 @@ export const Collection = ({ collection, mesh, numericParameters, setNumericPara
                             <Slider
                                 margin={2}
                                 w={{ base: "28", sm: "30", md: "32", lg: "40" }}
-                                value={numericParameters[parameterName]}
+                                value={sliderParameters[parameterName]}
                                 min={parameterDetails.min}
                                 max={parameterDetails.max}
                                 step={parameterDetails.step}
-                                onChange={(newValue) => changeNumericParameter(setNumericParameters, parameterName, newValue)}
+                                onChange={(newValue) => changeNumericParameter(setSliderParameters, parameterName, newValue)}
                             >
 
                                 <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
@@ -62,7 +62,7 @@ export const Collection = ({ collection, mesh, numericParameters, setNumericPara
                                     bg='brand.100'
                                     color='white'
                                     placement='bottom'
-                                    label={numericParameters[parameterName]}
+                                    label={sliderParameters[parameterName]}
                                 >
                                     <SliderThumb />
                                 </Tooltip>

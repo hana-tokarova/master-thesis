@@ -8,8 +8,9 @@ import { JewelryMesh } from '../components/collections/Collections';
 type RenderCanvasProps = {
     mesh: JewelryMesh;
     color: string;
-    numParams: { [key: string]: number };
-    boolParams: { [key: string]: boolean };
+    sliderParams: { [key: string]: number };
+    switchParams: { [key: string]: boolean };
+    numberInputParams: { [key: string]: number };
 };
 
 const FollowCameraLight = () => {
@@ -32,7 +33,7 @@ const FollowCameraLight = () => {
 }
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
-    ({ mesh, color, numParams, boolParams }, ref) => {
+    ({ mesh, color, sliderParams: numParams, switchParams: boolParams, numberInputParams: numInputParams }, ref) => {
         const cameraRef = useRef<THREE.PerspectiveCamera>(null);
         const [cameraPosition, setCameraPosition] = useState(new Vector3(0, 0, 0));
 
@@ -77,7 +78,7 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
 
                 <ambientLight intensity={1} color="dimgray" />
 
-                {mesh.render(numParams, boolParams, color, ref)}
+                {mesh.render(numParams, numInputParams, boolParams, color, ref)}
 
                 <OrbitControls
                     enablePan={false}
