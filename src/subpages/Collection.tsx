@@ -64,7 +64,14 @@ export const Collection = ({ collection, mesh, sliderParameters, setSliderParame
                                     placement='bottom'
                                     label={sliderParameters[parameterName]}
                                 >
-                                    <SliderThumb />
+                                    <SliderThumb
+                                        _focus={{
+                                            ring: "1px",
+                                            ringColor: "brand.100",
+                                            ringOffset: "1px",
+                                            ringOffsetColor: "brand.100"
+                                        }}
+                                    />
                                 </Tooltip>
                             </Slider>
                         </Box>

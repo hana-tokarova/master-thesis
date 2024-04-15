@@ -22,6 +22,7 @@ export type NumberInputParameter = {
     min: number;
     max: number;
     step: number;
+    precision: number;
 };
 
 export type SliderParameter = {
@@ -78,18 +79,19 @@ export const collections: {
                 sliderParameters: {
                     a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
                     b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+                    scaleB: { name: "Height", tag: "general", type: 'slider', value: 10, min: 10, max: 30, step: 1 },
+                    r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.50, min: 0.10, max: 1.00, step: 0.10 },
                 },
                 switchParameters: {},
                 numberInputParameters: {
-                    scaleA: { name: "Scaling A", tag: "general", type: 'number-input', value: 20, min: 10, max: 30, step: 1 },
-                    scaleB: { name: "Scaling B", tag: "general", type: 'number-input', value: 10, min: 10, max: 30, step: 1 },
-                    r: { name: "Radius", tag: "general", type: 'number-input', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    scaleA: { name: "Sizing", tag: "general", type: 'number-input', value: 20, min: 10, max: 30, step: 1, precision: 0 },
+
                 },
                 dimensions: function () {
                     return {
                         x: this.numberInputParameters.scaleA.value,
                         y: this.numberInputParameters.scaleA.value,
-                        z: this.numberInputParameters.scaleB.value
+                        z: this.sliderParameters.scaleB.value
                     };
                 },
                 render: (slider, numberInput, _, color, ref) => <LissajousRing
@@ -97,9 +99,9 @@ export const collections: {
                     meshColor={color}
                     parameterA={slider.a}
                     parameterB={slider.b}
-                    meshRadius={numberInput.r}
+                    meshRadius={slider.r}
                     scaleA={numberInput.scaleA}
-                    scaleB={numberInput.scaleB}
+                    scaleB={slider.scaleB}
                     detail={1000}
                 />
             },

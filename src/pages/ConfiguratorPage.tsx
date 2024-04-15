@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Text, Tooltip } from "@chakra-ui/react";
 import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
@@ -7,7 +7,7 @@ import { collections, CollectionType, JewelryType } from "../components/collecti
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
-import { useMeshParameters } from "../components/utils/mesh/ChangeMesh";
+import { changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
 import { Collection } from "../subpages/Collection";
 import { Finalize } from "../subpages/Finalize";
 import { Info } from "../subpages/Info";
@@ -54,6 +54,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                 paddingRight="20px"
                 w="35vw"
                 h="auto"
+                zIndex={1}
             >
                 <Button
                     leftIcon={<MdKeyboardBackspace />}
@@ -66,7 +67,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                     color={"brand.50"}
                     style={{ padding: 0 }}
                 >
-                    Back to jewelry types
+                    Back to collection types
                 </Button>
 
                 <Info
@@ -89,11 +90,19 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                     paddingTop="2"
                     paddingBottom="4"
                     direction="row"
-                    rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
+                    rowGap={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     columnGap={4}
                     wrap='wrap'
                 >
-                    {mesh && Object.entries(mesh.numberInputParameters).map(([parameterName, parameterDetails]) => (
+                    <Text
+                        fontFamily={"heading"}
+                        fontWeight="400"
+                        fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
+                    >
+                        Jewelry type
+                    </Text>
+
+                    {mesh && Object.entries(mesh.sliderParameters).map(([parameterName, parameterDetails]) => (
                         parameterDetails.tag === 'general' && (
                             <Box key={parameterName + parameterDetails}>
                                 <Text
@@ -102,7 +111,47 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                                     fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
                                 >
                                     {parameterDetails.name}
+                                    <Box
+                                        as="span"
+                                        fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                                    >
+                                        {parameterName === "r" || "scaleB" ? " (in mm)" : ""}
+                                    </Box>
                                 </Text>
+                                <Slider
+                                    margin={2}
+                                    w={{ base: "28", sm: "30", md: "32", lg: "40" }}
+                                    value={sliderParameters[parameterName]}
+                                    min={parameterDetails.min}
+                                    max={parameterDetails.max}
+                                    step={parameterDetails.step}
+                                    onChange={(newValue) => changeNumericParameter(setSliderParameters, parameterName, newValue)}
+                                >
+                                    <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
+                                        {parameterDetails.min}
+                                    </SliderMark>
+                                    <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
+                                        {parameterDetails.max}
+                                    </SliderMark>
+                                    <SliderTrack bg='brand.200' shadow='md'>
+                                        <SliderFilledTrack bg='brand.100' />
+                                    </SliderTrack>
+                                    <Tooltip
+                                        bg='brand.100'
+                                        color='white'
+                                        placement='bottom'
+                                        label={sliderParameters[parameterName] + " mm"}
+                                    >
+                                        <SliderThumb
+                                            _focus={{
+                                                ring: "1px",
+                                                ringColor: "brand.100",
+                                                ringOffset: "1px",
+                                                ringOffsetColor: "brand.100"
+                                            }}
+                                        />
+                                    </Tooltip>
+                                </Slider>
                             </Box>
                         )
                     ))}
@@ -129,13 +178,13 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}
                 />
-            </Box>
+            </Box >
 
             <Box
                 position="fixed"
                 right="0"
                 top="0"
-                h="100vh"
+                h="80vh"
                 w="65vw"
                 overflow="hidden"
             >
@@ -148,6 +197,6 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                     numberInputParams={numberInputParameters}
                 />
             </Box>
-        </HStack>
+        </HStack >
     );
 };

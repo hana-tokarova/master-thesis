@@ -36,7 +36,7 @@ export const Visualize = ({ colors, meshColor, setMeshColor }: VisualizeProps) =
                 <Select
                     w={44}
                     fontFamily={"body"}
-                    fontWeight="500"
+                    fontWeight="400"
                     fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
                     bg='brand.200'
                     border="none"

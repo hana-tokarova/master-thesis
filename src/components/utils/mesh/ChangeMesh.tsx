@@ -49,7 +49,7 @@ export const changeBooleanParameter = (
  * @param collection - The current collection type.
  * @param jewelry - The current jewelry type.
  * @param mesh - The mesh object to extract parameters from.
- * @returns The numeric and boolean parameters, and their setter functions.
+ * @returns The slider, switch and number input parameters, and their setter functions.
  */
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType, mesh?: JewelryMesh) => {
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});

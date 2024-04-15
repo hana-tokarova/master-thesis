@@ -43,7 +43,7 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 const h = window.innerHeight;
 
                 // TODO doresit
-                const x = (w / h) * 40;
+                const x = (w / h) * 100;
                 const y = 30;
                 const z = 0;
 
