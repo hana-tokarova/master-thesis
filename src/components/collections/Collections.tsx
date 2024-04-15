@@ -93,7 +93,7 @@ export const collections: {
             [JewelryType.Ring]: {
                 description: 'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
                 sliderParameters: {
-                    a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
                     b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
                     scaleB: { name: "Height", tag: "general", type: 'slider', value: 10, min: 10, max: 30, step: 1 },
                     r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.50, min: 0.10, max: 1.00, step: 0.10 },

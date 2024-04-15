@@ -64,6 +64,19 @@ export const changeBooleanParameter = (
     }));
 };
 
+
+/**
+ * Function to change the jewelry type in the state.
+ * @param setJewelryType - The React state setter function for the jewelry type.
+ * @param jewelryType - The new jewelry type.
+ */
+export const changeJewelryType = (
+    setJewelryType: React.Dispatch<React.SetStateAction<JewelryType>>,
+    jewelryType: JewelryType
+): void => {
+    setJewelryType(jewelryType);
+}
+
 /**
  * Custom hook to manage mesh parameters in the state.
  * @param collection - The current collection type.
@@ -77,10 +90,9 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
     const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize }>({});
 
     const [currentCollection, setCurrentCollection] = React.useState<CollectionType>();
-    const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>();
+    const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>(JewelryType.Ring);
 
     React.useEffect(() => {
-        // TODO opravit pomocou react three pitfalls mutate, use deltas, alebo sa pozriet ci je to ok a pozriet sa aj na kolekciach
         if (!mesh) return;
         setSliderParameters(() => Object.entries(mesh.sliderParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
         setSwitchParameters(() => Object.entries(mesh.switchParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
@@ -90,5 +102,5 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
         setCurrentJewelryType(jewelry);
     }, [mesh, collection, jewelry]);
 
-    return { sliderParameters, switchParameters, dropdownParameters, setSliderParameters, setSwitchParameters, setDropdownParameters, currentCollection, currentJewelryType };
+    return { sliderParameters, switchParameters, dropdownParameters, setSliderParameters, setSwitchParameters, setDropdownParameters, currentCollection, currentJewelryType, setCurrentJewelryType };
 };

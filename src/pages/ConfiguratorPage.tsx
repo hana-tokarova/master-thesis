@@ -7,7 +7,7 @@ import { collections, CollectionType, JewelryType, ringSizes } from "../componen
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
-import { changeDropdownParameter, changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
+import { changeDropdownParameter, changeJewelryType, changeNumericParameter, useMeshParameters } from "../components/utils/mesh/ChangeMesh";
 import { Collection } from "../subpages/Collection";
 import { Finalize } from "../subpages/Finalize";
 import { Info } from "../subpages/Info";
@@ -27,12 +27,12 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
     const {
         sliderParameters, switchParameters, dropdownParameters,
         setSliderParameters, setSwitchParameters, setDropdownParameters,
-        currentCollection, currentJewelryType
+        currentCollection, currentJewelryType, setCurrentJewelryType
     } = useMeshParameters(collection, jewelry, mesh);
 
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
-    if (!mesh || !switchParameters || !sliderParameters || !dropdownParameters || currentCollection !== collection || currentJewelryType !== jewelry) {
+    if (!mesh || !switchParameters || !sliderParameters || !dropdownParameters || currentCollection !== collection) {
         return <></>;
     }
 
@@ -60,7 +60,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                     leftIcon={<MdKeyboardBackspace />}
                     size={{ base: "xs", md: "sm", lg: "md" }}
                     as={Link}
-                    to={"/"}
+                    to={"/create"}
                     fontFamily={"heading"}
                     fontWeight="400"
                     variant="link"
@@ -72,7 +72,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
 
                 <Info
                     collection={collection}
-                    jewelry={jewelry}
+                    jewelry={currentJewelryType}
                     mesh={mesh}
                 />
 
@@ -100,9 +100,38 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                         fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
                     >
                         Jewelry type
+
+                        <Select
+                            w={44}
+                            fontFamily={"body"}
+                            fontWeight="400"
+                            fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                            bg='brand.200'
+                            border="none"
+                            color='brand.50'
+                            size='md'
+                            shadow={'lg'}
+                            paddingTop={2}
+                            paddingBottom={4}
+                            _hover={{ bg: 'brand.400' }}
+                            _focus={{ bg: 'brand.300' }}
+                            onChange={(event) => {
+                                const selectedJewelryType = event.target.value as JewelryType;
+                                changeJewelryType(setCurrentJewelryType, selectedJewelryType);
+                            }}
+                        >
+                            {Object.entries(JewelryType).map(([jewerlyName, jewelryType], index) => (
+                                <option
+                                    key={index}
+                                    value={jewelryType}
+                                >
+                                    {jewerlyName}
+                                </option>
+                            ))}
+                        </Select>
                     </Text>
 
-                    {mesh && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
+                    {mesh && currentJewelryType === (JewelryType.Ring || JewelryType.Bracelet) && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
                         <Box key={parameterName + parameterDetails}>
                             <Text
                                 fontFamily={"heading"}
@@ -146,15 +175,14 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                                     changeDropdownParameter(setDropdownParameters, parameterName, selectedSize!);
                                 }}
                             >
-                                {jewelry === "ring" && ringSizes.map((ringSize) => (
+                                {ringSizes.map((ringSize) => (
                                     <option
                                         key={ringSize.value.toString()}
                                         value={ringSize.value}
                                     >
                                         {"Sz " + ringSize.value.toString()}
                                     </option>
-                                ))
-                                }
+                                ))}
                             </Select>
                         </Box>
                     ))}
