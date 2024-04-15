@@ -3,7 +3,7 @@ import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { JewelryType, ringSizes } from "../components/collections/Collections";
+import { CollectionType, JewelryType, ringSizes } from "../components/collections/Collections";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
@@ -22,7 +22,7 @@ export const ConfiguratorPage = () => {
         mesh, sliderParameters, switchParameters, dropdownParameters,
         setSliderParameters, setSwitchParameters, setDropdownParameters,
         currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType
-    } = useMeshParameters();
+    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Bracelet);
 
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
@@ -107,6 +107,7 @@ export const ConfiguratorPage = () => {
                             shadow={'lg'}
                             paddingTop={2}
                             paddingBottom={4}
+                            value={currentJewelryType}
                             _hover={{ bg: 'brand.400' }}
                             _focus={{ bg: 'brand.300' }}
                             onChange={(event) => {

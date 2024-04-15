@@ -78,14 +78,14 @@ export const changeJewelryType = (
 }
 
 
-export const useMeshParameters = () => {
+export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType) => {
     const [mesh, setMesh] = React.useState<JewelryMesh | undefined>(undefined);
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
     const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
     const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize }>({});
 
-    const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(CollectionType.Lissajous);
-    const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>(JewelryType.Ring);
+    const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(collection);
+    const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
 
     useEffect(() => {
         const newMesh = collections[currentCollection]?.meshes[currentJewelryType];
