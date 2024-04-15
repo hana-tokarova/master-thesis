@@ -19,9 +19,11 @@ export const ConfiguratorPage = () => {
     const meshRef = React.useRef<THREE.Mesh>(null);
 
     const {
-        mesh, sliderParameters, switchParameters, dropdownParameters,
-        setSliderParameters, setSwitchParameters, setDropdownParameters,
-        currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType
+        mesh, sliderParameters, sliderMinParameters, switchParameters, dropdownParameters,
+        setSliderParameters, setSliderMinParameters, setSwitchParameters, setDropdownParameters,
+        currentCollection, setCurrentCollection,
+        currentJewelryType, setCurrentJewelryType,
+        currentMaterial, setCurrentMaterial
     } = useMeshParameters(CollectionType.Lissajous, JewelryType.Bracelet);
 
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
@@ -155,6 +157,7 @@ export const ConfiguratorPage = () => {
                                 fontFamily={"body"}
                                 fontWeight="400"
                                 fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                                value={dropdownParameters[parameterName]?.value}
                                 bg='brand.200'
                                 border="none"
                                 color='brand.50'
@@ -202,13 +205,13 @@ export const ConfiguratorPage = () => {
                                     margin={2}
                                     w={{ base: "28", sm: "30", md: "32", lg: "40" }}
                                     value={sliderParameters[parameterName]}
-                                    min={parameterDetails.min}
+                                    min={sliderMinParameters[parameterName]}
                                     max={parameterDetails.max}
                                     step={parameterDetails.step}
                                     onChange={(newValue) => changeNumericParameter(setSliderParameters, parameterName, newValue)}
                                 >
-                                    <SliderMark value={parameterDetails.min} mt='1' fontSize='sm'>
-                                        {parameterDetails.min}
+                                    <SliderMark value={sliderMinParameters[parameterName]} mt='1' fontSize='sm'>
+                                        {sliderMinParameters[parameterName]}
                                     </SliderMark>
                                     <SliderMark value={parameterDetails.max} mt='1' fontSize='sm'>
                                         {parameterDetails.max}
@@ -246,6 +249,9 @@ export const ConfiguratorPage = () => {
                 />
 
                 <Visualize
+                    setSliderMinParameters={setSliderMinParameters}
+                    currentMaterial={currentMaterial}
+                    setCurrentMaterial={setCurrentMaterial}
                     colors={[["ghostwhite", "gray"], ["gold", "goldenrod"], ["greenyellow", "forestgreen"], ["cyan", "deepskyblue"], ["pink", "maroon"]]}
                     meshColor={meshColor}
                     setMeshColor={setMeshColor}

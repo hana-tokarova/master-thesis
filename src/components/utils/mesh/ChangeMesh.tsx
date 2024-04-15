@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { collections, CollectionType, JewelryMesh, JewelryType, RingSize } from "../../collections/Collections";
+import { collections, CollectionType, JewelryMesh, JewelryType, materials, RingSize } from "../../collections/Collections";
 
 /**
  * Function to change the color of a mesh.
@@ -64,7 +64,6 @@ export const changeBooleanParameter = (
     }));
 };
 
-
 /**
  * Function to change the jewelry type in the state.
  * @param setJewelryType - The React state setter function for the jewelry type.
@@ -77,15 +76,31 @@ export const changeJewelryType = (
     setJewelryType(jewelryType);
 }
 
+export const changeCurrentMaterial = (
+    setCurrentMaterial: React.Dispatch<React.SetStateAction<{
+        name: string;
+        thicknessMinimum: number;
+        additionalCost: number;
+    }>>,
+    currentMaterial: {
+        name: string;
+        thicknessMinimum: number;
+        additionalCost: number;
+    }
+): void => {
+    setCurrentMaterial(currentMaterial);
+}
 
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType) => {
     const [mesh, setMesh] = React.useState<JewelryMesh | undefined>(undefined);
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
+    const [sliderMinParameters, setSliderMinParameters] = React.useState<{ [key: string]: number }>({});
     const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
     const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize }>({});
 
     const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(collection);
     const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
+    const [currentMaterial, setCurrentMaterial] = React.useState(materials.PLA);
 
     useEffect(() => {
         const newMesh = collections[currentCollection]?.meshes[currentJewelryType];
@@ -93,11 +108,12 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
             setMesh(newMesh);
 
             setSliderParameters(Object.entries(newMesh.sliderParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.value }), {}));
+            setSliderMinParameters(Object.entries(newMesh.sliderParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.min }), {}));
             setSwitchParameters(Object.entries(newMesh.switchParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.value }), {}));
             setDropdownParameters(Object.entries(newMesh.dropdownParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.size }), {}));
         }
 
     }, [currentCollection, currentJewelryType]);
 
-    return { mesh, sliderParameters, switchParameters, dropdownParameters, setSliderParameters, setSwitchParameters, setDropdownParameters, currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType };
+    return { mesh, sliderParameters, sliderMinParameters, switchParameters, dropdownParameters, setSliderParameters, setSliderMinParameters, setSwitchParameters, setDropdownParameters, currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType, currentMaterial, setCurrentMaterial };
 };

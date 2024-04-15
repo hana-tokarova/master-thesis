@@ -58,6 +58,26 @@ export type ToggleParameter = {
     value: boolean;
 };
 
+type MaterialType = 'Silver' | 'Resin' | 'PLA';
+
+export const materials = {
+    Metal: {
+        name: "Metal",
+        thicknessMinimum: 0.30,  // Silver can have a thinner wire
+        additionalCost: 20
+    },
+    Resin: {
+        name: "Resin",
+        thicknessMinimum: 0.40,  // Resin can have a thinner wire
+        additionalCost: 10
+    },
+    PLA: {
+        name: "PLA",
+        thicknessMinimum: 0.50,  // PLA needs thicker wire
+        additionalCost: 5
+    }
+};
+
 export type JewelryMesh = {
     description: string;
     dimensions: () => { x: number; y: number; z: number };
@@ -96,7 +116,7 @@ export const collections: {
                     a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
                     b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
                     scaleB: { name: "Height", tag: "general", type: 'slider', value: 10, min: 10, max: 30, step: 1 },
-                    r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.50, min: 0.10, max: 1.00, step: 0.10 },
+                    r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.50, min: materials.PLA.thicknessMinimum, max: 1.00, step: 0.10 },
                 },
                 switchParameters: {},
                 dropdownParameters: {
@@ -126,11 +146,11 @@ export const collections: {
                     a: { name: "Horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
                     b: { name: "Vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
                     scaleB: { name: "Scaling B", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: materials.PLA.thicknessMinimum, max: 1, step: 0.01 },
                 },
                 switchParameters: {},
                 dropdownParameters: {
-                    scaleA: { name: "lol", tag: "general", type: 'dropdown', size: ringSizes[0] },
+                    scaleA: { name: "lol", tag: "general", type: 'dropdown', size: ringSizes[4] },
                 },
                 dimensions: function () {
                     return {

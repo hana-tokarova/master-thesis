@@ -9,6 +9,7 @@ export const Footer = () => {
             height="5px"
             bgColor="brand.50"
             alignItems={'end'}
+            zIndex={100}
         />
     );
 }

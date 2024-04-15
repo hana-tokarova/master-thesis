@@ -1,13 +1,26 @@
 import { Box, HStack, Select, Switch, Text } from '@chakra-ui/react';
+import { materials } from '../components/collections/Collections';
 import { ColorPair, ColorPicker } from '../components/layout/ColorPicker';
+import { changeCurrentMaterial, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
 
 type VisualizeProps = {
+    setSliderMinParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>,
+    currentMaterial: {
+        name: string;
+        thicknessMinimum: number;
+        additionalCost: number;
+    }
+    setCurrentMaterial: React.Dispatch<React.SetStateAction<{
+        name: string;
+        thicknessMinimum: number;
+        additionalCost: number;
+    }>>
     colors: ColorPair[];
     meshColor: string;
     setMeshColor: (color: string) => void;
 }
 
-export const Visualize = ({ colors, meshColor, setMeshColor }: VisualizeProps) => {
+export const Visualize = ({ setSliderMinParameters, currentMaterial, setCurrentMaterial, colors, meshColor, setMeshColor }: VisualizeProps) => {
     return (
         <Box>
             <Text
@@ -40,6 +53,7 @@ export const Visualize = ({ colors, meshColor, setMeshColor }: VisualizeProps) =
                     fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
                     bg='brand.200'
                     border="none"
+                    value={currentMaterial.name}
                     color='brand.50'
                     size='md'
                     shadow={'lg'}
@@ -47,10 +61,16 @@ export const Visualize = ({ colors, meshColor, setMeshColor }: VisualizeProps) =
                     paddingBottom={4}
                     _hover={{ bg: 'brand.400' }}
                     _focus={{ bg: 'brand.300' }}
+                    onChange={(event) => {
+                        const newValue = event.target.value;
+                        changeCurrentMaterial(setCurrentMaterial, materials[newValue as keyof typeof materials]);
+                        changeNumericParameter(setSliderMinParameters, "r", materials[newValue as keyof typeof materials].thicknessMinimum);
+                    }}
                 >
-                    <option value='pla' >PLA Filament</option>
-                    <option value='metal' >Metal</option>
-                    <option value='resin'>Resin</option>
+                    {Object.entries(materials).map(([key, val]) => (
+                        <option key={key} value={val.name}>{val.name}</option>
+                    ))}
+
                 </Select>
 
                 <ColorPicker
@@ -58,7 +78,6 @@ export const Visualize = ({ colors, meshColor, setMeshColor }: VisualizeProps) =
                     colors={colors}
                     setMeshColor={setMeshColor}
                 />
-
             </HStack>
 
             <Text
@@ -88,6 +107,5 @@ export const Visualize = ({ colors, meshColor, setMeshColor }: VisualizeProps) =
                 }}
             />
         </Box>
-
     );
 }
