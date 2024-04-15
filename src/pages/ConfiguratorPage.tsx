@@ -24,7 +24,7 @@ export const ConfiguratorPage = () => {
         currentCollection, setCurrentCollection,
         currentJewelryType, setCurrentJewelryType,
         currentMaterial, setCurrentMaterial
-    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Bracelet);
+    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
 
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
