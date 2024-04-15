@@ -38,10 +38,13 @@ export const changeDropdownParameter = (
     parameterName: string,
     newValue: RingSize
 ): void => {
-    setDropdownParameters(prevParams => ({
-        ...prevParams,
-        [parameterName]: newValue,
-    }));
+    setDropdownParameters(prevParams => {
+        const updatedParams = {
+            ...prevParams,
+            [parameterName]: { ...newValue }
+        };
+        return updatedParams;
+    });
 }
 
 /**

@@ -43,7 +43,7 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 const h = window.innerHeight;
 
                 // TODO doresit, zeby to nejak upravovat podla scale?
-                const x = (w / h) * 200;
+                const x = (w / h) * 100;
                 const y = 30;
                 const z = 0;
 

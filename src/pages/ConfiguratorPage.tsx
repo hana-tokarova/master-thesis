@@ -121,10 +121,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                                         as="span"
                                         fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
                                     >
-                                        <>
-                                            {console.log(parameterDetails.size.value, parameterDetails.size.diameter)}
-                                        </>
-                                        {" " + parameterDetails.size.diameter + " mm)"}
+                                        {" " + dropdownParameters[parameterName]?.diameter + " mm)"}
                                     </Box>
                                 </Box>
 
@@ -143,12 +140,16 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                                 paddingBottom={4}
                                 _hover={{ bg: 'brand.400' }}
                                 _focus={{ bg: 'brand.300' }}
+                                onChange={(event) => {
+                                    const parsedValue = parseInt(event.target.value);
+                                    const selectedSize = ringSizes.find(size => size.value === parsedValue);
+                                    changeDropdownParameter(setDropdownParameters, parameterName, selectedSize!);
+                                }}
                             >
                                 {jewelry === "ring" && ringSizes.map((ringSize) => (
                                     <option
                                         key={ringSize.value.toString()}
-                                        value={ringSize.value.toString()}
-                                        onClick={() => changeDropdownParameter(setDropdownParameters, parameterName, ringSize)}
+                                        value={ringSize.value}
                                     >
                                         {"Sz " + ringSize.value.toString()}
                                     </option>
