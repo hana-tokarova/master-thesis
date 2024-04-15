@@ -77,13 +77,7 @@ export const changeJewelryType = (
     setJewelryType(jewelryType);
 }
 
-/**
- * Custom hook to manage mesh parameters in the state.
- * @param collection - The current collection type.
- * @param jewelry - The current jewelry type.
- * @param mesh - The mesh object to extract parameters from.
- * @returns The slider, switch and number input parameters, and their setter functions.
- */
+
 export const useMeshParameters = () => {
     const [mesh, setMesh] = React.useState<JewelryMesh | undefined>(undefined);
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
@@ -105,5 +99,5 @@ export const useMeshParameters = () => {
 
     }, [currentCollection, currentJewelryType]);
 
-    return { mesh, sliderParameters, switchParameters, dropdownParameters, setSliderParameters, setSwitchParameters, setDropdownParameters, currentCollection, currentJewelryType, setCurrentJewelryType };
+    return { mesh, sliderParameters, switchParameters, dropdownParameters, setSliderParameters, setSwitchParameters, setDropdownParameters, currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType };
 };

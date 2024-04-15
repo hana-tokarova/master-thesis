@@ -21,7 +21,7 @@ export const ConfiguratorPage = () => {
     const {
         mesh, sliderParameters, switchParameters, dropdownParameters,
         setSliderParameters, setSwitchParameters, setDropdownParameters,
-        currentCollection, currentJewelryType, setCurrentJewelryType
+        currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType
     } = useMeshParameters();
 
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
@@ -125,7 +125,7 @@ export const ConfiguratorPage = () => {
                         </Select>
                     </Text>
 
-                    {mesh && currentJewelryType === (JewelryType.Ring || JewelryType.Bracelet) && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
+                    {mesh && ((currentJewelryType === JewelryType.Ring) || (currentJewelryType === JewelryType.Bracelet)) && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
                         <Box key={parameterName + parameterDetails}>
                             <Text
                                 fontFamily={"heading"}
