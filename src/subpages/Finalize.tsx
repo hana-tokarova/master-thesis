@@ -76,7 +76,10 @@ export const Finalize = ({ mesh, meshRef, sliderParameters, dropdownParameters, 
                 <Text
                     fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
                 >
-                    {dropdownParameters["scaleA"].diameter} x {dropdownParameters["scaleA"].diameter} x {sliderParameters["scaleB"]} mm
+                    {dropdownParameters && Object.keys(dropdownParameters).length === 0
+                        ? `${sliderParameters["scaleA"]} x ${sliderParameters["scaleB"]} x ${sliderParameters["scaleC"]} mm`
+                        : `${dropdownParameters["scaleA"].diameter} x ${dropdownParameters["scaleA"].diameter} x ${sliderParameters["scaleB"]} mm`
+                    }
                 </Text>
 
                 <Text

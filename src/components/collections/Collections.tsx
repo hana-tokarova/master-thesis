@@ -1,4 +1,4 @@
-import { LissajousBracelet, LissajousRing } from "./LissajousCollection";
+import { LissajousBracelet, LissajousEarring, LissajousRing } from "./LissajousCollection";
 
 export enum CollectionType {
     Lissajous = 'lissaje',
@@ -182,31 +182,39 @@ export const collections: {
                     detail={1000}
                 />
             },
-            // [JewelryType.Earring]: {
-            //     description: 'Lissajous curve earring',
-            //     numericParameters: {
-            //         a: { name: "Vertical lines", type: 'slider', value: 4, min: 2, max: 8, step: 2 },
-            //         b: { name: "Twisting ", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
-            //         c: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-            //         scaleA: { name: "Scale A", type: 'slider', value: 15, min: 5, max: 10, step: 1 },
-            //         scaleB: { name: "Scale B", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-            //         scaleC: { name: "Scale C", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-            //         r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
-            //     },
-            //     booleanParameters: {},
-            //     render: (numParams, togParams, color, ref) => <LissajousEarring
-            //         mesh={ref}
-            //         meshColor={color}
-            //         meshRadius={numParams.r}
-            //         parameterA={numParams.a}
-            //         parameterB={numParams.b}
-            //         parameterC={numParams.c}
-            //         scaleA={numParams.scaleA}
-            //         scaleB={numParams.scaleB}
-            //         scaleC={numParams.scaleC}
-            //         detail={1000}
-            //     />
-            // },
+            [JewelryType.Earring]: {
+                description: 'Lissajous curve earring',
+                sliderParameters: {
+                    a: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 4, min: 2, max: 8, step: 2 },
+                    b: { name: "Twisting ", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    c: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    scaleA: { name: "Scale A", tag: "general", type: 'slider', value: 15, min: 5, max: 20, step: 1 },
+                    scaleB: { name: "Scale B", tag: "general", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    scaleC: { name: "Scale C", tag: "general", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: materials.PLA.thicknessMinimum, max: 1, step: 0.01 },
+                },
+                switchParameters: {},
+                dropdownParameters: {},
+                dimensions: function () {
+                    return {
+                        x: this.sliderParameters.scaleA.value,
+                        y: this.sliderParameters.scaleB.value,
+                        z: this.sliderParameters.scaleC.value
+                    };
+                },
+                render: (slider, _, __, color, ref) => <LissajousEarring
+                    mesh={ref}
+                    meshColor={color}
+                    meshRadius={slider.r}
+                    parameterA={slider.a}
+                    parameterB={slider.b}
+                    parameterC={slider.c}
+                    scaleA={slider.scaleA}
+                    scaleB={slider.scaleB}
+                    scaleC={slider.scaleC}
+                    detail={1000}
+                />
+            },
             // [JewelryType.Pendant]: {
             //     description: 'Lissajous curve pendant',
             //     numericParameters: {
