@@ -14,15 +14,31 @@ export enum JewelryType {
 
 export type ParameterTag = 'general' | 'collection';
 
-export type NumberInputParameter = {
+export type RingSize = {
+    value: number;
+    diameter: number;
+}
+
+export const ringSizes: RingSize[] = [
+    { value: 43, diameter: 13.6 },
+    { value: 44, diameter: 13.9 },
+    { value: 45, diameter: 14.3 },
+    { value: 46, diameter: 14.6 },
+    { value: 47, diameter: 14.9 },
+    { value: 48, diameter: 15.3 },
+    { value: 49, diameter: 15.6 },
+    { value: 50, diameter: 15.9 },
+    { value: 51, diameter: 16.2 },
+    { value: 52, diameter: 16.6 },
+    { value: 53, diameter: 16.9 },
+    { value: 54, diameter: 17.2 },
+]
+
+export type DropdownParameter = {
     name: string;
     tag: ParameterTag;
-    type: 'number-input';
-    value: number;
-    min: number;
-    max: number;
-    step: number;
-    precision: number;
+    type: 'dropdown';
+    size: RingSize;
 };
 
 export type SliderParameter = {
@@ -51,11 +67,11 @@ export type JewelryMesh = {
     switchParameters: {
         [key: string]: ToggleParameter;
     };
-    numberInputParameters: {
-        [key: string]: NumberInputParameter;
+    dropdownParameters: {
+        [key: string]: DropdownParameter;
     };
     render: (sliderParams: { [key: string]: number },
-        numberInputParams: { [key: string]: number },
+        dropdownParams: { [key: string]: RingSize },
         booleanParams: { [key: string]: boolean },
         color: string,
         ref: React.Ref<THREE.Mesh>) => JSX.Element;
@@ -83,24 +99,24 @@ export const collections: {
                     r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.50, min: 0.10, max: 1.00, step: 0.10 },
                 },
                 switchParameters: {},
-                numberInputParameters: {
-                    scaleA: { name: "Sizing", tag: "general", type: 'number-input', value: 20, min: 10, max: 30, step: 1, precision: 0 },
+                dropdownParameters: {
+                    scaleA: { name: "Sizing", tag: "general", type: 'dropdown', size: ringSizes[0] },
 
                 },
                 dimensions: function () {
                     return {
-                        x: this.numberInputParameters.scaleA.value,
-                        y: this.numberInputParameters.scaleA.value,
+                        x: this.dropdownParameters.scaleA.size.diameter,
+                        y: this.dropdownParameters.scaleA.size.diameter,
                         z: this.sliderParameters.scaleB.value
                     };
                 },
-                render: (slider, numberInput, _, color, ref) => <LissajousRing
+                render: (slider, dropdown, _, color, ref) => <LissajousRing
                     mesh={ref}
                     meshColor={color}
                     parameterA={slider.a}
                     parameterB={slider.b}
                     meshRadius={slider.r}
-                    scaleA={numberInput.scaleA}
+                    scaleA={dropdown.scaleA.diameter}
                     scaleB={slider.scaleB}
                     detail={1000}
                 />

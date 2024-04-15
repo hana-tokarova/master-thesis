@@ -1,5 +1,5 @@
 import React from "react";
-import { CollectionType, JewelryMesh, JewelryType } from "../../collections/Collections";
+import { CollectionType, JewelryMesh, JewelryType, RingSize } from "../../collections/Collections";
 
 /**
  * Function to change the color of a mesh.
@@ -28,6 +28,23 @@ export const changeNumericParameter = (
 };
 
 /**
+ * Function to update a dropdown parameter's value in the state.
+ * @param setDropdownParameters - The React state setter function for dropdown parameters.
+ * @param parameterName - The name of the parameter to update.
+ * @param newValue - The new value for the parameter.
+ */
+export const changeDropdownParameter = (
+    setDropdownParameters: React.Dispatch<React.SetStateAction<{ [key: string]: RingSize }>>,
+    parameterName: string,
+    newValue: RingSize
+): void => {
+    setDropdownParameters(prevParams => ({
+        ...prevParams,
+        [parameterName]: newValue,
+    }));
+}
+
+/**
  * Function to update a boolean parameter's value in the state.
  * @param setBooleanParameters - The React state setter function for boolean parameters.
  * @param parameterName - The name of the parameter to update.
@@ -54,7 +71,7 @@ export const changeBooleanParameter = (
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType, mesh?: JewelryMesh) => {
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
     const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
-    const [numberInputParameters, setNumberInputParameters] = React.useState<{ [key: string]: number }>({});
+    const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize }>({});
 
     const [currentCollection, setCurrentCollection] = React.useState<CollectionType>();
     const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>();
@@ -64,11 +81,11 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
         if (!mesh) return;
         setSliderParameters(() => Object.entries(mesh.sliderParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
         setSwitchParameters(() => Object.entries(mesh.switchParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
-        setNumberInputParameters(() => Object.entries(mesh.numberInputParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].value }), {}));
+        setDropdownParameters(() => Object.entries(mesh.dropdownParameters).reduce((prev, curr) => ({ ...prev, [curr[0]]: curr[1].size }), {}));
 
         setCurrentCollection(collection);
         setCurrentJewelryType(jewelry);
     }, [mesh, collection, jewelry]);
 
-    return { sliderParameters, switchParameters, numberInputParameters, setSliderParameters, setSwitchParameters, setNumberInputParameters, currentCollection, currentJewelryType };
+    return { sliderParameters, switchParameters, dropdownParameters, setSliderParameters, setSwitchParameters, setDropdownParameters, currentCollection, currentJewelryType };
 };

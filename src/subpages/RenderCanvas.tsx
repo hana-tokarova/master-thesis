@@ -3,14 +3,14 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import { Vector3 } from 'three';
-import { JewelryMesh } from '../components/collections/Collections';
+import { JewelryMesh, RingSize } from '../components/collections/Collections';
 
 type RenderCanvasProps = {
     mesh: JewelryMesh;
     color: string;
     sliderParams: { [key: string]: number };
     switchParams: { [key: string]: boolean };
-    numberInputParams: { [key: string]: number };
+    dropdownParams: { [key: string]: RingSize };
 };
 
 const FollowCameraLight = () => {
@@ -33,7 +33,7 @@ const FollowCameraLight = () => {
 }
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
-    ({ mesh, color, sliderParams: numParams, switchParams: boolParams, numberInputParams: numInputParams }, ref) => {
+    ({ mesh, color, sliderParams, switchParams, dropdownParams }, ref) => {
         const cameraRef = useRef<THREE.PerspectiveCamera>(null);
         const [cameraPosition, setCameraPosition] = useState(new Vector3(0, 0, 0));
 
@@ -42,8 +42,8 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 const w = window.innerWidth;
                 const h = window.innerHeight;
 
-                // TODO doresit
-                const x = (w / h) * 100;
+                // TODO doresit, zeby to nejak upravovat podla scale?
+                const x = (w / h) * 200;
                 const y = 30;
                 const z = 0;
 
@@ -78,7 +78,7 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
 
                 <ambientLight intensity={1} color="dimgray" />
 
-                {mesh.render(numParams, numInputParams, boolParams, color, ref)}
+                {mesh.render(sliderParams, dropdownParams, switchParams, color, ref)}
 
                 <OrbitControls
                     enablePan={false}
