@@ -1,4 +1,4 @@
-import { LissajousBracelet, LissajousEarring, LissajousRing } from "./LissajousCollection";
+import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from "./LissajousCollection";
 
 export enum CollectionType {
     Lissajous = 'lissaje',
@@ -92,7 +92,6 @@ export const materials = {
 
 export type JewelryMesh = {
     description: string;
-    dimensions: () => { x: number; y: number; z: number };
     sliderParameters: {
         [key: string]: SliderParameter;
     };
@@ -134,13 +133,6 @@ export const collections: {
                 dropdownParameters: {
                     scaleA: { name: "Sizing", tag: "general", type: 'dropdown', size: ringSizes[0] },
                 },
-                dimensions: function () {
-                    return {
-                        x: this.dropdownParameters.scaleA.size.diameter,
-                        y: this.dropdownParameters.scaleA.size.diameter,
-                        z: this.sliderParameters.scaleB.value
-                    };
-                },
                 render: (slider, dropdown, _, color, ref) => <LissajousRing
                     mesh={ref}
                     meshColor={color}
@@ -164,13 +156,6 @@ export const collections: {
                 dropdownParameters: {
                     scaleA: { name: "Sizing", tag: "general", type: 'dropdown', size: braceletSizes[0] },
                 },
-                dimensions: function () {
-                    return {
-                        x: this.dropdownParameters.scaleA.size.diameter,
-                        y: this.dropdownParameters.scaleA.size.diameter,
-                        z: this.sliderParameters.scaleB.value
-                    };
-                },
                 render: (slider, dropdown, _, color, ref) => <LissajousBracelet
                     mesh={ref}
                     meshColor={color}
@@ -186,22 +171,15 @@ export const collections: {
                 description: 'Lissajous curve earring',
                 sliderParameters: {
                     a: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 4, min: 2, max: 8, step: 2 },
-                    b: { name: "Twisting ", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
                     c: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-                    scaleA: { name: "Scale A", tag: "general", type: 'slider', value: 15, min: 5, max: 20, step: 1 },
-                    scaleB: { name: "Scale B", tag: "general", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-                    scaleC: { name: "Scale C", tag: "general", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: materials.PLA.thicknessMinimum, max: 1, step: 0.01 },
+                    b: { name: "Twisting ", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    scaleA: { name: "Width", tag: "general", type: 'slider', value: 15, min: 5, max: 20, step: 1 },
+                    scaleB: { name: "Depth", tag: "general", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    scaleC: { name: "Height", tag: "general", type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.5, min: materials.PLA.thicknessMinimum, max: 1, step: 0.01 },
                 },
                 switchParameters: {},
                 dropdownParameters: {},
-                dimensions: function () {
-                    return {
-                        x: this.sliderParameters.scaleA.value,
-                        y: this.sliderParameters.scaleB.value,
-                        z: this.sliderParameters.scaleC.value
-                    };
-                },
                 render: (slider, _, __, color, ref) => <LissajousEarring
                     mesh={ref}
                     meshColor={color}
@@ -215,27 +193,28 @@ export const collections: {
                     detail={1000}
                 />
             },
-            // [JewelryType.Pendant]: {
-            //     description: 'Lissajous curve pendant',
-            //     numericParameters: {
-            //         a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-            //         b: { name: "Vertical lines", type: 'slider', value: 3, min: 1, max: 5, step: 1 },
-            //         scaleA: { name: "Scale A", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-            //         scaleB: { name: "Scale B", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-            //         r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
-            //     },
-            //     booleanParameters: {},
-            //     render: (numParams, togParams, color, ref) => <LissajousPendant
-            //         mesh={ref}
-            //         meshColor={color}
-            //         meshRadius={numParams.r}
-            //         parameterA={numParams.a}
-            //         parameterB={numParams.b}
-            //         scaleA={numParams.scaleA}
-            //         scaleB={numParams.scaleB}
-            //         detail={1000}
-            //     />
-            // },
+            [JewelryType.Pendant]: {
+                description: 'Lissajous curve pendant',
+                sliderParameters: {
+                    a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
+                    b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    scaleA: { name: "Width", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: "Height", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                },
+                switchParameters: {},
+                dropdownParameters: {},
+                render: (slider, _, __, color, ref) => <LissajousPendant
+                    mesh={ref}
+                    meshColor={color}
+                    meshRadius={slider.r}
+                    parameterA={slider.b}
+                    parameterB={slider.a}
+                    scaleA={slider.scaleB}
+                    scaleB={slider.scaleA}
+                    detail={1000}
+                />
+            },
         }
     },
 

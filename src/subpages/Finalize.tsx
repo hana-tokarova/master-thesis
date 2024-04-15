@@ -15,7 +15,7 @@ type FinalizeProps = {
 
 export const Finalize = ({ mesh, meshRef, sliderParameters, dropdownParameters, exportMeshSTL, exportMeshOBJ, exportMeshGlTF }: FinalizeProps) => {
     return (
-        <HStack spacing={5} >
+        <HStack spacing={5} alignItems="flex-start" >
             <Box paddingBottom={10}>
                 <Text
                     fontFamily={"heading"}
@@ -69,18 +69,29 @@ export const Finalize = ({ mesh, meshRef, sliderParameters, dropdownParameters, 
                     fontFamily={"heading"}
                     fontWeight="500"
                     fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
-                    paddingTop={2}
                 >
                     Dimensions
+                    <Text
+                        fontFamily={"heading"}
+                        fontWeight="400"
+                        fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                    >
+                        (base mesh only)
+                    </Text>
                 </Text>
                 <Text
                     fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
                 >
                     {dropdownParameters && Object.keys(dropdownParameters).length === 0
-                        ? `${sliderParameters["scaleA"]} x ${sliderParameters["scaleB"]} x ${sliderParameters["scaleC"]} mm`
+                        ? (
+                            sliderParameters["scaleC"] !== undefined
+                                ? `${sliderParameters["scaleA"]} x ${sliderParameters["scaleB"]} x ${sliderParameters["scaleC"]} mm`
+                                : `${sliderParameters["scaleA"]} x ${sliderParameters["scaleB"]} x ${sliderParameters["r"]} mm`
+                        )
                         : `${dropdownParameters["scaleA"].diameter} x ${dropdownParameters["scaleA"].diameter} x ${sliderParameters["scaleB"]} mm`
                     }
                 </Text>
+
 
                 <Text
                     fontFamily={"heading"}
