@@ -2,7 +2,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { CollectionType, JewelryType } from "./components/collections/Collections";
 import { WebsiteLayout } from "./components/layout/WebsiteLayout";
 import { AboutPage } from "./pages/AboutPage";
 import { ConfiguratorPage } from "./pages/ConfiguratorPage";
@@ -38,10 +37,7 @@ const router = createBrowserRouter([
             {
                 path: "configurator",
                 element: (
-                    <ConfiguratorPage
-                        collection={CollectionType.Lissajous}
-                        jewelry={JewelryType.Ring}
-                    />
+                    <ConfiguratorPage />
                 ),
             },
             {

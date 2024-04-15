@@ -3,7 +3,7 @@ import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { collections, CollectionType, JewelryType, ringSizes } from "../components/collections/Collections";
+import { JewelryType, ringSizes } from "../components/collections/Collections";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
@@ -15,24 +15,18 @@ import { RenderCanvas } from "../subpages/RenderCanvas";
 import { Visualize } from "../subpages/Visualize";
 
 
-type ConfiguratorProps = {
-    collection: CollectionType;
-    jewelry: JewelryType;
-}
-
-export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => {
+export const ConfiguratorPage = () => {
     const meshRef = React.useRef<THREE.Mesh>(null);
-    const mesh = collections[collection]?.meshes[jewelry];
 
     const {
-        sliderParameters, switchParameters, dropdownParameters,
+        mesh, sliderParameters, switchParameters, dropdownParameters,
         setSliderParameters, setSwitchParameters, setDropdownParameters,
         currentCollection, currentJewelryType, setCurrentJewelryType
-    } = useMeshParameters(collection, jewelry, mesh);
+    } = useMeshParameters();
 
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
 
-    if (!mesh || !switchParameters || !sliderParameters || !dropdownParameters || currentCollection !== collection) {
+    if (!mesh || !switchParameters || !sliderParameters || !dropdownParameters) {
         return <></>;
     }
 
@@ -71,7 +65,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                 </Button>
 
                 <Info
-                    collection={collection}
+                    collection={currentCollection}
                     jewelry={currentJewelryType}
                     mesh={mesh}
                 />
@@ -244,7 +238,7 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                 {/* // General */}
 
                 <Collection
-                    collection={collection}
+                    collection={currentCollection}
                     mesh={mesh}
                     sliderParameters={sliderParameters}
                     setSliderParameters={setSliderParameters}

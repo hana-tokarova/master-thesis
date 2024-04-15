@@ -1,4 +1,4 @@
-import { LissajousRing } from "./LissajousCollection";
+import { LissajousBracelet, LissajousRing } from "./LissajousCollection";
 
 export enum CollectionType {
     Lissajous = 'lissaje',
@@ -120,27 +120,36 @@ export const collections: {
                     detail={1000}
                 />
             },
-            // [JewelryType.Bracelet]: {
-            //     description: 'Lissajous curve bracelet',
-            //     numericParameters: {
-            //         a: { name: "Horizontal lines", type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-            //         b: { name: "Vertical lines", type: 'slider', value: 5, min: 1, max: 10, step: 1 },
-            //         scaleA: { name: "Scaling A", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-            //         scaleB: { name: "Scaling B", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-            //         r: { name: "Radius", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
-            //     },
-            //     booleanParameters: {},
-            //     render: (numParams, togParams, color, ref) => <LissajousBracelet
-            //         mesh={ref}
-            //         meshColor={color}
-            //         meshRadius={numParams.r}
-            //         parameterA={numParams.a}
-            //         parameterB={numParams.b}
-            //         scaleA={numParams.scaleA}
-            //         scaleB={numParams.scaleB}
-            //         detail={1000}
-            //     />
-            // },
+            [JewelryType.Bracelet]: {
+                description: 'Lissajous curve bracelet',
+                sliderParameters: {
+                    a: { name: "Horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    b: { name: "Vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+                    scaleB: { name: "Scaling B", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: 0.1, max: 1, step: 0.01 },
+                },
+                switchParameters: {},
+                dropdownParameters: {
+                    scaleA: { name: "lol", tag: "general", type: 'dropdown', size: ringSizes[0] },
+                },
+                dimensions: function () {
+                    return {
+                        x: this.dropdownParameters.scaleA.size.diameter,
+                        y: this.dropdownParameters.scaleA.size.diameter,
+                        z: this.sliderParameters.scaleB.value
+                    };
+                },
+                render: (slider, dropdown, _, color, ref) => <LissajousBracelet
+                    mesh={ref}
+                    meshColor={color}
+                    meshRadius={slider.r}
+                    parameterA={slider.a}
+                    parameterB={slider.b}
+                    scaleA={dropdown.scaleA.diameter}
+                    scaleB={slider.scaleB}
+                    detail={1000}
+                />
+            },
             // [JewelryType.Earring]: {
             //     description: 'Lissajous curve earring',
             //     numericParameters: {
