@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { collections, CollectionType, JewelryMesh, JewelryType, materials, RingSize } from "../../collections/Collections";
+import { BraceletSize, collections, CollectionType, JewelryMesh, JewelryType, materials, RingSize } from "../../collections/Collections";
 
 /**
  * Function to change the color of a mesh.
@@ -96,7 +96,7 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
     const [sliderMinParameters, setSliderMinParameters] = React.useState<{ [key: string]: number }>({});
     const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
-    const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize }>({});
+    const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize | BraceletSize }>({});
 
     const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(collection);
     const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
