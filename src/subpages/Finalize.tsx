@@ -1,17 +1,19 @@
 import { Box, Button, HStack, Select, Text } from '@chakra-ui/react';
 import React from 'react';
-import { JewelryMesh } from '../components/collections/Collections';
+import { JewelryMesh, RingSize } from '../components/collections/Collections';
 
 
 type FinalizeProps = {
     mesh: JewelryMesh;
     meshRef: React.RefObject<THREE.Mesh>;
+    sliderParameters: { [key: string]: number };
+    dropdownParameters: { [key: string]: RingSize };
     exportMeshSTL: (mesh: THREE.Mesh) => void;
     exportMeshOBJ: (mesh: THREE.Mesh) => void;
     exportMeshGlTF: (mesh: THREE.Mesh) => void;
 };
 
-export const Finalize = ({ mesh, meshRef, exportMeshSTL, exportMeshOBJ, exportMeshGlTF }: FinalizeProps) => {
+export const Finalize = ({ mesh, meshRef, sliderParameters, dropdownParameters, exportMeshSTL, exportMeshOBJ, exportMeshGlTF }: FinalizeProps) => {
     return (
         <HStack spacing={5} >
             <Box paddingBottom={10}>
@@ -74,7 +76,7 @@ export const Finalize = ({ mesh, meshRef, exportMeshSTL, exportMeshOBJ, exportMe
                 <Text
                     fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
                 >
-                    {mesh.dimensions().x} x {mesh.dimensions().y} x {mesh.dimensions().z} mm
+                    {dropdownParameters["scaleA"].diameter} x {dropdownParameters["scaleA"].diameter} x {sliderParameters["scaleB"]} mm
                 </Text>
 
                 <Text

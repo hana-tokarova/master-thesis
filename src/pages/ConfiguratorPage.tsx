@@ -231,6 +231,8 @@ export const ConfiguratorPage = ({ collection, jewelry }: ConfiguratorProps) => 
                 <Finalize
                     mesh={mesh}
                     meshRef={meshRef}
+                    sliderParameters={sliderParameters}
+                    dropdownParameters={dropdownParameters}
                     exportMeshSTL={exportMeshSTL}
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}

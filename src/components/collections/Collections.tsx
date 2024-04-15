@@ -101,7 +101,6 @@ export const collections: {
                 switchParameters: {},
                 dropdownParameters: {
                     scaleA: { name: "Sizing", tag: "general", type: 'dropdown', size: ringSizes[0] },
-
                 },
                 dimensions: function () {
                     return {
