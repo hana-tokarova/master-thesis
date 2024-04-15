@@ -19,6 +19,20 @@ export type RingSize = {
     diameter: number;
 }
 
+export type BraceletSize = {
+    value: number;
+    diameter: number;
+}
+
+export const braceletSizes: BraceletSize[] = [
+    { value: 160, diameter: 25.5 },
+    { value: 170, diameter: 27.1 },
+    { value: 180, diameter: 28.7 },
+    { value: 190, diameter: 30.3 },
+    { value: 200, diameter: 31.9 },
+    { value: 210, diameter: 33.5 },
+]
+
 export const ringSizes: RingSize[] = [
     { value: 43, diameter: 13.6 },
     { value: 44, diameter: 13.9 },
@@ -58,8 +72,6 @@ export type ToggleParameter = {
     value: boolean;
 };
 
-type MaterialType = 'Silver' | 'Resin' | 'PLA';
-
 export const materials = {
     Metal: {
         name: "Metal",
@@ -91,7 +103,7 @@ export type JewelryMesh = {
         [key: string]: DropdownParameter;
     };
     render: (sliderParams: { [key: string]: number },
-        dropdownParams: { [key: string]: RingSize },
+        dropdownParams: { [key: string]: RingSize | BraceletSize },
         booleanParams: { [key: string]: boolean },
         color: string,
         ref: React.Ref<THREE.Mesh>) => JSX.Element;
@@ -141,16 +153,16 @@ export const collections: {
                 />
             },
             [JewelryType.Bracelet]: {
-                description: 'Lissajous curve bracelet',
+                description: 'Lissaje bracelet is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
                 sliderParameters: {
-                    a: { name: "Horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
-                    b: { name: "Vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
-                    scaleB: { name: "Scaling B", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-                    r: { name: "Radius", tag: "general", type: 'slider', value: 0.5, min: materials.PLA.thicknessMinimum, max: 1, step: 0.01 },
+                    a: { name: "Number of horizontal lines", tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 2 },
+                    b: { name: "Number of vertical lines", tag: 'collection', type: 'slider', value: 5, min: 1, max: 10, step: 1 },
+                    scaleB: { name: "Height", tag: "general", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    r: { name: "Wire thickness", tag: "general", type: 'slider', value: 0.5, min: materials.PLA.thicknessMinimum, max: 1, step: 0.01 },
                 },
                 switchParameters: {},
                 dropdownParameters: {
-                    scaleA: { name: "lol", tag: "general", type: 'dropdown', size: ringSizes[4] },
+                    scaleA: { name: "Sizing", tag: "general", type: 'dropdown', size: braceletSizes[0] },
                 },
                 dimensions: function () {
                     return {

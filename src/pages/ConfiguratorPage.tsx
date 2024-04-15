@@ -3,7 +3,7 @@ import React from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { CollectionType, JewelryType, ringSizes } from "../components/collections/Collections";
+import { braceletSizes, CollectionType, JewelryType, ringSizes } from "../components/collections/Collections";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
 import { exportMeshSTL } from "../components/utils/exporters/ExportSTL";
@@ -128,7 +128,7 @@ export const ConfiguratorPage = () => {
                         </Select>
                     </Text>
 
-                    {mesh && ((currentJewelryType === JewelryType.Ring) || (currentJewelryType === JewelryType.Bracelet)) && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
+                    {mesh && (currentJewelryType === JewelryType.Ring) && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
                         <Box key={parameterName + parameterDetails}>
                             <Text
                                 fontFamily={"heading"}
@@ -179,6 +179,63 @@ export const ConfiguratorPage = () => {
                                         value={ringSize.value}
                                     >
                                         {"Sz " + ringSize.value.toString()}
+                                    </option>
+                                ))}
+                            </Select>
+                        </Box>
+                    ))}
+
+                    {mesh && (currentJewelryType === JewelryType.Bracelet) && Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
+                        <Box key={parameterName + parameterDetails}>
+                            <Text
+                                fontFamily={"heading"}
+                                fontWeight="400"
+                                fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
+                            >
+                                {parameterDetails.name}
+                                <Box
+                                    as="span"
+                                    fontWeight="600"
+                                    fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                                >
+                                    {" (Diameter:"}
+                                    <Box
+                                        fontWeight="400"
+                                        as="span"
+                                        fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                                    >
+                                        {" " + dropdownParameters[parameterName]?.diameter + " mm)"}
+                                    </Box>
+                                </Box>
+
+                            </Text>
+                            <Select
+                                w={44}
+                                fontFamily={"body"}
+                                fontWeight="400"
+                                fontSize={{ base: "3xs", sm: "2xs", md: "xs", lg: "sm" }}
+                                value={dropdownParameters[parameterName]?.value}
+                                bg='brand.200'
+                                border="none"
+                                color='brand.50'
+                                size='md'
+                                shadow={'lg'}
+                                paddingTop={2}
+                                paddingBottom={4}
+                                _hover={{ bg: 'brand.400' }}
+                                _focus={{ bg: 'brand.300' }}
+                                onChange={(event) => {
+                                    const parsedValue = parseInt(event.target.value);
+                                    const selectedSize = braceletSizes.find(size => size.value === parsedValue);
+                                    changeDropdownParameter(setDropdownParameters, parameterName, selectedSize!);
+                                }}
+                            >
+                                {braceletSizes.map((braceletSize) => (
+                                    <option
+                                        key={braceletSize.value.toString()}
+                                        value={braceletSize.value}
+                                    >
+                                        {"Sz " + braceletSize.value.toString()}
                                     </option>
                                 ))}
                             </Select>
