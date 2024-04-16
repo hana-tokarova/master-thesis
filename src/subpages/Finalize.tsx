@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { BiCopy } from 'react-icons/bi';
-import { FaCheck } from 'react-icons/fa';
+import { FaBug, FaCheck } from 'react-icons/fa';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { JewelryMesh, RingSize } from '../components/collections/Collections';
 
@@ -41,6 +41,12 @@ export const Finalize = ({
     exportMeshOBJ,
     exportMeshGlTF,
 }: FinalizeProps) => {
+    const exportOptions = [
+        { value: 'stl', function: exportMeshSTL, label: '.STL' },
+        { value: 'obj', function: exportMeshOBJ, label: '.OBJ' },
+        { value: 'gltf', function: exportMeshGlTF, label: '.glTF' },
+    ];
+
     const [, copy] = useCopyToClipboard();
     const toast = useToast();
 
@@ -72,8 +78,84 @@ export const Finalize = ({
                     paddingBottom={4}
                     _hover={{ bg: 'brand.400' }}
                     _focus={{ bg: 'brand.300' }}
+                    onChange={(e) => {
+                        const option = exportOptions.find((option) => option.value === e.target.value);
+                        if (option && meshRef.current) {
+                            try {
+                                option.function(meshRef.current);
+                                toast({
+                                    position: 'bottom',
+                                    status: 'success',
+                                    duration: 10000,
+                                    render: () => (
+                                        <HStack
+                                            color="white"
+                                            p={3}
+                                            bg="green.400"
+                                            boxShadow={'md'}
+                                            borderRadius="5"
+                                            align="start"
+                                        >
+                                            <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
+                                            <Box>
+                                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                                    Your file has been successfully exported as {option.label}
+                                                </Text>
+                                                <Text fontFamily={'body'} fontWeight="400">
+                                                    Happy 3D printing!
+                                                </Text>
+                                            </Box>
+                                        </HStack>
+                                    ),
+                                });
+                            } catch (error) {
+                                toast({
+                                    position: 'bottom',
+                                    status: 'error',
+                                    duration: 10000,
+                                    render: () => (
+                                        <HStack
+                                            color="white"
+                                            p={3}
+                                            bg="red.400"
+                                            boxShadow={'md'}
+                                            borderRadius="5"
+                                            align="start"
+                                        >
+                                            <Icon as={FaBug} w={5} h={5} paddingTop={1} color="brand.200" />
+                                            <Box>
+                                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                                    An error when exporting the file as {option.label}
+                                                </Text>
+                                                <Text fontFamily={'body'} fontWeight="400">
+                                                    {(error as Error).message}
+                                                </Text>
+                                            </Box>
+                                        </HStack>
+                                    ),
+                                });
+                            }
+                        }
+                    }}
                 >
-                    <option value="stl" onClick={() => exportMeshSTL(meshRef.current!)}>
+                    {exportOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            to {option.label}
+                        </option>
+                    ))}
+                </Select>
+
+                {/* <option
+                        value="stl"
+                        onClick={async () => {
+                            try {
+                                exportMeshSTL(meshRef.current!);
+                                
+                            } catch (error) {
+                                
+                            }
+                        }}
+                    >
                         to .STL
                     </option>
                     <option value="obj" onClick={() => exportMeshOBJ(meshRef.current!)}>
@@ -81,8 +163,7 @@ export const Finalize = ({
                     </option>
                     <option value="gltf" onClick={() => exportMeshGlTF(meshRef.current!)}>
                         to .glTF
-                    </option>
-                </Select>
+                    </option> */}
 
                 <Popover
                     returnFocusOnClose={false}
@@ -108,14 +189,14 @@ export const Finalize = ({
                                     const share = window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
                                     await copy(share);
                                     toast({
-                                        position: 'top',
+                                        position: 'bottom',
                                         status: 'success',
                                         duration: 10000,
                                         render: () => (
                                             <HStack
                                                 color="white"
                                                 p={3}
-                                                bg="brand.400"
+                                                bg="green.400"
                                                 boxShadow={'md'}
                                                 borderRadius="5"
                                                 align="start"
