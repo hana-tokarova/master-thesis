@@ -1,5 +1,5 @@
-import { OBJExporter } from "three/examples/jsm/exporters/OBJExporter";
-import { saveString } from "./Saving";
+import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
+import { saveString } from './Saving';
 
 export const exportMeshOBJ = (mesh: THREE.Mesh) => {
     const clonedMesh = mesh.clone();

@@ -16,11 +16,11 @@ type TorsionProps = {
     scaleC: number;
     inflate?: number;
     screw?: number;
-}
+};
 
 const makeCircleCurve2D = (nbSteps: number) => {
     const points = [];
-    const stepSize = Math.PI * 2 / nbSteps;
+    const stepSize = (Math.PI * 2) / nbSteps;
 
     for (let t = 0; t <= nbSteps; t++) {
         const x = Math.cos(t * stepSize);
@@ -43,17 +43,17 @@ const inflateMesh = (i: number, u: number) => {
     if (i === undefined) {
         inflate = 1;
     } else {
-        inflate = (u > Math.PI / 2 && u < 3 * (Math.PI / 2)) ? i * 0.5 * (1 - (Math.cos(u * 2 - Math.PI))) + 1 : 1;
+        inflate = u > Math.PI / 2 && u < 3 * (Math.PI / 2) ? i * 0.5 * (1 - Math.cos(u * 2 - Math.PI)) + 1 : 1;
     }
 
     return inflate;
-}
+};
 
 const twistMesh = (twistAll: boolean, u: number, twist: number, start: number, end: number) => {
     let smoothTwist;
 
     if (twistAll) {
-        smoothTwist = Math.PI * u * twist / 5;
+        smoothTwist = (Math.PI * u * twist) / 5;
     } else {
         let t;
 
@@ -69,12 +69,12 @@ const twistMesh = (twistAll: boolean, u: number, twist: number, start: number, e
     smoothTwist *= 10;
 
     return smoothTwist;
-}
+};
 
 const calculateDetail2D = (majorR: number, twist: number) => {
-    const detail = Math.floor((majorR * 2 * Math.PI * Math.abs(twist === 0 ? 1 : twist)));
+    const detail = Math.floor(majorR * 2 * Math.PI * Math.abs(twist === 0 ? 1 : twist));
     return detail > 1000 ? 1000 : detail;
-}
+};
 
 const taperEdge = (u: number, lowerFallOff: number, upperFallOff: number) => {
     let edgeTaper = 1;
@@ -82,14 +82,14 @@ const taperEdge = (u: number, lowerFallOff: number, upperFallOff: number) => {
     if (u > upperFallOff) {
         edgeTaper = (1 - u) / (1 - upperFallOff);
     } else if (u < lowerFallOff) {
-        edgeTaper = u / (lowerFallOff);
+        edgeTaper = u / lowerFallOff;
     }
 
     edgeTaper = 1 - edgeTaper;
     edgeTaper = Math.min(Math.max(0.00001, edgeTaper), 0.99999);
 
-    return edgeTaper === 1 ? 1 : Math.sqrt(1 - edgeTaper * edgeTaper);//1 - Math.pow(majorR, -5 * edgeTaper));
-}
+    return edgeTaper === 1 ? 1 : Math.sqrt(1 - edgeTaper * edgeTaper); //1 - Math.pow(majorR, -5 * edgeTaper));
+};
 
 const torsion = (
     scaleA: number,
@@ -99,7 +99,7 @@ const torsion = (
     minorR: number,
     twist: number,
     twistAll: boolean,
-    inflate: number
+    inflate: number,
 ) => {
     return (u: number, v: number, target: THREE.Vector3) => {
         const smoothTwist = twistMesh(twistAll, u, twist, 0, 1);
@@ -126,11 +126,11 @@ const taperedTorsion = (
     minorR: number,
     twist: number,
     twistAll: boolean,
-    screw: number
+    screw: number,
 ) => {
     return (u: number, v: number, target: THREE.Vector3) => {
         const smoothTwist = twistMesh(twistAll, u, twist, 0, 1);
-        const taper = taperEdge(u, 0.10, 0.90);
+        const taper = taperEdge(u, 0.1, 0.9);
 
         u *= 1.8 * Math.PI;
         v *= 2 * Math.PI;
@@ -139,13 +139,25 @@ const taperedTorsion = (
 
         const x = scaleA * (majorR + minorR * taper * squared * Math.cos(v + smoothTwist)) * Math.cos(u);
         const y = scaleB * (majorR + minorR * taper * squared * Math.cos(v + smoothTwist)) * Math.sin(u);
-        const z = scaleC * taper * squared * Math.sin(v + smoothTwist) + ((screw * u) / Math.PI);
+        const z = scaleC * taper * squared * Math.sin(v + smoothTwist) + (screw * u) / Math.PI;
 
         target.set(x, y, z);
     };
-}
+};
 
-export const TorsionRing = ({ mesh, meshColor, majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks }: TorsionProps) => {
+export const TorsionRing = ({
+    mesh,
+    meshColor,
+    majorR,
+    minorR,
+    twistAll,
+    twist,
+    inflate,
+    scaleA,
+    scaleB,
+    scaleC,
+    stacks,
+}: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
 
@@ -165,7 +177,19 @@ export const TorsionRing = ({ mesh, meshColor, majorR, minorR, twistAll, twist, 
     );
 };
 
-export const TorsionBracelet = ({ mesh, meshColor, majorR, minorR, twistAll, twist, scaleA, scaleB, scaleC, stacks, screw }: TorsionProps) => {
+export const TorsionBracelet = ({
+    mesh,
+    meshColor,
+    majorR,
+    minorR,
+    twistAll,
+    twist,
+    scaleA,
+    scaleB,
+    scaleC,
+    stacks,
+    screw,
+}: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = taperedTorsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, screw!);
 
@@ -183,9 +207,21 @@ export const TorsionBracelet = ({ mesh, meshColor, majorR, minorR, twistAll, twi
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
-}
+};
 
-export const TorsionEarring = ({ mesh, meshColor, majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks }: TorsionProps) => {
+export const TorsionEarring = ({
+    mesh,
+    meshColor,
+    majorR,
+    minorR,
+    twistAll,
+    twist,
+    inflate,
+    scaleA,
+    scaleB,
+    scaleC,
+    stacks,
+}: TorsionProps) => {
     const holderPoints = makeCircleCurve2D(100);
 
     const geometry = useMemo(() => {
@@ -213,13 +249,30 @@ export const TorsionEarring = ({ mesh, meshColor, majorR, minorR, twistAll, twis
     }, [holderPoints, stacks, twistAll, twist, scaleA, scaleB, scaleC, majorR, minorR, inflate]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}>
+        <mesh
+            ref={mesh}
+            geometry={geometry}
+            position={[0, 0, 0]}
+            rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}
+        >
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );
 };
 
-export const TorsionPendant = ({ mesh, meshColor, majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks }: TorsionProps) => {
+export const TorsionPendant = ({
+    mesh,
+    meshColor,
+    majorR,
+    minorR,
+    twistAll,
+    twist,
+    inflate,
+    scaleA,
+    scaleB,
+    scaleC,
+    stacks,
+}: TorsionProps) => {
     const holderPoints = makeCircleCurve2D(100);
 
     const geometry = useMemo(() => {
@@ -237,7 +290,9 @@ export const TorsionPendant = ({ mesh, meshColor, majorR, minorR, twistAll, twis
 
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(new THREE.Vector3(scaleA * (majorR + minorR + 0.5), 0, 0));
+        const translateHolder = new THREE.Matrix4().makeTranslation(
+            new THREE.Vector3(scaleA * (majorR + minorR + 0.5), 0, 0),
+        );
         holderMesh.applyMatrix4(translateHolder);
 
         const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
@@ -247,7 +302,12 @@ export const TorsionPendant = ({ mesh, meshColor, majorR, minorR, twistAll, twis
     }, [holderPoints, stacks, twistAll, twist, scaleA, scaleB, scaleC, majorR, minorR, inflate]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}>
+        <mesh
+            ref={mesh}
+            geometry={geometry}
+            position={[0, 0, 0]}
+            rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}
+        >
             <meshLambertMaterial attach="material" color={meshColor} />
         </mesh>
     );

@@ -1,116 +1,116 @@
-import { Box, Flex, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { CollectionType, JewelryType } from "../components/collections/Collections";
+import { Box, Flex, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { CollectionType, JewelryType } from '../components/collections/Collections';
 
 type Project = {
     id: number;
     image: string;
-    material: "PLA Filament" | "Resin" | "Metal";
+    material: 'PLA Filament' | 'Resin' | 'Metal';
     price: number;
     url?: string;
     collection?: CollectionType;
     jewelry?: JewelryType;
-}
+};
 
 const projects: Project[] = [
     {
         id: 1,
-        material: "PLA Filament",
-        price: 10.00,
-        image: "https://source.unsplash.com/random/100x100",
+        material: 'PLA Filament',
+        price: 10.0,
+        image: 'https://source.unsplash.com/random/100x100',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Earring,
     },
     {
         id: 2,
-        material: "Resin",
-        price: 15.00,
-        image: "https://source.unsplash.com/random/100x50",
+        material: 'Resin',
+        price: 15.0,
+        image: 'https://source.unsplash.com/random/100x50',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
-        url: "eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjUsInNjYWxlQiI6MTAsInIiOjAuNX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwiciI6MC40fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjAuNCwiYWRkaXRpb25hbENvc3QiOjEwfSwibWVzaENvbG9yIjoiZ3JlZW55ZWxsb3cifQ=="
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjUsInNjYWxlQiI6MTAsInIiOjAuNX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwiciI6MC40fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjAuNCwiYWRkaXRpb25hbENvc3QiOjEwfSwibWVzaENvbG9yIjoiZ3JlZW55ZWxsb3cifQ==',
     },
     {
         id: 3,
-        material: "Metal",
-        price: 20.00,
-        image: "https://source.unsplash.com/random/100x150",
+        material: 'Metal',
+        price: 20.0,
+        image: 'https://source.unsplash.com/random/100x150',
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Pendant,
     },
     {
         id: 4,
-        material: "PLA Filament",
-        price: 10.00,
-        image: "https://source.unsplash.com/random/100x200",
+        material: 'PLA Filament',
+        price: 10.0,
+        image: 'https://source.unsplash.com/random/100x200',
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Earring,
     },
     {
         id: 5,
-        material: "Resin",
-        price: 15.00,
-        image: "https://source.unsplash.com/random/100x250",
+        material: 'Resin',
+        price: 15.0,
+        image: 'https://source.unsplash.com/random/100x250',
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Ring,
     },
     {
         id: 6,
-        material: "Metal",
-        price: 20.00,
-        image: "https://source.unsplash.com/random/100x300",
+        material: 'Metal',
+        price: 20.0,
+        image: 'https://source.unsplash.com/random/100x300',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Pendant,
     },
     {
         id: 7,
-        material: "PLA Filament",
-        price: 10.00,
-        image: "https://source.unsplash.com/random/100x350",
+        material: 'PLA Filament',
+        price: 10.0,
+        image: 'https://source.unsplash.com/random/100x350',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
     },
     {
         id: 8,
-        material: "Resin",
-        price: 15.00,
-        image: "https://source.unsplash.com/random/100x400",
+        material: 'Resin',
+        price: 15.0,
+        image: 'https://source.unsplash.com/random/100x400',
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Bracelet,
     },
     {
         id: 9,
-        material: "Metal",
-        price: 20.00,
-        image: "https://source.unsplash.com/random/100x450",
+        material: 'Metal',
+        price: 20.0,
+        image: 'https://source.unsplash.com/random/100x450',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
     },
     {
         id: 10,
-        material: "Metal",
-        price: 20.00,
-        image: "https://source.unsplash.com/random/100x420",
+        material: 'Metal',
+        price: 20.0,
+        image: 'https://source.unsplash.com/random/100x420',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
     },
     {
         id: 11,
-        material: "Metal",
-        price: 20.00,
-        image: "https://source.unsplash.com/random/100x250",
+        material: 'Metal',
+        price: 20.0,
+        image: 'https://source.unsplash.com/random/100x250',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
     },
     {
         id: 12,
-        material: "Metal",
-        price: 20.00,
-        image: "https://source.unsplash.com/random/100x320",
+        material: 'Metal',
+        price: 20.0,
+        image: 'https://source.unsplash.com/random/100x320',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Bracelet,
-    }
-]
+    },
+];
 
 export const CreatePage = () => {
     return (
@@ -120,55 +120,43 @@ export const CreatePage = () => {
             paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}
             paddingBottom={16}
-            alignItems={"left"}
+            alignItems={'left'}
             w="100vw"
         >
-            <Text
-                fontFamily={"heading"}
-                fontWeight="500"
-                fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
-            >
+            <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}>
                 / Create
             </Text>
 
-            <Text
-                maxW="70vw"
-                fontSize={{ base: "xs", md: "sm", lg: "md" }}
-            >
+            <Text maxW="70vw" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
                 Want to create something for yourself or your loved ones? This it the right place!
                 <br />
                 Based on your preferences, fill in the details of what kind of jewelry you want to create.
             </Text>
 
-            <Tabs defaultIndex={0} variant='unstyled' isFitted>
-                <TabList
-                    maxW={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
-                >
+            <Tabs defaultIndex={0} variant="unstyled" isFitted>
+                <TabList maxW={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}>
                     {Object.values(JewelryType).map((jewelryValue) => (
                         <Tab
                             key={jewelryValue}
-                            fontFamily={"heading"}
-                            fontSize={{ base: "xs", sm: "sm", md: "md", lg: "lg" }}
+                            fontFamily={'heading'}
+                            fontSize={{ base: 'xs', sm: 'sm', md: 'md', lg: 'lg' }}
                             fontWeight="300"
                             sx={{
                                 borderBottom: '1px solid #ccc',
                                 _selected: {
                                     borderBottom: '3px solid black',
-                                    fontWeight: '500'
-                                }
+                                    fontWeight: '500',
+                                },
                             }}
                         >
-                            {jewelryValue.charAt(0).toUpperCase() + jewelryValue.slice(1) + "s"}
+                            {jewelryValue.charAt(0).toUpperCase() + jewelryValue.slice(1) + 's'}
                         </Tab>
                     ))}
                 </TabList>
 
-                <Text
-                    paddingTop={3}
-                    maxW="xl"
-                    fontSize={{ base: "xs", md: "sm", lg: "md" }}
-                >
-                    Each collection showcases different ways how given jewelry type could look like. If you like any of the types below, click on it and you will be able to customize it futher.
+                <Text paddingTop={3} maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
+                    Each collection showcases different ways how given jewelry type could look like. If you like any of
+                    the types below, click on it and you will be able to customize it futher.
                 </Text>
 
                 <TabPanels>
@@ -178,18 +166,20 @@ export const CreatePage = () => {
                                 <Box key={jewelryType + collectionType}>
                                     <Text
                                         paddingTop={1}
-                                        fontFamily={"heading"}
-                                        fontSize={{ base: "md", sm: "lg", md: "xl", lg: "2xl" }}
+                                        fontFamily={'heading'}
+                                        fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                                         fontWeight="500"
                                     >
                                         Collection {collectionType.charAt(0).toUpperCase() + collectionType.slice(1)}
                                     </Text>
                                     <Text
                                         color="brand.100"
-                                        fontSize={{ base: "2xs", sm: "xs", md: "sm", lg: "md" }}
+                                        fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                                         paddingBottom={1}
                                     >
-                                        {(collectionType === CollectionType.Lissajous) ? "/ Based on the Lissajous curves" : "/ Based on the twists of the torus geometry"}
+                                        {collectionType === CollectionType.Lissajous
+                                            ? '/ Based on the Lissajous curves'
+                                            : '/ Based on the twists of the torus geometry'}
                                     </Text>
 
                                     <Flex
@@ -198,39 +188,39 @@ export const CreatePage = () => {
                                         direction="row"
                                         rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
                                         columnGap={4}
-                                        wrap='wrap'
+                                        wrap="wrap"
                                     >
                                         {projects
-                                            .filter(project => project.jewelry === jewelryType)
-                                            .filter(project => project.collection === collectionType)
+                                            .filter((project) => project.jewelry === jewelryType)
+                                            .filter((project) => project.collection === collectionType)
                                             .map((selectedProject) => (
                                                 <Box
                                                     as={Link}
                                                     to={`/configurator?config=${selectedProject.url}`}
                                                     key={selectedProject.id}
-                                                    h={{ base: "44", sm: "48", md: "52", lg: "72" }}
+                                                    h={{ base: '44', sm: '48', md: '52', lg: '72' }}
                                                 >
                                                     <Image
-                                                        w={{ base: "32", sm: "36", md: "40", lg: "60" }}
-                                                        objectFit='cover'
-                                                        h={{ base: "32", sm: "36", md: "40", lg: "60" }}
+                                                        w={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                        objectFit="cover"
+                                                        h={{ base: '32', sm: '36', md: '40', lg: '60' }}
                                                         src={selectedProject.image}
-                                                        alt={"Project" + selectedProject.id}
+                                                        alt={'Project' + selectedProject.id}
                                                         shadow={'xl'}
                                                         borderRadius="sm"
                                                     />
 
                                                     <Text
                                                         paddingTop={2}
-                                                        fontFamily={"heading"}
-                                                        fontSize={{ base: "sm", sm: "sm", md: "md", lg: "md" }}
+                                                        fontFamily={'heading'}
+                                                        fontSize={{ base: 'sm', sm: 'sm', md: 'md', lg: 'md' }}
                                                         fontWeight="500"
                                                     >
                                                         {selectedProject.material}
                                                     </Text>
                                                     <Text
-                                                        fontFamily={"heading"}
-                                                        fontSize={{ base: "xs", sm: "xs", md: "sm", lg: "sm" }}
+                                                        fontFamily={'heading'}
+                                                        fontSize={{ base: 'xs', sm: 'xs', md: 'sm', lg: 'sm' }}
                                                         fontWeight="300"
                                                     >
                                                         {selectedProject.price.toFixed(2)} €
@@ -246,4 +236,4 @@ export const CreatePage = () => {
             </Tabs>
         </VStack>
     );
-}
+};

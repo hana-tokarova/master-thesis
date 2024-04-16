@@ -1,6 +1,6 @@
-import { Box, HStack, Tooltip } from "@chakra-ui/react";
-import { FaCheck } from "react-icons/fa";
-import { changeMeshColor } from "../utils/mesh/ChangeMesh";
+import { Box, HStack, Tooltip } from '@chakra-ui/react';
+import { FaCheck } from 'react-icons/fa';
+import { changeMeshColor } from '../utils/mesh/ChangeMesh';
 
 export type ColorPair = [string, string];
 
@@ -13,11 +13,11 @@ type ColorPickerProps = {
 export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerProps) => {
     return (
         <HStack marginBottom={2}>
-            {colors.map(([buttonColor, gradientColor], index) =>
+            {colors.map(([buttonColor, gradientColor], index) => (
                 <Tooltip
-                    bg='brand.100'
-                    color='white'
-                    placement='bottom'
+                    bg="brand.100"
+                    color="white"
+                    placement="bottom"
                     label={buttonColor.charAt(0).toUpperCase() + buttonColor.slice(1)}
                     key={buttonColor + gradientColor}
                 >
@@ -38,7 +38,7 @@ export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerPr
                         {activeColor === buttonColor && <FaCheck color="white" />}
                     </Box>
                 </Tooltip>
-            )}
+            ))}
         </HStack>
     );
 };

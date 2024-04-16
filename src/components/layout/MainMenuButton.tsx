@@ -1,7 +1,7 @@
-import { Button, Text } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Button, Text } from '@chakra-ui/react';
+import { Link, useLocation } from 'react-router-dom';
 
-type PageName = "/" | "/create" | "/about" | "/showcase";
+type PageName = '/' | '/create' | '/about' | '/showcase';
 
 type MainMenuButtonProps = {
     pageName: PageName;
@@ -13,15 +13,11 @@ export const MainMenuButton = ({ pageName, text }: MainMenuButtonProps) => {
     const isActive = location.pathname === pageName;
 
     return (
-        <Button
-            as={Link}
-            to={pageName}
-            variant="link"
-        >
+        <Button as={Link} to={pageName} variant="link">
             <Text
-                fontSize={{ base: "xs", md: "md", lg: "sm" }}
-                fontWeight={isActive ? "600" : "400"}
-                color={"brand.50"}
+                fontSize={{ base: 'xs', md: 'md', lg: 'sm' }}
+                fontWeight={isActive ? '600' : '400'}
+                color={'brand.50'}
             >
                 {text}
             </Text>

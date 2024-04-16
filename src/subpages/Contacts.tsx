@@ -1,27 +1,21 @@
-import { Box, Button, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Image, Text } from '@chakra-ui/react';
 
 export const Contacts = () => {
     return (
         <>
             <Text
-                fontFamily={"heading"}
+                fontFamily={'heading'}
                 fontWeight="500"
-                fontSize={{ base: "lg", sm: "xl", md: "2xl", lg: "3xl" }}
+                fontSize={{ base: 'lg', sm: 'xl', md: '2xl', lg: '3xl' }}
                 paddingTop={{ base: 10, sm: 14, md: 16, lg: 20 }}
             >
                 / Contacts
             </Text>
 
-            <Text
-                maxW="md"
-                fontSize={{ base: "2xs", md: "xs", lg: "sm" }}
-            >
+            <Text maxW="md" fontSize={{ base: '2xs', md: 'xs', lg: 'sm' }}>
                 <Box as="strong" fontFamily="heading" fontWeight="600">
                     E-mail:
-                </Box>
-
-                {" "}
-
+                </Box>{' '}
                 <Button
                     as="a"
                     href="mailto:info@neotaku.com?subject=Interested in Your Work"
@@ -30,19 +24,14 @@ export const Contacts = () => {
                     variant="link"
                     color="brand.50"
                     fontWeight={400}
-                    fontSize={{ base: "2xs", md: "xs", lg: "sm" }}
+                    fontSize={{ base: '2xs', md: 'xs', lg: 'sm' }}
                 >
                     info@neotaku.com
                 </Button>
-
                 <br />
-
                 <Box as="strong" fontFamily="heading" fontWeight="600">
                     Portfolio:
-                </Box>
-
-                {" "}
-
+                </Box>{' '}
                 <Button
                     as="a"
                     href="https://behance.net/hana-tokarova"
@@ -51,28 +40,15 @@ export const Contacts = () => {
                     variant="link"
                     color="brand.50"
                     fontWeight={400}
-                    fontSize={{ base: "2xs", md: "xs", lg: "sm" }}
+                    fontSize={{ base: '2xs', md: 'xs', lg: 'sm' }}
                 >
                     behance.net/hana-tokarova
                 </Button>
-
             </Text>
 
-            <HStack
-                paddingTop={3}
-                alignItems={"end"}
-                spacing={1}
-            >
-                <Image
-                    src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`}
-                    alt="ht-logo"
-                    w={10}
-                    h={10}
-                />
-                <Text
-                    fontSize={{ base: "3xs", md: "2xs", lg: "xs" }}
-                    color="brand.50"
-                >
+            <HStack paddingTop={3} alignItems={'end'} spacing={1}>
+                <Image src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`} alt="ht-logo" w={10} h={10} />
+                <Text fontSize={{ base: '3xs', md: '2xs', lg: 'xs' }} color="brand.50">
                     Neotaku Jewelry is a master thesis project created by Hana Tokárová.
                     <br />
                     ©2024 NEOTAKU JEWELRY
@@ -80,4 +56,4 @@ export const Contacts = () => {
             </HStack>
         </>
     );
-}
+};

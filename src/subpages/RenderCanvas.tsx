@@ -1,4 +1,3 @@
-
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
@@ -30,7 +29,7 @@ const FollowCameraLight = () => {
             <directionalLight intensity={1} position={[-3, 3, 3]} />
         </>
     );
-}
+};
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
     ({ mesh, color, sliderParams, switchParams, dropdownParams }, ref) => {
@@ -43,7 +42,7 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 const h = window.innerHeight;
 
                 // TODO doresit, zeby to nejak upravovat podla scale?
-                const x = (w / h) * 100;
+                const x = Math.max(Math.min(50000 / Math.min(w / 2, h), 100), 50);
                 const y = 30;
                 const z = 0;
 
@@ -90,7 +89,5 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 />
             </Canvas>
         );
-    }
+    },
 );
-
-

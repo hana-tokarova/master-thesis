@@ -1,8 +1,8 @@
-import { HStack, Image, Spacer } from "@chakra-ui/react";
-import { motion, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { MainMenuButton } from "./MainMenuButton";
+import { HStack, Image, Spacer } from '@chakra-ui/react';
+import { motion, useScroll } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { MainMenuButton } from './MainMenuButton';
 
 export const MainMenu = () => {
     const { scrollY } = useScroll();
@@ -28,7 +28,7 @@ export const MainMenu = () => {
             as={motion.div}
             style={{
                 height: menuHeight,
-                boxShadow: menuShadow
+                boxShadow: menuShadow,
             }}
             position="fixed"
             w="100vw"
@@ -41,7 +41,7 @@ export const MainMenu = () => {
         >
             <Link to="/">
                 <Image
-                    h={{ base: "7", md: "8", lg: "9" }}
+                    h={{ base: '7', md: '8', lg: '9' }}
                     src={`${process.env.PUBLIC_URL}/images/logo/logo-full.png`}
                     alt="NEOTAKU JEWELRY"
                 />
@@ -56,4 +56,3 @@ export const MainMenu = () => {
         </HStack>
     );
 };
-

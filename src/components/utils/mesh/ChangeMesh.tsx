@@ -1,5 +1,13 @@
-import React, { useEffect } from "react";
-import { BraceletSize, collections, CollectionType, JewelryMesh, JewelryType, materials, RingSize } from "../../collections/Collections";
+import React, { useEffect } from 'react';
+import {
+    BraceletSize,
+    collections,
+    CollectionType,
+    JewelryMesh,
+    JewelryType,
+    materials,
+    RingSize,
+} from '../../collections/Collections';
 
 /**
  * Function to change the color of a mesh.
@@ -19,9 +27,9 @@ export const changeMeshColor = (setMeshColor: (color: string) => void, color: st
 export const changeNumericParameter = (
     setNumericParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>,
     parameterName: string,
-    newValue: number
+    newValue: number,
 ): void => {
-    setNumericParameters(prevParams => ({
+    setNumericParameters((prevParams) => ({
         ...prevParams,
         [parameterName]: newValue,
     }));
@@ -36,16 +44,16 @@ export const changeNumericParameter = (
 export const changeDropdownParameter = (
     setDropdownParameters: React.Dispatch<React.SetStateAction<{ [key: string]: RingSize }>>,
     parameterName: string,
-    newValue: RingSize
+    newValue: RingSize,
 ): void => {
-    setDropdownParameters(prevParams => {
+    setDropdownParameters((prevParams) => {
         const updatedParams = {
             ...prevParams,
-            [parameterName]: { ...newValue }
+            [parameterName]: { ...newValue },
         };
         return updatedParams;
     });
-}
+};
 
 /**
  * Function to update a boolean parameter's value in the state.
@@ -56,9 +64,9 @@ export const changeDropdownParameter = (
 export const changeBooleanParameter = (
     setBooleanParameters: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>,
     parameterName: string,
-    newValue: boolean
+    newValue: boolean,
 ): void => {
-    setBooleanParameters(prevParams => ({
+    setBooleanParameters((prevParams) => ({
         ...prevParams,
         [parameterName]: newValue,
     }));
@@ -69,27 +77,26 @@ export const changeBooleanParameter = (
  * @param setJewelryType - The React state setter function for the jewelry type.
  * @param jewelryType - The new jewelry type.
  */
-export const changeJewelryType = (
-    setJewelryType: (type: JewelryType) => void,
-    jewelryType: JewelryType
-): void => {
+export const changeJewelryType = (setJewelryType: (type: JewelryType) => void, jewelryType: JewelryType): void => {
     setJewelryType(jewelryType);
-}
+};
 
 export const changeCurrentMaterial = (
-    setCurrentMaterial: React.Dispatch<React.SetStateAction<{
-        name: string;
-        thicknessMinimum: number;
-        additionalCost: number;
-    }>>,
+    setCurrentMaterial: React.Dispatch<
+        React.SetStateAction<{
+            name: string;
+            thicknessMinimum: number;
+            additionalCost: number;
+        }>
+    >,
     currentMaterial: {
         name: string;
         thicknessMinimum: number;
         additionalCost: number;
-    }
+    },
 ): void => {
     setCurrentMaterial(currentMaterial);
-}
+};
 
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType) => {
     const refreshParams = (collection: CollectionType, jewelry: JewelryType) => {
@@ -97,12 +104,32 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
         if (newMesh) {
             setMesh(newMesh);
 
-            setSliderParameters(Object.entries(newMesh.sliderParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.value }), {}));
-            setSliderMinParameters(Object.entries(newMesh.sliderParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.min }), {}));
-            setSwitchParameters(Object.entries(newMesh.switchParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.value }), {}));
-            setDropdownParameters(Object.entries(newMesh.dropdownParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.size }), {}));
+            setSliderParameters(
+                Object.entries(newMesh.sliderParameters).reduce(
+                    (prev, [key, val]) => ({ ...prev, [key]: val.value }),
+                    {},
+                ),
+            );
+            setSliderMinParameters(
+                Object.entries(newMesh.sliderParameters).reduce(
+                    (prev, [key, val]) => ({ ...prev, [key]: val.min }),
+                    {},
+                ),
+            );
+            setSwitchParameters(
+                Object.entries(newMesh.switchParameters).reduce(
+                    (prev, [key, val]) => ({ ...prev, [key]: val.value }),
+                    {},
+                ),
+            );
+            setDropdownParameters(
+                Object.entries(newMesh.dropdownParameters).reduce(
+                    (prev, [key, val]) => ({ ...prev, [key]: val.size }),
+                    {},
+                ),
+            );
         }
-    }
+    };
 
     const [mesh, setMesh] = React.useState<JewelryMesh | undefined>(undefined);
     const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
@@ -117,17 +144,33 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
     const setCurrentCollection = (collection: CollectionType) => {
         _setCurrentCollection(collection);
         refreshParams(collection, currentJewelryType);
-    }
+    };
 
     const setCurrentJewelryType = (jewelry: JewelryType) => {
         _setCurrentJewelryType(jewelry);
         refreshParams(currentCollection, jewelry);
-    }
+    };
 
     useEffect(() => {
         refreshParams(collection, jewelry);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { mesh, sliderParameters, sliderMinParameters, switchParameters, dropdownParameters, setSliderParameters, setSliderMinParameters, setSwitchParameters, setDropdownParameters, currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType, currentMaterial, setCurrentMaterial };
+    return {
+        mesh,
+        sliderParameters,
+        sliderMinParameters,
+        switchParameters,
+        dropdownParameters,
+        setSliderParameters,
+        setSliderMinParameters,
+        setSwitchParameters,
+        setDropdownParameters,
+        currentCollection,
+        setCurrentCollection,
+        currentJewelryType,
+        setCurrentJewelryType,
+        currentMaterial,
+        setCurrentMaterial,
+    };
 };

@@ -1,5 +1,5 @@
-import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
-import { saveArrayBuffer, saveString } from "./Saving";
+import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
+import { saveArrayBuffer, saveString } from './Saving';
 
 export const exportMeshGlTF = (mesh: THREE.Mesh) => {
     const clonedMesh = mesh.clone();
@@ -9,7 +9,7 @@ export const exportMeshGlTF = (mesh: THREE.Mesh) => {
         trs: false,
         onlyVisible: true,
         binary: false,
-        maxTextureSize: 4096
+        maxTextureSize: 4096,
     };
 
     const exporter = new GLTFExporter();
@@ -26,6 +26,6 @@ export const exportMeshGlTF = (mesh: THREE.Mesh) => {
         function (error) {
             console.log('An error happened during parsing', error);
         },
-        options
+        options,
     );
 };
