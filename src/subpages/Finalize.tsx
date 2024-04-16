@@ -16,7 +16,7 @@ type FinalizeProps = {
 };
 
 export const Finalize = ({ parameters, mesh, meshRef, sliderParameters, dropdownParameters, exportMeshSTL, exportMeshOBJ, exportMeshGlTF }: FinalizeProps) => {
-    const [_, copy] = useCopyToClipboard();
+    const [, copy] = useCopyToClipboard();
     const toast = useToast();
 
     const { isOpen, onToggle, onClose } = useDisclosure();
