@@ -1,15 +1,13 @@
 import {
     Box,
     Button,
-    ButtonGroup,
     HStack,
+    Icon,
+    Input,
     Popover,
-    PopoverArrow,
     PopoverBody,
     PopoverCloseButton,
     PopoverContent,
-    PopoverFooter,
-    PopoverHeader,
     PopoverTrigger,
     Select,
     Text,
@@ -17,6 +15,8 @@ import {
     useToast,
 } from '@chakra-ui/react';
 import React from 'react';
+import { BiCopy } from 'react-icons/bi';
+import { FaCheck } from 'react-icons/fa';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { JewelryMesh, RingSize } from '../components/collections/Collections';
 
@@ -88,11 +88,12 @@ export const Finalize = ({
                     returnFocusOnClose={false}
                     isOpen={isOpen}
                     onClose={onClose}
-                    placement="right"
+                    placement="bottom-end"
                     closeOnBlur={false}
                 >
                     <PopoverTrigger>
                         <Button
+                            rightIcon={<BiCopy />}
                             size="md"
                             fontFamily={'heading'}
                             fontWeight="500"
@@ -107,33 +108,62 @@ export const Finalize = ({
                                     const share = window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
                                     await copy(share);
                                     toast({
-                                        title: 'Design saved!',
-                                        description: 'Design link saved to your clipboard.',
+                                        position: 'top',
                                         status: 'success',
-                                        duration: 9000,
+                                        duration: 10000,
+                                        render: () => (
+                                            <HStack
+                                                color="white"
+                                                p={3}
+                                                bg="brand.400"
+                                                boxShadow={'md'}
+                                                borderRadius="5"
+                                                align="start"
+                                            >
+                                                <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
+                                                <Box>
+                                                    <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                                        Design saved!
+                                                    </Text>
+                                                    <Text fontFamily={'body'} fontWeight="400">
+                                                        Design link saved to your clipboard.
+                                                        <br />
+                                                        Don't forget to set dimensions to 'mm' before printing.
+                                                    </Text>
+                                                </Box>
+                                            </HStack>
+                                        ),
                                     });
                                 } catch (error) {
                                     onToggle();
                                 }
                             }}
                         >
-                            <Box textAlign="left" w="full">
+                            <Text textAlign="left" w="full">
                                 {' '}
-                                Share Design
-                            </Box>
+                                Save Design Link
+                            </Text>
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent>
-                        <PopoverHeader fontWeight="semibold">Confirmation</PopoverHeader>
-                        <PopoverArrow />
-                        <PopoverCloseButton />
-                        <PopoverBody>Are you sure you want to continue with your action?</PopoverBody>
-                        <PopoverFooter display="flex" justifyContent="flex-end">
-                            <ButtonGroup size="sm">
-                                <Button variant="outline">Cancel</Button>
-                                <Button colorScheme="red">Apply</Button>
-                            </ButtonGroup>
-                        </PopoverFooter>
+                        <PopoverCloseButton color={'brand.200'} />
+                        <PopoverBody bg="brand.400" boxShadow={'md'} borderRadius="5">
+                            <Text fontFamily={'heading'} fontWeight="500" size={'lg'} color="white">
+                                Design saved!
+                            </Text>
+                            <Text fontFamily={'body'} fontWeight="400" color="white" align="start" paddingBottom={2}>
+                                Here you can copy the link to your design.
+                                <br />
+                                Don't forget to set dimensions to 'mm' before printing.
+                            </Text>
+                            <Input
+                                bg={'brand.200'}
+                                focusBorderColor="brand.200"
+                                value={window.location.href + `?config=${btoa(JSON.stringify(parameters))}`}
+                                isDisabled
+                                cursor="text !important"
+                            />
+                        </PopoverBody>
                     </PopoverContent>
                 </Popover>
             </Box>
