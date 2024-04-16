@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Box, Button, HStack } from "@chakra-ui/react";
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { MdKeyboardBackspace } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CollectionType, JewelryType } from "../components/collections/Collections";
 import { exportMeshGlTF } from "../components/utils/exporters/ExportGlTF";
 import { exportMeshOBJ } from "../components/utils/exporters/ExportOBJ";
@@ -27,8 +27,30 @@ export const ConfiguratorPage = () => {
         currentJewelryType, setCurrentJewelryType,
         currentMaterial, setCurrentMaterial
     } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
-
     const [meshColor, setMeshColor] = React.useState("ghostwhite");
+
+    const { search } = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const params = new URLSearchParams(search);
+        const config = params.get("config");
+        if (config) {
+            const parsedConfig = JSON.parse(atob(config));
+            setCurrentCollection(parsedConfig.currentCollection);
+            setCurrentJewelryType(parsedConfig.currentJewelryType);
+            setSliderParameters(parsedConfig.sliderParameters);
+            setSliderMinParameters(parsedConfig.sliderMinParameters);
+            setSwitchParameters(parsedConfig.switchParameters);
+            setDropdownParameters(parsedConfig.dropdownParameters);
+            setCurrentMaterial(parsedConfig.currentMaterial);
+            setMeshColor(parsedConfig.meshColor);
+            navigate("/configurator");
+        }
+    }, [navigate, search, setCurrentCollection, setCurrentJewelryType, setCurrentMaterial, setDropdownParameters, setSliderMinParameters, setSliderParameters, setSwitchParameters]);
+
+    const storeParameters = { sliderParameters, sliderMinParameters, switchParameters, dropdownParameters, currentCollection, currentJewelryType, currentMaterial, meshColor };
+
 
     if (!mesh || !switchParameters || !sliderParameters || !dropdownParameters) {
         return <></>;
@@ -102,6 +124,7 @@ export const ConfiguratorPage = () => {
                 />
 
                 <Finalize
+                    parameters={storeParameters}
                     mesh={mesh}
                     meshRef={meshRef}
                     sliderParameters={sliderParameters}

@@ -70,7 +70,7 @@ export const changeBooleanParameter = (
  * @param jewelryType - The new jewelry type.
  */
 export const changeJewelryType = (
-    setJewelryType: React.Dispatch<React.SetStateAction<JewelryType>>,
+    setJewelryType: (type: JewelryType) => void,
     jewelryType: JewelryType
 ): void => {
     setJewelryType(jewelryType);
@@ -92,18 +92,8 @@ export const changeCurrentMaterial = (
 }
 
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType) => {
-    const [mesh, setMesh] = React.useState<JewelryMesh | undefined>(undefined);
-    const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
-    const [sliderMinParameters, setSliderMinParameters] = React.useState<{ [key: string]: number }>({});
-    const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
-    const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize | BraceletSize }>({});
-
-    const [currentCollection, setCurrentCollection] = React.useState<CollectionType>(collection);
-    const [currentJewelryType, setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
-    const [currentMaterial, setCurrentMaterial] = React.useState(materials.PLA);
-
-    useEffect(() => {
-        const newMesh = collections[currentCollection]?.meshes[currentJewelryType];
+    const refreshParams = (collection: CollectionType, jewelry: JewelryType) => {
+        const newMesh = collections[collection]?.meshes[jewelry];
         if (newMesh) {
             setMesh(newMesh);
 
@@ -112,8 +102,32 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
             setSwitchParameters(Object.entries(newMesh.switchParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.value }), {}));
             setDropdownParameters(Object.entries(newMesh.dropdownParameters).reduce((prev, [key, val]) => ({ ...prev, [key]: val.size }), {}));
         }
+    }
 
-    }, [currentCollection, currentJewelryType]);
+    const [mesh, setMesh] = React.useState<JewelryMesh | undefined>(undefined);
+    const [sliderParameters, setSliderParameters] = React.useState<{ [key: string]: number }>({});
+    const [sliderMinParameters, setSliderMinParameters] = React.useState<{ [key: string]: number }>({});
+    const [switchParameters, setSwitchParameters] = React.useState<{ [key: string]: boolean }>({});
+    const [dropdownParameters, setDropdownParameters] = React.useState<{ [key: string]: RingSize | BraceletSize }>({});
+
+    const [currentCollection, _setCurrentCollection] = React.useState<CollectionType>(collection);
+    const [currentJewelryType, _setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
+    const [currentMaterial, setCurrentMaterial] = React.useState(materials.PLA);
+
+    const setCurrentCollection = (collection: CollectionType) => {
+        _setCurrentCollection(collection);
+        refreshParams(collection, currentJewelryType);
+    }
+
+    const setCurrentJewelryType = (jewelry: JewelryType) => {
+        _setCurrentJewelryType(jewelry);
+        refreshParams(currentCollection, jewelry);
+    }
+
+    useEffect(() => {
+        refreshParams(collection, jewelry);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return { mesh, sliderParameters, sliderMinParameters, switchParameters, dropdownParameters, setSliderParameters, setSliderMinParameters, setSwitchParameters, setDropdownParameters, currentCollection, setCurrentCollection, currentJewelryType, setCurrentJewelryType, currentMaterial, setCurrentMaterial };
 };

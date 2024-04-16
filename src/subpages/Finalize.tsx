@@ -1,9 +1,11 @@
-import { Box, Button, HStack, Select, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Select, Text, useDisclosure, useToast } from '@chakra-ui/react';
 import React from 'react';
+import { useCopyToClipboard } from 'usehooks-ts';
 import { JewelryMesh, RingSize } from '../components/collections/Collections';
 
 
 type FinalizeProps = {
+    parameters: any;
     mesh: JewelryMesh;
     meshRef: React.RefObject<THREE.Mesh>;
     sliderParameters: { [key: string]: number };
@@ -13,7 +15,12 @@ type FinalizeProps = {
     exportMeshGlTF: (mesh: THREE.Mesh) => void;
 };
 
-export const Finalize = ({ mesh, meshRef, sliderParameters, dropdownParameters, exportMeshSTL, exportMeshOBJ, exportMeshGlTF }: FinalizeProps) => {
+export const Finalize = ({ parameters, mesh, meshRef, sliderParameters, dropdownParameters, exportMeshSTL, exportMeshOBJ, exportMeshGlTF }: FinalizeProps) => {
+    const [_, copy] = useCopyToClipboard();
+    const toast = useToast();
+
+    const { isOpen, onToggle, onClose } = useDisclosure();
+
     return (
         <HStack spacing={5} alignItems="flex-start" >
             <Box paddingBottom={10}>
@@ -46,20 +53,58 @@ export const Finalize = ({ mesh, meshRef, sliderParameters, dropdownParameters, 
                     <option value='gltf' onClick={() => exportMeshGlTF(meshRef.current!)}>to .glTF</option>
                 </Select>
 
-                <Button
-                    size='md'
-                    fontFamily={"heading"}
-                    fontWeight="500"
-                    bg='brand.400'
-                    color='brand.50'
-                    w={44}
-                    shadow={'lg'}
-                    _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.300' }}
 
+                <Popover
+                    returnFocusOnClose={false}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    placement='right'
+                    closeOnBlur={false}
                 >
-                    <Box textAlign="left" w="full"> Share Design</Box>
-                </Button>
+                    <PopoverTrigger>
+                        <Button
+                            size='md'
+                            fontFamily={"heading"}
+                            fontWeight="500"
+                            bg='brand.400'
+                            color='brand.50'
+                            w={44}
+                            shadow={'lg'}
+                            _hover={{ bg: 'brand.400' }}
+                            _focus={{ bg: 'brand.300' }}
+                            onClick={async () => {
+                                try {
+                                    const share = window.location.href + `?config=${btoa(JSON.stringify(parameters))}`
+                                    await copy(share)
+                                    toast({
+                                        title: "Design saved!",
+                                        description: "Design link saved to your clipboard.",
+                                        status: "success",
+                                        duration: 9000,
+                                    })
+                                } catch (error) {
+                                    onToggle();
+                                }
+                            }}
+                        >
+                            <Box textAlign="left" w="full"> Share Design</Box>
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <PopoverHeader fontWeight='semibold'>Confirmation</PopoverHeader>
+                        <PopoverArrow />
+                        <PopoverCloseButton />
+                        <PopoverBody>
+                            Are you sure you want to continue with your action?
+                        </PopoverBody>
+                        <PopoverFooter display='flex' justifyContent='flex-end'>
+                            <ButtonGroup size='sm'>
+                                <Button variant='outline'>Cancel</Button>
+                                <Button colorScheme='red'>Apply</Button>
+                            </ButtonGroup>
+                        </PopoverFooter>
+                    </PopoverContent>
+                </Popover>
             </Box>
 
             <Box

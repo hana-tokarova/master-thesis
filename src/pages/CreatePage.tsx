@@ -1,4 +1,5 @@
 import { Box, Flex, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { CollectionType, JewelryType } from "../components/collections/Collections";
 
 type Project = {
@@ -6,6 +7,7 @@ type Project = {
     image: string;
     material: "PLA Filament" | "Resin" | "Metal";
     price: number;
+    url?: string;
     collection?: CollectionType;
     jewelry?: JewelryType;
 }
@@ -26,6 +28,7 @@ const projects: Project[] = [
         image: "https://source.unsplash.com/random/100x50",
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
+        url: "eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjUsInNjYWxlQiI6MTAsInIiOjAuNX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwiciI6MC40fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjAuNCwiYWRkaXRpb25hbENvc3QiOjEwfSwibWVzaENvbG9yIjoiZ3JlZW55ZWxsb3cifQ=="
     },
     {
         id: 3,
@@ -202,6 +205,8 @@ export const CreatePage = () => {
                                             .filter(project => project.collection === collectionType)
                                             .map((selectedProject) => (
                                                 <Box
+                                                    as={Link}
+                                                    to={`/configurator?config=${selectedProject.url}`}
                                                     key={selectedProject.id}
                                                     h={{ base: "44", sm: "48", md: "52", lg: "72" }}
                                                 >

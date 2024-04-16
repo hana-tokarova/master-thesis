@@ -5,7 +5,7 @@ import { changeDropdownParameter, changeJewelryType, changeNumericParameter } fr
 type GeneralProps = {
     mesh: JewelryMesh
     currentJewelryType: JewelryType;
-    setCurrentJewelryType: React.Dispatch<React.SetStateAction<JewelryType>>;
+    setCurrentJewelryType: (type: JewelryType) => void;
     dropdownParameters: { [key: string]: RingSize | BraceletSize; }
     setDropdownParameters: React.Dispatch<React.SetStateAction<{ [key: string]: RingSize | BraceletSize; }>>;
     sliderParameters: { [key: string]: number; }
