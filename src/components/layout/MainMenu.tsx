@@ -42,7 +42,7 @@ export const MainMenu = () => {
             <Link to="/">
                 <Image
                     h={{ base: "7", md: "8", lg: "9" }}
-                    src="/images/logo/logo-full.png"
+                    src={`${process.env.PUBLIC_URL}/images/logo/logo-full.png`}
                     alt="NEOTAKU JEWELRY"
                 />
             </Link>

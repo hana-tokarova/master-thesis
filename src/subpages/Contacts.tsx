@@ -64,7 +64,7 @@ export const Contacts = () => {
                 spacing={1}
             >
                 <Image
-                    src="/images/logo/ht-logo.svg"
+                    src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`}
                     alt="ht-logo"
                     w={10}
                     h={10}

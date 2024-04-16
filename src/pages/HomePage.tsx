@@ -6,7 +6,7 @@ export const HomePage = () => {
     return (
         <>
             <Image
-                src="/images/bg/jewelry-homepage.png"
+                src={`${process.env.PUBLIC_URL}/images/bg/jewelry-homepage.png`}
                 alt="jewelry-homepage-image"
                 w="100vw"
                 h={{ base: 36, sm: 36, md: 56, lg: 72 }}
