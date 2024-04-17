@@ -34,6 +34,12 @@ export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerPr
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
+                        sx={{
+                            transition: 'background 0.3s ease-in-out',
+                            ':hover': {
+                                background: `linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5)), linear-gradient(to bottom, ${buttonColor}, ${gradientColor})`,
+                            },
+                        }}
                     >
                         {activeColor === buttonColor && <FaCheck color="white" />}
                     </Box>

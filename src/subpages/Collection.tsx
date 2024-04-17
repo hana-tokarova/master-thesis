@@ -137,6 +137,13 @@ export const Collection = ({
                                                     _checked: {
                                                         bg: 'brand.100',
                                                     },
+                                                    _focus: {
+                                                        ring: '0px',
+                                                        ringColor: 'none',
+                                                        ringOffset: '0px',
+                                                        ringOffsetColor: 'none',
+                                                        boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.1)',
+                                                    },
                                                 },
                                             }}
                                             onChange={(newValue) =>

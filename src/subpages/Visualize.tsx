@@ -67,6 +67,7 @@ export const Visualize = ({
                     value={currentMaterial.name}
                     color="brand.50"
                     size="md"
+                    cursor="pointer"
                     shadow={'lg'}
                     paddingTop={2}
                     paddingBottom={4}

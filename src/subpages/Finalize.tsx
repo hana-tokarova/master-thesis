@@ -96,6 +96,7 @@ export const Finalize = ({
                     border="none"
                     color="brand.50"
                     size="md"
+                    cursor="pointer"
                     shadow={'lg'}
                     paddingTop={2}
                     paddingBottom={4}

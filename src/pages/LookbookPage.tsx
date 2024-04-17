@@ -99,6 +99,7 @@ export const LookbookPage = () => {
                 {projects.map((image) => (
                     <Image
                         key={image.id}
+                        cursor="pointer"
                         w="100%"
                         display="inline-block"
                         mb={2}
