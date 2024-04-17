@@ -18,11 +18,10 @@ import React from 'react';
 import { BiCopy } from 'react-icons/bi';
 import { FaBug, FaCheck } from 'react-icons/fa';
 import { useCopyToClipboard } from 'usehooks-ts';
-import { JewelryMesh, RingSize } from '../components/collections/Collections';
+import { RingSize } from '../components/collections/Collections';
 
 type FinalizeProps = {
     parameters: any;
-    mesh: JewelryMesh;
     meshRef: React.RefObject<THREE.Mesh>;
     sliderParameters: { [key: string]: number };
     dropdownParameters: { [key: string]: RingSize };
@@ -33,7 +32,6 @@ type FinalizeProps = {
 
 export const Finalize = ({
     parameters,
-    mesh,
     meshRef,
     sliderParameters,
     dropdownParameters,
@@ -51,6 +49,8 @@ export const Finalize = ({
     const toast = useToast();
 
     const { isOpen, onToggle, onClose } = useDisclosure();
+
+    const [volume, setVolume] = React.useState<number>(1);
 
     return (
         <HStack spacing={5} alignItems="flex-start">
@@ -144,26 +144,6 @@ export const Finalize = ({
                         </option>
                     ))}
                 </Select>
-
-                {/* <option
-                        value="stl"
-                        onClick={async () => {
-                            try {
-                                exportMeshSTL(meshRef.current!);
-                                
-                            } catch (error) {
-                                
-                            }
-                        }}
-                    >
-                        to .STL
-                    </option>
-                    <option value="obj" onClick={() => exportMeshOBJ(meshRef.current!)}>
-                        to .OBJ
-                    </option>
-                    <option value="gltf" onClick={() => exportMeshGlTF(meshRef.current!)}>
-                        to .glTF
-                    </option> */}
 
                 <Popover
                     returnFocusOnClose={false}
@@ -282,7 +262,9 @@ export const Finalize = ({
                     fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                     paddingBottom={10}
                 >
-                    €5,00
+                    {/* {volume}, €{price.toFixed(2)} */}
+                    {/* {volume}, €{volume * parameters.currentMaterial.additionalCost} */}
+                    {meshRef.current ? 'lol' : 'no'}
                 </Text>
             </Box>
         </HStack>

@@ -199,16 +199,37 @@ export const CreatePage = () => {
                                                     to={`/configurator?config=${selectedProject.url}`}
                                                     key={selectedProject.id}
                                                     h={{ base: '44', sm: '48', md: '52', lg: '72' }}
+                                                    position="relative"
                                                 >
-                                                    <Image
-                                                        w={{ base: '32', sm: '36', md: '40', lg: '60' }}
-                                                        objectFit="cover"
-                                                        h={{ base: '32', sm: '36', md: '40', lg: '60' }}
-                                                        src={selectedProject.image}
-                                                        alt={'Project' + selectedProject.id}
-                                                        shadow={'xl'}
-                                                        borderRadius="sm"
-                                                    />
+                                                    <Box
+                                                        _hover={{
+                                                            '.image-overlay': {
+                                                                opacity: 1,
+                                                            },
+                                                        }}
+                                                    >
+                                                        <Image
+                                                            w={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                            objectFit="cover"
+                                                            h={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                            src={selectedProject.image}
+                                                            alt={'Project' + selectedProject.id}
+                                                            shadow={'xl'}
+                                                            borderRadius="sm"
+                                                        />
+                                                        <Box
+                                                            className="image-overlay"
+                                                            position="absolute"
+                                                            top="0"
+                                                            left="0"
+                                                            w="full"
+                                                            h="full"
+                                                            bgGradient="linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))"
+                                                            opacity="0"
+                                                            transition="opacity 0.3s ease-in-out"
+                                                            zIndex="1"
+                                                        />
+                                                    </Box>
 
                                                     <Text
                                                         paddingTop={2}

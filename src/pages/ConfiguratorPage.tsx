@@ -199,7 +199,6 @@ export const ConfiguratorPage = () => {
 
                 <Finalize
                     parameters={storeParameters}
-                    mesh={mesh}
                     meshRef={meshRef}
                     sliderParameters={sliderParameters}
                     dropdownParameters={dropdownParameters}
@@ -207,6 +206,8 @@ export const ConfiguratorPage = () => {
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}
                 />
+
+                {meshRef.current ? 'lol' : 'no'}
             </Box>
 
             <Box position="fixed" right="0" top="0" h="90%" w="65vw" overflow="hidden">
