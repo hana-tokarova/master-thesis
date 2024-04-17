@@ -64,7 +64,12 @@ export const General = ({
                 columnGap={4}
                 wrap="wrap"
             >
-                <Text fontFamily={'heading'} fontWeight="400" fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
+                <Text
+                    as="div"
+                    fontFamily={'heading'}
+                    fontWeight="400"
+                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                >
                     Jewelry type
                     <Select
                         w={44}
