@@ -1,4 +1,4 @@
-import { Box, HStack, Select, Switch, Text } from '@chakra-ui/react';
+import { Box, HStack, Select, Text } from '@chakra-ui/react';
 import { materials } from '../components/collections/Collections';
 import { ColorPair, ColorPicker } from '../components/layout/ColorPicker';
 import { changeCurrentMaterial, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
@@ -91,33 +91,6 @@ export const Visualize = ({
 
                 <ColorPicker activeColor={meshColor} colors={colors} setMeshColor={setMeshColor} />
             </HStack>
-
-            <Text
-                fontFamily={'heading'}
-                fontWeight="400"
-                fontSize={{ base: 'xs', sm: 'sm', md: 'md', lg: 'lg' }}
-                w={{ base: '28', sm: '30', md: '32', lg: '34' }}
-            >
-                Mockup Viewer
-            </Text>
-
-            <Switch
-                paddingTop={2}
-                size="lg"
-                style={{ margin: 0 }}
-                sx={{
-                    '.chakra-switch__thumb': {
-                        boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.3)',
-                    },
-                    '.chakra-switch__track': {
-                        bg: 'brand.400',
-                        boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
-                        _checked: {
-                            bg: 'brand.100',
-                        },
-                    },
-                }}
-            />
         </Box>
     );
 };

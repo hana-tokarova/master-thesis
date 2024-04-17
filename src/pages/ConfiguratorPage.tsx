@@ -51,7 +51,7 @@ export const ConfiguratorPage = () => {
         setCurrentJewelryType,
         currentMaterial,
         setCurrentMaterial,
-    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
+    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Bracelet);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
@@ -206,8 +206,6 @@ export const ConfiguratorPage = () => {
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}
                 />
-
-                {meshRef.current ? 'lol' : 'no'}
             </Box>
 
             <Box position="fixed" right="0" top="0" h="90%" w="65vw" overflow="hidden">

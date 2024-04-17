@@ -227,7 +227,7 @@ export const collections: {
                         meshRadius={slider.r}
                         parameterA={slider.a}
                         parameterB={slider.b}
-                        scaleA={dropdown.scaleA.diameter}
+                        scaleA={dropdown.scaleA.diameter * Math.PI}
                         scaleB={slider.scaleB}
                         detail={1000}
                     />

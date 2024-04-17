@@ -18,7 +18,7 @@ export const Contacts = () => {
                 </Box>{' '}
                 <Button
                     as="a"
-                    href="mailto:info@neotaku.com?subject=Interested in Your Work"
+                    href="https://github.com/hana-tokarova/master-thesis"
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="link"
@@ -26,7 +26,7 @@ export const Contacts = () => {
                     fontWeight={400}
                     fontSize={{ base: '2xs', md: 'xs', lg: 'sm' }}
                 >
-                    info@neotaku.com
+                    github.com/hana-tokarova/master-thesis
                 </Button>
                 <br />
                 <Box as="strong" fontFamily="heading" fontWeight="600">

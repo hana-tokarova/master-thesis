@@ -18,8 +18,8 @@ const projects: Project[] = [
         material: 'PLA Filament',
         price: 10.0,
         image: 'https://source.unsplash.com/random/100x100',
-        collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Earring,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Ring,
     },
     {
         id: 2,
