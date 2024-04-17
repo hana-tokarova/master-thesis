@@ -1,20 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogContent,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
-    Box,
-    Button,
-    HStack,
-    useDisclosure,
-} from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 
 import isEqual from 'lodash/isEqual';
-import { MdKeyboardBackspace } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BraceletSize, CollectionType, JewelryType, RingSize } from '../components/collections/Collections';
 import { exportMeshGlTF } from '../components/utils/exporters/ExportGlTF';
@@ -24,6 +12,7 @@ import { useMeshParameters } from '../components/utils/mesh/ChangeMesh';
 import { Collection } from '../subpages/Collection';
 import { Finalize } from '../subpages/Finalize';
 import { General } from '../subpages/General';
+import { GoBack } from '../subpages/GoBack';
 import { Info } from '../subpages/Info';
 import { RenderCanvas } from '../subpages/RenderCanvas';
 import { Visualize } from '../subpages/Visualize';
@@ -67,21 +56,6 @@ export const ConfiguratorPage = () => {
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
     const [isDirty, setIsDirty] = React.useState(false);
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const cancelRef = React.useRef<HTMLButtonElement>(null);
-
-    const handleBackClick = () => {
-        if (isDirty) {
-            onOpen(); // open the alert dialog
-        } else {
-            navigate('/create');
-        }
-    };
-
-    const handleLeave = () => {
-        setIsDirty(false); // Reset the dirty state
-        navigate('/create');
-    };
 
     const { search } = useLocation();
     const navigate = useNavigate();
@@ -137,7 +111,7 @@ export const ConfiguratorPage = () => {
                 currentMaterial,
                 meshColor,
             };
-            // Compare each parameter; you can use deep equality check or JSON stringify for simplicity
+
             if (!isEqual(currentParams, initialParameters)) {
                 setIsDirty(true);
             } else {
@@ -186,39 +160,7 @@ export const ConfiguratorPage = () => {
             position="relative"
         >
             <Box flex="0.35" paddingRight="20px" w="35vw" h="auto" zIndex={1}>
-                <Button
-                    leftIcon={<MdKeyboardBackspace />}
-                    onClick={handleBackClick}
-                    size={{ base: 'xs', md: 'sm', lg: 'md' }}
-                    fontFamily={'heading'}
-                    fontWeight="400"
-                    variant="link"
-                    color={'brand.50'}
-                    style={{ padding: 0 }}
-                >
-                    Back to collection types
-                </Button>
-
-                <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
-                    <AlertDialogOverlay>
-                        <AlertDialogContent>
-                            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                                Leave Page?
-                            </AlertDialogHeader>
-                            <AlertDialogBody>
-                                Are you sure you want to leave? You will lose all unsaved changes.
-                            </AlertDialogBody>
-                            <AlertDialogFooter>
-                                <Button ref={cancelRef} onClick={onClose}>
-                                    Cancel
-                                </Button>
-                                <Button colorScheme="red" onClick={handleLeave} ml={3}>
-                                    Leave
-                                </Button>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialogOverlay>
-                </AlertDialog>
+                <GoBack isDirty={isDirty} setIsDirty={setIsDirty} navigate={navigate} />
 
                 <Info collection={currentCollection} jewelry={currentJewelryType} mesh={mesh} />
 
