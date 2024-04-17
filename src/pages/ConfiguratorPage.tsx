@@ -204,6 +204,7 @@ export const ConfiguratorPage = () => {
                     meshRef={meshRef}
                     sliderParameters={sliderParameters}
                     dropdownParameters={dropdownParameters}
+                    currentCollection={currentCollection}
                     exportMeshSTL={exportMeshSTL}
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}

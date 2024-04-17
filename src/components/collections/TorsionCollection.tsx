@@ -193,6 +193,8 @@ export const TorsionBracelet = ({
     scaleC,
     stacks,
     screw,
+    roughness,
+    metalness,
 }: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = taperedTorsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, screw!);
@@ -208,7 +210,7 @@ export const TorsionBracelet = ({
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };
