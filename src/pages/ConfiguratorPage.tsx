@@ -1,10 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Box, Button, HStack } from '@chakra-ui/react';
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogOverlay,
+    Box,
+    Button,
+    HStack,
+    useDisclosure,
+} from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 
+import isEqual from 'lodash/isEqual';
 import { MdKeyboardBackspace } from 'react-icons/md';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { CollectionType, JewelryType } from '../components/collections/Collections';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { BraceletSize, CollectionType, JewelryType, RingSize } from '../components/collections/Collections';
 import { exportMeshGlTF } from '../components/utils/exporters/ExportGlTF';
 import { exportMeshOBJ } from '../components/utils/exporters/ExportOBJ';
 import { exportMeshSTL } from '../components/utils/exporters/ExportSTL';
@@ -15,6 +27,21 @@ import { General } from '../subpages/General';
 import { Info } from '../subpages/Info';
 import { RenderCanvas } from '../subpages/RenderCanvas';
 import { Visualize } from '../subpages/Visualize';
+
+type ParameterState = {
+    sliderParameters: { [key: string]: number };
+    sliderMinParameters: { [key: string]: number };
+    switchParameters: { [key: string]: boolean };
+    dropdownParameters: { [key: string]: RingSize | BraceletSize };
+    currentCollection: CollectionType;
+    currentJewelryType: JewelryType;
+    currentMaterial: {
+        name: string;
+        thicknessMinimum: number;
+        additionalCost: number;
+    };
+    meshColor: string;
+};
 
 export const ConfiguratorPage = () => {
     const meshRef = React.useRef<THREE.Mesh>(null);
@@ -38,6 +65,24 @@ export const ConfiguratorPage = () => {
     } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
+    const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
+    const [isDirty, setIsDirty] = React.useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = React.useRef<HTMLButtonElement>(null);
+
+    const handleBackClick = () => {
+        if (isDirty) {
+            onOpen(); // open the alert dialog
+        } else {
+            navigate('/create');
+        }
+    };
+
+    const handleLeave = () => {
+        setIsDirty(false); // Reset the dirty state
+        navigate('/create');
+    };
+
     const { search } = useLocation();
     const navigate = useNavigate();
 
@@ -54,6 +99,18 @@ export const ConfiguratorPage = () => {
             setDropdownParameters(parsedConfig.dropdownParameters);
             setCurrentMaterial(parsedConfig.currentMaterial);
             setMeshColor(parsedConfig.meshColor);
+
+            setInitialParameters({
+                sliderParameters: parsedConfig.sliderParameters,
+                sliderMinParameters: parsedConfig.sliderMinParameters,
+                switchParameters: parsedConfig.switchParameters,
+                dropdownParameters: parsedConfig.dropdownParameters,
+                currentCollection: parsedConfig.currentCollection,
+                currentJewelryType: parsedConfig.currentJewelryType,
+                currentMaterial: parsedConfig.currentMaterial,
+                meshColor: parsedConfig.meshColor,
+            });
+
             navigate('/configurator', { replace: true });
         }
     }, [
@@ -66,6 +123,39 @@ export const ConfiguratorPage = () => {
         setSliderMinParameters,
         setSliderParameters,
         setSwitchParameters,
+    ]);
+
+    useEffect(() => {
+        const checkForChanges = () => {
+            const currentParams = {
+                sliderParameters,
+                sliderMinParameters,
+                switchParameters,
+                dropdownParameters,
+                currentCollection,
+                currentJewelryType,
+                currentMaterial,
+                meshColor,
+            };
+            // Compare each parameter; you can use deep equality check or JSON stringify for simplicity
+            if (!isEqual(currentParams, initialParameters)) {
+                setIsDirty(true);
+            } else {
+                setIsDirty(false);
+            }
+        };
+
+        checkForChanges();
+    }, [
+        initialParameters,
+        sliderParameters,
+        sliderMinParameters,
+        switchParameters,
+        dropdownParameters,
+        currentCollection,
+        currentJewelryType,
+        currentMaterial,
+        meshColor,
     ]);
 
     const storeParameters = {
@@ -98,9 +188,8 @@ export const ConfiguratorPage = () => {
             <Box flex="0.35" paddingRight="20px" w="35vw" h="auto" zIndex={1}>
                 <Button
                     leftIcon={<MdKeyboardBackspace />}
+                    onClick={handleBackClick}
                     size={{ base: 'xs', md: 'sm', lg: 'md' }}
-                    as={Link}
-                    to={'/create'}
                     fontFamily={'heading'}
                     fontWeight="400"
                     variant="link"
@@ -109,6 +198,27 @@ export const ConfiguratorPage = () => {
                 >
                     Back to collection types
                 </Button>
+
+                <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+                    <AlertDialogOverlay>
+                        <AlertDialogContent>
+                            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                                Leave Page?
+                            </AlertDialogHeader>
+                            <AlertDialogBody>
+                                Are you sure you want to leave? You will lose all unsaved changes.
+                            </AlertDialogBody>
+                            <AlertDialogFooter>
+                                <Button ref={cancelRef} onClick={onClose}>
+                                    Cancel
+                                </Button>
+                                <Button colorScheme="red" onClick={handleLeave} ml={3}>
+                                    Leave
+                                </Button>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialogOverlay>
+                </AlertDialog>
 
                 <Info collection={currentCollection} jewelry={currentJewelryType} mesh={mesh} />
 
