@@ -268,12 +268,12 @@ export const Finalize = ({
                     {currentCollection === CollectionType.Lissajous
                         ? Object.keys(dropdownParameters).length === 0
                             ? sliderParameters['scaleC'] !== undefined
-                                ? `wat ${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['scaleC']} mm`
+                                ? `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['scaleC']} mm`
                                 : `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['r']} mm`
-                            : `ring & bracelet ${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`
+                            : `${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`
                         : Object.keys(dropdownParameters).length === 0
                         ? `${sliderParameters['majorR']} x ${sliderParameters['minorR']} x ${sliderParameters['scaleC']} mm`
-                        : `ring & bracelet ${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
+                        : `${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
                 </Text>
 
                 {volume !== null && (

@@ -13,8 +13,8 @@ type LissajousProps = {
     scaleB: number;
     scaleC?: number;
     detail: number;
-    roughness?: number;
-    metalness?: number;
+    roughness: number;
+    metalness: number;
 };
 
 const makeLissajousCurve2D = (
@@ -187,6 +187,8 @@ export const LissajousBracelet = ({
     mesh,
     meshColor,
     detail,
+    roughness,
+    metalness,
 }: LissajousProps) => {
     const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 1, 5, parameterA, parameterB, Math.PI / 2);
 
@@ -211,7 +213,7 @@ export const LissajousBracelet = ({
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, 0, 0)}>
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };
@@ -227,6 +229,8 @@ export const LissajousEarring = ({
     mesh,
     meshColor,
     detail,
+    roughness,
+    metalness,
 }: LissajousProps) => {
     const lissajousPoints = makeLissajousCurve3D(
         detail,
@@ -283,7 +287,7 @@ export const LissajousEarring = ({
             position={[0, 0, 0]}
             rotation={new THREE.Euler(-Math.PI / 2, 0, Math.PI / 3)}
         >
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };
@@ -297,6 +301,8 @@ export const LissajousPendant = ({
     mesh,
     meshColor,
     detail,
+    roughness,
+    metalness,
 }: LissajousProps) => {
     const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 5, 5, parameterA, parameterB, Math.PI / 2);
     const holderPoints = makeCircleCurve2D(detail);
@@ -337,7 +343,7 @@ export const LissajousPendant = ({
             position={[0, 0, 0]}
             rotation={new THREE.Euler(0, Math.PI / 3, Math.PI / 2)}
         >
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };

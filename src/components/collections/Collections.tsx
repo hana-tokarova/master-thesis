@@ -222,7 +222,7 @@ export const collections: {
                 dropdownParameters: {
                     scaleA: { name: 'Sizing', tag: 'general', type: 'dropdown', size: braceletSizes[0] },
                 },
-                render: (slider, dropdown, _, color, ref) => (
+                render: (slider, dropdown, _, color, ref, roughness, metalness) => (
                     <LissajousBracelet
                         mesh={ref}
                         meshColor={color}
@@ -232,6 +232,8 @@ export const collections: {
                         scaleA={dropdown.scaleA.diameter * Math.PI}
                         scaleB={slider.scaleB}
                         detail={1000}
+                        roughness={roughness}
+                        metalness={metalness}
                     />
                 ),
             },
@@ -272,7 +274,7 @@ export const collections: {
                 },
                 switchParameters: {},
                 dropdownParameters: {},
-                render: (slider, _, __, color, ref) => (
+                render: (slider, _, __, color, ref, roughness, metalness) => (
                     <LissajousEarring
                         mesh={ref}
                         meshColor={color}
@@ -284,6 +286,8 @@ export const collections: {
                         scaleB={slider.scaleB}
                         scaleC={slider.scaleC}
                         detail={1000}
+                        roughness={roughness}
+                        metalness={metalness}
                     />
                 ),
             },
@@ -322,7 +326,7 @@ export const collections: {
                 },
                 switchParameters: {},
                 dropdownParameters: {},
-                render: (slider, _, __, color, ref) => (
+                render: (slider, _, __, color, ref, roughness, metalness) => (
                     <LissajousPendant
                         mesh={ref}
                         meshColor={color}
@@ -332,6 +336,8 @@ export const collections: {
                         scaleA={slider.scaleB}
                         scaleB={slider.scaleA}
                         detail={1000}
+                        roughness={roughness}
+                        metalness={metalness}
                     />
                 ),
             },

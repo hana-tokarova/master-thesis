@@ -20,6 +20,7 @@ const projects: Project[] = [
         image: 'https://source.unsplash.com/random/100x100',
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Ring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1pbm9yUiI6MC4zLCJ0d2lzdCI6LTEuNSwiaW5mbGF0ZSI6Mywic2NhbGVDIjowLjU4fSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJtaW5vclIiOjAuMSwidHdpc3QiOi01LCJpbmZsYXRlIjoxLCJzY2FsZUMiOjAuNSwiciI6MC4zfSwic3dpdGNoUGFyYW1ldGVycyI6eyJ0d2lzdEFsbCI6dHJ1ZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJtYWpvclIiOnsidmFsdWUiOjQ3LCJkaWFtZXRlciI6MTQuOX19LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJNZXRhbCIsInRoaWNrbmVzc01pbmltdW0iOjAuMywiYWRkaXRpb25hbENvc3QiOjIwLCJyb3VnaG5lc3MiOjAuMywibWV0YWxuZXNzIjoxfSwibWVzaENvbG9yIjoiY3lhbiJ9',
     },
     {
         id: 2,
