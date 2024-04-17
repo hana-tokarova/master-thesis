@@ -1,4 +1,5 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from './LissajousCollection';
+import { TorsionRing } from './TorsionCollection';
 
 export enum CollectionType {
     Lissajous = 'lissaje',
@@ -339,32 +340,70 @@ export const collections: {
     [CollectionType.Torsion]: {
         name: 'Torsion',
         meshes: {
-            // [JewelryType.Ring]: {
-            //     description: 'Torsion ring',
-            //     numericParameters: {
-            //         majorR: { name: "Radius", type: 'slider', value: 20, min: 10, max: 30, step: 1 },
-            //         minorR: { name: "Thickness", type: 'slider', value: 0.3, min: 0.1, max: 0.5, step: 0.01 },
-            //         twist: { name: "Twistiness", type: 'slider', value: 3, min: -5, max: 5, step: 0.5 },
-            //         inflate: { name: "Inflation", type: 'slider', value: 2, min: 1, max: 3, step: 0.01 },
-            //         scaleC: { name: "Height", type: 'slider', value: 0.7, min: 0.5, max: 1, step: 0.01 },
-            //     },
-            //     booleanParameters: {
-            //         twistAll: { name: "Twist all?", type: 'toggle', value: false },
-            //     },
-            //     render: (numParams, togParams, color, ref) => <TorsionRing
-            //         mesh={ref}
-            //         meshColor={color}
-            //         stacks={64}
-            //         majorR={numParams.majorR}
-            //         minorR={numParams.minorR}
-            //         twistAll={togParams.twistAll}
-            //         twist={numParams.twist}
-            //         inflate={numParams.inflate}
-            //         scaleA={1}
-            //         scaleB={1}
-            //         scaleC={numParams.scaleC}
-            //     />
-            // },
+            [JewelryType.Ring]: {
+                description: 'Torsion ring',
+                sliderParameters: {
+                    minorR: {
+                        name: 'Thickness',
+                        tag: 'general',
+                        type: 'slider',
+                        value: 0.3,
+                        min: 0.1,
+                        max: 0.5,
+                        step: 0.01,
+                    },
+                    twist: {
+                        name: 'Twistiness',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 3,
+                        min: -5,
+                        max: 5,
+                        step: 0.5,
+                    },
+                    inflate: {
+                        name: 'Inflation',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 2,
+                        min: 1,
+                        max: 3,
+                        step: 0.01,
+                    },
+                    scaleC: {
+                        name: 'Height',
+                        tag: 'general',
+                        type: 'slider',
+                        value: 0.7,
+                        min: 0.5,
+                        max: 1,
+                        step: 0.01,
+                    },
+                },
+                switchParameters: {
+                    twistAll: { name: 'Twist all?', tag: 'collection', type: 'toggle', value: false },
+                },
+                dropdownParameters: {
+                    majorR: { name: 'Sizing', tag: 'general', type: 'dropdown', size: ringSizes[0] },
+                },
+                render: (slider, dropdown, bool, color, ref, roughness, metalness) => (
+                    <TorsionRing
+                        mesh={ref}
+                        meshColor={color}
+                        stacks={64}
+                        majorR={dropdown.majorR.diameter}
+                        minorR={slider.minorR}
+                        twistAll={bool.twistAll}
+                        twist={slider.twist}
+                        inflate={slider.inflate}
+                        scaleA={1}
+                        scaleB={1}
+                        scaleC={slider.scaleC}
+                        roughness={roughness}
+                        metalness={metalness}
+                    />
+                ),
+            },
             // [JewelryType.Bracelet]: {
             //     description: 'Torsion bracelet',
             //     numericParameters: {

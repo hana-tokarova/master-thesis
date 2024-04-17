@@ -242,11 +242,12 @@ export const Finalize = ({
                     </Text>
                 </Text>
                 <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
-                    {dropdownParameters && Object.keys(dropdownParameters).length === 0
+                    toto opravit
+                    {/* {dropdownParameters && Object.keys(dropdownParameters).length === 0
                         ? sliderParameters['scaleC'] !== undefined
                             ? `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['scaleC']} mm`
                             : `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['r']} mm`
-                        : `${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`}
+                        : `${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`} */}
                 </Text>
 
                 <Text

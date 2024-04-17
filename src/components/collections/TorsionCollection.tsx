@@ -16,6 +16,8 @@ type TorsionProps = {
     scaleC: number;
     inflate?: number;
     screw?: number;
+    roughness?: number;
+    metalness?: number;
 };
 
 const makeCircleCurve2D = (nbSteps: number) => {
@@ -157,6 +159,8 @@ export const TorsionRing = ({
     scaleB,
     scaleC,
     stacks,
+    roughness,
+    metalness,
 }: TorsionProps) => {
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
@@ -172,7 +176,7 @@ export const TorsionRing = ({
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(Math.PI / 2, 0, Math.PI)}>
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };

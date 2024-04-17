@@ -6,20 +6,30 @@ import {
     SliderMark,
     SliderThumb,
     SliderTrack,
+    Switch,
     Text,
     Tooltip,
 } from '@chakra-ui/react';
 import { CollectionType, JewelryMesh } from '../components/collections/Collections';
-import { changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
+import { changeBooleanParameter, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
 
 type LissajousProps = {
     collection: CollectionType;
     mesh: JewelryMesh;
     sliderParameters: { [key: string]: number };
+    switchParameters: { [key: string]: boolean };
     setSliderParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>;
+    setSwitchParameters: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
 };
 
-export const Collection = ({ collection, mesh, sliderParameters, setSliderParameters }: LissajousProps) => {
+export const Collection = ({
+    collection,
+    mesh,
+    sliderParameters,
+    setSliderParameters,
+    switchParameters,
+    setSwitchParameters,
+}: LissajousProps) => {
     return (
         <Box>
             <Text
@@ -88,6 +98,56 @@ export const Collection = ({ collection, mesh, sliderParameters, setSliderParame
                                             />
                                         </Tooltip>
                                     </Slider>
+                                </Box>
+                            ),
+                    )}
+
+                {mesh &&
+                    Object.entries(mesh.switchParameters).map(
+                        ([parameterName, parameterDetails]) =>
+                            parameterDetails.tag === 'collection' && (
+                                <Box key={parameterName + parameterDetails}>
+                                    <Text
+                                        fontFamily={'heading'}
+                                        fontWeight="400"
+                                        fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                                    >
+                                        {parameterDetails.name}
+                                    </Text>
+
+                                    <Tooltip
+                                        bg="brand.100"
+                                        color="white"
+                                        placement="bottom"
+                                        label={switchParameters[parameterName] === true ? 'On' : 'Off'}
+                                        shouldWrapChildren
+                                    >
+                                        <Switch
+                                            margin={1}
+                                            size="lg"
+                                            colorScheme="cyan"
+                                            isChecked={switchParameters[parameterName]}
+                                            sx={{
+                                                '.chakra-switch__thumb': {
+                                                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.2)',
+                                                },
+                                                '.chakra-switch__track': {
+                                                    bg: 'brand.400',
+                                                    boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.1)',
+                                                    _checked: {
+                                                        bg: 'brand.100',
+                                                    },
+                                                },
+                                            }}
+                                            onChange={(newValue) =>
+                                                changeBooleanParameter(
+                                                    setSwitchParameters,
+                                                    parameterName,
+                                                    newValue.target.checked,
+                                                )
+                                            }
+                                        />
+                                    </Tooltip>
                                 </Box>
                             ),
                     )}
