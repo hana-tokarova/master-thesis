@@ -52,21 +52,42 @@ export const GoBack = ({ isDirty, setIsDirty, navigate }: GoBackProps) => {
                 Back to collection types
             </Button>
 
-            <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
+            <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} motionPreset="slideInBottom">
                 <AlertDialogOverlay>
                     <AlertDialogContent>
-                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                            Leave Page?
+                        <AlertDialogHeader fontFamily={'heading'} fontSize="xl" fontWeight="500">
+                            Leave Configurator?
                         </AlertDialogHeader>
-                        <AlertDialogBody>
-                            Are you sure you want to leave? You will lose all unsaved changes.
+                        <AlertDialogBody fontFamily={'body'} fontSize="sm" fontWeight="400">
+                            Are you sure you want to leave? You will lose all progress if you didn't save the design
+                            link.
                         </AlertDialogBody>
                         <AlertDialogFooter>
-                            <Button ref={cancelRef} onClick={onClose}>
+                            <Button
+                                ref={cancelRef}
+                                onClick={onClose}
+                                fontFamily={'heading'}
+                                fontSize="md"
+                                fontWeight="500"
+                                bg="brand.400"
+                                color="brand.50"
+                                _hover={{ bg: 'brand.400' }}
+                                _focus={{ bg: 'brand.300' }}
+                            >
                                 Cancel
                             </Button>
-                            <Button colorScheme="red" onClick={handleLeave} ml={3}>
-                                Leave
+                            <Button
+                                fontFamily={'heading'}
+                                fontSize="md"
+                                fontWeight="500"
+                                bg="red.500"
+                                color="brand.200"
+                                onClick={handleLeave}
+                                ml={3}
+                                _hover={{ bg: 'red.400' }}
+                                _focus={{ bg: 'red.600' }}
+                            >
+                                Leave Anyway
                             </Button>
                         </AlertDialogFooter>
                     </AlertDialogContent>
