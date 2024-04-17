@@ -224,7 +224,7 @@ export const ConfiguratorPage = () => {
                 />
             </Box>
 
-            <Box position="fixed" right="0" top="0" h="90%" w="65vw" overflow="hidden">
+            <Box position="fixed" right="0" top="0" h="90%" w="65vw" overflow="hidden" cursor="pointer">
                 <RenderCanvas
                     mesh={mesh!}
                     color={meshColor}

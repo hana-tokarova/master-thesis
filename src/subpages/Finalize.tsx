@@ -257,6 +257,7 @@ export const Finalize = ({
                 <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
                     Dimensions
                     <Text
+                        as="span"
                         fontFamily={'heading'}
                         fontWeight="400"
                         fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
