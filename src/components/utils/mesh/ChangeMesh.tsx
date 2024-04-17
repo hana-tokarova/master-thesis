@@ -176,5 +176,6 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
         setCurrentJewelryType,
         currentMaterial,
         setCurrentMaterial,
+        setMesh,
     };
 };

@@ -4,7 +4,13 @@ import React, { useEffect } from 'react';
 
 import isEqual from 'lodash/isEqual';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BraceletSize, CollectionType, JewelryType, RingSize } from '../components/collections/Collections';
+import {
+    BraceletSize,
+    collections,
+    CollectionType,
+    JewelryType,
+    RingSize,
+} from '../components/collections/Collections';
 import { exportMeshGlTF } from '../components/utils/exporters/ExportGlTF';
 import { exportMeshOBJ } from '../components/utils/exporters/ExportOBJ';
 import { exportMeshSTL } from '../components/utils/exporters/ExportSTL';
@@ -51,6 +57,7 @@ export const ConfiguratorPage = () => {
         setCurrentJewelryType,
         currentMaterial,
         setCurrentMaterial,
+        setMesh,
     } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
@@ -73,6 +80,11 @@ export const ConfiguratorPage = () => {
             setDropdownParameters(parsedConfig.dropdownParameters);
             setCurrentMaterial(parsedConfig.currentMaterial);
             setMeshColor(parsedConfig.meshColor);
+            setMesh(
+                collections[parsedConfig.currentCollection as CollectionType]?.meshes[
+                    parsedConfig.currentJewelryType as JewelryType
+                ],
+            );
 
             setInitialParameters({
                 sliderParameters: parsedConfig.sliderParameters,
@@ -97,6 +109,7 @@ export const ConfiguratorPage = () => {
         setSliderMinParameters,
         setSliderParameters,
         setSwitchParameters,
+        setMesh,
     ]);
 
     useEffect(() => {
