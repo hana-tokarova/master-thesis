@@ -10,6 +10,13 @@ type RenderCanvasProps = {
     sliderParams: { [key: string]: number };
     switchParams: { [key: string]: boolean };
     dropdownParams: { [key: string]: RingSize };
+    currentMaterial: {
+        name: string;
+        thicknessMinimum: number;
+        additionalCost: number;
+        roughness: number;
+        metalness: number;
+    };
 };
 
 const FollowCameraLight = () => {
@@ -32,7 +39,7 @@ const FollowCameraLight = () => {
 };
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
-    ({ mesh, color, sliderParams, switchParams, dropdownParams }, ref) => {
+    ({ mesh, color, sliderParams, switchParams, dropdownParams, currentMaterial }, ref) => {
         const cameraRef = useRef<THREE.PerspectiveCamera>(null);
         const [cameraPosition, setCameraPosition] = useState(new Vector3(0, 0, 0));
 
@@ -76,7 +83,15 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
 
                 <ambientLight intensity={1} color="dimgray" />
 
-                {mesh.render(sliderParams, dropdownParams, switchParams, color, ref)}
+                {mesh.render(
+                    sliderParams,
+                    dropdownParams,
+                    switchParams,
+                    color,
+                    ref,
+                    currentMaterial.roughness,
+                    currentMaterial.metalness,
+                )}
 
                 <OrbitControls
                     enablePan={false}

@@ -13,6 +13,8 @@ type LissajousProps = {
     scaleB: number;
     scaleC?: number;
     detail: number;
+    roughness?: number;
+    metalness?: number;
 };
 
 const makeLissajousCurve2D = (
@@ -139,6 +141,8 @@ export const LissajousRing = ({
     mesh,
     meshColor,
     detail,
+    roughness,
+    metalness,
 }: LissajousProps) => {
     const lissajousPoints = makeLissajousCurve3D(
         detail,
@@ -169,7 +173,7 @@ export const LissajousRing = ({
 
     return (
         <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, 0, 0)}>
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };

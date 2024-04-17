@@ -87,12 +87,16 @@ export const changeCurrentMaterial = (
             name: string;
             thicknessMinimum: number;
             additionalCost: number;
+            roughness: number;
+            metalness: number;
         }>
     >,
     currentMaterial: {
         name: string;
         thicknessMinimum: number;
         additionalCost: number;
+        roughness: number;
+        metalness: number;
     },
 ): void => {
     setCurrentMaterial(currentMaterial);

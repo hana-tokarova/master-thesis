@@ -50,6 +50,7 @@ export const Finalize = ({
 
     const { isOpen, onToggle, onClose } = useDisclosure();
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [volume, setVolume] = React.useState<number>(1);
 
     return (
@@ -263,8 +264,8 @@ export const Finalize = ({
                     paddingBottom={10}
                 >
                     {/* {volume}, €{price.toFixed(2)} */}
-                    {/* {volume}, €{volume * parameters.currentMaterial.additionalCost} */}
-                    {meshRef.current ? 'lol' : 'no'}
+                    {volume}, €{volume * parameters.currentMaterial.additionalCost}
+                    {/* {meshRef.current ? 'lol' : 'no'} */}
                 </Text>
             </Box>
         </HStack>

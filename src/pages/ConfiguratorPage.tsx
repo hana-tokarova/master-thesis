@@ -215,6 +215,7 @@ export const ConfiguratorPage = () => {
                     mesh={mesh!}
                     color={meshColor}
                     ref={meshRef}
+                    currentMaterial={currentMaterial}
                     sliderParams={sliderParameters}
                     switchParams={switchParameters}
                     dropdownParams={dropdownParameters}

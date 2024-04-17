@@ -9,12 +9,16 @@ type VisualizeProps = {
         name: string;
         thicknessMinimum: number;
         additionalCost: number;
+        roughness: number;
+        metalness: number;
     };
     setCurrentMaterial: React.Dispatch<
         React.SetStateAction<{
             name: string;
             thicknessMinimum: number;
             additionalCost: number;
+            roughness: number;
+            metalness: number;
         }>
     >;
     colors: ColorPair[];

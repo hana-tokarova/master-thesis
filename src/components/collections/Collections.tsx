@@ -75,18 +75,24 @@ export type ToggleParameter = {
 export const materials = {
     Metal: {
         name: 'Metal',
-        thicknessMinimum: 0.3, // Silver can have a thinner wire
+        thicknessMinimum: 0.3,
         additionalCost: 20,
+        roughness: 0.3,
+        metalness: 1,
     },
     Resin: {
         name: 'Resin',
-        thicknessMinimum: 0.4, // Resin can have a thinner wire
+        thicknessMinimum: 0.4,
         additionalCost: 10,
+        roughness: 0.3,
+        metalness: 0,
     },
     PLA: {
         name: 'PLA',
-        thicknessMinimum: 0.5, // PLA needs thicker wire
+        thicknessMinimum: 0.5,
         additionalCost: 5,
+        roughness: 0.8,
+        metalness: 0,
     },
 };
 
@@ -107,6 +113,8 @@ export type JewelryMesh = {
         booleanParams: { [key: string]: boolean },
         color: string,
         ref: React.Ref<THREE.Mesh>,
+        roughness: number,
+        metalness: number,
     ) => JSX.Element;
 };
 
@@ -160,7 +168,7 @@ export const collections: {
                 dropdownParameters: {
                     scaleA: { name: 'Sizing', tag: 'general', type: 'dropdown', size: ringSizes[0] },
                 },
-                render: (slider, dropdown, _, color, ref) => (
+                render: (slider, dropdown, _, color, ref, roughness, metalness) => (
                     <LissajousRing
                         mesh={ref}
                         meshColor={color}
@@ -169,6 +177,8 @@ export const collections: {
                         meshRadius={slider.r}
                         scaleA={dropdown.scaleA.diameter}
                         scaleB={slider.scaleB}
+                        roughness={roughness}
+                        metalness={metalness}
                         detail={1000}
                     />
                 ),
