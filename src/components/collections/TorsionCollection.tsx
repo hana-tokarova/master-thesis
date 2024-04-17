@@ -14,10 +14,10 @@ type TorsionProps = {
     scaleA: number;
     scaleB: number;
     scaleC: number;
+    roughness: number;
+    metalness: number;
     inflate?: number;
     screw?: number;
-    roughness?: number;
-    metalness?: number;
 };
 
 const makeCircleCurve2D = (nbSteps: number) => {
@@ -227,6 +227,8 @@ export const TorsionEarring = ({
     scaleB,
     scaleC,
     stacks,
+    roughness,
+    metalness,
 }: TorsionProps) => {
     const holderPoints = makeCircleCurve2D(100);
 
@@ -261,7 +263,7 @@ export const TorsionEarring = ({
             position={[0, 0, 0]}
             rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}
         >
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
 };
@@ -278,6 +280,8 @@ export const TorsionPendant = ({
     scaleB,
     scaleC,
     stacks,
+    metalness,
+    roughness,
 }: TorsionProps) => {
     const holderPoints = makeCircleCurve2D(100);
 
@@ -314,7 +318,7 @@ export const TorsionPendant = ({
             position={[0, 0, 0]}
             rotation={new THREE.Euler(0, Math.PI / 4, Math.PI / 2)}
         >
-            <meshLambertMaterial attach="material" color={meshColor} />
+            <meshStandardMaterial attach="material" color={meshColor} metalness={metalness} roughness={roughness} />
         </mesh>
     );
 };

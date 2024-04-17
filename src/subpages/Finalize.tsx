@@ -272,7 +272,7 @@ export const Finalize = ({
                                 : `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['r']} mm`
                             : `ring & bracelet ${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`
                         : Object.keys(dropdownParameters).length === 0
-                        ? 'kek'
+                        ? `${sliderParameters['majorR']} x ${sliderParameters['minorR']} x ${sliderParameters['scaleC']} mm`
                         : `ring & bracelet ${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
                 </Text>
 
