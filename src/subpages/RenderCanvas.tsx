@@ -4,9 +4,10 @@ import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Vector3 } from 'three';
-import { JewelryMesh, Material, RingSize } from '../components/collections/Collections';
+import { JewelryMesh, JewelryType, Material, RingSize } from '../components/collections/Collections';
 
 type RenderCanvasProps = {
+    currentJewelry: JewelryType;
     mesh: JewelryMesh;
     color: string;
     sliderParams: { [key: string]: number };
@@ -15,25 +16,46 @@ type RenderCanvasProps = {
     currentMaterial: Material;
 };
 
+const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleFactor: number } => {
+    switch (jewelryType) {
+        case JewelryType.Ring:
+            return { offset: 50, scaleFactor: 1.0 };
+        case JewelryType.Bracelet:
+            return { offset: 90, scaleFactor: 3 };
+        case JewelryType.Earring:
+            return { offset: 30, scaleFactor: 0.8 };
+        case JewelryType.Pendant:
+            return { offset: 40, scaleFactor: 1.0 };
+        default:
+            throw new Error('Unknown Jewelry Type');
+    }
+};
+
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
-    ({ mesh, color, sliderParams, switchParams, dropdownParams, currentMaterial }, ref) => {
-        const initializeCameraPosition = () => {
+    ({ currentJewelry, mesh, color, sliderParams, switchParams, dropdownParams, currentMaterial }, ref) => {
+        const initializeCameraPosition = (offset: number, scaleFactor: number): THREE.Vector3 => {
             const w = window.innerWidth;
             const h = window.innerHeight;
-            const x = Math.max(Math.min(50000 / Math.min(w / 2, h), 100), 50);
+            const x = Math.max(Math.min((50000 / Math.min(w / 2, h)) * scaleFactor, 100), offset);
             const y = 30;
             const z = 0;
             return new Vector3(x, y, z);
         };
 
+        const jewelrySettings = useRef(setCameraForJewelry(currentJewelry));
         const cameraRef = useRef<THREE.PerspectiveCamera>(null);
-        const [cameraPosition, setCameraPosition] = useState(initializeCameraPosition());
+        const [cameraPosition, setCameraPosition] = useState<THREE.Vector3>(
+            initializeCameraPosition(jewelrySettings.current.offset, jewelrySettings.current.scaleFactor),
+        );
 
         const handleResize = useRef(
             debounce(() => {
                 const w = window.innerWidth;
                 const h = window.innerHeight;
-                const x = Math.max(Math.min(50000 / Math.min(w / 2, h), 100), 50);
+                const x = Math.max(
+                    Math.min((50000 / Math.min(w / 2, h)) * jewelrySettings.current.scaleFactor, 100),
+                    jewelrySettings.current.offset,
+                );
                 const y = 30;
                 const z = 0;
                 setCameraPosition(new Vector3(x, y, z));

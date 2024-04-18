@@ -230,6 +230,7 @@ export const ConfiguratorPage = () => {
             <Box position="fixed" right="0" top="0" h="90%" w="60vw" overflow="hidden" cursor="pointer">
                 {showOverlay && <StartupOverlay onClose={handleOverlayClose} />}
                 <RenderCanvas
+                    currentJewelry={currentJewelryType}
                     mesh={mesh!}
                     color={meshColor}
                     ref={meshRef}

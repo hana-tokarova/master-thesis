@@ -205,7 +205,7 @@ export const LissajousBracelet = ({
         braceletMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.01);
 
-        bendLissajous(mergedVertices, 2 * Math.pow(scaleA, -0.9));
+        bendLissajous(mergedVertices, 2 * Math.pow(scaleA, -0.91));
         mergedVertices.computeVertexNormals();
 
         return mergedVertices;
