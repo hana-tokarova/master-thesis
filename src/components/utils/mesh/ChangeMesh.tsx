@@ -5,7 +5,7 @@ import {
     CollectionType,
     JewelryMesh,
     JewelryType,
-    materials,
+    Material,
     RingSize,
 } from '../../collections/Collections';
 
@@ -82,27 +82,13 @@ export const changeJewelryType = (setJewelryType: (type: JewelryType) => void, j
 };
 
 export const changeCurrentMaterial = (
-    setCurrentMaterial: React.Dispatch<
-        React.SetStateAction<{
-            name: string;
-            thicknessMinimum: number;
-            additionalCost: number;
-            roughness: number;
-            metalness: number;
-        }>
-    >,
-    currentMaterial: {
-        name: string;
-        thicknessMinimum: number;
-        additionalCost: number;
-        roughness: number;
-        metalness: number;
-    },
+    setCurrentMaterial: React.Dispatch<React.SetStateAction<Material>>,
+    currentMaterial: Material,
 ): void => {
     setCurrentMaterial(currentMaterial);
 };
 
-export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType) => {
+export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType, material: Material) => {
     const refreshParams = (collection: CollectionType, jewelry: JewelryType) => {
         const newMesh = collections[collection]?.meshes[jewelry];
         if (newMesh) {
@@ -143,7 +129,9 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
 
     const [currentCollection, _setCurrentCollection] = React.useState<CollectionType>(collection);
     const [currentJewelryType, _setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
-    const [currentMaterial, setCurrentMaterial] = React.useState(materials.PLA);
+    const [currentMaterial, setCurrentMaterial] = React.useState<Material>(material);
+
+    console.log(currentMaterial);
 
     const setCurrentCollection = (collection: CollectionType) => {
         _setCurrentCollection(collection);

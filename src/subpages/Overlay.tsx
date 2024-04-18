@@ -3,20 +3,20 @@ import { useEffect } from 'react';
 import { MdMouse } from 'react-icons/md';
 
 const halfArcAnimation = keyframes`
-0% { 
-    transform: translateX(0) translateY(0) rotate(0deg); 
+  0% { 
+    transform: translateX(0) translateY(0) rotate(0deg);
   }
   25% { 
-    transform: translateX(-5px) translateY(10px) rotate(-10deg); 
+    transform: translateX(-10px) translateY(-10px) rotate(10deg);
   }
   50% { 
-    transform: translateX(-10px) translateY(0) rotate(-20deg); 
+    transform: translateX(0) translateY(-20px) rotate(0deg);
   }
   75% { 
-    transform: translateX(-5px) translateY(-10px) rotate(-10deg); 
+    transform: translateX(10px) translateY(-10px) rotate(-10deg);
   }
   100% { 
-    transform: translateX(0) translateY(0) rotate(0deg); 
+    transform: translateX(0) translateY(0) rotate(0deg);
   }
 `;
 
@@ -61,7 +61,7 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
             <Text fontFamily={'heading'} fontSize="xl" fontWeight={400} mb={4} pointerEvents="auto">
                 Use your mouse to rotate the model.
             </Text>
-            <Box p={3} as="div" animation={`${halfArcAnimation} infinite 3s ease-in-out`}>
+            <Box p={5} as="div" animation={`${halfArcAnimation} infinite 3s ease-in-out`}>
                 <Icon as={MdMouse} boxSize={6} />
             </Box>
         </Box>

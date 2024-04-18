@@ -21,7 +21,7 @@ import { FaBug, FaCheck } from 'react-icons/fa';
 import { ThreeVolume } from 'three-volume';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { forAnimationFrame } from 'waitasecond';
-import { CollectionType, RingSize } from '../components/collections/Collections';
+import { CollectionType, Material, RingSize } from '../components/collections/Collections';
 
 type FinalizeProps = {
     parameters: any;
@@ -29,6 +29,7 @@ type FinalizeProps = {
     sliderParameters: { [key: string]: number };
     dropdownParameters: { [key: string]: RingSize };
     currentCollection: CollectionType;
+    currentMaterial: Material;
     exportMeshSTL: (mesh: THREE.Mesh) => void;
     exportMeshOBJ: (mesh: THREE.Mesh) => void;
     exportMeshGlTF: (mesh: THREE.Mesh) => void;
@@ -43,6 +44,7 @@ export const Finalize = ({
     exportMeshOBJ,
     exportMeshGlTF,
     currentCollection,
+    currentMaterial,
 }: FinalizeProps) => {
     const exportOptions = [
         { value: 'stl', function: exportMeshSTL, label: '.STL' },
@@ -286,7 +288,7 @@ export const Finalize = ({
                             fontWeight="500"
                             fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                         >
-                            Estimated material price
+                            Estimated {currentMaterial.name} price
                             <Text
                                 as="span"
                                 fontFamily={'heading'}
@@ -303,7 +305,8 @@ export const Finalize = ({
                             fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                             paddingBottom={10}
                         >
-                            €{(volume * parameters.currentMaterial.additionalCost).toFixed(2)}
+                            {volume}, {currentMaterial.additionalCost}, €
+                            {(volume * currentMaterial.additionalCost).toFixed(2)}
                         </Text>
                     </>
                 )}

@@ -1,26 +1,12 @@
 import { Box, HStack, Select, Text } from '@chakra-ui/react';
-import { materials } from '../components/collections/Collections';
+import { Material, materials } from '../components/collections/Collections';
 import { ColorPair, ColorPicker } from '../components/layout/ColorPicker';
 import { changeCurrentMaterial, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
 
 type VisualizeProps = {
     setSliderMinParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>;
-    currentMaterial: {
-        name: string;
-        thicknessMinimum: number;
-        additionalCost: number;
-        roughness: number;
-        metalness: number;
-    };
-    setCurrentMaterial: React.Dispatch<
-        React.SetStateAction<{
-            name: string;
-            thicknessMinimum: number;
-            additionalCost: number;
-            roughness: number;
-            metalness: number;
-        }>
-    >;
+    currentMaterial: Material;
+    setCurrentMaterial: React.Dispatch<React.SetStateAction<Material>>;
     colors: ColorPair[];
     meshColor: string;
     setMeshColor: (color: string) => void;
@@ -75,12 +61,8 @@ export const Visualize = ({
                     _focus={{ bg: 'brand.300' }}
                     onChange={(event) => {
                         const newValue = event.target.value;
-                        changeCurrentMaterial(setCurrentMaterial, materials[newValue as keyof typeof materials]);
-                        changeNumericParameter(
-                            setSliderMinParameters,
-                            'r',
-                            materials[newValue as keyof typeof materials].thicknessMinimum,
-                        );
+                        changeCurrentMaterial(setCurrentMaterial, materials[newValue]);
+                        changeNumericParameter(setSliderMinParameters, 'r', materials[newValue].thicknessMinimum);
                     }}
                 >
                     {Object.entries(materials).map(([key, val]) => (

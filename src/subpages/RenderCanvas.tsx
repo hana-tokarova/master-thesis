@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Vector3 } from 'three';
-import { JewelryMesh, RingSize } from '../components/collections/Collections';
+import { JewelryMesh, Material, RingSize } from '../components/collections/Collections';
 
 type RenderCanvasProps = {
     mesh: JewelryMesh;
@@ -12,13 +12,7 @@ type RenderCanvasProps = {
     sliderParams: { [key: string]: number };
     switchParams: { [key: string]: boolean };
     dropdownParams: { [key: string]: RingSize };
-    currentMaterial: {
-        name: string;
-        thicknessMinimum: number;
-        additionalCost: number;
-        roughness: number;
-        metalness: number;
-    };
+    currentMaterial: Material;
 };
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(

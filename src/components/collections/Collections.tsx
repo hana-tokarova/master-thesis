@@ -75,8 +75,16 @@ export type ToggleParameter = {
     value: boolean;
 };
 
+export type Material = {
+    name: string;
+    thicknessMinimum: number;
+    additionalCost: number;
+    roughness: number;
+    metalness: number;
+};
+
 // additionalCost = (density / density conversion) * price per kg
-export const materials = {
+export const materials: { [key: string]: Material } = {
     Metal: {
         name: 'Metal',
         thicknessMinimum: 0.5,
@@ -163,7 +171,7 @@ export const collections: {
                         tag: 'general',
                         type: 'slider',
                         value: 0.5,
-                        min: materials.Metal.thicknessMinimum, //todo upravit podla daneho materialu na meshi
+                        min: materials.Metal.thicknessMinimum,
                         max: materials.Metal.thicknessMinimum * 2,
                         step: 0.1,
                     },

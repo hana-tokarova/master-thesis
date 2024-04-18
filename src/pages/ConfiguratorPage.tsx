@@ -9,6 +9,8 @@ import {
     collections,
     CollectionType,
     JewelryType,
+    Material,
+    materials,
     RingSize,
 } from '../components/collections/Collections';
 import { exportMeshGlTF } from '../components/utils/exporters/ExportGlTF';
@@ -31,11 +33,7 @@ type ParameterState = {
     dropdownParameters: { [key: string]: RingSize | BraceletSize };
     currentCollection: CollectionType;
     currentJewelryType: JewelryType;
-    currentMaterial: {
-        name: string;
-        thicknessMinimum: number;
-        additionalCost: number;
-    };
+    currentMaterial: Material;
     meshColor: string;
 };
 
@@ -59,7 +57,7 @@ export const ConfiguratorPage = () => {
         currentMaterial,
         setCurrentMaterial,
         setMesh,
-    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
+    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring, materials.PLA);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
@@ -222,6 +220,7 @@ export const ConfiguratorPage = () => {
                     sliderParameters={sliderParameters}
                     dropdownParameters={dropdownParameters}
                     currentCollection={currentCollection}
+                    currentMaterial={currentMaterial}
                     exportMeshSTL={exportMeshSTL}
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}
