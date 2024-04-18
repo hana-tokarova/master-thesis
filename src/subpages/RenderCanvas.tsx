@@ -1,5 +1,6 @@
 import { AdaptiveDpr, OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Vector3 } from 'three';
@@ -22,33 +23,40 @@ type RenderCanvasProps = {
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
     ({ mesh, color, sliderParams, switchParams, dropdownParams, currentMaterial }, ref) => {
-        const cameraRef = useRef<THREE.PerspectiveCamera>(null);
-        const [cameraPosition, setCameraPosition] = useState(new Vector3(0, 0, 0));
+        const initializeCameraPosition = () => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const x = Math.max(Math.min(50000 / Math.min(w / 2, h), 100), 50);
+            const y = 30;
+            const z = 0;
+            return new Vector3(x, y, z);
+        };
 
-        useEffect(() => {
-            const handleResize = () => {
+        const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+        const [cameraPosition, setCameraPosition] = useState(initializeCameraPosition());
+
+        const handleResize = useRef(
+            debounce(() => {
                 const w = window.innerWidth;
                 const h = window.innerHeight;
-
                 const x = Math.max(Math.min(50000 / Math.min(w / 2, h), 100), 50);
                 const y = 30;
                 const z = 0;
-
                 setCameraPosition(new Vector3(x, y, z));
-
                 if (cameraRef.current) {
                     cameraRef.current.position.set(x, y, z);
                     cameraRef.current.updateProjectionMatrix();
                 }
-            };
+            }, 100),
+        ).current;
 
+        useEffect(() => {
             window.addEventListener('resize', handleResize);
             handleResize();
-
             return () => {
                 window.removeEventListener('resize', handleResize);
             };
-        }, []);
+        }, [handleResize]);
 
         return (
             <Canvas shadows>

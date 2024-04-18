@@ -26,7 +26,7 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
     useEffect(() => {
         const timer = setTimeout(() => {
             fadeOutAndClose();
-        }, 5000);
+        }, 3000);
         return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onClose, setIsVisible]);

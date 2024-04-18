@@ -254,7 +254,7 @@ export const Finalize = ({
             </Box>
 
             <Box paddingTop={14}>
-                <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
+                <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
                     Dimensions
                     <Text
                         as="span"
@@ -263,7 +263,7 @@ export const Finalize = ({
                         fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                     >
                         <br />
-                        (base mesh only)
+                        (w/o earring & pendant holder)
                     </Text>
                 </Text>
                 <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
@@ -281,10 +281,10 @@ export const Finalize = ({
                 {volume !== null && (
                     <>
                         <Text
+                            paddingTop={2}
                             fontFamily={'heading'}
                             fontWeight="500"
-                            fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                            paddingTop={2}
+                            fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                         >
                             Estimated material price
                             <Text
