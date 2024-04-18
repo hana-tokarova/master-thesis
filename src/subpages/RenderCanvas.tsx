@@ -64,6 +64,7 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                 />
 
                 <Stage
+                    key={JSON.stringify([sliderParams, dropdownParams, switchParams])}
                     preset={'rembrandt'}
                     environment={'warehouse'}
                     intensity={0.2}
