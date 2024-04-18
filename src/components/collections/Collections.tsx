@@ -73,26 +73,26 @@ export type ToggleParameter = {
     value: boolean;
 };
 
+// additionalCost = (density / density conversion) * price per kg
 export const materials = {
     Metal: {
         name: 'Metal',
         thicknessMinimum: 0.3,
-        additionalCost: 20,
+        additionalCost: (10.49 / 1000000) * 30000,
         roughness: 0.3,
         metalness: 1,
     },
     Resin: {
         name: 'Resin',
         thicknessMinimum: 0.4,
-        // hustota - 1.11 g/cm^3, prevod hustoty - kg/mm^3 = 0.00000111, 30 EUR/kg = 0.00000111 * 30 = 0.0000333 EUR/mm^3
-        additionalCost: (1.11 / 1000000) * 30, // (hustota / prevod hustoty) * cena za kg
-        roughness: 0.3,
-        metalness: 0,
+        additionalCost: (1.11 / 1000000) * 30,
+        roughness: 1,
+        metalness: 0.5,
     },
     PLA: {
         name: 'PLA',
         thicknessMinimum: 0.5,
-        additionalCost: 5,
+        additionalCost: (1.25 / 1000000) * 25,
         roughness: 0.8,
         metalness: 0,
     },
@@ -161,7 +161,7 @@ export const collections: {
                         tag: 'general',
                         type: 'slider',
                         value: 0.5,
-                        min: materials.PLA.thicknessMinimum,
+                        min: materials.Metal.thicknessMinimum,
                         max: 1.0,
                         step: 0.1,
                     },

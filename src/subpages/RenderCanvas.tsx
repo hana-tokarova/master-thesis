@@ -1,6 +1,7 @@
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { AdaptiveDpr, OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 import { Vector3 } from 'three';
 import { JewelryMesh, RingSize } from '../components/collections/Collections';
 
@@ -17,25 +18,6 @@ type RenderCanvasProps = {
         roughness: number;
         metalness: number;
     };
-};
-
-const FollowCameraLight = () => {
-    const lightRef = useRef<THREE.DirectionalLight | null>(null);
-    const { camera } = useThree();
-
-    useFrame(() => {
-        lightRef.current!.position.copy(camera.position);
-    });
-
-    return (
-        <>
-            <directionalLight ref={lightRef} intensity={2} />
-            <directionalLight intensity={1} position={[3, 3, 3]} />
-            <directionalLight intensity={1} position={[-3, 3, -3]} />
-            <directionalLight intensity={1} position={[3, 3, -3]} />
-            <directionalLight intensity={1} position={[-3, 3, 3]} />
-        </>
-    );
 };
 
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
@@ -69,7 +51,9 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
         }, []);
 
         return (
-            <Canvas>
+            <Canvas shadows>
+                <color attach="background" args={['#f0f0f0']} />
+
                 <PerspectiveCamera
                     makeDefault
                     ref={cameraRef}
@@ -79,27 +63,33 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                     far={1000}
                 />
 
-                <FollowCameraLight />
+                <Stage
+                    preset={'rembrandt'}
+                    environment={'warehouse'}
+                    intensity={0.2}
+                    shadows="contact"
+                    adjustCamera={false}
+                >
+                    {mesh.render(
+                        sliderParams,
+                        dropdownParams,
+                        switchParams,
+                        color,
+                        ref,
+                        currentMaterial.roughness,
+                        currentMaterial.metalness,
+                    )}
+                </Stage>
 
-                <ambientLight intensity={1} color="dimgray" />
-
-                {mesh.render(
-                    sliderParams,
-                    dropdownParams,
-                    switchParams,
-                    color,
-                    ref,
-                    currentMaterial.roughness,
-                    currentMaterial.metalness,
-                )}
+                <AdaptiveDpr pixelated />
 
                 <OrbitControls
                     enablePan={false}
-                    enableRotate={true}
+                    enableRotate
                     enableZoom={false}
-                    enableDamping={true}
-                    minPolarAngle={Math.PI / 2 - Math.PI / 5}
-                    maxPolarAngle={Math.PI / 2 + Math.PI / 5}
+                    enableDamping
+                    minPolarAngle={Math.PI / 2 - Math.PI / 3}
+                    maxPolarAngle={Math.PI / 2}
                 />
             </Canvas>
         );

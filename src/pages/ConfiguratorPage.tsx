@@ -58,7 +58,7 @@ export const ConfiguratorPage = () => {
         currentMaterial,
         setCurrentMaterial,
         setMesh,
-    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring);
+    } = useMeshParameters(CollectionType.Torsion, JewelryType.Ring);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
@@ -172,7 +172,7 @@ export const ConfiguratorPage = () => {
             wrap="nowrap"
             position="relative"
         >
-            <Box flex="0.35" paddingRight="20px" w="35vw" h="auto" zIndex={1}>
+            <Box flex="0.40" paddingRight="20px" w="40vw" h="auto" zIndex={1}>
                 <GoBack isDirty={isDirty} setIsDirty={setIsDirty} navigate={navigate} />
 
                 <Info collection={currentCollection} jewelry={currentJewelryType} mesh={mesh} />
@@ -224,7 +224,7 @@ export const ConfiguratorPage = () => {
                 />
             </Box>
 
-            <Box position="fixed" right="0" top="0" h="90%" w="65vw" overflow="hidden" cursor="pointer">
+            <Box position="fixed" right="0" top="0" h="90%" w="60vw" overflow="hidden">
                 <RenderCanvas
                     mesh={mesh!}
                     color={meshColor}

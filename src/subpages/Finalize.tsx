@@ -262,6 +262,7 @@ export const Finalize = ({
                         fontWeight="400"
                         fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                     >
+                        <br />
                         (base mesh only)
                     </Text>
                 </Text>
@@ -286,6 +287,15 @@ export const Finalize = ({
                             paddingTop={2}
                         >
                             Estimated material price
+                            <Text
+                                as="span"
+                                fontFamily={'heading'}
+                                fontWeight="400"
+                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                            >
+                                <br />
+                                (based on volume)
+                            </Text>
                         </Text>
                         <Text
                             fontFamily={'heading'}

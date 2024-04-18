@@ -18,6 +18,7 @@ type TorsionProps = {
     metalness: number;
     inflate?: number;
     screw?: number;
+    meshPosition?: THREE.Vector3;
 };
 
 const makeCircleCurve2D = (nbSteps: number) => {
