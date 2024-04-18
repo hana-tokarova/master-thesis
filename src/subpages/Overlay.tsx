@@ -1,10 +1,23 @@
-import { Box, keyframes, Text, useBoolean } from '@chakra-ui/react';
+import { Box, Icon, keyframes, Text, useBoolean } from '@chakra-ui/react';
 import { useEffect } from 'react';
+import { MdMouse } from 'react-icons/md';
 
-const swayAnimation = keyframes`
-  0% { transform: translate(-10px, -5px); }
-  50% { transform: translate(10px, 5px); }
-  100% { transform: translate(-10px, -5px); }
+const halfArcAnimation = keyframes`
+0% { 
+    transform: translateX(0) translateY(0) rotate(0deg); 
+  }
+  25% { 
+    transform: translateX(-5px) translateY(10px) rotate(-10deg); 
+  }
+  50% { 
+    transform: translateX(-10px) translateY(0) rotate(-20deg); 
+  }
+  75% { 
+    transform: translateX(-5px) translateY(-10px) rotate(-10deg); 
+  }
+  100% { 
+    transform: translateX(0) translateY(0) rotate(0deg); 
+  }
 `;
 
 export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) => {
@@ -15,13 +28,14 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
             fadeOutAndClose();
         }, 5000);
         return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onClose, setIsVisible]);
 
     const fadeOutAndClose = () => {
-        setIsVisible.off(); // Begin fade-out
+        setIsVisible.off();
         setTimeout(() => {
-            onClose(); // Finally close the overlay
-        }, 1000); // Sync with the fade-out transition time
+            onClose();
+        }, 1000);
     };
 
     return (
@@ -29,8 +43,8 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
             position="absolute"
             top="0"
             right="0"
-            width="100%" // Cover the parent Box dimensions
-            height="100%" // Cover the parent Box dimensions
+            width="100%"
+            height="100%"
             bg="whiteAlpha.800"
             zIndex="overlay"
             display="flex"
@@ -39,21 +53,16 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
             justifyContent="center"
             p={4}
             opacity={isVisible ? 1 : 0}
-            transition="opacity 1s ease-in-out" // Fade out transition
-            onMouseDown={fadeOutAndClose} // Close the overlay on mouse release
+            transition="opacity 1s ease-in-out"
+            onMouseDown={fadeOutAndClose}
+            userSelect="none"
+            pointerEvents="none"
         >
-            <Text fontSize="xl" fontWeight="bold" mb={4}>
-                Welcome! Use your mouse to rotate the model.
+            <Text fontFamily={'heading'} fontSize="xl" fontWeight={400} mb={4} pointerEvents="auto">
+                Use your mouse to rotate the model.
             </Text>
-            <Box
-                as="div"
-                animation={`${swayAnimation} infinite 2s ease-in-out`} // Modified sway animation for an arc-like path
-                borderWidth="2px"
-                borderColor="blue.500"
-                p={2}
-                borderRadius="full"
-            >
-                <Text>👆</Text>
+            <Box p={3} as="div" animation={`${halfArcAnimation} infinite 3s ease-in-out`}>
+                <Icon as={MdMouse} boxSize={6} />
             </Box>
         </Box>
     );

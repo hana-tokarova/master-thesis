@@ -52,8 +52,6 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
 
         return (
             <Canvas shadows>
-                <color attach="background" args={['#f0f0f0']} />
-
                 <PerspectiveCamera
                     makeDefault
                     ref={cameraRef}
