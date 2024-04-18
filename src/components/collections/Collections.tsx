@@ -47,6 +47,8 @@ export const ringSizes: RingSize[] = [
     { value: 52, diameter: 16.6 },
     { value: 53, diameter: 16.9 },
     { value: 54, diameter: 17.2 },
+    { value: 55, diameter: 17.5 },
+    { value: 56, diameter: 17.8 },
 ];
 
 export type DropdownParameter = {
@@ -77,21 +79,21 @@ export type ToggleParameter = {
 export const materials = {
     Metal: {
         name: 'Metal',
-        thicknessMinimum: 0.3,
+        thicknessMinimum: 0.5,
         additionalCost: (10.49 / 1000000) * 30000,
         roughness: 0.3,
         metalness: 1,
     },
     Resin: {
         name: 'Resin',
-        thicknessMinimum: 0.4,
+        thicknessMinimum: 1,
         additionalCost: (1.11 / 1000000) * 30,
         roughness: 1,
         metalness: 0.5,
     },
     PLA: {
         name: 'PLA',
-        thicknessMinimum: 0.5,
+        thicknessMinimum: 0.75,
         additionalCost: (1.25 / 1000000) * 25,
         roughness: 0.8,
         metalness: 0,
@@ -138,13 +140,13 @@ export const collections: {
                     'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
                 sliderParameters: {
                     a: {
-                        name: 'Number of horizontal lines',
+                        name: 'Horizontal segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 3,
                         min: 1,
                         max: 5,
-                        step: 2,
+                        step: 1,
                     },
                     b: {
                         name: 'Number of vertical lines',
@@ -155,14 +157,14 @@ export const collections: {
                         max: 10,
                         step: 1,
                     },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 10, min: 10, max: 30, step: 1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 10, min: 5, max: 15, step: 1 },
                     r: {
-                        name: 'Wire thickness',
+                        name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
                         value: 0.5,
-                        min: materials.Metal.thicknessMinimum,
-                        max: 1.0,
+                        min: materials.Metal.thicknessMinimum, //todo upravit podla daneho materialu na meshi
+                        max: materials.Metal.thicknessMinimum * 2,
                         step: 0.1,
                     },
                 },
@@ -190,7 +192,7 @@ export const collections: {
                     'Lissaje bracelet is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
                 sliderParameters: {
                     a: {
-                        name: 'Number of horizontal lines',
+                        name: 'Horizontal segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 3,
@@ -209,7 +211,7 @@ export const collections: {
                     },
                     scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     r: {
-                        name: 'Wire thickness',
+                        name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
                         value: 0.5,
@@ -250,7 +252,7 @@ export const collections: {
                         step: 2,
                     },
                     c: {
-                        name: 'Number of horizontal lines',
+                        name: 'Horizontal segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 3,
@@ -263,7 +265,7 @@ export const collections: {
                     scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 1 },
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 1 },
                     r: {
-                        name: 'Wire thickness',
+                        name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
                         value: 0.5,
@@ -295,7 +297,7 @@ export const collections: {
                 description: 'Lissajous curve pendant',
                 sliderParameters: {
                     a: {
-                        name: 'Number of horizontal lines',
+                        name: 'Horizontal segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 3,
@@ -315,7 +317,7 @@ export const collections: {
                     scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     r: {
-                        name: 'Wire thickness',
+                        name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
                         value: 0.5,
@@ -377,15 +379,7 @@ export const collections: {
                         max: 3,
                         step: 0.01,
                     },
-                    scaleC: {
-                        name: 'Height',
-                        tag: 'general',
-                        type: 'slider',
-                        value: 0.7,
-                        min: 0.5,
-                        max: 1,
-                        step: 0.01,
-                    },
+                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 10, min: 5, max: 15, step: 1 },
                 },
                 switchParameters: {
                     twistAll: { name: 'Twist all?', tag: 'collection', type: 'toggle', value: false },

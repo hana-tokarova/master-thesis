@@ -162,7 +162,7 @@ export const LissajousRing = ({
 
     const geometry = useMemo(() => {
         const ringPath = new THREE.CatmullRomCurve3(lissajousPoints);
-        const ringMesh = new THREE.TubeGeometry(ringPath, calculateDetail2D(scaleA, scaleB) * 2, meshRadius, 32, true);
+        const ringMesh = new THREE.TubeGeometry(ringPath, calculateDetail2D(scaleA, scaleB) * 3, meshRadius, 32, true);
         ringMesh.deleteAttribute('normal');
         ringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(ringMesh, 0.01);
