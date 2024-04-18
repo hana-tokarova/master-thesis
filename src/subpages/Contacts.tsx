@@ -14,7 +14,7 @@ export const Contacts = () => {
 
             <Text maxW="md" fontSize={{ base: '2xs', md: 'xs', lg: 'sm' }}>
                 <Box as="strong" fontFamily="heading" fontWeight="600">
-                    E-mail:
+                    Project repository:
                 </Box>{' '}
                 <Button
                     as="a"

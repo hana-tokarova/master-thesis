@@ -59,7 +59,7 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
             pointerEvents="none"
         >
             <Text fontFamily={'heading'} fontSize="xl" fontWeight={400} mb={4} pointerEvents="auto">
-                Use your mouse to rotate the model.
+                Rotate jewelry by dragging.
             </Text>
             <Box p={5} as="div" animation={`${halfArcAnimation} infinite 3s ease-in-out`}>
                 <Icon as={MdMouse} boxSize={6} />
