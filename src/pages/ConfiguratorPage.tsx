@@ -57,7 +57,7 @@ export const ConfiguratorPage = () => {
         currentMaterial,
         setCurrentMaterial,
         setMesh,
-    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring, materials.PLA);
+    } = useMeshParameters(CollectionType.Torsion, JewelryType.Ring, materials.PLA);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
@@ -72,8 +72,18 @@ export const ConfiguratorPage = () => {
     useEffect(() => {
         const params = new URLSearchParams(search);
         const config = params.get('config');
+        console.log('here');
         if (config) {
             const parsedConfig = JSON.parse(atob(config));
+
+            console.log(
+                'parsed',
+                parsedConfig.currentMaterial,
+                parsedConfig.currentMaterial.name,
+                parsedConfig.currentMaterial.thicknessMinimum,
+                parsedConfig.currentMaterial.additionalCost,
+            );
+
             setCurrentCollection(parsedConfig.currentCollection);
             setCurrentJewelryType(parsedConfig.currentJewelryType);
             setSliderParameters(parsedConfig.sliderParameters);

@@ -20,7 +20,7 @@ const projects: Project[] = [
         image: 'https://source.unsplash.com/random/100x100',
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Ring,
-        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1pbm9yUiI6MC4zLCJ0d2lzdCI6LTEuNSwiaW5mbGF0ZSI6Mywic2NhbGVDIjowLjU4fSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJtaW5vclIiOjAuMSwidHdpc3QiOi01LCJpbmZsYXRlIjoxLCJzY2FsZUMiOjAuNSwiciI6MC4zfSwic3dpdGNoUGFyYW1ldGVycyI6eyJ0d2lzdEFsbCI6dHJ1ZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJtYWpvclIiOnsidmFsdWUiOjQ3LCJkaWFtZXRlciI6MTQuOX19LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJNZXRhbCIsInRoaWNrbmVzc01pbmltdW0iOjAuMywiYWRkaXRpb25hbENvc3QiOjIwLCJyb3VnaG5lc3MiOjAuMywibWV0YWxuZXNzIjoxfSwibWVzaENvbG9yIjoiY3lhbiJ9',
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1pbm9yUiI6MC4zLCJ0d2lzdCI6MywiaW5mbGF0ZSI6MSwic2NhbGVDIjo1fSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJtaW5vclIiOjAuMSwidHdpc3QiOi01LCJpbmZsYXRlIjoxLCJzY2FsZUMiOjUsInIiOjF9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjpmYWxzZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJtYWpvclIiOnsidmFsdWUiOjQ4LCJkaWFtZXRlciI6MTUuM319LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjEsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMzMsInJvdWdobmVzcyI6MSwibWV0YWxuZXNzIjowLjV9LCJtZXNoQ29sb3IiOiJwaW5rIn0=',
     },
     {
         id: 2,
@@ -29,15 +29,15 @@ const projects: Project[] = [
         image: 'https://source.unsplash.com/random/100x50',
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
-        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjUsInNjYWxlQiI6MTAsInIiOjAuNX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwiciI6MC40fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjAuNCwiYWRkaXRpb25hbENvc3QiOjEwfSwibWVzaENvbG9yIjoiZ3JlZW55ZWxsb3cifQ==',
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjUsInNjYWxlQiI6MTAsInIiOjAuNn0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwiciI6MC41fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJNZXRhbCIsInRoaWNrbmVzc01pbmltdW0iOjAuNSwiYWRkaXRpb25hbENvc3QiOjAuMzE0Nywicm91Z2huZXNzIjowLjMsIm1ldGFsbmVzcyI6MX0sIm1lc2hDb2xvciI6Imdob3N0d2hpdGUifQ==',
     },
     {
         id: 3,
         material: 'Metal',
         price: 20.0,
         image: 'https://source.unsplash.com/random/100x150',
-        collection: CollectionType.Torsion,
-        jewelry: JewelryType.Pendant,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Ring,
     },
     {
         id: 4,

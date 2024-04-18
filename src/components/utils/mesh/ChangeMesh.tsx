@@ -131,7 +131,7 @@ export const useMeshParameters = (collection: CollectionType, jewelry: JewelryTy
     const [currentJewelryType, _setCurrentJewelryType] = React.useState<JewelryType>(jewelry);
     const [currentMaterial, setCurrentMaterial] = React.useState<Material>(material);
 
-    console.log(currentMaterial);
+    console.log(currentMaterial); // where the heck is it???
 
     const setCurrentCollection = (collection: CollectionType) => {
         _setCurrentCollection(collection);
