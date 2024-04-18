@@ -20,6 +20,7 @@ import { Finalize } from '../subpages/Finalize';
 import { General } from '../subpages/General';
 import { GoBack } from '../subpages/GoBack';
 import { Info } from '../subpages/Info';
+import { StartupOverlay } from '../subpages/Overlay';
 import { RenderCanvas } from '../subpages/RenderCanvas';
 import { Visualize } from '../subpages/Visualize';
 
@@ -63,6 +64,9 @@ export const ConfiguratorPage = () => {
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
     const [isDirty, setIsDirty] = React.useState(false);
+
+    const [showOverlay, setShowOverlay] = React.useState(true);
+    const handleOverlayClose = () => setShowOverlay(false);
 
     const { search } = useLocation();
     const navigate = useNavigate();
@@ -224,7 +228,8 @@ export const ConfiguratorPage = () => {
                 />
             </Box>
 
-            <Box position="fixed" right="0" top="0" h="90%" w="60vw" overflow="hidden">
+            <Box position="fixed" right="0" top="0" h="90%" w="60vw" overflow="hidden" cursor="pointer">
+                {showOverlay && <StartupOverlay onClose={handleOverlayClose} />}
                 <RenderCanvas
                     mesh={mesh!}
                     color={meshColor}
