@@ -277,7 +277,7 @@ export const Finalize = ({
                                   } x ${sliderParameters['scaleC'] + sliderParameters['r'] * 2} mm`
                                 : `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${
                                       sliderParameters['scaleA'] + sliderParameters['r'] * 2
-                                  } x ${sliderParameters['r'] * 2} mm`
+                                  } x ${sliderParameters['r'] + sliderParameters['r'] * 2} mm`
                             : `${dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2} x ${
                                   dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2
                               } x ${sliderParameters['scaleB'] + sliderParameters['r'] * 2} mm`
