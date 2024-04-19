@@ -539,7 +539,8 @@ export const collections: {
                 ),
             },
             [JewelryType.Pendant]: {
-                description: 'Torsion pendant',
+                description:
+                    'Torsion pendant is a generativelly created pattern from the twisted torus. By adjusting the twist parameters, the torus changes its shape.',
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 1 },
                     minorR: {
