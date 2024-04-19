@@ -487,7 +487,7 @@ export const collections: {
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 13, min: 10, max: 20, step: 0.1 },
                     minorR: {
-                        name: 'Height',
+                        name: 'Thickness',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
@@ -543,7 +543,7 @@ export const collections: {
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 1 },
                     minorR: {
-                        name: 'Height',
+                        name: 'Thickness',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
