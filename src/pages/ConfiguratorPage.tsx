@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 
 import isEqual from 'lodash/isEqual';
@@ -163,12 +163,12 @@ export const ConfiguratorPage = () => {
     }
 
     return (
-        <HStack
+        <Flex
+            direction="row"
             paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
             paddingTop={{ base: 0, sm: 4, md: 4, lg: 6 }}
             alignItems={'left'}
-            spacing={5}
             w="100vw"
             minH="calc(100vh - 80px)"
             wrap="nowrap"
@@ -240,6 +240,6 @@ export const ConfiguratorPage = () => {
                     dropdownParams={dropdownParameters}
                 />
             </Box>
-        </HStack>
+        </Flex>
     );
 };
