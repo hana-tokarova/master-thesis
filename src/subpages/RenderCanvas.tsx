@@ -34,8 +34,8 @@ const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleF
 const initializeCameraPosition = (offset: number, scaleFactor: number): THREE.Vector3 => {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const x = Math.max(Math.min((50000 / Math.min(w / 2, h)) * scaleFactor, 100), offset);
-    const y = 30;
+    const x = Math.max(Math.min((50000 / Math.min(w / 2, h)) * scaleFactor, 10), offset);
+    const y = 20;
     const z = 0;
     return new Vector3(x, y, z);
 };
