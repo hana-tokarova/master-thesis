@@ -190,7 +190,7 @@ export const LissajousBracelet = ({
     roughness,
     metalness,
 }: LissajousProps) => {
-    const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 1, 5, parameterA, parameterB, Math.PI / 2);
+    const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 1, 1, parameterA, parameterB, Math.PI / 2);
 
     const geometry = useMemo(() => {
         const braceletPath = new THREE.CatmullRomCurve3(lissajousPoints);
