@@ -187,8 +187,8 @@ export const collections: {
                         parameterA={slider.a}
                         parameterB={slider.b}
                         meshRadius={slider.r}
-                        scaleA={dropdown.scaleA.diameter}
-                        scaleB={slider.scaleB}
+                        scaleA={dropdown.scaleA.diameter / 2}
+                        scaleB={slider.scaleB / 2}
                         roughness={roughness}
                         metalness={metalness}
                         detail={1000}
@@ -239,8 +239,8 @@ export const collections: {
                         meshRadius={slider.r}
                         parameterA={slider.a}
                         parameterB={slider.b}
-                        scaleA={dropdown.scaleA.diameter * Math.PI}
-                        scaleB={slider.scaleB}
+                        scaleA={(dropdown.scaleA.diameter * Math.PI) / 2}
+                        scaleB={slider.scaleB / 2}
                         detail={1000}
                         roughness={roughness}
                         metalness={metalness}
@@ -278,9 +278,9 @@ export const collections: {
                         max: 5,
                         step: 1,
                     },
-                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
+                    scaleB: { name: 'Width', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
+                    scaleA: { name: 'Depth', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
-                    scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -301,9 +301,9 @@ export const collections: {
                         parameterA={slider.a}
                         parameterB={slider.b}
                         parameterC={slider.c}
-                        scaleA={slider.scaleA}
-                        scaleB={slider.scaleB}
-                        scaleC={slider.scaleC}
+                        scaleA={slider.scaleA / 2}
+                        scaleB={slider.scaleB / 2}
+                        scaleC={slider.scaleC / 2}
                         detail={1000}
                         roughness={roughness}
                         metalness={metalness}
@@ -314,7 +314,7 @@ export const collections: {
                 description:
                     'Lissaje pendant is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
                 sliderParameters: {
-                    b: {
+                    a: {
                         name: 'Horizontal segments',
                         tag: 'collection',
                         type: 'slider',
@@ -323,7 +323,7 @@ export const collections: {
                         max: 5,
                         step: 2,
                     },
-                    a: {
+                    b: {
                         name: 'Vertical segments',
                         tag: 'collection',
                         type: 'slider',
@@ -332,8 +332,8 @@ export const collections: {
                         max: 5,
                         step: 1,
                     },
-                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
+                    scaleB: { name: 'Width', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
+                    scaleA: { name: 'Height', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -351,10 +351,10 @@ export const collections: {
                         mesh={ref}
                         meshColor={color}
                         meshRadius={slider.r}
-                        parameterA={slider.b}
-                        parameterB={slider.a}
-                        scaleA={slider.scaleB}
-                        scaleB={slider.scaleA}
+                        parameterA={slider.a}
+                        parameterB={slider.b}
+                        scaleA={slider.scaleA / 2}
+                        scaleB={slider.scaleB / 2}
                         detail={1000}
                         roughness={roughness}
                         metalness={metalness}

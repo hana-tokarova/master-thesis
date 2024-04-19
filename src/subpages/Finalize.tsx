@@ -272,9 +272,15 @@ export const Finalize = ({
                     {currentCollection === CollectionType.Lissajous
                         ? Object.keys(dropdownParameters).length === 0
                             ? sliderParameters['scaleC'] !== undefined
-                                ? `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['scaleC']} mm`
-                                : `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['r']} mm`
-                            : `${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`
+                                ? `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${
+                                      sliderParameters['scaleA'] + sliderParameters['r'] * 2
+                                  } x ${sliderParameters['scaleC'] + sliderParameters['r'] * 2} mm`
+                                : `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${
+                                      sliderParameters['scaleA'] + sliderParameters['r'] * 2
+                                  } x ${sliderParameters['r'] * 2} mm`
+                            : `${dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2} x ${
+                                  dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2
+                              } x ${sliderParameters['scaleB'] + sliderParameters['r'] * 2} mm`
                         : Object.keys(dropdownParameters).length === 0
                         ? `${sliderParameters['majorR']} x ${sliderParameters['majorR']} x ${sliderParameters['scaleC']} mm`
                         : `${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
