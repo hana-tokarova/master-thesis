@@ -276,8 +276,8 @@ export const Finalize = ({
                                 : `${sliderParameters['scaleA']} x ${sliderParameters['scaleB']} x ${sliderParameters['r']} mm`
                             : `${dropdownParameters['scaleA'].diameter} x ${dropdownParameters['scaleA'].diameter} x ${sliderParameters['scaleB']} mm`
                         : Object.keys(dropdownParameters).length === 0
-                        ? `${sliderParameters['majorR']} x ${sliderParameters['minorR']} x ${sliderParameters['scaleC']} mm`
-                        : `${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
+                          ? `${sliderParameters['majorR']} x ${sliderParameters['minorR']} x ${sliderParameters['scaleC']} mm`
+                          : `${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
                 </Text>
 
                 {volume !== null && (
