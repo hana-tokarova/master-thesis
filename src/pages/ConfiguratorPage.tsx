@@ -174,7 +174,7 @@ export const ConfiguratorPage = () => {
             wrap="nowrap"
             position="relative"
         >
-            <Box flex="0.40" paddingRight="20px" w="40vw" h="auto" zIndex={1}>
+            <Box flex="0.40" paddingRight="40px" w="40vw" h="auto" zIndex={1}>
                 <GoBack isDirty={isDirty} setIsDirty={setIsDirty} navigate={navigate} />
 
                 <Info collection={currentCollection} jewelry={currentJewelryType} mesh={mesh} />
