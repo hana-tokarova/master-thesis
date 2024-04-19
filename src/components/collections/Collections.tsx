@@ -145,7 +145,7 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 description:
-                    'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
+                    'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
                 sliderParameters: {
                     a: {
                         name: 'Horizontal segments',
@@ -157,7 +157,7 @@ export const collections: {
                         step: 1,
                     },
                     b: {
-                        name: 'Number of vertical lines',
+                        name: 'Vertical segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 5,
@@ -165,12 +165,12 @@ export const collections: {
                         max: 10,
                         step: 1,
                     },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 10, min: 5, max: 15, step: 1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 7, min: 5, max: 10, step: 1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
-                        value: 0.5,
+                        value: 1,
                         min: materials.PLA.thicknessMinimum,
                         max: 1.5,
                         step: 0.1,
@@ -197,7 +197,7 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 description:
-                    'Lissaje bracelet is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical number of lines, the curve changes its shape.',
+                    'Lissaje bracelet is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
                 sliderParameters: {
                     a: {
                         name: 'Horizontal segments',
@@ -209,7 +209,7 @@ export const collections: {
                         step: 2,
                     },
                     b: {
-                        name: 'Number of vertical lines',
+                        name: 'Vertical segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 5,
@@ -217,15 +217,15 @@ export const collections: {
                         max: 10,
                         step: 1,
                     },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 25, min: 20, max: 30, step: 1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
-                        value: 0.5,
+                        value: 1,
                         min: materials.PLA.thicknessMinimum,
-                        max: 1,
-                        step: 0.01,
+                        max: 1.5,
+                        step: 0.1,
                     },
                 },
                 switchParameters: {},
@@ -248,17 +248,9 @@ export const collections: {
                 ),
             },
             [JewelryType.Earring]: {
-                description: 'Lissajous curve earring',
+                description:
+                    'Lissaje earring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal, vertical and twisting segments, the curve changes its shape.',
                 sliderParameters: {
-                    a: {
-                        name: 'Number of vertical lines',
-                        tag: 'collection',
-                        type: 'slider',
-                        value: 4,
-                        min: 2,
-                        max: 8,
-                        step: 2,
-                    },
                     c: {
                         name: 'Horizontal segments',
                         tag: 'collection',
@@ -268,18 +260,35 @@ export const collections: {
                         max: 5,
                         step: 2,
                     },
-                    b: { name: 'Twisting ', tag: 'collection', type: 'slider', value: 3, min: 1, max: 5, step: 1 },
-                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 15, min: 5, max: 20, step: 1 },
-                    scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 1 },
-                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    a: {
+                        name: 'Vertical segments',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 4,
+                        min: 2,
+                        max: 8,
+                        step: 2,
+                    },
+                    b: {
+                        name: 'Twisting segments ',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 3,
+                        min: 1,
+                        max: 5,
+                        step: 1,
+                    },
+                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 1 },
+                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 10, min: 10, max: 20, step: 1 },
+                    scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 10, min: 10, max: 20, step: 1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
-                        value: 0.5,
+                        value: 1,
                         min: materials.PLA.thicknessMinimum,
-                        max: 1,
-                        step: 0.01,
+                        max: 1.5,
+                        step: 0.1,
                     },
                 },
                 switchParameters: {},
@@ -302,19 +311,11 @@ export const collections: {
                 ),
             },
             [JewelryType.Pendant]: {
-                description: 'Lissajous curve pendant',
+                description:
+                    'Lissaje pendant is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
                 sliderParameters: {
-                    a: {
-                        name: 'Horizontal segments',
-                        tag: 'collection',
-                        type: 'slider',
-                        value: 3,
-                        min: 1,
-                        max: 5,
-                        step: 1,
-                    },
                     b: {
-                        name: 'Number of vertical lines',
+                        name: 'Horizontal segments',
                         tag: 'collection',
                         type: 'slider',
                         value: 3,
@@ -322,16 +323,25 @@ export const collections: {
                         max: 5,
                         step: 2,
                     },
+                    a: {
+                        name: 'Vertical segments',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 3,
+                        min: 1,
+                        max: 5,
+                        step: 1,
+                    },
                     scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
                         type: 'slider',
-                        value: 0.5,
-                        min: 0.1,
-                        max: 1,
-                        step: 0.01,
+                        value: 1,
+                        min: materials.PLA.thicknessMinimum,
+                        max: 1.5,
+                        step: 0.1,
                     },
                 },
                 switchParameters: {},
