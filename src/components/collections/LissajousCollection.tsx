@@ -128,7 +128,7 @@ const calculateDetail2D = (scaleA: number, scaleB: number) => {
 };
 
 const calculateDetail3D = (sA: number, sB: number, sC: number) => {
-    const detail = Math.max(1, Math.floor((Math.PI * sA * sB * sC) / 30));
+    const detail = Math.max(1, Math.floor((Math.PI * sA * sB * sC) / 15));
     return detail > 1000 ? 1000 : detail;
 };
 
@@ -237,9 +237,9 @@ export const LissajousEarring = ({
         scaleA,
         scaleB,
         scaleC!,
-        4,
-        4,
-        4,
+        1,
+        1,
+        1,
         parameterA,
         parameterB,
         parameterC!,
@@ -269,7 +269,7 @@ export const LissajousEarring = ({
 
         const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, (scaleC! / 4) * Math.sin(Math.PI / 2) + 1.5);
+        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, scaleC! * Math.sin(Math.PI / 2) + 1.5);
         holderMesh.applyMatrix4(translateHolder);
         const rotationHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
         holderMesh.applyMatrix4(rotationHolder2);
@@ -304,7 +304,7 @@ export const LissajousPendant = ({
     roughness,
     metalness,
 }: LissajousProps) => {
-    const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 5, 5, parameterA, parameterB, Math.PI / 2);
+    const lissajousPoints = makeLissajousCurve2D(detail, scaleA, scaleB, 1, 1, parameterA, parameterB, Math.PI / 2);
     const holderPoints = makeCircleCurve2D(detail);
 
     const geometry = useMemo(() => {
@@ -325,7 +325,7 @@ export const LissajousPendant = ({
         holderMesh.deleteAttribute('normal');
         holderMesh.deleteAttribute('uv');
 
-        const translateHolder = new THREE.Matrix4().makeTranslation((scaleA / 5) * Math.sin(Math.PI / 2) + 1.5, 0, 0);
+        const translateHolder = new THREE.Matrix4().makeTranslation(scaleA * Math.sin(Math.PI / 2) + 1.5, 0, 0);
         holderMesh.applyMatrix4(translateHolder);
         const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotateHolder);

@@ -278,9 +278,9 @@ export const collections: {
                         max: 5,
                         step: 1,
                     },
-                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 0.1 },
-                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 10, min: 10, max: 20, step: 0.1 },
-                    scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 10, min: 10, max: 20, step: 0.1 },
+                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
+                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
+                    scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -438,16 +438,6 @@ export const collections: {
                         max: 1.5,
                         step: 0.1,
                     },
-                    twist: {
-                        name: 'Twist',
-                        tag: 'collection',
-                        type: 'slider',
-                        value: 3,
-                        min: -5,
-                        max: 5,
-                        step: 0.5,
-                    },
-
                     screw: {
                         name: 'Screw offset',
                         type: 'slider',
@@ -456,6 +446,15 @@ export const collections: {
                         min: 0,
                         max: 10,
                         step: 0.1,
+                    },
+                    twist: {
+                        name: 'Twist',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 3,
+                        min: -5,
+                        max: 5,
+                        step: 0.5,
                     },
                 },
                 switchParameters: {
@@ -483,29 +482,39 @@ export const collections: {
                 ),
             },
             [JewelryType.Earring]: {
-                description: 'Torsion earring',
+                description:
+                    'Torsion earring is a generativelly created pattern from the twisted torus. By adjusting the twist and inflate parameters, the torus changes its shape.',
                 sliderParameters: {
-                    majorR: { name: 'Radius', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 1 },
+                    majorR: { name: 'Width', type: 'slider', tag: 'general', value: 13, min: 10, max: 20, step: 0.1 },
                     minorR: {
-                        name: 'Radius of ring',
+                        name: 'Height',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
-                        min: 0.5,
+                        min: 1,
                         max: 2,
                         step: 0.1,
                     },
-                    twist: { name: 'Twistiness', type: 'slider', tag: 'collection', value: 3, min: 0, max: 5, step: 1 },
                     inflate: {
-                        name: 'Inflation',
-                        type: 'slider',
+                        name: 'Inflate',
                         tag: 'collection',
-                        value: 1,
-                        min: 0.01,
+                        type: 'slider',
+                        value: 0.5,
+                        min: 0,
                         max: 1,
-                        step: 0.01,
+                        step: 0.1,
                     },
-                    scaleC: { name: 'Depth', type: 'slider', tag: 'general', value: 2, min: 1, max: 2, step: 0.1 },
+                    twist: {
+                        name: 'Twist',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 3,
+                        min: -5,
+                        max: 5,
+                        step: 0.5,
+                    },
+
+                    scaleC: { name: 'Depth', tag: 'general', type: 'slider', value: 5, min: 3, max: 10, step: 0.1 },
                 },
                 switchParameters: {
                     twistAll: { name: 'Twist all?', tag: 'collection', type: 'toggle', value: true },
@@ -532,28 +541,26 @@ export const collections: {
             [JewelryType.Pendant]: {
                 description: 'Torsion pendant',
                 sliderParameters: {
-                    majorR: { name: 'Radius', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 1 },
+                    majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 1 },
                     minorR: {
-                        name: 'Radius of ring',
+                        name: 'Height',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
                         min: 1,
-                        max: 3,
+                        max: 2,
                         step: 0.1,
                     },
-                    twist: { name: 'Twistiness', type: 'slider', tag: 'collection', value: 3, min: 0, max: 5, step: 1 },
-                    scaleA: {
-                        name: 'Height',
-                        type: 'slider',
-                        tag: 'collection',
-                        value: 1,
-                        min: 1,
-                        max: 1.5,
-                        step: 0.1,
-                    },
-                    scaleB: { name: 'Width', type: 'slider', tag: 'collection', value: 1, min: 1, max: 1.5, step: 0.1 },
                     scaleC: { name: 'Depth', type: 'slider', tag: 'general', value: 1, min: 1, max: 1.5, step: 0.1 },
+                    twist: {
+                        name: 'Twist',
+                        tag: 'collection',
+                        type: 'slider',
+                        value: 3,
+                        min: -5,
+                        max: 5,
+                        step: 0.5,
+                    },
                 },
                 switchParameters: {
                     twistAll: { name: 'Twist all?', tag: 'collection', type: 'toggle', value: true },
@@ -568,8 +575,8 @@ export const collections: {
                         twist={slider.twist}
                         majorR={slider.majorR}
                         minorR={slider.minorR}
-                        scaleA={slider.scaleA}
-                        scaleB={slider.scaleB}
+                        scaleA={1}
+                        scaleB={1}
                         scaleC={slider.scaleC}
                         roughness={roughness}
                         metalness={metalness}
