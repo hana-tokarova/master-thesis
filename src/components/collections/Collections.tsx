@@ -332,8 +332,8 @@ export const collections: {
                         max: 5,
                         step: 1,
                     },
-                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 0.1 },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 20, min: 10, max: 30, step: 0.1 },
+                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -542,7 +542,7 @@ export const collections: {
                 description:
                     'Torsion pendant is a generativelly created pattern from the twisted torus. By adjusting the twist parameters, the torus changes its shape.',
                 sliderParameters: {
-                    majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 1 },
+                    majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 0.1 },
                     minorR: {
                         name: 'Thickness',
                         type: 'slider',

@@ -57,7 +57,7 @@ export const ConfiguratorPage = () => {
         currentMaterial,
         setCurrentMaterial,
         setMesh,
-    } = useMeshParameters(CollectionType.Torsion, JewelryType.Ring, materials.PLA);
+    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring, materials.PLA);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);

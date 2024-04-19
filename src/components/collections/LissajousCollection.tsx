@@ -285,7 +285,7 @@ export const LissajousEarring = ({
             ref={mesh}
             geometry={geometry}
             position={[0, 0, 0]}
-            rotation={new THREE.Euler(-Math.PI / 2, 0, Math.PI / 3)}
+            rotation={new THREE.Euler(-Math.PI / 2, 0, Math.PI / 2)}
         >
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
@@ -341,7 +341,7 @@ export const LissajousPendant = ({
             ref={mesh}
             geometry={geometry}
             position={[0, 0, 0]}
-            rotation={new THREE.Euler(0, Math.PI / 3, Math.PI / 2)}
+            rotation={new THREE.Euler(0, Math.PI / 2, Math.PI / 2)}
         >
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
