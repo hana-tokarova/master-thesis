@@ -275,9 +275,11 @@ export const Finalize = ({
                                 ? `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${
                                       sliderParameters['scaleA'] + sliderParameters['r'] * 2
                                   } x ${sliderParameters['scaleC'] + sliderParameters['r'] * 2} mm`
-                                : `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${
-                                      sliderParameters['scaleA'] + sliderParameters['r'] * 2
-                                  } x ${sliderParameters['r'] + sliderParameters['r'] * 2} mm`
+                                : `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${(
+                                      sliderParameters['r'] * 3
+                                  ).toFixed(1)} x ${(sliderParameters['scaleA'] + sliderParameters['r'] * 2).toFixed(
+                                      1,
+                                  )} mm`
                             : `${dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2} x ${
                                   dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2
                               } x ${sliderParameters['scaleB'] + sliderParameters['r'] * 2} mm`
