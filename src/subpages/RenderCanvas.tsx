@@ -19,7 +19,7 @@ type RenderCanvasProps = {
 const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleFactor: number } => {
     switch (jewelryType) {
         case JewelryType.Ring:
-            return { offset: 50, scaleFactor: 1.0 };
+            return { offset: 60, scaleFactor: 1.0 };
         case JewelryType.Bracelet:
             return { offset: 90, scaleFactor: 1.5 };
         case JewelryType.Earring:
