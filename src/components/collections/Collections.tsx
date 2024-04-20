@@ -427,7 +427,7 @@ export const collections: {
                 description:
                     'Torsion bracelet is a generativelly created pattern from the twisted torus. By adjusting the twist and screw parameters, the torus changes its shape.',
                 sliderParameters: {
-                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 13, min: 3, max: 20, step: 0.1 },
+                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 7, min: 3, max: 10, step: 0.1 },
                     minorR: {
                         name: 'Wall thickness',
                         tag: 'general',
