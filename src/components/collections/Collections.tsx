@@ -372,7 +372,7 @@ export const collections: {
                 sliderParameters: {
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 4, min: 3, max: 8, step: 0.1 },
                     minorR: {
-                        name: 'Thickness',
+                        name: 'Wall thickness',
                         tag: 'general',
                         type: 'slider',
                         value: 1,
@@ -429,7 +429,7 @@ export const collections: {
                 sliderParameters: {
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 13, min: 10, max: 20, step: 0.1 },
                     minorR: {
-                        name: 'Thickness',
+                        name: 'Wall thickness',
                         tag: 'general',
                         type: 'slider',
                         value: 1,
@@ -486,7 +486,7 @@ export const collections: {
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 13, min: 10, max: 20, step: 0.1 },
                     minorR: {
-                        name: 'Thickness',
+                        name: 'Wall thickness',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
@@ -543,7 +543,7 @@ export const collections: {
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 0.1 },
                     minorR: {
-                        name: 'Thickness',
+                        name: 'Wall thickness',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
