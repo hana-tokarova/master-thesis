@@ -35,7 +35,7 @@ export const Visualize = ({
                 paddingTop="2"
                 direction="row"
                 rowGap={{ base: 2, sm: 3, md: 4, lg: 5 }}
-                columnGap={{ base: '20', md: '14' }}
+                columnGap={{ base: '14', md: '16' }}
                 wrap="wrap"
             >
                 <Text

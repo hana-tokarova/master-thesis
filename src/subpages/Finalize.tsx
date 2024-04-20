@@ -91,7 +91,7 @@ export const Finalize = ({
     }, [meshRef, meshRef.current, meshRef.current?.geometry, currentJewelryType]);
 
     return (
-        <HStack spacing={5} alignItems="flex-start">
+        <HStack spacing={4} alignItems="flex-start">
             <Box paddingBottom={10}>
                 <Text
                     fontFamily={'heading'}
