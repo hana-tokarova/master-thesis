@@ -265,7 +265,7 @@ export const LissajousEarring = ({
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
-        const holderMesh = new THREE.TubeGeometry(holderPath, 32, 0.5, 32, true);
+        const holderMesh = new THREE.TubeGeometry(holderPath, 32, 0.3, 32, true);
         holderMesh.deleteAttribute('normal');
         holderMesh.deleteAttribute('uv');
 
@@ -314,7 +314,7 @@ export const LissajousPendant = ({
         const mergedVertices = BufferGeometryUtils.mergeVertices(pendantMesh, 0.01);
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
-        const holderMesh = new THREE.TubeGeometry(holderPath, 32, 0.5, 32, true);
+        const holderMesh = new THREE.TubeGeometry(holderPath, 32, 0.3, 32, true);
         holderMesh.deleteAttribute('normal');
         holderMesh.deleteAttribute('uv');
 
