@@ -165,7 +165,7 @@ export const TorsionRing = ({
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
 
-        const ringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist), stacks);
+        const ringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist) * 2, stacks);
         ringMesh.deleteAttribute('normal');
         ringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(ringMesh, 0.01);
@@ -202,7 +202,7 @@ export const TorsionBracelet = ({
     const geometry = useMemo(() => {
         const func = taperedTorsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, screw!);
 
-        const braceletMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist), stacks);
+        const braceletMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist) * 2, stacks);
         braceletMesh.deleteAttribute('normal');
         braceletMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.02);
@@ -241,7 +241,7 @@ export const TorsionEarring = ({
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
 
-        const earringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist), stacks);
+        const earringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist) * 3, stacks);
         earringMesh.deleteAttribute('normal');
         earringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
@@ -294,7 +294,7 @@ export const TorsionPendant = ({
     const geometry = useMemo(() => {
         const func = torsion(scaleA, scaleB, scaleC, majorR, minorR, twist, twistAll, inflate!);
 
-        const earringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist), stacks);
+        const earringMesh = new ParametricGeometry(func, calculateDetail2D(majorR, twist) * 3, stacks);
         earringMesh.deleteAttribute('normal');
         earringMesh.deleteAttribute('uv');
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
