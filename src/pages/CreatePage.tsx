@@ -7,108 +7,155 @@ type Project = {
     image: string;
     material: 'PLA Filament' | 'Resin' | 'Metal';
     price: number;
-    url?: string;
-    collection?: CollectionType;
-    jewelry?: JewelryType;
+    url: string;
+    collection: CollectionType;
+    jewelry: JewelryType;
 };
 
-const projects: Project[] = [
+export const projects: Project[] = [
     {
         id: 1,
-        material: 'PLA Filament',
-        price: 10.0,
-        image: 'https://source.unsplash.com/random/100x100',
+        material: 'Metal',
+        price: 12.38,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeRing1.jpg`,
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
-        // url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjQsImIiOjEsInNjYWxlQiI6NSwiciI6MX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjo1LCJyIjoxfSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQ1LCJkaWFtZXRlciI6MTQuM319LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjEsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMzMsInJvdWdobmVzcyI6MSwibWV0YWxuZXNzIjowLjV9LCJtZXNoQ29sb3IiOiJnb2xkIn0=',
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjMsInNjYWxlQiI6NC4xLCJyIjowLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjEsInNjYWxlQiI6MywiciI6MC41fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJNZXRhbCIsInRoaWNrbmVzc01pbmltdW0iOjAuNSwiYWRkaXRpb25hbENvc3QiOjAuMzE0Nywicm91Z2huZXNzIjowLjMsIm1ldGFsbmVzcyI6MX0sIm1lc2hDb2xvciI6Imdob3N0d2hpdGUifQ==',
     },
     {
         id: 2,
-        material: 'Resin',
-        price: 15.0,
-        image: 'https://source.unsplash.com/random/100x50',
+        material: 'PLA Filament',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeRing2.jpg`,
         collection: CollectionType.Lissajous,
         jewelry: JewelryType.Ring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjIsImIiOjEsInNjYWxlQiI6Ni4yLCJyIjowLjc1fSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJhIjoxLCJiIjoxLCJzY2FsZUIiOjMsInIiOjAuNzV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7fSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7InNjYWxlQSI6eyJ2YWx1ZSI6NDMsImRpYW1ldGVyIjoxMy42fX0sImN1cnJlbnRDb2xsZWN0aW9uIjoibGlzc2FqZSIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6InJpbmciLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoicGluayJ9',
     },
     {
         id: 3,
         material: 'Metal',
-        price: 20.0,
-        image: 'https://source.unsplash.com/random/100x150',
-        collection: CollectionType.Lissajous,
+        price: 21.04,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionRing1.jpg`,
+        collection: CollectionType.Torsion,
         jewelry: JewelryType.Ring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6MSwibWlub3JSIjoxLCJpbmZsYXRlIjoxLCJ0d2lzdCI6MX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsic2NhbGVDIjoxLCJtaW5vclIiOjAuNzUsImluZmxhdGUiOjAsInR3aXN0IjotNSwiciI6MC41fSwic3dpdGNoUGFyYW1ldGVycyI6eyJ0d2lzdEFsbCI6ZmFsc2V9LCJkcm9wZG93blBhcmFtZXRlcnMiOnsibWFqb3JSIjp7InZhbHVlIjo0MywiZGlhbWV0ZXIiOjEzLjZ9fSwiY3VycmVudENvbGxlY3Rpb24iOiJ0b3JzaW9uIiwiY3VycmVudEpld2VscnlUeXBlIjoicmluZyIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiTWV0YWwiLCJ0aGlja25lc3NNaW5pbXVtIjowLjUsImFkZGl0aW9uYWxDb3N0IjowLjMxNDcsInJvdWdobmVzcyI6MC4zLCJtZXRhbG5lc3MiOjF9LCJtZXNoQ29sb3IiOiJsaWdodGdyZWVuIn0=',
     },
     {
         id: 4,
         material: 'PLA Filament',
-        price: 10.0,
-        image: 'https://source.unsplash.com/random/100x200',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionRing2.jpg`,
         collection: CollectionType.Torsion,
-        jewelry: JewelryType.Earring,
+        jewelry: JewelryType.Ring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6Mi44LCJtaW5vclIiOjEuMiwiaW5mbGF0ZSI6MSwidHdpc3QiOi0yLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7InNjYWxlQyI6MSwibWlub3JSIjowLjc1LCJpbmZsYXRlIjowLCJ0d2lzdCI6LTUsInIiOjAuNzV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjp0cnVlfSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7Im1ham9yUiI6eyJ2YWx1ZSI6NDMsImRpYW1ldGVyIjoxMy42fX0sImN1cnJlbnRDb2xsZWN0aW9uIjoidG9yc2lvbiIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6InJpbmciLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoiZ2hvc3R3aGl0ZSJ9',
     },
     {
         id: 5,
-        material: 'Resin',
-        price: 15.0,
-        image: 'https://source.unsplash.com/random/100x250',
-        collection: CollectionType.Torsion,
-        jewelry: JewelryType.Ring,
+        material: 'Metal',
+        price: 95.11,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeBracelet1.jpg`,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Bracelet,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjIsImIiOjQsInNjYWxlQiI6MTMsInIiOjAuNX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjo4LCJyIjowLjV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7fSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7InNjYWxlQSI6eyJ2YWx1ZSI6MTYwLCJkaWFtZXRlciI6MjUuNX19LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJicmFjZWxldCIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiTWV0YWwiLCJ0aGlja25lc3NNaW5pbXVtIjowLjUsImFkZGl0aW9uYWxDb3N0IjowLjMxNDcsInJvdWdobmVzcyI6MC4zLCJtZXRhbG5lc3MiOjF9LCJtZXNoQ29sb3IiOiJnb2xkIn0=',
     },
     {
         id: 6,
-        material: 'Metal',
-        price: 20.0,
-        image: 'https://source.unsplash.com/random/100x300',
+        material: 'PLA Filament',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeBracelet2.jpg`,
         collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Pendant,
+        jewelry: JewelryType.Bracelet,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjEsInNjYWxlQiI6OCwiciI6MC43NX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjo4LCJyIjowLjc1fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjE2MCwiZGlhbWV0ZXIiOjI1LjV9fSwiY3VycmVudENvbGxlY3Rpb24iOiJsaXNzYWplIiwiY3VycmVudEpld2VscnlUeXBlIjoiYnJhY2VsZXQiLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoibGlnaHRncmVlbiJ9',
     },
     {
         id: 7,
         material: 'PLA Filament',
-        price: 10.0,
-        image: 'https://source.unsplash.com/random/100x350',
-        collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Ring,
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionBracelet1.jpg`,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Bracelet,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6MywibWlub3JSIjoxLjUsInNjcmV3Ijo0LjksInR3aXN0IjoyLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7InNjYWxlQyI6MywibWlub3JSIjowLjc1LCJzY3JldyI6MCwidHdpc3QiOi01fSwic3dpdGNoUGFyYW1ldGVycyI6eyJ0d2lzdEFsbCI6dHJ1ZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJtYWpvclIiOnsidmFsdWUiOjE2MCwiZGlhbWV0ZXIiOjI1LjV9fSwiY3VycmVudENvbGxlY3Rpb24iOiJ0b3JzaW9uIiwiY3VycmVudEpld2VscnlUeXBlIjoiYnJhY2VsZXQiLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoibGlnaHRza3libHVlIn0=',
     },
     {
         id: 8,
-        material: 'Resin',
-        price: 15.0,
-        image: 'https://source.unsplash.com/random/100x400',
+        material: 'Metal',
+        price: 129.88,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionBracelet2.jpg`,
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Bracelet,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6NS4yLCJtaW5vclIiOjEuMiwic2NyZXciOjAsInR3aXN0IjotMn0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsic2NhbGVDIjozLCJtaW5vclIiOjAuNzUsInNjcmV3IjowLCJ0d2lzdCI6LTUsInIiOjAuNX0sInN3aXRjaFBhcmFtZXRlcnMiOnsidHdpc3RBbGwiOmZhbHNlfSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7Im1ham9yUiI6eyJ2YWx1ZSI6MTYwLCJkaWFtZXRlciI6MjUuNX19LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJicmFjZWxldCIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiTWV0YWwiLCJ0aGlja25lc3NNaW5pbXVtIjowLjUsImFkZGl0aW9uYWxDb3N0IjowLjMxNDcsInJvdWdobmVzcyI6MC4zLCJtZXRhbG5lc3MiOjF9LCJtZXNoQ29sb3IiOiJnb2xkIn0=',
     },
     {
         id: 9,
         material: 'Metal',
-        price: 20.0,
-        image: 'https://source.unsplash.com/random/100x450',
+        price: 26.71,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeEarring1.jpg`,
         collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Ring,
+        jewelry: JewelryType.Earring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjUsImMiOjEsImIiOjUsInNjYWxlQSI6NSwic2NhbGVCIjo3LCJzY2FsZUMiOjEyLCJyIjowLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7ImEiOjIsImMiOjEsImIiOjEsInNjYWxlQSI6NSwic2NhbGVCIjo1LCJzY2FsZUMiOjEwLCJyIjowLjV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7fSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7fSwiY3VycmVudENvbGxlY3Rpb24iOiJsaXNzYWplIiwiY3VycmVudEpld2VscnlUeXBlIjoiZWFycmluZyIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiTWV0YWwiLCJ0aGlja25lc3NNaW5pbXVtIjowLjUsImFkZGl0aW9uYWxDb3N0IjowLjMxNDcsInJvdWdobmVzcyI6MC4zLCJtZXRhbG5lc3MiOjF9LCJtZXNoQ29sb3IiOiJsaWdodHNreWJsdWUifQ==',
     },
     {
         id: 10,
-        material: 'Metal',
-        price: 20.0,
-        image: 'https://source.unsplash.com/random/100x420',
+        material: 'Resin',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeEarring2.jpg`,
         collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Ring,
+        jewelry: JewelryType.Earring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjMsImMiOjIsImIiOjEsInNjYWxlQSI6NSwic2NhbGVCIjo1LCJzY2FsZUMiOjEwLCJyIjowLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7ImEiOjIsImMiOjEsImIiOjEsInNjYWxlQSI6NSwic2NhbGVCIjo1LCJzY2FsZUMiOjEwLCJyIjoxfSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6e30sImN1cnJlbnRDb2xsZWN0aW9uIjoibGlzc2FqZSIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6ImVhcnJpbmciLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlJlc2luIiwidGhpY2tuZXNzTWluaW11bSI6MSwiYWRkaXRpb25hbENvc3QiOjAuMDAwMDMzMywicm91Z2huZXNzIjoxLCJtZXRhbG5lc3MiOjAuNX0sIm1lc2hDb2xvciI6ImdvbGQifQ==',
     },
     {
         id: 11,
-        material: 'Metal',
-        price: 20.0,
-        image: 'https://source.unsplash.com/random/100x250',
-        collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Ring,
+        material: 'Resin',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionEarring1.jpg`,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Earring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6NS4zLCJtaW5vclIiOjAuNzUsImluZmxhdGUiOjAuNSwidHdpc3QiOjEsInNjYWxlQyI6MS40fSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJtYWpvclIiOjUsIm1pbm9yUiI6MC43NSwiaW5mbGF0ZSI6MCwidHdpc3QiOi01LCJzY2FsZUMiOjEsInIiOjF9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjp0cnVlfSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7fSwiY3VycmVudENvbGxlY3Rpb24iOiJ0b3JzaW9uIiwiY3VycmVudEpld2VscnlUeXBlIjoiZWFycmluZyIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiUmVzaW4iLCJ0aGlja25lc3NNaW5pbXVtIjoxLCJhZGRpdGlvbmFsQ29zdCI6MC4wMDAwMzMzLCJyb3VnaG5lc3MiOjEsIm1ldGFsbmVzcyI6MC41fSwibWVzaENvbG9yIjoicGluayJ9',
     },
     {
         id: 12,
-        material: 'Metal',
-        price: 20.0,
-        image: 'https://source.unsplash.com/random/100x320',
+        material: 'PLA Filament',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionEarring2.jpg`,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Earring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6OC41LCJtaW5vclIiOjEuMSwiaW5mbGF0ZSI6MC41LCJ0d2lzdCI6LTEuNSwic2NhbGVDIjoyfSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJtYWpvclIiOjUsIm1pbm9yUiI6MC43NSwiaW5mbGF0ZSI6MCwidHdpc3QiOi01LCJzY2FsZUMiOjEsInIiOjAuNzV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjpmYWxzZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6e30sImN1cnJlbnRDb2xsZWN0aW9uIjoidG9yc2lvbiIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6ImVhcnJpbmciLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoibGlnaHRncmVlbiJ9',
+    },
+    {
+        id: 13,
+        material: 'Resin',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajePendant1.jpg`,
         collection: CollectionType.Lissajous,
-        jewelry: JewelryType.Bracelet,
+        jewelry: JewelryType.Pendant,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjMsInNjYWxlQiI6MTAsInNjYWxlQSI6MTAsInIiOjAuNzV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjEsInNjYWxlQiI6MTAsInNjYWxlQSI6MTAsInIiOjAuNzV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7fSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7fSwiY3VycmVudENvbGxlY3Rpb24iOiJsaXNzYWplIiwiY3VycmVudEpld2VscnlUeXBlIjoicGVuZGFudCIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiUmVzaW4iLCJ0aGlja25lc3NNaW5pbXVtIjoxLCJhZGRpdGlvbmFsQ29zdCI6MC4wMDAwMzMzLCJyb3VnaG5lc3MiOjEsIm1ldGFsbmVzcyI6MC41fSwibWVzaENvbG9yIjoibGlnaHRza3libHVlIn0=',
+    },
+    {
+        id: 14,
+        material: 'Metal',
+        price: 8.27,
+        image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajePendant2.jpg`,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Pendant,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjEsInNjYWxlQiI6MTAsInNjYWxlQSI6MTAsInIiOjAuNX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwic2NhbGVBIjoxMCwiciI6MC41fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6e30sImN1cnJlbnRDb2xsZWN0aW9uIjoibGlzc2FqZSIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6InBlbmRhbnQiLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6Ik1ldGFsIiwidGhpY2tuZXNzTWluaW11bSI6MC41LCJhZGRpdGlvbmFsQ29zdCI6MC4zMTQ3LCJyb3VnaG5lc3MiOjAuMywibWV0YWxuZXNzIjoxfSwibWVzaENvbG9yIjoicGluayJ9',
+    },
+    {
+        id: 15,
+        material: 'Metal',
+        price: 4.06,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionPendant1.jpg`,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Pendant,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6My4zLCJtaW5vclIiOjEuMSwic2NhbGVDIjoxLCJ0d2lzdCI6MH0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsibWFqb3JSIjozLCJtaW5vclIiOjAuNzUsInNjYWxlQyI6MSwidHdpc3QiOi01LCJyIjowLjV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjpmYWxzZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6e30sImN1cnJlbnRDb2xsZWN0aW9uIjoidG9yc2lvbiIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6InBlbmRhbnQiLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6Ik1ldGFsIiwidGhpY2tuZXNzTWluaW11bSI6MC41LCJhZGRpdGlvbmFsQ29zdCI6MC4zMTQ3LCJyb3VnaG5lc3MiOjAuMywibWV0YWxuZXNzIjoxfSwibWVzaENvbG9yIjoibGlnaHRza3libHVlIn0=',
+    },
+    {
+        id: 16,
+        material: 'Resin',
+        price: 0.01,
+        image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionPendant2.jpg`,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Pendant,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6NS44LCJtaW5vclIiOjIsInNjYWxlQyI6MSwidHdpc3QiOjF9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7Im1ham9yUiI6MywibWlub3JSIjowLjc1LCJzY2FsZUMiOjEsInR3aXN0IjotNSwiciI6MX0sInN3aXRjaFBhcmFtZXRlcnMiOnsidHdpc3RBbGwiOnRydWV9LCJkcm9wZG93blBhcmFtZXRlcnMiOnt9LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJwZW5kYW50IiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjEsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMzMsInJvdWdobmVzcyI6MSwibWV0YWxuZXNzIjowLjV9LCJtZXNoQ29sb3IiOiJnaG9zdHdoaXRlIn0=',
     },
 ];
 
@@ -198,8 +245,11 @@ export const CreatePage = () => {
                                                     as={Link}
                                                     to={`/configurator?config=${selectedProject.url}`}
                                                     key={selectedProject.id}
-                                                    h={{ base: '44', sm: '48', md: '52', lg: '72' }}
+                                                    h={{ base: '52', sm: '56', md: '60', lg: '80' }}
                                                     position="relative"
+                                                    shadow={'xl'}
+                                                    borderRadius="lg"
+                                                    padding={6}
                                                 >
                                                     <Box
                                                         _hover={{
@@ -214,8 +264,6 @@ export const CreatePage = () => {
                                                             h={{ base: '32', sm: '36', md: '40', lg: '60' }}
                                                             src={selectedProject.image}
                                                             alt={'Project' + selectedProject.id}
-                                                            shadow={'xl'}
-                                                            borderRadius="sm"
                                                         />
                                                         <Box
                                                             className="image-overlay"
@@ -232,7 +280,6 @@ export const CreatePage = () => {
                                                     </Box>
 
                                                     <Text
-                                                        paddingTop={2}
                                                         fontFamily={'heading'}
                                                         fontSize={{ base: 'sm', sm: 'sm', md: 'md', lg: 'md' }}
                                                         fontWeight="500"
@@ -244,7 +291,7 @@ export const CreatePage = () => {
                                                         fontSize={{ base: 'xs', sm: 'xs', md: 'sm', lg: 'sm' }}
                                                         fontWeight="300"
                                                     >
-                                                        {selectedProject.price.toFixed(2)} €
+                                                        ~€{selectedProject.price.toFixed(2)}
                                                     </Text>
                                                 </Box>
                                             ))}

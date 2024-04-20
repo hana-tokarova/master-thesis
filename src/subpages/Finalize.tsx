@@ -316,7 +316,7 @@ export const Finalize = ({
                             fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                             paddingBottom={10}
                         >
-                            €{(volume * currentMaterial.additionalCost).toFixed(2)}
+                            ~€{(volume * currentMaterial.additionalCost).toFixed(2)}
                         </Text>
                     </>
                 )}
