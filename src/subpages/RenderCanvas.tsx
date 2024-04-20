@@ -88,8 +88,14 @@ export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
                     key={JSON.stringify([sliderParams, dropdownParams, switchParams])}
                     preset={'rembrandt'}
                     environment={'warehouse'}
-                    intensity={0.2}
-                    shadows="contact"
+                    intensity={0.3}
+                    shadows={{
+                        type: 'contact',
+                        bias: -0.0001,
+                        normalBias: 0,
+                        size: 1024,
+                        offset: 0.1,
+                    }}
                     adjustCamera={false}
                 >
                     {mesh.render(

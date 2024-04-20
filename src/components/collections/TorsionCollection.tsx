@@ -171,11 +171,14 @@ export const TorsionRing = ({
         const mergedVertices = BufferGeometryUtils.mergeVertices(ringMesh, 0.01);
         mergedVertices.computeVertexNormals();
 
+        const meshRotation = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        mergedVertices.applyMatrix4(meshRotation);
+
         return mergedVertices;
     }, [majorR, minorR, twistAll, twist, inflate, scaleA, scaleB, scaleC, stacks]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(Math.PI / 2, 0, Math.PI)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, 0, Math.PI)}>
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
