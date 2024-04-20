@@ -213,10 +213,10 @@ export const ConfiguratorPage = () => {
                     setCurrentMaterial={setCurrentMaterial}
                     colors={[
                         ['ghostwhite', 'gray'],
-                        ['gold', 'goldenrod'],
-                        ['greenyellow', 'forestgreen'],
-                        ['cyan', 'deepskyblue'],
+                        ['gold', 'darkgoldenrod'],
                         ['pink', 'maroon'],
+                        ['lightgreen', 'darkgreen'],
+                        ['lightskyblue', 'mediumblue'],
                     ]}
                     meshColor={meshColor}
                     setMeshColor={setMeshColor}

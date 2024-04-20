@@ -43,6 +43,7 @@ export const Collection = ({
 
             <Flex
                 paddingTop="2"
+                paddingBottom="4"
                 direction="row"
                 rowGap={{ base: 0, sm: 2, md: 4, lg: 6 }}
                 columnGap={4}
