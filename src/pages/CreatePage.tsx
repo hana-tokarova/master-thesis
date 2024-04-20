@@ -4,9 +4,9 @@ import { CollectionType, JewelryType } from '../components/collections/Collectio
 
 type Project = {
     id: number;
-    image: string;
-    material: 'PLA Filament' | 'Resin' | 'Metal';
-    price: number;
+    image: string | undefined;
+    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Create from scratch';
+    price: number | 'TBA';
     url: string;
     collection: CollectionType;
     jewelry: JewelryType;
@@ -157,6 +157,15 @@ export const projects: Project[] = [
         jewelry: JewelryType.Pendant,
         url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6NS44LCJtaW5vclIiOjIsInNjYWxlQyI6MSwidHdpc3QiOjF9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7Im1ham9yUiI6MywibWlub3JSIjowLjc1LCJzY2FsZUMiOjEsInR3aXN0IjotNSwiciI6MX0sInN3aXRjaFBhcmFtZXRlcnMiOnsidHdpc3RBbGwiOnRydWV9LCJkcm9wZG93blBhcmFtZXRlcnMiOnt9LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJwZW5kYW50IiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjEsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMzMsInJvdWdobmVzcyI6MSwibWV0YWxuZXNzIjowLjV9LCJtZXNoQ29sb3IiOiJnaG9zdHdoaXRlIn0=',
     },
+    {
+        id: 18,
+        material: 'Create from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Ring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6MS42LCJtaW5vclIiOjAuOSwiaW5mbGF0ZSI6MC4yLCJ0d2lzdCI6LTF9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7InNjYWxlQyI6MSwibWlub3JSIjowLjc1LCJpbmZsYXRlIjowLCJ0d2lzdCI6LTV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjpmYWxzZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJtYWpvclIiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJQTEEiLCJ0aGlja25lc3NNaW5pbXVtIjowLjc1LCJhZGRpdGlvbmFsQ29zdCI6MC4wMDAwMzEyNSwicm91Z2huZXNzIjowLjgsIm1ldGFsbmVzcyI6MH0sIm1lc2hDb2xvciI6Imdob3N0d2hpdGUifQ==',
+    },
 ];
 
 export const CreatePage = () => {
@@ -251,33 +260,50 @@ export const CreatePage = () => {
                                                     borderRadius="lg"
                                                     padding={6}
                                                 >
-                                                    <Box
-                                                        _hover={{
-                                                            '.image-overlay': {
-                                                                opacity: 1,
-                                                            },
-                                                        }}
-                                                    >
-                                                        <Image
-                                                            w={{ base: '32', sm: '36', md: '40', lg: '60' }}
-                                                            objectFit="cover"
-                                                            h={{ base: '32', sm: '36', md: '40', lg: '60' }}
-                                                            src={selectedProject.image}
-                                                            alt={'Project' + selectedProject.id}
-                                                        />
+                                                    {selectedProject.image !== undefined ? (
                                                         <Box
-                                                            className="image-overlay"
-                                                            position="absolute"
-                                                            top="0"
-                                                            left="0"
-                                                            w="full"
-                                                            h="full"
-                                                            bgGradient="linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))"
-                                                            opacity="0"
-                                                            transition="opacity 0.3s ease-in-out"
-                                                            zIndex="1"
-                                                        />
-                                                    </Box>
+                                                            _hover={{
+                                                                '.image-overlay': {
+                                                                    opacity: 1,
+                                                                },
+                                                            }}
+                                                        >
+                                                            <Image
+                                                                w={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                                objectFit="cover"
+                                                                h={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                                src={selectedProject.image}
+                                                                alt={'Project' + selectedProject.id}
+                                                            />
+                                                            <Box
+                                                                className="image-overlay"
+                                                                position="absolute"
+                                                                top="0"
+                                                                left="0"
+                                                                w="full"
+                                                                h="full"
+                                                                bgGradient="linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))"
+                                                                opacity="0"
+                                                                transition="opacity 0.3s ease-in-out"
+                                                                zIndex="1"
+                                                            />
+                                                        </Box>
+                                                    ) : (
+                                                        <Text
+                                                            paddingTop={10}
+                                                            fontFamily={'heading'}
+                                                            fontSize={{ base: '5xl', sm: '6xl', md: '7xl', lg: '8xl' }}
+                                                            fontWeight="300"
+                                                            display="flex"
+                                                            align="center"
+                                                            justifyContent="center"
+                                                            color="brand.100"
+                                                            h={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                            w={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                        >
+                                                            +
+                                                        </Text>
+                                                    )}
 
                                                     <Text
                                                         fontFamily={'heading'}
@@ -286,13 +312,24 @@ export const CreatePage = () => {
                                                     >
                                                         {selectedProject.material}
                                                     </Text>
-                                                    <Text
-                                                        fontFamily={'heading'}
-                                                        fontSize={{ base: 'xs', sm: 'xs', md: 'sm', lg: 'sm' }}
-                                                        fontWeight="300"
-                                                    >
-                                                        ~€{selectedProject.price.toFixed(2)}
-                                                    </Text>
+
+                                                    {selectedProject.price === 'TBA' ? (
+                                                        <Text
+                                                            fontFamily={'heading'}
+                                                            fontSize={{ base: 'xs', sm: 'xs', md: 'sm', lg: 'sm' }}
+                                                            fontWeight="300"
+                                                        >
+                                                            TBA
+                                                        </Text>
+                                                    ) : (
+                                                        <Text
+                                                            fontFamily={'heading'}
+                                                            fontSize={{ base: 'xs', sm: 'xs', md: 'sm', lg: 'sm' }}
+                                                            fontWeight="300"
+                                                        >
+                                                            ~€{selectedProject.price!.toFixed(2)}
+                                                        </Text>
+                                                    )}
                                                 </Box>
                                             ))}
                                     </Flex>

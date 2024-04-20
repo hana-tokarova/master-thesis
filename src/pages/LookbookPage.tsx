@@ -31,20 +31,22 @@ export const LookbookPage = () => {
                 }}
                 flexGrow={1}
             >
-                {projects.map((selectedProject) => (
-                    <Box as={Link} to={`/configurator?config=${selectedProject.url}`}>
-                        <Image
-                            key={selectedProject.id}
-                            w="100%"
-                            display="inline-block"
-                            mb={2}
-                            src={selectedProject.image}
-                            alt={selectedProject.id.toString()}
-                            borderRadius="lg"
-                            shadow={'xl'}
-                        />
-                    </Box>
-                ))}
+                {projects
+                    .filter((project) => project.price !== 'TBA')
+                    .map((selectedProject) => (
+                        <Box as={Link} to={`/configurator?config=${selectedProject.url}`}>
+                            <Image
+                                key={selectedProject.id}
+                                w="100%"
+                                display="inline-block"
+                                mb={2}
+                                src={selectedProject.image}
+                                alt={selectedProject.id.toString()}
+                                borderRadius="lg"
+                                shadow={'xl'}
+                            />
+                        </Box>
+                    ))}
             </Box>
         </VStack>
     );
