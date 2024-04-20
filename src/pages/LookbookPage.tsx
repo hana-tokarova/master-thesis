@@ -18,9 +18,8 @@ export const LookbookPage = () => {
             </Text>
 
             <Text maxW="70vw" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                Here you can find showcase of renders and lookbooks from the different collections. If you fancy some of
-                the designs below, you can click on the specified jewelry and then you will be send to the Neotaku
-                configurator.
+                Here you can find showcase of renders from the different jewelry collections. If you fancy some of the
+                designs below, you can click on the specified jewelry and then you will be send to the configurator.
             </Text>
 
             <Box

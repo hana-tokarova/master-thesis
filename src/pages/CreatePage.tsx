@@ -5,7 +5,7 @@ import { CollectionType, JewelryType } from '../components/collections/Collectio
 type Project = {
     id: number;
     image: string | undefined;
-    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Create from scratch';
+    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Configure from scratch';
     price: number | 'TBA';
     url: string;
     collection: CollectionType;
@@ -158,13 +158,76 @@ export const projects: Project[] = [
         url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6NS44LCJtaW5vclIiOjIsInNjYWxlQyI6MSwidHdpc3QiOjF9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7Im1ham9yUiI6MywibWlub3JSIjowLjc1LCJzY2FsZUMiOjEsInR3aXN0IjotNSwiciI6MX0sInN3aXRjaFBhcmFtZXRlcnMiOnsidHdpc3RBbGwiOnRydWV9LCJkcm9wZG93blBhcmFtZXRlcnMiOnt9LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJwZW5kYW50IiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJSZXNpbiIsInRoaWNrbmVzc01pbmltdW0iOjEsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMzMsInJvdWdobmVzcyI6MSwibWV0YWxuZXNzIjowLjV9LCJtZXNoQ29sb3IiOiJnaG9zdHdoaXRlIn0=',
     },
     {
+        id: 17,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Ring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjIsInNjYWxlQiI6NS41LCJyIjowLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjEsInNjYWxlQiI6MywiciI6MC43NX0sInN3aXRjaFBhcmFtZXRlcnMiOnt9LCJkcm9wZG93blBhcmFtZXRlcnMiOnsic2NhbGVBIjp7InZhbHVlIjo0MywiZGlhbWV0ZXIiOjEzLjZ9fSwiY3VycmVudENvbGxlY3Rpb24iOiJsaXNzYWplIiwiY3VycmVudEpld2VscnlUeXBlIjoicmluZyIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiUExBIiwidGhpY2tuZXNzTWluaW11bSI6MC43NSwiYWRkaXRpb25hbENvc3QiOjAuMDAwMDMxMjUsInJvdWdobmVzcyI6MC44LCJtZXRhbG5lc3MiOjB9LCJtZXNoQ29sb3IiOiJnaG9zdHdoaXRlIn0=',
+    },
+    {
         id: 18,
-        material: 'Create from scratch',
+        material: 'Configure from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
         jewelry: JewelryType.Ring,
         url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6MS42LCJtaW5vclIiOjAuOSwiaW5mbGF0ZSI6MC4yLCJ0d2lzdCI6LTF9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7InNjYWxlQyI6MSwibWlub3JSIjowLjc1LCJpbmZsYXRlIjowLCJ0d2lzdCI6LTV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjpmYWxzZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJtYWpvclIiOnsidmFsdWUiOjQzLCJkaWFtZXRlciI6MTMuNn19LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJyaW5nIiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJQTEEiLCJ0aGlja25lc3NNaW5pbXVtIjowLjc1LCJhZGRpdGlvbmFsQ29zdCI6MC4wMDAwMzEyNSwicm91Z2huZXNzIjowLjgsIm1ldGFsbmVzcyI6MH0sIm1lc2hDb2xvciI6Imdob3N0d2hpdGUifQ==',
+    },
+    {
+        id: 19,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Bracelet,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjMsImIiOjMsInNjYWxlQiI6OCwiciI6MC43NX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjo4LCJyIjowLjc1fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6eyJzY2FsZUEiOnsidmFsdWUiOjE2MCwiZGlhbWV0ZXIiOjI1LjV9fSwiY3VycmVudENvbGxlY3Rpb24iOiJsaXNzYWplIiwiY3VycmVudEpld2VscnlUeXBlIjoiYnJhY2VsZXQiLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoiZ2hvc3R3aGl0ZSJ9',
+    },
+    {
+        id: 20,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Bracelet,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7InNjYWxlQyI6NC4xLCJtaW5vclIiOjEsInNjcmV3IjowLCJ0d2lzdCI6MX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsic2NhbGVDIjozLCJtaW5vclIiOjAuNzUsInNjcmV3IjowLCJ0d2lzdCI6LTUsInIiOjAuNzV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjp0cnVlfSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7Im1ham9yUiI6eyJ2YWx1ZSI6MTYwLCJkaWFtZXRlciI6MjUuNX19LCJjdXJyZW50Q29sbGVjdGlvbiI6InRvcnNpb24iLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJicmFjZWxldCIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiUExBIiwidGhpY2tuZXNzTWluaW11bSI6MC43NSwiYWRkaXRpb25hbENvc3QiOjAuMDAwMDMxMjUsInJvdWdobmVzcyI6MC44LCJtZXRhbG5lc3MiOjB9LCJtZXNoQ29sb3IiOiJnaG9zdHdoaXRlIn0=',
+    },
+    {
+        id: 21,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Earring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjIsImMiOjEsImIiOjEsInNjYWxlQSI6NSwic2NhbGVCIjo1LCJzY2FsZUMiOjEyLCJyIjowLjV9LCJzbGlkZXJNaW5QYXJhbWV0ZXJzIjp7ImEiOjIsImMiOjEsImIiOjEsInNjYWxlQSI6NSwic2NhbGVCIjo1LCJzY2FsZUMiOjEwLCJyIjowLjc1fSwic3dpdGNoUGFyYW1ldGVycyI6e30sImRyb3Bkb3duUGFyYW1ldGVycyI6e30sImN1cnJlbnRDb2xsZWN0aW9uIjoibGlzc2FqZSIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6ImVhcnJpbmciLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoiZ2hvc3R3aGl0ZSJ9',
+    },
+    {
+        id: 22,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Earring,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6OC41LCJtaW5vclIiOjEuMSwiaW5mbGF0ZSI6MCwidHdpc3QiOjAsInNjYWxlQyI6Mn0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsibWFqb3JSIjo1LCJtaW5vclIiOjAuNzUsImluZmxhdGUiOjAsInR3aXN0IjotNSwic2NhbGVDIjoxLCJyIjowLjc1fSwic3dpdGNoUGFyYW1ldGVycyI6eyJ0d2lzdEFsbCI6dHJ1ZX0sImRyb3Bkb3duUGFyYW1ldGVycyI6e30sImN1cnJlbnRDb2xsZWN0aW9uIjoidG9yc2lvbiIsImN1cnJlbnRKZXdlbHJ5VHlwZSI6ImVhcnJpbmciLCJjdXJyZW50TWF0ZXJpYWwiOnsibmFtZSI6IlBMQSIsInRoaWNrbmVzc01pbmltdW0iOjAuNzUsImFkZGl0aW9uYWxDb3N0IjowLjAwMDAzMTI1LCJyb3VnaG5lc3MiOjAuOCwibWV0YWxuZXNzIjowfSwibWVzaENvbG9yIjoiZ2hvc3R3aGl0ZSJ9',
+    },
+    {
+        id: 23,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Lissajous,
+        jewelry: JewelryType.Pendant,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7ImEiOjEsImIiOjEsInNjYWxlQiI6MTAsInNjYWxlQSI6MTMuOCwiciI6MC43NX0sInNsaWRlck1pblBhcmFtZXRlcnMiOnsiYSI6MSwiYiI6MSwic2NhbGVCIjoxMCwic2NhbGVBIjoxMCwiciI6MC43NX0sInN3aXRjaFBhcmFtZXRlcnMiOnt9LCJkcm9wZG93blBhcmFtZXRlcnMiOnt9LCJjdXJyZW50Q29sbGVjdGlvbiI6Imxpc3NhamUiLCJjdXJyZW50SmV3ZWxyeVR5cGUiOiJwZW5kYW50IiwiY3VycmVudE1hdGVyaWFsIjp7Im5hbWUiOiJQTEEiLCJ0aGlja25lc3NNaW5pbXVtIjowLjc1LCJhZGRpdGlvbmFsQ29zdCI6MC4wMDAwMzEyNSwicm91Z2huZXNzIjowLjgsIm1ldGFsbmVzcyI6MH0sIm1lc2hDb2xvciI6Imdob3N0d2hpdGUifQ==',
+    },
+    {
+        id: 24,
+        material: 'Configure from scratch',
+        price: 'TBA',
+        image: undefined,
+        collection: CollectionType.Torsion,
+        jewelry: JewelryType.Pendant,
+        url: 'eyJzbGlkZXJQYXJhbWV0ZXJzIjp7Im1ham9yUiI6NS44LCJtaW5vclIiOjEsInNjYWxlQyI6MSwidHdpc3QiOi0yfSwic2xpZGVyTWluUGFyYW1ldGVycyI6eyJtYWpvclIiOjMsIm1pbm9yUiI6MC43NSwic2NhbGVDIjoxLCJ0d2lzdCI6LTUsInIiOjAuNzV9LCJzd2l0Y2hQYXJhbWV0ZXJzIjp7InR3aXN0QWxsIjp0cnVlfSwiZHJvcGRvd25QYXJhbWV0ZXJzIjp7fSwiY3VycmVudENvbGxlY3Rpb24iOiJ0b3JzaW9uIiwiY3VycmVudEpld2VscnlUeXBlIjoicGVuZGFudCIsImN1cnJlbnRNYXRlcmlhbCI6eyJuYW1lIjoiUExBIiwidGhpY2tuZXNzTWluaW11bSI6MC43NSwiYWRkaXRpb25hbENvc3QiOjAuMDAwMDMxMjUsInJvdWdobmVzcyI6MC44LCJtZXRhbG5lc3MiOjB9LCJtZXNoQ29sb3IiOiJnaG9zdHdoaXRlIn0=',
     },
 ];
 
