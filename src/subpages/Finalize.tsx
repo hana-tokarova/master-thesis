@@ -21,14 +21,12 @@ import { FaBug, FaCheck } from 'react-icons/fa';
 import { ThreeVolume } from 'three-volume';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { forAnimationFrame } from 'waitasecond';
-import { CollectionType, Material, RingSize } from '../components/collections/Collections';
+import { JewelryType, Material } from '../components/collections/Collections';
 
 type FinalizeProps = {
     parameters: any;
     meshRef: React.RefObject<THREE.Mesh>;
-    sliderParameters: { [key: string]: number };
-    dropdownParameters: { [key: string]: RingSize };
-    currentCollection: CollectionType;
+    currentJewelryType: JewelryType;
     currentMaterial: Material;
     exportMeshSTL: (mesh: THREE.Mesh) => void;
     exportMeshOBJ: (mesh: THREE.Mesh) => void;
@@ -38,13 +36,11 @@ type FinalizeProps = {
 export const Finalize = ({
     parameters,
     meshRef,
-    sliderParameters,
-    dropdownParameters,
     exportMeshSTL,
     exportMeshOBJ,
     exportMeshGlTF,
-    currentCollection,
     currentMaterial,
+    currentJewelryType,
 }: FinalizeProps) => {
     const exportOptions = [
         { value: 'stl', function: exportMeshSTL, label: '.STL' },
@@ -57,7 +53,6 @@ export const Finalize = ({
 
     const { isOpen, onToggle, onClose } = useDisclosure();
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [volume, setVolume] = React.useState<number | null>(null);
     const [reload, i] = useForceUpdate();
 
@@ -76,6 +71,24 @@ export const Finalize = ({
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [meshRef, meshRef.current, meshRef.current?.geometry, i]);
+
+    const [boundingBox, setBoundingBox] = React.useState<{ width: number; height: number; depth: number } | null>(null);
+
+    useEffect(() => {
+        if (meshRef.current) {
+            meshRef.current.geometry.computeBoundingBox();
+            const boundingBox = meshRef.current.geometry.boundingBox;
+
+            if (boundingBox) {
+                const width = boundingBox.max.x - boundingBox.min.x;
+                const height = boundingBox.max.y - boundingBox.min.y;
+                const depth = boundingBox.max.z - boundingBox.min.z;
+
+                setBoundingBox({ width, height, depth });
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [meshRef, meshRef.current, meshRef.current?.geometry, currentJewelryType]);
 
     return (
         <HStack spacing={5} alignItems="flex-start">
@@ -258,34 +271,13 @@ export const Finalize = ({
             <Box paddingTop={14}>
                 <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
                     Dimensions
-                    <Text
-                        as="span"
-                        fontFamily={'heading'}
-                        fontWeight="400"
-                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                    >
-                        <br />
-                        (w/o earring & pendant holder)
-                    </Text>
                 </Text>
                 <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
-                    {currentCollection === CollectionType.Lissajous
-                        ? Object.keys(dropdownParameters).length === 0
-                            ? sliderParameters['scaleC'] !== undefined
-                                ? `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${
-                                      sliderParameters['scaleA'] + sliderParameters['r'] * 2
-                                  } x ${sliderParameters['scaleC'] + sliderParameters['r'] * 2} mm`
-                                : `${sliderParameters['scaleB'] + sliderParameters['r'] * 2} x ${(
-                                      sliderParameters['r'] * 3
-                                  ).toFixed(1)} x ${(sliderParameters['scaleA'] + sliderParameters['r'] * 2).toFixed(
-                                      1,
-                                  )} mm`
-                            : `${dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2} x ${
-                                  dropdownParameters['scaleA'].diameter + sliderParameters['r'] * 2
-                              } x ${sliderParameters['scaleB'] + sliderParameters['r'] * 2} mm`
-                        : Object.keys(dropdownParameters).length === 0
-                        ? `${sliderParameters['majorR']} x ${sliderParameters['majorR']} x ${sliderParameters['scaleC']} mm`
-                        : `${dropdownParameters['majorR'].diameter} x ${dropdownParameters['majorR'].diameter} x ${sliderParameters['scaleC']} mm`}
+                    {boundingBox !== null
+                        ? `${boundingBox.width.toFixed(1)} x ${boundingBox.height.toFixed(
+                              1,
+                          )} x ${boundingBox.depth.toFixed(1)} mm`
+                        : 'Loading...'}
                 </Text>
 
                 {volume !== null && (

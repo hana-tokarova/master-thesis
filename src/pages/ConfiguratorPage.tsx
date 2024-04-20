@@ -57,7 +57,7 @@ export const ConfiguratorPage = () => {
         currentMaterial,
         setCurrentMaterial,
         setMesh,
-    } = useMeshParameters(CollectionType.Lissajous, JewelryType.Ring, materials.PLA);
+    } = useMeshParameters(CollectionType.Torsion, JewelryType.Ring, materials.PLA);
     const [meshColor, setMeshColor] = React.useState('ghostwhite');
 
     const [initialParameters, setInitialParameters] = React.useState<ParameterState | null>(null);
@@ -225,10 +225,8 @@ export const ConfiguratorPage = () => {
                 <Finalize
                     parameters={storeParameters}
                     meshRef={meshRef}
-                    sliderParameters={sliderParameters}
-                    dropdownParameters={dropdownParameters}
-                    currentCollection={currentCollection}
                     currentMaterial={currentMaterial}
+                    currentJewelryType={currentJewelryType}
                     exportMeshSTL={exportMeshSTL}
                     exportMeshOBJ={exportMeshOBJ}
                     exportMeshGlTF={exportMeshGlTF}

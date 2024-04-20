@@ -363,7 +363,6 @@ export const collections: {
             },
         },
     },
-
     [CollectionType.Torsion]: {
         name: 'Torsion',
         meshes: {
@@ -411,14 +410,14 @@ export const collections: {
                         mesh={ref}
                         meshColor={color}
                         stacks={64}
-                        majorR={dropdown.majorR.diameter}
-                        minorR={slider.minorR}
+                        majorR={dropdown.majorR.diameter / 2}
+                        minorR={slider.minorR / 2}
                         twistAll={bool.twistAll}
                         twist={slider.twist}
                         inflate={slider.inflate}
                         scaleA={1}
                         scaleB={1}
-                        scaleC={slider.scaleC}
+                        scaleC={slider.scaleC / 2}
                         roughness={roughness}
                         metalness={metalness}
                     />
@@ -468,13 +467,13 @@ export const collections: {
                         mesh={ref}
                         meshColor={color}
                         stacks={64}
-                        majorR={dropdown.majorR.diameter}
-                        minorR={slider.minorR}
+                        majorR={dropdown.majorR.diameter / 2}
+                        minorR={slider.minorR / 2}
                         twistAll={bool.twistAll}
                         twist={slider.twist}
                         scaleA={1}
                         scaleB={1}
-                        scaleC={slider.scaleC}
+                        scaleC={slider.scaleC / 2}
                         screw={slider.screw}
                         roughness={roughness}
                         metalness={metalness}
@@ -527,12 +526,12 @@ export const collections: {
                         stacks={64}
                         twistAll={bool.twistAll}
                         twist={slider.twist}
-                        majorR={slider.majorR}
-                        minorR={slider.minorR}
+                        majorR={slider.majorR / 2}
+                        minorR={slider.minorR / 2}
                         inflate={slider.inflate}
                         scaleA={1}
                         scaleB={1}
-                        scaleC={slider.scaleC}
+                        scaleC={slider.scaleC / 2}
                         roughness={roughness}
                         metalness={metalness}
                     />
@@ -574,11 +573,11 @@ export const collections: {
                         stacks={64}
                         twistAll={bool.twistAll}
                         twist={slider.twist}
-                        majorR={slider.majorR}
-                        minorR={slider.minorR}
+                        majorR={slider.majorR / 2}
+                        minorR={slider.minorR / 2}
                         scaleA={1}
                         scaleB={1}
-                        scaleC={slider.scaleC}
+                        scaleC={slider.scaleC / 2}
                         roughness={roughness}
                         metalness={metalness}
                     />
