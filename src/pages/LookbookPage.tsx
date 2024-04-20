@@ -35,16 +35,40 @@ export const LookbookPage = () => {
                     .filter((project) => project.price !== 'TBA')
                     .map((selectedProject) => (
                         <Box as={Link} to={`/configurator?config=${selectedProject.url}`}>
-                            <Image
-                                key={selectedProject.id}
-                                w="100%"
-                                display="inline-block"
-                                mb={2}
-                                src={selectedProject.image}
-                                alt={selectedProject.id.toString()}
+                            <Box
+                                _hover={{
+                                    '.image-overlay': {
+                                        opacity: 1,
+                                    },
+                                }}
+                                position="relative"
+                                overflow="hidden"
                                 borderRadius="lg"
-                                shadow={'xl'}
-                            />
+                                shadow="xl"
+                                marginBottom="4"
+                            >
+                                <Image
+                                    key={selectedProject.id}
+                                    w="100%"
+                                    display="inline-block"
+                                    mb={2}
+                                    src={selectedProject.image}
+                                    alt={selectedProject.id.toString()}
+                                    borderRadius="lg"
+                                />
+                                <Box
+                                    className="image-overlay"
+                                    position="absolute"
+                                    top="0"
+                                    left="0"
+                                    w="full"
+                                    h="full"
+                                    bgGradient="linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))"
+                                    opacity="0"
+                                    transition="opacity 0.3s ease-in-out"
+                                    zIndex="1"
+                                />
+                            </Box>
                         </Box>
                     ))}
             </Box>
