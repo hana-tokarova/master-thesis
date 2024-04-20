@@ -260,6 +260,8 @@ export const LissajousEarring = ({
         );
         earringMesh.deleteAttribute('normal');
         earringMesh.deleteAttribute('uv');
+        const rotationHolderM = new THREE.Matrix4().makeRotationX(-(Math.PI / 2));
+        earringMesh.applyMatrix4(rotationHolderM);
         const mergedVertices = BufferGeometryUtils.mergeVertices(earringMesh, 0.01);
 
         const holderPath = new THREE.CatmullRomCurve3(holderPoints);
@@ -267,12 +269,8 @@ export const LissajousEarring = ({
         holderMesh.deleteAttribute('normal');
         holderMesh.deleteAttribute('uv');
 
-        const rotationHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
-        holderMesh.applyMatrix4(rotationHolder);
-        const translateHolder = new THREE.Matrix4().makeTranslation(0, 0, scaleC! * Math.sin(Math.PI / 2) + 1.5);
+        const translateHolder = new THREE.Matrix4().makeTranslation(0, scaleC! * Math.sin(Math.PI / 2) + 1.5, 0);
         holderMesh.applyMatrix4(translateHolder);
-        const rotationHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
-        holderMesh.applyMatrix4(rotationHolder2);
 
         const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
         mergedGeometries.computeVertexNormals();
@@ -281,7 +279,7 @@ export const LissajousEarring = ({
     }, [lissajousPoints, holderPoints, meshRadius, scaleC, scaleA, scaleB]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(-Math.PI / 2, 0, 0)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, Math.PI / 2, 0)}>
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );

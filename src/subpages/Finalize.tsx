@@ -271,6 +271,15 @@ export const Finalize = ({
             <Box paddingTop={14}>
                 <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
                     Dimensions
+                    <Text
+                        as="span"
+                        fontFamily={'heading'}
+                        fontWeight="400"
+                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                    >
+                        <br />
+                        (w x d x h)
+                    </Text>
                 </Text>
                 <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
                     {boundingBox !== null
