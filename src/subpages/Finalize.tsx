@@ -278,7 +278,7 @@ export const Finalize = ({
                         fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                     >
                         <br />
-                        (w x d x h)
+                        (width x depth x height)
                     </Text>
                 </Text>
                 <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
