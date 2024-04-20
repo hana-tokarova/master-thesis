@@ -205,11 +205,14 @@ export const TorsionBracelet = ({
         const mergedVertices = BufferGeometryUtils.mergeVertices(braceletMesh, 0.02);
         mergedVertices.computeVertexNormals();
 
+        const meshRotation = new THREE.Matrix4().makeRotationX(Math.PI / 2);
+        mergedVertices.applyMatrix4(meshRotation);
+
         return mergedVertices;
     }, [majorR, minorR, stacks, twist, twistAll, screw, scaleA, scaleB, scaleC]);
 
     return (
-        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, 0, 0)}>
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
