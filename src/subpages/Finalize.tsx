@@ -274,9 +274,9 @@ export const Finalize = ({
                 </Text>
                 <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
                     {boundingBox !== null
-                        ? `${boundingBox.width.toFixed(1)} x ${boundingBox.height.toFixed(
+                        ? `${boundingBox.width.toFixed(1)} x ${boundingBox.depth.toFixed(
                               1,
-                          )} x ${boundingBox.depth.toFixed(1)} mm`
+                          )} x ${boundingBox.height.toFixed(1)} mm`
                         : 'Loading...'}
                 </Text>
 

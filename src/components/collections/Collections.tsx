@@ -165,7 +165,7 @@ export const collections: {
                         max: 10,
                         step: 1,
                     },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 7, min: 5, max: 10, step: 0.1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 5, min: 3, max: 8, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -217,7 +217,7 @@ export const collections: {
                         max: 10,
                         step: 1,
                     },
-                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 15, min: 10, max: 20, step: 0.1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 13, min: 8, max: 20, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -278,8 +278,8 @@ export const collections: {
                         max: 5,
                         step: 1,
                     },
-                    scaleB: { name: 'Width', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
-                    scaleA: { name: 'Depth', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
+                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 13, min: 5, max: 20, step: 0.1 },
+                    scaleB: { name: 'Depth', tag: 'general', type: 'slider', value: 7, min: 5, max: 10, step: 0.1 },
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 12, min: 10, max: 15, step: 0.1 },
                     r: {
                         name: 'Wire radius',
@@ -332,8 +332,8 @@ export const collections: {
                         max: 5,
                         step: 1,
                     },
-                    scaleB: { name: 'Width', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
-                    scaleA: { name: 'Height', tag: 'general', type: 'slider', value: 8, min: 3, max: 15, step: 0.1 },
+                    scaleA: { name: 'Width', tag: 'general', type: 'slider', value: 8, min: 5, max: 15, step: 0.1 },
+                    scaleB: { name: 'Height', tag: 'general', type: 'slider', value: 8, min: 5, max: 15, step: 0.1 },
                     r: {
                         name: 'Wire radius',
                         tag: 'general',
@@ -370,7 +370,7 @@ export const collections: {
                 description:
                     'Torsion ring is a generativelly created pattern from the twisted torus. By adjusting the twist and inflate parameters, the torus changes its shape.',
                 sliderParameters: {
-                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 4, min: 3, max: 8, step: 0.1 },
+                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 3, min: 1, max: 5, step: 0.1 },
                     minorR: {
                         name: 'Wall thickness',
                         tag: 'general',
@@ -427,7 +427,7 @@ export const collections: {
                 description:
                     'Torsion bracelet is a generativelly created pattern from the twisted torus. By adjusting the twist and screw parameters, the torus changes its shape.',
                 sliderParameters: {
-                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 13, min: 10, max: 20, step: 0.1 },
+                    scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 13, min: 3, max: 20, step: 0.1 },
                     minorR: {
                         name: 'Wall thickness',
                         tag: 'general',
@@ -484,13 +484,13 @@ export const collections: {
                 description:
                     'Torsion earring is a generativelly created pattern from the twisted torus. By adjusting the twist and inflate parameters, the torus changes its shape.',
                 sliderParameters: {
-                    majorR: { name: 'Width', type: 'slider', tag: 'general', value: 13, min: 10, max: 20, step: 0.1 },
+                    majorR: { name: 'Width', type: 'slider', tag: 'general', value: 13, min: 5, max: 20, step: 0.1 },
                     minorR: {
                         name: 'Wall thickness',
                         type: 'slider',
                         tag: 'general',
                         value: 2,
-                        min: 1,
+                        min: materials.PLA.thicknessMinimum,
                         max: 2,
                         step: 0.1,
                     },
@@ -513,7 +513,7 @@ export const collections: {
                         step: 0.5,
                     },
 
-                    scaleC: { name: 'Depth', tag: 'general', type: 'slider', value: 5, min: 3, max: 10, step: 0.1 },
+                    scaleC: { name: 'Depth', tag: 'general', type: 'slider', value: 2, min: 1, max: 3, step: 0.1 },
                 },
                 switchParameters: {
                     twistAll: { name: 'Twist all?', tag: 'collection', type: 'toggle', value: true },
@@ -547,7 +547,7 @@ export const collections: {
                         type: 'slider',
                         tag: 'general',
                         value: 2,
-                        min: 1,
+                        min: materials.PLA.thicknessMinimum,
                         max: 2,
                         step: 0.1,
                     },

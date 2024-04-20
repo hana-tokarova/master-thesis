@@ -223,6 +223,9 @@ export const General = ({
                                         fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                                     >
                                         {parameterDetails.name}
+                                        <Box as="span" fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
+                                            {parameterName === 'r' || 'scaleB' ? ' (in mm)' : ''}
+                                        </Box>
                                     </Text>
                                     <Slider
                                         margin={2}
@@ -249,7 +252,7 @@ export const General = ({
                                             bg="brand.100"
                                             color="white"
                                             placement="bottom"
-                                            label={sliderParameters[parameterName]}
+                                            label={sliderParameters[parameterName] + ' mm'}
                                         >
                                             <SliderThumb
                                                 _focus={{

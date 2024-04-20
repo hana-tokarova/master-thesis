@@ -281,12 +281,7 @@ export const LissajousEarring = ({
     }, [lissajousPoints, holderPoints, meshRadius, scaleC, scaleA, scaleB]);
 
     return (
-        <mesh
-            ref={mesh}
-            geometry={geometry}
-            position={[0, 0, 0]}
-            rotation={new THREE.Euler(-Math.PI / 2, 0, Math.PI / 2)}
-        >
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(-Math.PI / 2, 0, 0)}>
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
@@ -325,10 +320,12 @@ export const LissajousPendant = ({
         holderMesh.deleteAttribute('normal');
         holderMesh.deleteAttribute('uv');
 
-        const translateHolder = new THREE.Matrix4().makeTranslation(scaleA * Math.sin(Math.PI / 2) + 1.5, 0, 0);
-        holderMesh.applyMatrix4(translateHolder);
         const rotateHolder = new THREE.Matrix4().makeRotationX(Math.PI / 2);
         holderMesh.applyMatrix4(rotateHolder);
+        const rotateHolder2 = new THREE.Matrix4().makeRotationZ(Math.PI / 2);
+        holderMesh.applyMatrix4(rotateHolder2);
+        const translateHolder = new THREE.Matrix4().makeTranslation(0, scaleB * Math.sin(Math.PI / 2) + 1.5, 0);
+        holderMesh.applyMatrix4(translateHolder);
 
         const mergedGeometries = BufferGeometryUtils.mergeGeometries([mergedVertices, holderMesh]);
         mergedGeometries.computeVertexNormals();
@@ -337,12 +334,7 @@ export const LissajousPendant = ({
     }, [lissajousPoints, holderPoints, meshRadius, scaleA, scaleB]);
 
     return (
-        <mesh
-            ref={mesh}
-            geometry={geometry}
-            position={[0, 0, 0]}
-            rotation={new THREE.Euler(0, Math.PI / 2, Math.PI / 2)}
-        >
+        <mesh ref={mesh} geometry={geometry} position={[0, 0, 0]} rotation={new THREE.Euler(0, Math.PI / 2, 0)}>
             <meshStandardMaterial attach="material" color={meshColor} roughness={roughness} metalness={metalness} />
         </mesh>
     );
