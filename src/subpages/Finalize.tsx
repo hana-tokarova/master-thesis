@@ -15,7 +15,7 @@ import {
     useToast,
 } from '@chakra-ui/react';
 import { useForceUpdate } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { BiCopy } from 'react-icons/bi';
 import { FaBug, FaCheck } from 'react-icons/fa';
 import { ThreeVolume } from 'three-volume';
@@ -90,6 +90,57 @@ export const Finalize = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [meshRef, meshRef.current, meshRef.current?.geometry, currentJewelryType]);
 
+    const [selectedOption, setSelectedOption] = React.useState('');
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const newValue = e.target.value;
+        const option = exportOptions.find((option) => option.value === newValue);
+        if (option && meshRef.current) {
+            try {
+                option.function(meshRef.current);
+                toast({
+                    position: 'bottom',
+                    status: 'success',
+                    duration: 10000,
+                    render: () => (
+                        <HStack color="white" p={3} bg="green.400" boxShadow={'md'} borderRadius="5" align="start">
+                            <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
+                            <Box>
+                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                    Your file has been successfully exported as {option.label}
+                                </Text>
+                                <Text fontFamily={'body'} fontWeight="400">
+                                    Happy 3D printing!
+                                </Text>
+                            </Box>
+                        </HStack>
+                    ),
+                });
+            } catch (error) {
+                toast({
+                    position: 'bottom',
+                    status: 'error',
+                    duration: 10000,
+                    render: () => (
+                        <HStack color="white" p={3} bg="red.400" boxShadow={'md'} borderRadius="5" align="start">
+                            <Icon as={FaBug} w={5} h={5} paddingTop={1} color="brand.200" />
+                            <Box>
+                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                    An error occurred when exporting the file as {option.label}
+                                </Text>
+                                <Text fontFamily={'body'} fontWeight="400">
+                                    {(error as Error).message}
+                                </Text>
+                            </Box>
+                        </HStack>
+                    ),
+                });
+            }
+        }
+        // Reset the selected option after processing
+        setSelectedOption('');
+    };
+
     return (
         <HStack spacing={4} alignItems="flex-start">
             <Box paddingBottom={10}>
@@ -118,65 +169,8 @@ export const Finalize = ({
                     paddingBottom={4}
                     _hover={{ bg: 'brand.400' }}
                     _focus={{ bg: 'brand.300' }}
-                    onChange={(e) => {
-                        const option = exportOptions.find((option) => option.value === e.target.value);
-                        if (option && meshRef.current) {
-                            try {
-                                option.function(meshRef.current);
-                                toast({
-                                    position: 'bottom',
-                                    status: 'success',
-                                    duration: 10000,
-                                    render: () => (
-                                        <HStack
-                                            color="white"
-                                            p={3}
-                                            bg="green.400"
-                                            boxShadow={'md'}
-                                            borderRadius="5"
-                                            align="start"
-                                        >
-                                            <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
-                                            <Box>
-                                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
-                                                    Your file has been successfully exported as {option.label}
-                                                </Text>
-                                                <Text fontFamily={'body'} fontWeight="400">
-                                                    Happy 3D printing!
-                                                </Text>
-                                            </Box>
-                                        </HStack>
-                                    ),
-                                });
-                            } catch (error) {
-                                toast({
-                                    position: 'bottom',
-                                    status: 'error',
-                                    duration: 10000,
-                                    render: () => (
-                                        <HStack
-                                            color="white"
-                                            p={3}
-                                            bg="red.400"
-                                            boxShadow={'md'}
-                                            borderRadius="5"
-                                            align="start"
-                                        >
-                                            <Icon as={FaBug} w={5} h={5} paddingTop={1} color="brand.200" />
-                                            <Box>
-                                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
-                                                    An error when exporting the file as {option.label}
-                                                </Text>
-                                                <Text fontFamily={'body'} fontWeight="400">
-                                                    {(error as Error).message}
-                                                </Text>
-                                            </Box>
-                                        </HStack>
-                                    ),
-                                });
-                            }
-                        }
-                    }}
+                    onChange={handleChange}
+                    value={selectedOption} // Controlled component
                 >
                     {exportOptions.map((option) => (
                         <option key={option.value} value={option.value}>
