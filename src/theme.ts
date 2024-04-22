@@ -12,6 +12,8 @@ const theme = extendTheme({
             100: '#B2B2B2',
             200: '#FFFFFF',
             300: '#3E3E3E',
+            400: '#F2F2F2',
+            500: '#e5e5e5',
         },
         grayAlpha: {
             50: 'rgba(23,25,35,0.04)',

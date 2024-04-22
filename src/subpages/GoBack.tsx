@@ -69,10 +69,10 @@ export const GoBack = ({ isDirty, setIsDirty, navigate }: GoBackProps) => {
                                 fontFamily={'heading'}
                                 fontSize="md"
                                 fontWeight="500"
-                                bg="brand.400"
+                                bg="brand.200"
                                 color="brand.50"
                                 _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.300' }}
+                                _focus={{ bg: 'brand.400' }}
                             >
                                 Cancel
                             </Button>

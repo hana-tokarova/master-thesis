@@ -63,7 +63,7 @@ export const Visualize = ({
                             paddingTop={2}
                             paddingBottom={4}
                             _hover={{ bg: 'brand.400' }}
-                            _focus={{ bg: 'brand.300' }}
+                            _focus={{ bg: 'brand.400' }}
                             onChange={(event) => {
                                 const newValue = event.target.value;
                                 changeCurrentMaterial(setCurrentMaterial, materials[newValue]);

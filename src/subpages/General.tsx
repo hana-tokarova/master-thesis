@@ -79,7 +79,7 @@ export const General = ({
                         paddingBottom={4}
                         value={currentJewelryType}
                         _hover={{ bg: 'brand.400' }}
-                        _focus={{ bg: 'brand.300' }}
+                        _focus={{ bg: 'brand.400' }}
                         onChange={(event) => {
                             const selectedJewelryType = event.target.value as JewelryType;
                             changeJewelryType(setCurrentJewelryType, selectedJewelryType);
@@ -133,7 +133,7 @@ export const General = ({
                                 paddingTop={2}
                                 paddingBottom={4}
                                 _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.300' }}
+                                _focus={{ bg: 'brand.200' }}
                                 onChange={(event) => {
                                     const parsedValue = parseInt(event.target.value);
                                     const selectedSize = ringSizes.find((size) => size.value === parsedValue);
@@ -189,7 +189,7 @@ export const General = ({
                                 paddingTop={2}
                                 paddingBottom={4}
                                 _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.300' }}
+                                _focus={{ bg: 'brand.200' }}
                                 onChange={(event) => {
                                     const parsedValue = parseInt(event.target.value);
                                     const selectedSize = braceletSizes.find((size) => size.value === parsedValue);
@@ -239,10 +239,10 @@ export const General = ({
                                             {parameterDetails.max}
                                         </SliderMark>
                                         <SliderTrack bg="brand.200" shadow="md">
-                                            <SliderFilledTrack bg="brand.100" />
+                                            <SliderFilledTrack bg="brand.50" />
                                         </SliderTrack>
                                         <Tooltip
-                                            bg="brand.100"
+                                            bg="brand.50"
                                             color="white"
                                             placement="bottom"
                                             label={sliderParameters[parameterName] + ' mm'}
@@ -250,9 +250,9 @@ export const General = ({
                                             <SliderThumb
                                                 _focus={{
                                                     ring: '1px',
-                                                    ringColor: 'brand.100',
+                                                    ringColor: 'brand.50',
                                                     ringOffset: '1px',
-                                                    ringOffsetColor: 'brand.100',
+                                                    ringOffsetColor: 'brand.50',
                                                 }}
                                             />
                                         </Tooltip>

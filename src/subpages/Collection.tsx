@@ -81,10 +81,10 @@ export const Collection = ({
                                             {parameterDetails.max}
                                         </SliderMark>
                                         <SliderTrack bg="brand.200" shadow="md">
-                                            <SliderFilledTrack bg="brand.100" />
+                                            <SliderFilledTrack bg="brand.50" />
                                         </SliderTrack>
                                         <Tooltip
-                                            bg="brand.100"
+                                            bg="brand.50"
                                             color="white"
                                             placement="bottom"
                                             label={sliderParameters[parameterName]}
@@ -92,9 +92,9 @@ export const Collection = ({
                                             <SliderThumb
                                                 _focus={{
                                                     ring: '1px',
-                                                    ringColor: 'brand.100',
+                                                    ringColor: 'brand.50',
                                                     ringOffset: '1px',
-                                                    ringOffsetColor: 'brand.100',
+                                                    ringOffsetColor: 'brand.50',
                                                 }}
                                             />
                                         </Tooltip>
@@ -117,7 +117,7 @@ export const Collection = ({
                                     </Text>
 
                                     <Tooltip
-                                        bg="brand.100"
+                                        bg="brand.50"
                                         color="white"
                                         placement="bottom"
                                         label={switchParameters[parameterName] === true ? 'On' : 'Off'}
@@ -126,17 +126,16 @@ export const Collection = ({
                                         <Switch
                                             margin={1}
                                             size="lg"
-                                            colorScheme="cyan"
                                             isChecked={switchParameters[parameterName]}
                                             sx={{
                                                 '.chakra-switch__thumb': {
                                                     boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.2)',
                                                 },
                                                 '.chakra-switch__track': {
-                                                    bg: 'brand.400',
+                                                    bg: 'brand.500',
                                                     boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.1)',
                                                     _checked: {
-                                                        bg: 'brand.100',
+                                                        bg: 'brand.50',
                                                     },
                                                     _focus: {
                                                         ring: '0px',

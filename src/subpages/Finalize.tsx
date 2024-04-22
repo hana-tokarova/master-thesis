@@ -157,9 +157,9 @@ export const Finalize = ({
                     w={44}
                     fontFamily={'heading'}
                     fontWeight="500"
-                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                     placeholder="Export model"
-                    bg="brand.400"
+                    bg="brand.200"
                     border="none"
                     color="brand.50"
                     size="md"
@@ -168,7 +168,7 @@ export const Finalize = ({
                     paddingTop={2}
                     paddingBottom={4}
                     _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.300' }}
+                    _focus={{ bg: 'brand.400' }}
                     onChange={handleChange}
                     value={selectedOption} // Controlled component
                 >
@@ -192,13 +192,13 @@ export const Finalize = ({
                             size="md"
                             fontFamily={'heading'}
                             fontWeight="500"
-                            fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                            bg="brand.400"
+                            fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                            bg="brand.200"
                             color="brand.50"
                             w={44}
                             shadow={'lg'}
                             _hover={{ bg: 'brand.400' }}
-                            _focus={{ bg: 'brand.300' }}
+                            _focus={{ bg: 'brand.400' }}
                             onClick={async () => {
                                 try {
                                     const share = window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
@@ -223,8 +223,6 @@ export const Finalize = ({
                                                     </Text>
                                                     <Text fontFamily={'body'} fontWeight="400">
                                                         Design link saved to your clipboard.
-                                                        <br />
-                                                        Don't forget to set dimensions to 'mm' before printing.
                                                     </Text>
                                                 </Box>
                                             </HStack>

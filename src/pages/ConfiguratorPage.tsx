@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Center, Flex } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 
 import isEqual from 'lodash/isEqual';
@@ -163,101 +163,101 @@ export const ConfiguratorPage = () => {
     }
 
     return (
-        <Flex
-            direction={{ base: 'column', md: 'row' }}
-            px={{ base: 5, sm: 20, md: 24, lg: 28 }}
-            py={{ base: 0, sm: 2, md: 2, lg: 3 }}
-            alignItems="start"
-            w="100vw"
-            minH="calc(100vh - 80px)"
-            wrap="nowrap"
-            position="relative"
-        >
-            <Box
-                order={{ base: 2, md: 1 }}
-                flex={{ base: '1 1 auto', md: '0.4', lg: '0.4' }}
-                p="40px"
-                w={{ base: '100%', md: '40vw', lg: '40vw' }}
-                h="auto"
-                zIndex={{ base: 1, md: 3 }}
-                overflowY="auto"
-                paddingTop={{ base: '37vh', md: '0' }}
+        <Center>
+            <Flex
+                direction={{ base: 'column', md: 'row' }}
+                px={{ base: 5, sm: 20, md: 24, lg: 28 }}
+                py={{ base: 0, sm: 2, md: 2, lg: 3 }}
+                alignItems="start"
+                minH="calc(100vh - 80px)"
+                wrap="nowrap"
+                position="relative"
             >
-                <GoBack isDirty={isDirty} setIsDirty={setIsDirty} navigate={navigate} />
+                <Box
+                    order={{ base: 2, md: 1 }}
+                    flex={{ base: '1 1 auto', md: '0.4', lg: '0.4' }}
+                    w={{ base: '100%', md: '80vw', lg: '80vw' }}
+                    h="auto"
+                    zIndex={{ base: 1, md: 3 }}
+                    overflowY="auto"
+                    paddingTop={{ base: '37vh', md: '3' }}
+                >
+                    <GoBack isDirty={isDirty} setIsDirty={setIsDirty} navigate={navigate} />
 
-                <Info collection={currentCollection} jewelry={currentJewelryType} mesh={mesh} />
+                    <Info collection={currentCollection} jewelry={currentJewelryType} mesh={mesh} />
 
-                <General
-                    mesh={mesh}
-                    currentJewelryType={currentJewelryType}
-                    setCurrentJewelryType={setCurrentJewelryType}
-                    dropdownParameters={dropdownParameters}
-                    setDropdownParameters={setDropdownParameters}
-                    sliderParameters={sliderParameters}
-                    setSliderParameters={setSliderParameters}
-                    sliderMinParameters={sliderMinParameters}
-                />
+                    <General
+                        mesh={mesh}
+                        currentJewelryType={currentJewelryType}
+                        setCurrentJewelryType={setCurrentJewelryType}
+                        dropdownParameters={dropdownParameters}
+                        setDropdownParameters={setDropdownParameters}
+                        sliderParameters={sliderParameters}
+                        setSliderParameters={setSliderParameters}
+                        sliderMinParameters={sliderMinParameters}
+                    />
 
-                <Collection
-                    collection={currentCollection}
-                    mesh={mesh}
-                    sliderParameters={sliderParameters}
-                    setSliderParameters={setSliderParameters}
-                    switchParameters={switchParameters}
-                    setSwitchParameters={setSwitchParameters}
-                />
+                    <Collection
+                        collection={currentCollection}
+                        mesh={mesh}
+                        sliderParameters={sliderParameters}
+                        setSliderParameters={setSliderParameters}
+                        switchParameters={switchParameters}
+                        setSwitchParameters={setSwitchParameters}
+                    />
 
-                <Visualize
-                    setSliderMinParameters={setSliderMinParameters}
-                    currentMaterial={currentMaterial}
-                    setCurrentMaterial={setCurrentMaterial}
-                    colors={[
-                        ['ghostwhite', 'gray'],
-                        ['gold', 'darkgoldenrod'],
-                        ['pink', 'maroon'],
-                        ['lightgreen', 'darkgreen'],
-                        ['lightskyblue', 'mediumblue'],
-                    ]}
-                    meshColor={meshColor}
-                    setMeshColor={setMeshColor}
-                />
+                    <Visualize
+                        setSliderMinParameters={setSliderMinParameters}
+                        currentMaterial={currentMaterial}
+                        setCurrentMaterial={setCurrentMaterial}
+                        colors={[
+                            ['ghostwhite', 'gray'],
+                            ['gold', 'darkgoldenrod'],
+                            ['pink', 'maroon'],
+                            ['lightgreen', 'darkgreen'],
+                            ['lightskyblue', 'mediumblue'],
+                        ]}
+                        meshColor={meshColor}
+                        setMeshColor={setMeshColor}
+                    />
 
-                <Finalize
-                    parameters={storeParameters}
-                    meshRef={meshRef}
-                    currentMaterial={currentMaterial}
-                    currentJewelryType={currentJewelryType}
-                    exportMeshSTL={exportMeshSTL}
-                    exportMeshOBJ={exportMeshOBJ}
-                    exportMeshGlTF={exportMeshGlTF}
-                />
-            </Box>
+                    <Finalize
+                        parameters={storeParameters}
+                        meshRef={meshRef}
+                        currentMaterial={currentMaterial}
+                        currentJewelryType={currentJewelryType}
+                        exportMeshSTL={exportMeshSTL}
+                        exportMeshOBJ={exportMeshOBJ}
+                        exportMeshGlTF={exportMeshGlTF}
+                    />
+                </Box>
 
-            <Box
-                order={{ base: 1, md: 2 }}
-                position="fixed"
-                right="0"
-                top="0"
-                w={{ base: '100%', md: '60vw', lg: '60vw' }}
-                overflowY="hidden"
-                zIndex={2}
-                boxShadow={{ base: '0 0 10px 0 rgba(0, 0, 0, 0.1)', md: 'none' }}
-                h={{ base: '45vh', md: '90vh', lg: '90vh' }}
-                cursor="pointer"
-                paddingTop={{ base: '50px', md: '0' }}
-            >
-                {showOverlay && <StartupOverlay onClose={handleOverlayClose} />}
-                <RenderCanvas
-                    currentJewelry={currentJewelryType}
-                    mesh={mesh!}
-                    color={meshColor}
-                    ref={meshRef}
-                    currentMaterial={currentMaterial}
-                    sliderParams={sliderParameters}
-                    switchParams={switchParameters}
-                    dropdownParams={dropdownParameters}
-                />
-            </Box>
-        </Flex>
+                <Box
+                    order={{ base: 1, md: 2 }}
+                    position="fixed"
+                    right="0"
+                    top="0"
+                    w={{ base: '100%', md: '60vw', lg: '60vw' }}
+                    overflowY="hidden"
+                    zIndex={2}
+                    boxShadow={{ base: '0 0 10px 0 rgba(0, 0, 0, 0.1)', md: 'none' }}
+                    h={{ base: '45vh', md: '90vh', lg: '90vh' }}
+                    cursor="pointer"
+                    paddingTop={{ base: '50px', md: '0' }}
+                >
+                    {showOverlay && <StartupOverlay onClose={handleOverlayClose} />}
+                    <RenderCanvas
+                        currentJewelry={currentJewelryType}
+                        mesh={mesh!}
+                        color={meshColor}
+                        ref={meshRef}
+                        currentMaterial={currentMaterial}
+                        sliderParams={sliderParameters}
+                        switchParams={switchParameters}
+                        dropdownParams={dropdownParameters}
+                    />
+                </Box>
+            </Flex>
+        </Center>
     );
 };
