@@ -52,6 +52,7 @@ export const General = ({
                 fontWeight="500"
                 fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                 paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
+                color={'brand.50'}
             >
                 / General
             </Text>
@@ -61,14 +62,15 @@ export const General = ({
                     as="div"
                     fontFamily={'heading'}
                     fontWeight="400"
-                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                    fontSize={{ base: 'sm', md: 'md' }}
+                    color={'brand.50'}
                 >
                     Jewelry type
                     <Select
-                        w={44}
+                        w={{ base: 36, md: 44 }}
                         fontFamily={'body'}
                         fontWeight="400"
-                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                        fontSize={{ base: 'xs', md: 'sm' }}
                         bg="brand.200"
                         border="none"
                         color="brand.50"
@@ -97,32 +99,25 @@ export const General = ({
                     currentJewelryType === JewelryType.Ring &&
                     Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
                         <Box key={parameterName + parameterDetails}>
-                            <Text
-                                fontFamily={'heading'}
-                                fontWeight="400"
-                                fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
-                            >
+                            <Text fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'sm', md: 'md' }}>
                                 {parameterDetails.name}
-                                <Box
-                                    as="span"
-                                    fontWeight="600"
-                                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                                >
+                                <Box as="span" fontWeight="600" color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
                                     {' (Diameter:'}
                                     <Box
                                         fontWeight="400"
+                                        color={'brand.50'}
                                         as="span"
-                                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                        fontSize={{ base: 'xs', md: 'sm' }}
                                     >
                                         {' ' + dropdownParameters[parameterName]?.diameter + ' mm)'}
                                     </Box>
                                 </Box>
                             </Text>
                             <Select
-                                w={44}
+                                w={{ base: 36, md: 44 }}
                                 fontFamily={'body'}
                                 fontWeight="400"
-                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                fontSize={{ base: 'xs', md: 'sm' }}
                                 value={dropdownParameters[parameterName]?.value}
                                 bg="brand.200"
                                 border="none"
@@ -156,29 +151,27 @@ export const General = ({
                             <Text
                                 fontFamily={'heading'}
                                 fontWeight="400"
-                                fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                                fontSize={{ base: 'sm', md: 'md' }}
+                                color={'brand.50'}
                             >
                                 {parameterDetails.name}
-                                <Box
-                                    as="span"
-                                    fontWeight="600"
-                                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                                >
+                                <Box as="span" fontWeight="600" fontSize={{ base: 'xs', md: 'sm' }} color={'brand.50'}>
                                     {' (Diameter:'}
                                     <Box
                                         fontWeight="400"
                                         as="span"
-                                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                        fontSize={{ base: 'xs', md: 'sm' }}
+                                        color={'brand.50'}
                                     >
                                         {' ' + dropdownParameters[parameterName]?.diameter + ' mm)'}
                                     </Box>
                                 </Box>
                             </Text>
                             <Select
-                                w={44}
+                                w={{ base: 36, md: 44 }}
                                 fontFamily={'body'}
                                 fontWeight="400"
-                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                fontSize={{ base: 'sm', md: 'md' }}
                                 value={dropdownParameters[parameterName]?.value}
                                 bg="brand.200"
                                 border="none"
@@ -213,17 +206,18 @@ export const General = ({
                                     <Text
                                         fontFamily={'heading'}
                                         fontWeight="400"
-                                        fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                                        fontSize={{ base: 'sm', md: 'md' }}
+                                        color={'brand.50'}
                                     >
                                         {parameterDetails.name}
-                                        <Box as="span" fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
+                                        <Box as="span" fontSize={{ base: 'xs', md: 'sm' }} color={'brand.50'}>
                                             {parameterName === 'r' || 'scaleB' ? ' (in mm)' : ''}
                                         </Box>
                                     </Text>
                                     <Slider
                                         margin={2}
                                         mb={4}
-                                        w={{ base: '28', sm: '30', md: '32', lg: '40' }}
+                                        w={{ base: 32, md: 40 }}
                                         value={sliderParameters[parameterName]}
                                         min={sliderMinParameters[parameterName]}
                                         max={parameterDetails.max}
@@ -232,10 +226,20 @@ export const General = ({
                                             changeNumericParameter(setSliderParameters, parameterName, newValue)
                                         }
                                     >
-                                        <SliderMark value={sliderMinParameters[parameterName]} mt="3" fontSize="sm">
+                                        <SliderMark
+                                            value={sliderMinParameters[parameterName]}
+                                            mt="3"
+                                            fontSize={{ base: 'xs', md: 'sm' }}
+                                            color={'brand.50'}
+                                        >
                                             {sliderMinParameters[parameterName]}
                                         </SliderMark>
-                                        <SliderMark value={parameterDetails.max} mt="3" fontSize="sm">
+                                        <SliderMark
+                                            value={parameterDetails.max}
+                                            mt="3"
+                                            fontSize={{ base: 'xs', md: 'sm' }}
+                                            color={'brand.50'}
+                                        >
                                             {parameterDetails.max}
                                         </SliderMark>
                                         <SliderTrack bg="brand.200" shadow="md">
