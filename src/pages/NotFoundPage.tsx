@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const NotFoundPage = () => {
     return (
         <Center>
-            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}>
+            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                     <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text
