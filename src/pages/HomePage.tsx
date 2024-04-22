@@ -14,8 +14,8 @@ export const HomePage = () => {
                     paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}
                     paddingBottom={16}
                 >
-                    <Stack direction={{ base: 'column', md: 'row' }} align="flex-start">
-                        <Box w="30vw">
+                    <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start" gap={1}>
+                        <Box w="40vw">
                             <Text
                                 paddingTop={20}
                                 fontFamily={'heading'}
@@ -50,24 +50,14 @@ export const HomePage = () => {
                             <Text
                                 fontFamily={'heading'}
                                 fontWeight="300"
-                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '5xl' }}
                                 paddingTop={20}
                             >
                                 / Choose
-                                <Text
-                                    as="span"
-                                    fontFamily={'heading'}
-                                    fontWeight="400"
-                                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                                >
+                                <Text as="span" fontWeight="400">
                                     {' '}
                                     / Customize
-                                    <Text
-                                        as="span"
-                                        fontFamily={'heading'}
-                                        fontWeight="500"
-                                        fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                                    >
+                                    <Text as="span" fontWeight="500">
                                         {' '}
                                         / Export
                                     </Text>
@@ -100,16 +90,11 @@ export const HomePage = () => {
                                 paddingTop={12}
                                 fontFamily={'heading'}
                                 fontWeight="400"
-                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '5xl' }}
                             >
                                 {' '}
                                 / Multiple collections
-                                <Text
-                                    as="span"
-                                    fontFamily={'heading'}
-                                    fontWeight="500"
-                                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                                >
+                                <Text as="span" fontWeight="500">
                                     {' '}
                                     / Multiple possibilities
                                 </Text>
@@ -137,10 +122,10 @@ export const HomePage = () => {
                                 Browse collections
                             </Button>
                             <Text
-                                paddingTop={20}
+                                paddingTop={16}
                                 fontFamily={'heading'}
                                 fontWeight="500"
-                                fontSize={{ base: 'lg', sm: 'xl', md: '2xl', lg: '3xl' }}
+                                fontSize={{ base: 'lg', sm: 'xl', md: '2xl', lg: '4xl' }}
                             >
                                 / Not sure yet?
                             </Text>
@@ -173,11 +158,12 @@ export const HomePage = () => {
                             <Contacts />
                         </Box>
                         <Image
+                            w="40vw"
                             paddingTop={32}
-                            paddingRight={20}
-                            w="1000px"
+                            right={400}
                             src={`${process.env.PUBLIC_URL}/images/visuals/visuals1.png`}
                             alt="Visuals1"
+                            position="fixed"
                         />
                     </Stack>
                 </VStack>
