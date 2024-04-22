@@ -42,8 +42,8 @@ export const MainMenu = () => {
             <Link to="/">
                 <Image
                     w="auto"
-                    h={{ base: '7', md: '8', lg: '9' }}
-                    src={`${process.env.PUBLIC_URL}/images/logo/logo-full.png`}
+                    h={{ base: '6', md: '7', lg: '8' }}
+                    src={`${process.env.PUBLIC_URL}/images/logo/logo.svg`}
                     alt="NEOTAKU JEWELRY"
                     objectFit="contain"
                 />

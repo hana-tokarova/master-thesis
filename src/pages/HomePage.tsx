@@ -1,20 +1,10 @@
-import { Button, Image, Text, VStack } from '@chakra-ui/react';
+import { Button, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { Contacts } from '../subpages/Contacts';
 
 export const HomePage = () => {
     return (
         <>
-            <Image
-                src={`${process.env.PUBLIC_URL}/images/bg/jewelry-homepage.png`}
-                alt="jewelry-homepage-image"
-                w="100vw"
-                h={{ base: 36, sm: 36, md: 56, lg: 72 }}
-                objectFit="cover"
-                objectPosition={'center center'}
-                shadow={'md'}
-            />
-
             <VStack
                 spacing={2}
                 paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
