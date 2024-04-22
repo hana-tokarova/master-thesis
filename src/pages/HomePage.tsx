@@ -130,7 +130,7 @@ export const HomePage = () => {
                                 / Not sure yet?
                             </Text>
                             <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                                Look at some of the examples that can be done in the configurator!
+                                Here are some of the examples that can be done in the configurator!
                             </Text>
                             <Flex
                                 paddingTop="2"
