@@ -1,24 +1,11 @@
-import {
-    Box,
-    Center,
-    Flex,
-    Image,
-    Stack,
-    Tab,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
-    Text,
-    VStack,
-} from '@chakra-ui/react';
+import { Box, Center, Flex, Image, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { CollectionType, JewelryType } from '../components/collections/Collections';
 
 type Project = {
     id: number;
     image: string | undefined;
-    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Configure from scratch';
+    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Configure';
     price: number | 'TBA';
     url: string;
     collection: CollectionType;
@@ -172,7 +159,7 @@ export const projects: Project[] = [
     },
     {
         id: 17,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -181,7 +168,7 @@ export const projects: Project[] = [
     },
     {
         id: 18,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -190,7 +177,7 @@ export const projects: Project[] = [
     },
     {
         id: 19,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -199,7 +186,7 @@ export const projects: Project[] = [
     },
     {
         id: 20,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -208,7 +195,7 @@ export const projects: Project[] = [
     },
     {
         id: 21,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -217,7 +204,7 @@ export const projects: Project[] = [
     },
     {
         id: 22,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -226,7 +213,7 @@ export const projects: Project[] = [
     },
     {
         id: 23,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -235,7 +222,7 @@ export const projects: Project[] = [
     },
     {
         id: 24,
-        material: 'Configure from scratch',
+        material: 'Configure',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -247,40 +234,39 @@ export const projects: Project[] = [
 export const CreatePage = () => {
     return (
         <Center>
-            <VStack
-                spacing={2}
-                paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
-                paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
-                paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}
-                paddingBottom={16}
-            >
+            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw">
                     <Text
                         fontFamily={'heading'}
                         fontWeight="500"
                         fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                        color={'brand.50'}
                     >
                         / Create
                     </Text>
 
-                    <Text maxW="70vw" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                        Want to create something for yourself or your loved ones? This it the right place!
+                    <Text color={'brand.50'} fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
+                        Want to create something for yourself or your loved ones? This it the right place! Based on your
+                        preferences, fill in the details of what kind of jewelry you want to create.
                         <br />
-                        Based on your preferences, fill in the details of what kind of jewelry you want to create.
+                        Each collection showcases different ways how given jewelry type could look like. If you like any
+                        of the types below, click on it and you will be able to customize it futher. If not, you can
+                        configure whatever jewelry type you want from scratch.
                     </Text>
 
                     <Tabs defaultIndex={0} variant="unstyled" isFitted>
-                        <TabList maxW={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}>
+                        <TabList>
                             {Object.values(JewelryType).map((jewelryValue) => (
                                 <Tab
                                     key={jewelryValue}
                                     fontFamily={'heading'}
                                     fontSize={{ base: 'xs', sm: 'sm', md: 'md', lg: 'lg' }}
                                     fontWeight="300"
+                                    color={'brand.50'}
                                     sx={{
-                                        borderBottom: '1px solid #ccc',
+                                        borderBottom: '1px solid #B2B2B2',
                                         _selected: {
-                                            borderBottom: '3px solid black',
+                                            borderBottom: '3px solid #1E1E1E',
                                             fontWeight: '500',
                                         },
                                     }}
@@ -290,21 +276,16 @@ export const CreatePage = () => {
                             ))}
                         </TabList>
 
-                        <Text paddingTop={3} maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                            Each collection showcases different ways how given jewelry type could look like. If you like
-                            any of the types below, click on it and you will be able to customize it futher.
-                        </Text>
-
                         <TabPanels>
                             {Object.values(JewelryType).map((jewelryType) => (
                                 <TabPanel key={jewelryType} paddingLeft={0} paddingRight={0}>
                                     {Object.values(CollectionType).map((collectionType) => (
                                         <Box key={jewelryType + collectionType}>
                                             <Text
-                                                paddingTop={1}
                                                 fontFamily={'heading'}
                                                 fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                                                 fontWeight="500"
+                                                color={'brand.50'}
                                             >
                                                 Collection{' '}
                                                 {collectionType.charAt(0).toUpperCase() + collectionType.slice(1)}
@@ -312,7 +293,6 @@ export const CreatePage = () => {
                                             <Text
                                                 color="brand.100"
                                                 fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
-                                                paddingBottom={1}
                                             >
                                                 {collectionType === CollectionType.Lissajous
                                                     ? '/ Based on the Lissajous curves'
@@ -323,7 +303,7 @@ export const CreatePage = () => {
                                                 paddingTop="2"
                                                 paddingBottom="4"
                                                 direction="row"
-                                                rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
+                                                rowGap={4}
                                                 columnGap={4}
                                                 wrap="wrap"
                                             >
@@ -337,9 +317,9 @@ export const CreatePage = () => {
                                                             key={selectedProject.id}
                                                             h={{ base: '52', sm: '56', md: '60', lg: '80' }}
                                                             position="relative"
-                                                            shadow={'xl'}
-                                                            borderRadius="lg"
-                                                            padding={6}
+                                                            borderRadius="sm"
+                                                            shadow="lg"
+                                                            padding={4}
                                                             bg={'brand.200'}
                                                         >
                                                             {selectedProject.image !== undefined ? (
@@ -351,9 +331,9 @@ export const CreatePage = () => {
                                                                     }}
                                                                 >
                                                                     <Image
-                                                                        w={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                                                        w={{ base: '28', sm: '36', md: '40', lg: '60' }}
+                                                                        h={{ base: '36', sm: '40', md: '44', lg: '60' }}
                                                                         objectFit="cover"
-                                                                        h={{ base: '32', sm: '36', md: '40', lg: '60' }}
                                                                         src={selectedProject.image}
                                                                         alt={'Project' + selectedProject.id}
                                                                     />
@@ -372,6 +352,8 @@ export const CreatePage = () => {
                                                                 </Box>
                                                             ) : (
                                                                 <Text
+                                                                    w={{ base: '28', sm: '36', md: '40', lg: '60' }}
+                                                                    h={{ base: '36', sm: '40', md: '44', lg: '60' }}
                                                                     paddingTop={10}
                                                                     fontFamily={'heading'}
                                                                     fontSize={{
@@ -385,8 +367,6 @@ export const CreatePage = () => {
                                                                     align="center"
                                                                     justifyContent="center"
                                                                     color="brand.100"
-                                                                    h={{ base: '32', sm: '36', md: '40', lg: '60' }}
-                                                                    w={{ base: '32', sm: '36', md: '40', lg: '60' }}
                                                                 >
                                                                     +
                                                                 </Text>
@@ -410,6 +390,7 @@ export const CreatePage = () => {
                                                                         lg: 'sm',
                                                                     }}
                                                                     fontWeight="300"
+                                                                    color={'brand.50'}
                                                                 >
                                                                     TBA
                                                                 </Text>
@@ -423,6 +404,7 @@ export const CreatePage = () => {
                                                                         lg: 'sm',
                                                                     }}
                                                                     fontWeight="300"
+                                                                    color={'brand.50'}
                                                                 >
                                                                     ~€{selectedProject.price!.toFixed(2)}
                                                                 </Text>
@@ -437,7 +419,7 @@ export const CreatePage = () => {
                         </TabPanels>
                     </Tabs>
                 </Stack>
-            </VStack>
+            </Box>
         </Center>
     );
 };
