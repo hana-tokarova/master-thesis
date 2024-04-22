@@ -14,7 +14,7 @@ export const HomePage = () => {
                     paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}
                     paddingBottom={16}
                 >
-                    <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start" gap={1}>
+                    <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                         <Box w="40vw">
                             <Text
                                 paddingTop={20}
