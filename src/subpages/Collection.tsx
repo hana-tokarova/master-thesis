@@ -37,6 +37,7 @@ export const Collection = ({
                 fontWeight="500"
                 fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                 paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
+                color="brand.50"
             >
                 / {collection.charAt(0).toUpperCase() + collection.slice(1)} properties
             </Text>
@@ -58,14 +59,15 @@ export const Collection = ({
                                     <Text
                                         fontFamily={'heading'}
                                         fontWeight="400"
-                                        fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                                        fontSize={{ base: 'sm', md: 'md' }}
+                                        color={'brand.50'}
                                     >
                                         {parameterDetails.name}
                                     </Text>
                                     <Slider
                                         margin={2}
                                         mb={4}
-                                        w={{ base: '28', sm: '30', md: '32', lg: '40' }}
+                                        w={{ base: '32', md: '40' }}
                                         value={sliderParameters[parameterName]}
                                         min={parameterDetails.min}
                                         max={parameterDetails.max}
@@ -74,10 +76,20 @@ export const Collection = ({
                                             changeNumericParameter(setSliderParameters, parameterName, newValue)
                                         }
                                     >
-                                        <SliderMark value={parameterDetails.min} mt="3" fontSize="sm">
+                                        <SliderMark
+                                            value={parameterDetails.min}
+                                            mt="3"
+                                            fontSize={{ base: 'xs', md: 'sm' }}
+                                            color={'brand.50'}
+                                        >
                                             {parameterDetails.min}
                                         </SliderMark>
-                                        <SliderMark value={parameterDetails.max} mt="3" fontSize="sm">
+                                        <SliderMark
+                                            value={parameterDetails.max}
+                                            mt="3"
+                                            fontSize={{ base: 'xs', md: 'sm' }}
+                                            color={'brand.50'}
+                                        >
                                             {parameterDetails.max}
                                         </SliderMark>
                                         <SliderTrack bg="brand.200" shadow="md">
@@ -111,7 +123,8 @@ export const Collection = ({
                                     <Text
                                         fontFamily={'heading'}
                                         fontWeight="400"
-                                        fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                                        fontSize={{ base: 'sm', md: 'md' }}
+                                        color={'brand.50'}
                                     >
                                         {parameterDetails.name}
                                     </Text>

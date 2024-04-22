@@ -157,7 +157,7 @@ export const Finalize = ({
                     w={44}
                     fontFamily={'heading'}
                     fontWeight="500"
-                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                    fontSize={{ base: 'sm', md: 'md' }}
                     placeholder="Export model"
                     bg="brand.200"
                     border="none"
@@ -192,7 +192,7 @@ export const Finalize = ({
                             size="md"
                             fontFamily={'heading'}
                             fontWeight="500"
-                            fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                            fontSize={{ base: 'sm', md: 'md' }}
                             bg="brand.200"
                             color="brand.50"
                             w={44}
@@ -263,19 +263,14 @@ export const Finalize = ({
             </Box>
 
             <Box paddingTop={14}>
-                <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
+                <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: 'sm', md: 'md' }}>
                     Dimensions
-                    <Text
-                        as="span"
-                        fontFamily={'heading'}
-                        fontWeight="400"
-                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                    >
+                    <Text as="span" fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'xs', md: 'sm' }}>
                         <br />
                         (width x depth x height)
                     </Text>
                 </Text>
-                <Text fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}>
+                <Text fontSize={{ base: 'xs', md: 'sm' }}>
                     {boundingBox !== null
                         ? `${boundingBox.width.toFixed(1)} x ${boundingBox.depth.toFixed(
                               1,
@@ -289,15 +284,10 @@ export const Finalize = ({
                             paddingTop={2}
                             fontFamily={'heading'}
                             fontWeight="500"
-                            fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                            fontSize={{ base: 'sm', md: 'md' }}
                         >
                             Estimated {currentMaterial.name} price
-                            <Text
-                                as="span"
-                                fontFamily={'heading'}
-                                fontWeight="400"
-                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                            >
+                            <Text as="span" fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'xs', md: 'sm' }}>
                                 <br />
                                 (based on volume)
                             </Text>
@@ -305,7 +295,7 @@ export const Finalize = ({
                         <Text
                             fontFamily={'heading'}
                             fontWeight="400"
-                            fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
+                            fontSize={{ base: 'lg', md: '2xl' }}
                             paddingBottom={10}
                         >
                             ~€{(volume * currentMaterial.additionalCost).toFixed(2)}

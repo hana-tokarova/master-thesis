@@ -242,6 +242,7 @@ export const ConfiguratorPage = () => {
                         h={{ base: '45vh', md: '90vh', lg: '90vh' }}
                         cursor="pointer"
                         paddingTop={{ base: '50px', md: '0' }}
+                        bg={{ base: 'brand.200', md: 'transparent' }}
                     >
                         {showOverlay && <StartupOverlay onClose={handleOverlayClose} />}
                         <RenderCanvas

@@ -27,6 +27,7 @@ export const Visualize = ({
                 fontWeight="500"
                 fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
                 paddingTop="1"
+                color={'brand.50'}
             >
                 / Visualize
             </Text>
@@ -43,16 +44,17 @@ export const Visualize = ({
                     paddingBottom="1"
                     fontFamily={'heading'}
                     fontWeight="400"
-                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                    fontSize={{ base: 'sm', md: 'md' }}
                     w={{ base: '28', sm: '30', md: '32', lg: '34' }}
+                    color={'brand.50'}
                 >
                     Materials
                     <Box>
                         <Select
-                            w={44}
+                            w={{ base: 36, md: 44 }}
                             fontFamily={'body'}
                             fontWeight="400"
-                            fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                            fontSize={{ base: 'xs', md: 'sm' }}
                             bg="brand.200"
                             border="none"
                             value={currentMaterial.name}
@@ -88,8 +90,9 @@ export const Visualize = ({
                     paddingBottom="1"
                     fontFamily={'heading'}
                     fontWeight="400"
-                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                    fontSize={{ base: 'sm', md: 'md' }}
                     w={{ base: '28', sm: '30', md: '32', lg: '34' }}
+                    color={'brand.50'}
                 >
                     Colors
                     <Box>

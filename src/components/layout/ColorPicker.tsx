@@ -12,8 +12,8 @@ type ColorPickerProps = {
 
 export const ColorPicker = ({ activeColor, colors, setMeshColor }: ColorPickerProps) => {
     return (
-        <HStack marginBottom={2} w={60} paddingTop={3} paddingBottom={3}>
-            {colors.map(([buttonColor, gradientColor], index) => (
+        <HStack marginBottom={2} w={{ base: 36, md: 44 }} paddingTop={3} paddingBottom={3} wrap="wrap">
+            {colors.map(([buttonColor, gradientColor], _) => (
                 <Tooltip
                     bg="brand.100"
                     color="white"
