@@ -10,7 +10,7 @@ export const HomePage = () => {
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                     <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text
-                            paddingTop={20}
+                            paddingTop={15}
                             fontFamily={'heading'}
                             fontWeight="300"
                             fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
@@ -156,7 +156,7 @@ export const HomePage = () => {
                         <Contacts />
                     </Box>
                     <Image
-                        w={{ base: '100%', lg: '50%' }}
+                        w={{ base: '90%', lg: '50%' }}
                         h={{ base: '30%', lg: '40%' }}
                         marginTop={{ base: 0, md: 16 }}
                         src={`${process.env.PUBLIC_URL}/images/visuals/visuals1.png`}
