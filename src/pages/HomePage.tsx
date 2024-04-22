@@ -1,94 +1,187 @@
-import { Button, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Image, Stack, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { Contacts } from '../subpages/Contacts';
+import { projects } from './CreatePage';
 
 export const HomePage = () => {
     return (
         <>
-            <VStack
-                spacing={2}
-                paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
-                paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
-                paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}
-                paddingBottom={16}
-                alignItems={'left'}
-                w="100vw"
-            >
-                <Text
-                    fontFamily={'heading'}
-                    fontWeight="500"
-                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+            <Center>
+                <VStack
+                    spacing={2}
+                    paddingLeft={{ base: 12, sm: 20, md: 24, lg: 28 }}
+                    paddingRight={{ base: 12, sm: 20, md: 24, lg: 28 }}
+                    paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }}
+                    paddingBottom={16}
                 >
-                    / Welcome
-                </Text>
+                    <Stack direction={{ base: 'column', md: 'row' }} align="flex-start">
+                        <Box w="30vw">
+                            <Text
+                                paddingTop={20}
+                                fontFamily={'heading'}
+                                fontWeight="300"
+                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                            >
+                                Welcome to
+                            </Text>
 
-                <Text maxW="lg" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                    Hi and welcome to the world of interactive jewelry making! Want to create unique jewelry pieces just
-                    by quick changes of parameters? Then you are in the right place!
-                </Text>
+                            <Flex direction={{ base: 'column', md: 'row' }} align="flex-end" gap={5}>
+                                <Image
+                                    w="500px"
+                                    src={`${process.env.PUBLIC_URL}/images/logo/logo.svg`}
+                                    alt="NEOTAKU JEWELRY"
+                                    objectFit="contain"
+                                />
 
-                <Text
-                    fontFamily={'heading'}
-                    fontWeight="500"
-                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                    paddingTop={2}
-                >
-                    / Choose - Customize - Export
-                </Text>
+                                <Text color="brand.100" fontSize={{ base: 'xs', md: 'lg', lg: 'xl' }}>
+                                    /niː.oʊ.ta.ku/
+                                </Text>
+                            </Flex>
 
-                <Text maxW="lg" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                    The process is simple - just choose jewelry type, customize it to your liking and finally, export it
-                    to your preferred format to print it/cast it!
-                </Text>
+                            <Text
+                                maxW="lg"
+                                fontFamily={'heading'}
+                                fontWeight={300}
+                                fontSize={{ base: 'sm', sm: 'md', md: 'lg', lg: 'xl' }}
+                            >
+                                Tool for customizable jewelry creation.
+                            </Text>
 
-                <Button
-                    size="sm"
-                    as={Link}
-                    to={'/create'}
-                    fontFamily={'heading'}
-                    fontWeight="450"
-                    bg="brand.100"
-                    color="brand.200"
-                    w={36}
-                    shadow={'lg'}
-                    _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.300' }}
-                >
-                    Create your jewelry
-                </Button>
+                            <Text
+                                fontFamily={'heading'}
+                                fontWeight="300"
+                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                                paddingTop={20}
+                            >
+                                / Choose
+                                <Text
+                                    as="span"
+                                    fontFamily={'heading'}
+                                    fontWeight="400"
+                                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                                >
+                                    {' '}
+                                    / Customize
+                                    <Text
+                                        as="span"
+                                        fontFamily={'heading'}
+                                        fontWeight="500"
+                                        fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                                    >
+                                        {' '}
+                                        / Export
+                                    </Text>
+                                </Text>
+                            </Text>
 
-                <Text
-                    fontFamily={'heading'}
-                    fontWeight="500"
-                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                    paddingTop={3}
-                >
-                    / Multiple collections - Multiple possibilities
-                </Text>
+                            <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
+                                The process is simple - just choose jewelry, customize it and export it to your device
+                                in preferred format to 3D print it/cast it!
+                            </Text>
 
-                <Text maxW="lg" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
-                    By selecting a specific collection, you learn its ways and how you can customize it. Each collection
-                    has unique set of parameters that can be customized and changed.
-                </Text>
+                            <Button
+                                marginTop={2}
+                                size={{ sm: 'sm', lg: 'md' }}
+                                as={Link}
+                                to={'/create'}
+                                fontFamily={'heading'}
+                                fontWeight="450"
+                                bg="brand.50"
+                                color="brand.200"
+                                w={{ base: 36, sm: 44, md: 52, lg: 60 }}
+                                shadow={'lg'}
+                                _hover={{ bg: 'brand.300' }}
+                                _focus={{ bg: 'brand.50' }}
+                            >
+                                Create your jewelry
+                            </Button>
 
-                <Button
-                    size="sm"
-                    as={Link}
-                    to={'/showcase'}
-                    fontFamily={'heading'}
-                    fontWeight="450"
-                    bg="brand.100"
-                    color="brand.200"
-                    w={36}
-                    shadow={'lg'}
-                    _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.300' }}
-                >
-                    Browse collections
-                </Button>
+                            <Text
+                                paddingTop={12}
+                                fontFamily={'heading'}
+                                fontWeight="400"
+                                fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                            >
+                                {' '}
+                                / Multiple collections
+                                <Text
+                                    as="span"
+                                    fontFamily={'heading'}
+                                    fontWeight="500"
+                                    fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
+                                >
+                                    {' '}
+                                    / Multiple possibilities
+                                </Text>
+                            </Text>
 
-                <Contacts />
-            </VStack>
+                            <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
+                                Each collection has an unique set of parameters that can be customized and changed. You
+                                can start from scratch or by choosing one of the presets.
+                            </Text>
+
+                            <Button
+                                marginTop={2}
+                                size={{ sm: 'sm', lg: 'md' }}
+                                as={Link}
+                                to={'/showcase'}
+                                fontFamily={'heading'}
+                                fontWeight="450"
+                                bg="brand.50"
+                                color="brand.200"
+                                w={{ base: 36, sm: 44, md: 52, lg: 60 }}
+                                shadow={'lg'}
+                                _hover={{ bg: 'brand.300' }}
+                                _focus={{ bg: 'brand.50' }}
+                            >
+                                Browse collections
+                            </Button>
+                            <Text
+                                paddingTop={20}
+                                fontFamily={'heading'}
+                                fontWeight="500"
+                                fontSize={{ base: 'lg', sm: 'xl', md: '2xl', lg: '3xl' }}
+                            >
+                                / Not sure yet?
+                            </Text>
+                            <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}>
+                                Look at some of the examples that can be done in the configurator!
+                            </Text>
+                            <Flex
+                                paddingTop="2"
+                                paddingBottom="4"
+                                direction="row"
+                                rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
+                                columnGap={4}
+                                wrap="wrap"
+                            >
+                                {projects
+                                    .filter((project) => project.id === 2 || project.id === 5 || project.id === 9)
+                                    .map((selectedProject) => (
+                                        <Image
+                                            key={selectedProject.id}
+                                            w={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                            objectFit="cover"
+                                            h={{ base: '32', sm: '36', md: '40', lg: '60' }}
+                                            src={selectedProject.image}
+                                            alt={'Project' + selectedProject.id}
+                                            shadow={'xl'}
+                                            borderRadius="sm"
+                                        />
+                                    ))}
+                            </Flex>
+                            <Contacts />
+                        </Box>
+                        <Image
+                            paddingTop={32}
+                            paddingRight={20}
+                            w="1000px"
+                            src={`${process.env.PUBLIC_URL}/images/visuals/visuals1.png`}
+                            alt="Visuals1"
+                        />
+                    </Stack>
+                </VStack>
+            </Center>
         </>
     );
 };

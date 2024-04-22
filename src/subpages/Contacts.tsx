@@ -46,11 +46,18 @@ export const Contacts = () => {
                 </Button>
             </Text>
 
-            <HStack paddingTop={3} alignItems={'end'} spacing={1} w="250px">
-                <Image src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`} alt="ht-logo" w={10} h={10} />
-                <Text fontSize={{ base: '3xs', md: '2xs', lg: 'xs' }} color="brand.50">
-                    Neotaku Jewelry is a master thesis project created by Hana Tokárová.
+            <Text paddingTop={5} fontSize={{ base: '2xs', md: 'xs', lg: 'sm' }} color="brand.50">
+                Neotaku Jewelry is a master thesis project created by
+                <Text as="span" fontFamily={'heading'} fontWeight={600}>
+                    {' '}
+                    Hana Tokárová
                 </Text>
+                .
+            </Text>
+
+            <HStack paddingTop={3} paddingBottom={28} spacing={3} w="250px" align={'flex-end'}>
+                <Image src={`${process.env.PUBLIC_URL}/images/logo/logo-full.svg`} alt="ht-logo" h={30} />
+                <Image src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`} alt="ht-logo" w={10} h={8} />
             </HStack>
         </>
     );
