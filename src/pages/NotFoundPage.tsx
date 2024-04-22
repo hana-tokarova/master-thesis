@@ -35,9 +35,9 @@ export const NotFoundPage = () => {
                         </Text>
                     </Box>
                     <Image
-                        w={{ base: '80vw', lg: '50vw' }}
-                        h={{ base: '30vh', lg: '40vh' }}
-                        marginTop={{ base: 20, md: 32 }}
+                        w={{ base: '100%', lg: '50%' }}
+                        h={{ base: '30%', lg: '40%' }}
+                        marginTop={{ base: 0, md: 16 }}
                         src={`${process.env.PUBLIC_URL}/images/visuals/visuals3.png`}
                         alt="Visuals1"
                         objectFit="contain"
