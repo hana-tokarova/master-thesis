@@ -173,8 +173,8 @@ export const ConfiguratorPage = () => {
                 >
                     <Box
                         order={{ base: 2, md: 1 }}
-                        flex={{ base: '1 1 auto', md: '0.4' }}
-                        w={{ base: '100%', md: '80vw' }}
+                        flex={{ base: '1 1 auto', md: '0.30' }}
+                        w={{ base: '100%', md: '30vw' }}
                         h="auto"
                         zIndex={{ base: 1, md: 3 }}
                         overflowY="auto"
@@ -235,11 +235,11 @@ export const ConfiguratorPage = () => {
                         position="fixed"
                         right="0"
                         top="0"
-                        w={{ base: '100%', md: '60vw', lg: '60vw' }}
+                        w={{ base: '100%', md: '70vw' }}
                         overflowY="hidden"
                         zIndex={2}
                         boxShadow={{ base: 'lg', md: 'none' }}
-                        h={{ base: '45vh', md: '90vh', lg: '90vh' }}
+                        h={{ base: '45vh', md: '90vh' }}
                         cursor="pointer"
                         paddingTop={{ base: '50px', md: '0' }}
                         bg={{ base: 'brand.200', md: 'transparent' }}

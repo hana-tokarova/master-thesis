@@ -283,7 +283,7 @@ export const CreatePage = () => {
                                         <Box key={jewelryType + collectionType}>
                                             <Text
                                                 fontFamily={'heading'}
-                                                fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
+                                                fontSize={{ base: 'xl', md: '2xl' }}
                                                 fontWeight="500"
                                                 color={'brand.50'}
                                             >
@@ -406,7 +406,7 @@ export const CreatePage = () => {
                                                                     fontWeight="300"
                                                                     color={'brand.50'}
                                                                 >
-                                                                    ~€{selectedProject.price!.toFixed(2)}
+                                                                    Approx. €{selectedProject.price!.toFixed(2)}
                                                                 </Text>
                                                             )}
                                                         </Box>

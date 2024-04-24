@@ -42,15 +42,7 @@ export const Collection = ({
                 / {collection.charAt(0).toUpperCase() + collection.slice(1)} properties
             </Text>
 
-            <Flex
-                paddingTop="2"
-                paddingBottom="4"
-                direction="row"
-                rowGap={{ base: 0, sm: 2, md: 4, lg: 6 }}
-                columnGap={4}
-                wrap="wrap"
-                w="88"
-            >
+            <Flex paddingTop="2" paddingBottom="4" direction="row" rowGap={4} columnGap={4} wrap="wrap" w="88">
                 {mesh &&
                     Object.entries(mesh.sliderParameters).map(
                         ([parameterName, parameterDetails]) =>

@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    Flex,
     HStack,
     Icon,
     Input,
@@ -137,172 +138,183 @@ export const Finalize = ({
                 });
             }
         }
-        // Reset the selected option after processing
         setSelectedOption('');
     };
 
     return (
-        <HStack spacing={4} alignItems="flex-start">
-            <Box paddingBottom={10}>
-                <Text
-                    fontFamily={'heading'}
-                    fontWeight="500"
-                    fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-                    paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                >
-                    / Finalize
-                </Text>
+        <Box>
+            <Text
+                fontFamily={'heading'}
+                fontWeight="500"
+                fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
+                paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
+            >
+                / Finalize
+            </Text>
+            <Flex paddingTop="2" direction="row" rowGap={{ base: 2, sm: 3, md: 4, lg: 5 }} columnGap={4} wrap="wrap">
+                <Box>
+                    <Select
+                        w={44}
+                        fontFamily={'heading'}
+                        fontWeight="500"
+                        fontSize={{ base: 'sm', md: 'md' }}
+                        placeholder="Export model"
+                        bg="brand.200"
+                        border="none"
+                        color="brand.50"
+                        size="md"
+                        cursor="pointer"
+                        shadow={'lg'}
+                        paddingTop={2}
+                        paddingBottom={4}
+                        _hover={{ bg: 'brand.400' }}
+                        _focus={{ bg: 'brand.400' }}
+                        onChange={handleChange}
+                        value={selectedOption}
+                    >
+                        {exportOptions.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                to {option.label}
+                            </option>
+                        ))}
+                    </Select>
 
-                <Select
-                    w={44}
-                    fontFamily={'heading'}
-                    fontWeight="500"
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    placeholder="Export model"
-                    bg="brand.200"
-                    border="none"
-                    color="brand.50"
-                    size="md"
-                    cursor="pointer"
-                    shadow={'lg'}
-                    paddingTop={2}
-                    paddingBottom={4}
-                    _hover={{ bg: 'brand.400' }}
-                    _focus={{ bg: 'brand.400' }}
-                    onChange={handleChange}
-                    value={selectedOption} // Controlled component
-                >
-                    {exportOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            to {option.label}
-                        </option>
-                    ))}
-                </Select>
+                    <Popover
+                        returnFocusOnClose={false}
+                        isOpen={isOpen}
+                        onClose={onClose}
+                        placement="bottom-end"
+                        closeOnBlur={false}
+                    >
+                        <PopoverTrigger>
+                            <Button
+                                rightIcon={<BiCopy />}
+                                size="md"
+                                fontFamily={'heading'}
+                                fontWeight="500"
+                                fontSize={{ base: 'sm', md: 'md' }}
+                                bg="brand.200"
+                                color="brand.50"
+                                w={44}
+                                shadow={'lg'}
+                                _hover={{ bg: 'brand.400' }}
+                                _focus={{ bg: 'brand.400' }}
+                                onClick={async () => {
+                                    try {
+                                        const share =
+                                            window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
+                                        await copy(share);
+                                        toast({
+                                            position: 'bottom',
+                                            status: 'success',
+                                            duration: 10000,
+                                            render: () => (
+                                                <HStack
+                                                    color="white"
+                                                    p={3}
+                                                    bg="green.400"
+                                                    boxShadow={'md'}
+                                                    borderRadius="5"
+                                                    align="start"
+                                                >
+                                                    <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
+                                                    <Box>
+                                                        <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                                            Design saved!
+                                                        </Text>
+                                                        <Text fontFamily={'body'} fontWeight="400">
+                                                            Design link saved to your clipboard.
+                                                        </Text>
+                                                    </Box>
+                                                </HStack>
+                                            ),
+                                        });
+                                    } catch (error) {
+                                        onToggle();
+                                    }
+                                }}
+                            >
+                                <Text textAlign="left" w="full">
+                                    Save Design Link
+                                </Text>
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <PopoverCloseButton color={'brand.200'} />
+                            <PopoverBody bg="brand.400" boxShadow={'md'} borderRadius="5">
+                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'} color="white">
+                                    Design saved!
+                                </Text>
+                                <Text
+                                    fontFamily={'body'}
+                                    fontWeight="400"
+                                    color="white"
+                                    align="start"
+                                    paddingBottom={2}
+                                >
+                                    Here you can copy the link to your design.
+                                    <br />
+                                    Don't forget to set dimensions to 'mm' before printing.
+                                </Text>
+                                <Input
+                                    bg={'brand.200'}
+                                    focusBorderColor="brand.200"
+                                    value={window.location.href + `?config=${btoa(JSON.stringify(parameters))}`}
+                                    isDisabled
+                                    cursor="text !important"
+                                />
+                            </PopoverBody>
+                        </PopoverContent>
+                    </Popover>
+                </Box>
 
-                <Popover
-                    returnFocusOnClose={false}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    placement="bottom-end"
-                    closeOnBlur={false}
-                >
-                    <PopoverTrigger>
-                        <Button
-                            rightIcon={<BiCopy />}
-                            size="md"
-                            fontFamily={'heading'}
-                            fontWeight="500"
-                            fontSize={{ base: 'sm', md: 'md' }}
-                            bg="brand.200"
-                            color="brand.50"
-                            w={44}
-                            shadow={'lg'}
-                            _hover={{ bg: 'brand.400' }}
-                            _focus={{ bg: 'brand.400' }}
-                            onClick={async () => {
-                                try {
-                                    const share = window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
-                                    await copy(share);
-                                    toast({
-                                        position: 'bottom',
-                                        status: 'success',
-                                        duration: 10000,
-                                        render: () => (
-                                            <HStack
-                                                color="white"
-                                                p={3}
-                                                bg="green.400"
-                                                boxShadow={'md'}
-                                                borderRadius="5"
-                                                align="start"
-                                            >
-                                                <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
-                                                <Box>
-                                                    <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
-                                                        Design saved!
-                                                    </Text>
-                                                    <Text fontFamily={'body'} fontWeight="400">
-                                                        Design link saved to your clipboard.
-                                                    </Text>
-                                                </Box>
-                                            </HStack>
-                                        ),
-                                    });
-                                } catch (error) {
-                                    onToggle();
-                                }
-                            }}
-                        >
-                            <Text textAlign="left" w="full">
-                                {' '}
-                                Save Design Link
-                            </Text>
-                        </Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                        <PopoverCloseButton color={'brand.200'} />
-                        <PopoverBody bg="brand.400" boxShadow={'md'} borderRadius="5">
-                            <Text fontFamily={'heading'} fontWeight="500" size={'lg'} color="white">
-                                Design saved!
-                            </Text>
-                            <Text fontFamily={'body'} fontWeight="400" color="white" align="start" paddingBottom={2}>
-                                Here you can copy the link to your design.
-                                <br />
-                                Don't forget to set dimensions to 'mm' before printing.
-                            </Text>
-                            <Input
-                                bg={'brand.200'}
-                                focusBorderColor="brand.200"
-                                value={window.location.href + `?config=${btoa(JSON.stringify(parameters))}`}
-                                isDisabled
-                                cursor="text !important"
-                            />
-                        </PopoverBody>
-                    </PopoverContent>
-                </Popover>
-            </Box>
-
-            <Box paddingTop={14}>
-                <Text fontFamily={'heading'} fontWeight="500" fontSize={{ base: 'sm', md: 'md' }}>
-                    Dimensions
-                    <Text as="span" fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'xs', md: 'sm' }}>
-                        <br />
-                        (width x depth x height)
+                <Box>
+                    <Text paddingTop={2} fontFamily={'heading'} fontWeight="500" fontSize={{ base: 'sm', md: 'md' }}>
+                        Dimensions
+                        <Text as="span" fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'xs', md: 'sm' }}>
+                            <br />
+                            (width x depth x height)
+                        </Text>
                     </Text>
-                </Text>
-                <Text fontSize={{ base: 'xs', md: 'sm' }}>
-                    {boundingBox !== null
-                        ? `${boundingBox.width.toFixed(1)} x ${boundingBox.depth.toFixed(
-                              1,
-                          )} x ${boundingBox.height.toFixed(1)} mm`
-                        : 'Loading...'}
-                </Text>
+                    <Text fontSize={{ base: 'xs', md: 'sm' }}>
+                        {boundingBox !== null
+                            ? `${boundingBox.width.toFixed(1)} x ${boundingBox.depth.toFixed(
+                                  1,
+                              )} x ${boundingBox.height.toFixed(1)} mm`
+                            : 'Loading...'}
+                    </Text>
 
-                {volume !== null && (
-                    <>
-                        <Text
-                            paddingTop={2}
-                            fontFamily={'heading'}
-                            fontWeight="500"
-                            fontSize={{ base: 'sm', md: 'md' }}
-                        >
-                            Estimated {currentMaterial.name} price
-                            <Text as="span" fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'xs', md: 'sm' }}>
-                                <br />
-                                (based on volume)
+                    {volume !== null && (
+                        <>
+                            <Text
+                                paddingTop={2}
+                                fontFamily={'heading'}
+                                fontWeight="500"
+                                fontSize={{ base: 'sm', md: 'md' }}
+                            >
+                                Estimated {currentMaterial.name} price
+                                <Text
+                                    as="span"
+                                    fontFamily={'heading'}
+                                    fontWeight="400"
+                                    fontSize={{ base: 'xs', md: 'sm' }}
+                                >
+                                    <br />
+                                    (based on volume)
+                                </Text>
                             </Text>
-                        </Text>
-                        <Text
-                            fontFamily={'heading'}
-                            fontWeight="400"
-                            fontSize={{ base: 'lg', md: '2xl' }}
-                            paddingBottom={10}
-                        >
-                            ~€{(volume * currentMaterial.additionalCost).toFixed(2)}
-                        </Text>
-                    </>
-                )}
-            </Box>
-        </HStack>
+                            <Text
+                                fontFamily={'heading'}
+                                fontWeight="400"
+                                fontSize={{ base: 'lg', md: '2xl' }}
+                                paddingBottom={10}
+                            >
+                                Approx. €{(volume * currentMaterial.additionalCost).toFixed(2)}
+                            </Text>
+                        </>
+                    )}
+                </Box>
+            </Flex>
+        </Box>
     );
 };

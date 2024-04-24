@@ -57,7 +57,7 @@ export const General = ({
                 / General
             </Text>
 
-            <Flex paddingTop="2" direction="row" rowGap={{ base: 2, sm: 3, md: 4, lg: 5 }} columnGap={4} wrap="wrap">
+            <Flex paddingTop="2" direction="row" rowGap={4} columnGap={4} wrap="wrap">
                 <Text
                     as="div"
                     fontFamily={'heading'}

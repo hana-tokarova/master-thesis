@@ -63,7 +63,6 @@ export const Visualize = ({
                             cursor="pointer"
                             shadow={'lg'}
                             paddingTop={2}
-                            paddingBottom={4}
                             _hover={{ bg: 'brand.400' }}
                             _focus={{ bg: 'brand.400' }}
                             onChange={(event) => {
@@ -91,7 +90,7 @@ export const Visualize = ({
                     fontFamily={'heading'}
                     fontWeight="400"
                     fontSize={{ base: 'sm', md: 'md' }}
-                    w={{ base: '28', sm: '30', md: '32', lg: '34' }}
+                    w={{ base: 36, md: 48 }}
                     color={'brand.50'}
                 >
                     Colors
