@@ -187,7 +187,7 @@ export const collections: {
                         parameterA={slider.a}
                         parameterB={slider.b}
                         meshRadius={slider.r}
-                        scaleA={dropdown.scaleA.diameter / 2}
+                        scaleA={dropdown.scaleA.diameter / 2 + slider.r}
                         scaleB={slider.scaleB / 2}
                         roughness={roughness}
                         metalness={metalness}
@@ -239,7 +239,7 @@ export const collections: {
                         meshRadius={slider.r}
                         parameterA={slider.a}
                         parameterB={slider.b}
-                        scaleA={(dropdown.scaleA.diameter * Math.PI) / 2}
+                        scaleA={(dropdown.scaleA.diameter * Math.PI) / 2 + slider.r}
                         scaleB={slider.scaleB / 2}
                         detail={1000}
                         roughness={roughness}
@@ -410,7 +410,7 @@ export const collections: {
                         mesh={ref}
                         meshColor={color}
                         stacks={64}
-                        majorR={dropdown.majorR.diameter / 2}
+                        majorR={dropdown.majorR.diameter / 2 + slider.minorR / 2}
                         minorR={slider.minorR / 2}
                         twistAll={bool.twistAll}
                         twist={slider.twist}
@@ -467,7 +467,7 @@ export const collections: {
                         mesh={ref}
                         meshColor={color}
                         stacks={64}
-                        majorR={dropdown.majorR.diameter / 2}
+                        majorR={dropdown.majorR.diameter / 2 + slider.minorR / 2}
                         minorR={slider.minorR / 2}
                         twistAll={bool.twistAll}
                         twist={slider.twist}

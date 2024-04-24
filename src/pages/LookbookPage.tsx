@@ -16,7 +16,7 @@ export const LookbookPage = () => {
                         / Showcase
                     </Text>
 
-                    <Text fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }} color={'brand.50'}>
+                    <Text maxW="2xl" fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }} color={'brand.50'}>
                         Here you can find showcase of renders and lookbooks from the different collections. If you fancy
                         some of the designs below, you can click on the specified jewelry and then you will be send to
                         the Neotaku configurator.

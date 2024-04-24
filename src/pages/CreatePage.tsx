@@ -245,13 +245,11 @@ export const CreatePage = () => {
                         / Create
                     </Text>
 
-                    <Text color={'brand.50'} fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
-                        Want to create something for yourself or your loved ones? This it the right place! Based on your
-                        preferences, fill in the details of what kind of jewelry you want to create.
+                    <Text maxW="2xl" color={'brand.50'} fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
+                        Want to create something for yourself or your loved ones? This it the right place!
                         <br />
-                        Each collection showcases different ways how given jewelry type could look like. If you like any
-                        of the types below, click on it and you will be able to customize it futher. If not, you can
-                        configure whatever jewelry type you want from scratch.
+                        If you like any of the presets below, click on it and you will be able to customize it futher.
+                        If not, you can configure whatever jewelry type you want from scratch.
                     </Text>
 
                     <Tabs defaultIndex={0} variant="unstyled" isFitted>

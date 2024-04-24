@@ -11,6 +11,7 @@ export const HomePage = () => {
                     <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text
                             paddingTop={15}
+                            paddingBottom={5}
                             fontFamily={'heading'}
                             fontWeight="300"
                             fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
@@ -19,7 +20,12 @@ export const HomePage = () => {
                             Welcome to
                         </Text>
 
-                        <Flex direction={{ base: 'column', md: 'row' }} align="flex-end" wrap={'wrap'} gap={5}>
+                        <Flex
+                            direction={{ base: 'column', md: 'row' }}
+                            align={{ base: 'flex-start', md: 'flex-end' }}
+                            wrap={'wrap'}
+                            gap={5}
+                        >
                             <Image
                                 w="500px"
                                 src={`${process.env.PUBLIC_URL}/images/logo/logo.svg`}
@@ -33,10 +39,9 @@ export const HomePage = () => {
                         </Flex>
 
                         <Text
-                            maxW="lg"
                             fontFamily={'heading'}
                             fontWeight={300}
-                            fontSize={{ base: 'sm', sm: 'md', md: 'lg', lg: 'xl' }}
+                            fontSize={{ base: 'xl', md: '2xl' }}
                             color={'brand.50'}
                         >
                             Tool for customizable jewelry creation.
