@@ -8,7 +8,7 @@ export const HomePage = () => {
         <Center>
             <VStack paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
-                    <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
+                    <Box w={{ base: '80vw', md: '35vw' }} minW={'35vw'}>
                         <Text
                             paddingTop={15}
                             paddingBottom={5}
@@ -135,38 +135,71 @@ export const HomePage = () => {
                         <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color="brand.50">
                             Here are some of the examples that can be done in the configurator!
                         </Text>
+
                         <Flex
                             paddingTop="2"
                             paddingBottom="4"
                             direction="row"
                             rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
                             columnGap={4}
-                            wrap="wrap"
+                            // wrap="wrap"
                         >
                             {projects
                                 .filter((project) => project.id === 2 || project.id === 5 || project.id === 9)
                                 .map((selectedProject) => (
-                                    <Image
+                                    <Box
+                                        as={Link}
+                                        to={`/configurator?config=${selectedProject.url}`}
                                         key={selectedProject.id}
-                                        w={{ base: '32', md: '40' }}
-                                        objectFit="cover"
-                                        h={{ base: '32', md: '40' }}
-                                        src={selectedProject.image}
-                                        alt={'Project' + selectedProject.id}
-                                        shadow={'xl'}
+                                        position="relative"
                                         borderRadius="sm"
-                                    />
+                                        shadow="lg"
+                                        padding={4}
+                                        bg={'brand.200'}
+                                    >
+                                        <Box
+                                            _hover={{
+                                                '.image-overlay': {
+                                                    opacity: 1,
+                                                },
+                                            }}
+                                        >
+                                            <Image
+                                                key={selectedProject.id}
+                                                w={{ base: '32', md: '40' }}
+                                                objectFit="cover"
+                                                h={{ base: '32', md: '40' }}
+                                                src={selectedProject.image}
+                                                alt={'Project' + selectedProject.id}
+                                            />
+                                            <Box
+                                                className="image-overlay"
+                                                position="absolute"
+                                                top="0"
+                                                left="0"
+                                                w="full"
+                                                h="full"
+                                                bgGradient="linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))"
+                                                opacity="0"
+                                                transition="opacity 0.3s ease-in-out"
+                                                zIndex="1"
+                                            />
+                                        </Box>
+                                    </Box>
                                 ))}
                         </Flex>
+
                         <Contacts />
                     </Box>
+
                     <Image
-                        w={{ base: '90%', lg: '50%' }}
-                        h={{ base: '30%', lg: '40%' }}
+                        w={{ base: '90%', lg: '80%' }}
+                        // h={{ base: '30%', lg: '70%' }}
                         marginTop={{ base: 0, md: 16 }}
+                        marginRight="5%"
                         src={`${process.env.PUBLIC_URL}/images/visuals/visuals1.png`}
                         alt="Visuals2"
-                        objectFit="contain"
+                        // objectFit="fill"
                     />
                 </Stack>
             </VStack>
