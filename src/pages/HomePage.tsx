@@ -142,7 +142,6 @@ export const HomePage = () => {
                             direction="row"
                             rowGap={{ base: 4, sm: 6, md: 8, lg: 10 }}
                             columnGap={4}
-                            // wrap="wrap"
                         >
                             {projects
                                 .filter((project) => project.id === 2 || project.id === 5 || project.id === 9)
