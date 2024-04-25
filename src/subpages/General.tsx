@@ -51,7 +51,7 @@ export const General = ({
                 fontFamily={'heading'}
                 fontWeight="500"
                 fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-                paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
+                paddingTop={2}
                 color={'brand.50'}
             >
                 / General

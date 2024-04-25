@@ -20,7 +20,7 @@ export const Info = ({ collection, jewelry, mesh }: InfoProps) => {
                 {jewelry.charAt(0).toUpperCase() + jewelry.slice(1)}
             </Text>
 
-            <Text color={'brand.50'} fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
+            <Text color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
                 {mesh.description}
             </Text>
         </Box>

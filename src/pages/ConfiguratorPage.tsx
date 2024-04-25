@@ -163,7 +163,7 @@ export const ConfiguratorPage = () => {
 
     return (
         <Center>
-            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
+            <Box paddingTop={6} paddingBottom={28}>
                 <Flex
                     w="80vw"
                     direction={{ base: 'column', md: 'row' }}
@@ -173,8 +173,8 @@ export const ConfiguratorPage = () => {
                 >
                     <Box
                         order={{ base: 2, md: 1 }}
-                        flex={{ base: '1 1 auto', md: '0.30' }}
-                        w={{ base: '100%', md: '30vw' }}
+                        flex={{ base: '1 1 auto', md: '0.40' }}
+                        w={{ base: '100%', md: '40vw' }}
                         h="auto"
                         zIndex={{ base: 1, md: 3 }}
                         overflowY="auto"
@@ -235,7 +235,7 @@ export const ConfiguratorPage = () => {
                         position="fixed"
                         right="0"
                         top="0"
-                        w={{ base: '100%', md: '70vw' }}
+                        w={{ base: '100%', md: '65vw' }}
                         overflowY="hidden"
                         zIndex={2}
                         boxShadow={{ base: 'lg', md: 'none' }}
