@@ -158,7 +158,7 @@ export const Finalize = ({
                         fontFamily={'heading'}
                         fontWeight="500"
                         fontSize={{ base: 'sm', md: 'md' }}
-                        placeholder="Export model"
+                        placeholder="Save 3D model"
                         bg="brand.200"
                         border="none"
                         color="brand.50"
@@ -174,7 +174,7 @@ export const Finalize = ({
                     >
                         {exportOptions.map((option) => (
                             <option key={option.value} value={option.value}>
-                                to {option.label}
+                                as {option.label}
                             </option>
                         ))}
                     </Select>
@@ -235,7 +235,7 @@ export const Finalize = ({
                                 }}
                             >
                                 <Text textAlign="left" w="full">
-                                    Save Design Link
+                                    Copy Configuration
                                 </Text>
                             </Button>
                         </PopoverTrigger>

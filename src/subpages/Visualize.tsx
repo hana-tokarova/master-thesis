@@ -32,23 +32,21 @@ export const Visualize = ({
                 / Visualize
             </Text>
 
-            <Flex
-                paddingTop="2"
-                direction="row"
-                rowGap={{ base: 2, sm: 3, md: 4, lg: 5 }}
-                columnGap={{ base: '14', md: '16' }}
-                wrap="wrap"
-            >
+            <Flex paddingTop="2" direction="row" rowGap={4} columnGap={4} wrap="wrap">
                 <Text
                     as="span"
                     paddingBottom="1"
                     fontFamily={'heading'}
                     fontWeight="400"
                     fontSize={{ base: 'sm', md: 'md' }}
-                    w={{ base: '28', sm: '30', md: '32', lg: '34' }}
+                    w={{ base: 36, md: 44 }}
                     color={'brand.50'}
                 >
                     Materials
+                    <br />
+                    <Box as="span" fontWeight="400" color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
+                        {' (Changes minimal wall thickness)'}
+                    </Box>
                     <Box>
                         <Select
                             w={{ base: 36, md: 44 }}
@@ -73,11 +71,16 @@ export const Visualize = ({
                                     'r',
                                     materials[newValue].thicknessMinimum,
                                 );
+                                changeNumericParameter(
+                                    setSliderMinParameters,
+                                    'minorR',
+                                    materials[newValue].thicknessMinimum,
+                                );
                             }}
                         >
                             {Object.entries(materials).map(([key, val]) => (
                                 <option key={key} value={val.name}>
-                                    {val.name}
+                                    {val.name} (min. diameter {val.thicknessMinimum.toFixed(2)} mm)
                                 </option>
                             ))}
                         </Select>
@@ -94,6 +97,10 @@ export const Visualize = ({
                     color={'brand.50'}
                 >
                     Colors
+                    <br />
+                    <Box as="span" fontWeight="400" color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
+                        {' (Visualizes appearance of the mesh)'}
+                    </Box>
                     <Box>
                         <ColorPicker activeColor={meshColor} colors={colors} setMeshColor={setMeshColor} />
                     </Box>

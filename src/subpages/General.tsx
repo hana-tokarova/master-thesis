@@ -137,7 +137,7 @@ export const General = ({
                             >
                                 {ringSizes.map((ringSize) => (
                                     <option key={ringSize.value.toString()} value={ringSize.value}>
-                                        {'Sz ' + ringSize.value.toString()}
+                                        {'Sz ' + ringSize.value.toString()} (Circumference {ringSize.value} mm)
                                     </option>
                                 ))}
                             </Select>
@@ -191,7 +191,7 @@ export const General = ({
                             >
                                 {braceletSizes.map((braceletSize) => (
                                     <option key={braceletSize.value.toString()} value={braceletSize.value}>
-                                        {'Sz ' + braceletSize.value.toString()}
+                                        {'Sz ' + braceletSize.value.toString()} (Circumference {braceletSize.value} mm)
                                     </option>
                                 ))}
                             </Select>

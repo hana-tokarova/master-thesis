@@ -5,7 +5,7 @@ import { CollectionType, JewelryType } from '../components/collections/Collectio
 type Project = {
     id: number;
     image: string | undefined;
-    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Configure';
+    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Create Jewelry From Scratch';
     price: number | 'TBA';
     url: string;
     collection: CollectionType;
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     },
     {
         id: 17,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -168,7 +168,7 @@ export const projects: Project[] = [
     },
     {
         id: 18,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     },
     {
         id: 19,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -186,7 +186,7 @@ export const projects: Project[] = [
     },
     {
         id: 20,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -195,7 +195,7 @@ export const projects: Project[] = [
     },
     {
         id: 21,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -204,7 +204,7 @@ export const projects: Project[] = [
     },
     {
         id: 22,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -213,7 +213,7 @@ export const projects: Project[] = [
     },
     {
         id: 23,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -222,7 +222,7 @@ export const projects: Project[] = [
     },
     {
         id: 24,
-        material: 'Configure',
+        material: 'Create Jewelry From Scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -285,7 +285,7 @@ export const CreatePage = () => {
                                                 fontWeight="500"
                                                 color={'brand.50'}
                                             >
-                                                Collection{' '}
+                                                / Collection{' '}
                                                 {collectionType.charAt(0).toUpperCase() + collectionType.slice(1)}
                                             </Text>
                                             <Text
@@ -390,7 +390,7 @@ export const CreatePage = () => {
                                                                     fontWeight="300"
                                                                     color={'brand.50'}
                                                                 >
-                                                                    TBA
+                                                                    To be priced
                                                                 </Text>
                                                             ) : (
                                                                 <Text
