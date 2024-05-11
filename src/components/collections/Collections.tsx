@@ -26,11 +26,6 @@ export type BraceletSize = {
 };
 
 export const braceletSizes: BraceletSize[] = [
-    { value: 160, diameter: 25.5 },
-    { value: 170, diameter: 27.1 },
-    { value: 180, diameter: 28.7 },
-    { value: 190, diameter: 30.3 },
-    { value: 200, diameter: 31.9 },
     { value: 210, diameter: 33.5 },
     { value: 220, diameter: 35.1 },
     { value: 230, diameter: 36.7 },

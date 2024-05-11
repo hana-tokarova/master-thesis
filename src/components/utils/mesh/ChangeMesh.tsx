@@ -81,6 +81,11 @@ export const changeJewelryType = (setJewelryType: (type: JewelryType) => void, j
     setJewelryType(jewelryType);
 };
 
+/**
+ * Function to change the current material in the state.
+ * @param setCurrentMaterial - The React state setter function for the current material.
+ * @param currentMaterial - The new material.
+ */
 export const changeCurrentMaterial = (
     setCurrentMaterial: React.Dispatch<React.SetStateAction<Material>>,
     currentMaterial: Material,
@@ -88,6 +93,13 @@ export const changeCurrentMaterial = (
     setCurrentMaterial(currentMaterial);
 };
 
+/**
+ * Function to set current mesh in the state.
+ * @param collection - The collection type.
+ * @param jewelry - The jewelry type.
+ * @param material - The material type.
+ * @returns state and functions to update the mesh parameters.
+ */
 export const useMeshParameters = (collection: CollectionType, jewelry: JewelryType, material: Material) => {
     const refreshParams = (collection: CollectionType, jewelry: JewelryType) => {
         const newMesh = collections[collection]?.meshes[jewelry];
