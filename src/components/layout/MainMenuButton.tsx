@@ -15,11 +15,7 @@ export const MainMenuButton = ({ pageName, text }: MainMenuButtonProps) => {
 
     return (
         <Button as={Link} to={pageName} variant="link">
-            <Text
-                fontSize={{ base: 'xs', md: 'sm', lg: 'md' }}
-                fontWeight={isActive ? '600' : '400'}
-                color={'brand.50'}
-            >
+            <Text textStyle={'button'} fontWeight={isActive ? '600' : '400'} color={'brand.50'}>
                 {text}
             </Text>
         </Button>

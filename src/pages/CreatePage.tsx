@@ -293,8 +293,8 @@ export const CreatePage = () => {
                                                 fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                                             >
                                                 {collectionType === CollectionType.Lissajous
-                                                    ? '/ Based on the Lissajous curves'
-                                                    : '/ Based on the twists of the torus geometry'}
+                                                    ? 'Based on the Lissajous curves'
+                                                    : 'Based on the twists of the torus geometry'}
                                             </Text>
 
                                             <Flex

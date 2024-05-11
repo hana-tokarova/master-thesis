@@ -9,14 +9,7 @@ export const HomePage = () => {
             <VStack paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                     <Box w={{ base: '80vw', md: '35vw' }} minW={'35vw'}>
-                        <Text
-                            paddingTop={15}
-                            paddingBottom={5}
-                            fontFamily={'heading'}
-                            fontWeight="300"
-                            fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                            color={'brand.50'}
-                        >
+                        <Text paddingTop={15} paddingBottom={5} textStyle="header3" color={'brand.50'}>
                             Welcome to
                         </Text>
 
@@ -33,41 +26,22 @@ export const HomePage = () => {
                                 objectFit="contain"
                             />
 
-                            <Text color="brand.100" fontSize={{ base: 'xs', md: 'lg', lg: 'xl' }}>
+                            <Text color="brand.100" textStyle="subheader">
                                 /niː.oʊ.ta.ku/
                             </Text>
                         </Flex>
 
-                        <Text
-                            fontFamily={'heading'}
-                            fontWeight={300}
-                            fontSize={{ base: 'xl', md: '2xl' }}
-                            color={'brand.50'}
-                        >
+                        <Text paddingTop={5} textStyle="header4" color={'brand.50'}>
                             Tool for customizable jewelry creation.
                         </Text>
 
-                        <Text
-                            fontFamily={'heading'}
-                            fontWeight="300"
-                            fontSize={{ base: '2xl', md: '4xl' }}
-                            paddingTop={16}
-                            color={'brand.50'}
-                        >
-                            / Choose
-                            <Text as="span" fontWeight="400">
-                                {' '}
-                                / Customize
-                                <Text as="span" fontWeight="500">
-                                    {' '}
-                                    / Export
-                                </Text>
-                            </Text>
+                        <Text textStyle="header1" paddingTop={16} color={'brand.50'} style={{ whiteSpace: 'nowrap' }}>
+                            / Choose / Customize / Export
                         </Text>
 
-                        <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color={'brand.50'}>
+                        <Text maxW="xl" textStyle="body" color={'brand.50'}>
                             The process is simple - just choose jewelry, customize it and export it to your device in
-                            preferred format to 3D print it/cast it!
+                            preferred format to 3D print it!
                         </Text>
 
                         <Button
@@ -87,22 +61,11 @@ export const HomePage = () => {
                             Create your jewelry
                         </Button>
 
-                        <Text
-                            paddingTop={12}
-                            fontFamily={'heading'}
-                            fontWeight="400"
-                            fontSize={{ base: '2xl', md: '4xl' }}
-                            color={'brand.50'}
-                        >
-                            {' '}
-                            / Multiple collections
-                            <Text as="span" fontWeight="500">
-                                {' '}
-                                / Multiple possibilities
-                            </Text>
+                        <Text textStyle="header1" paddingTop={12} style={{ whiteSpace: 'nowrap' }} color={'brand.50'}>
+                            / Multiple collections / Multiple possibilities
                         </Text>
 
-                        <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color="brand.50">
+                        <Text maxW="xl" textStyle="body" color={'brand.50'}>
                             Each collection has an unique set of parameters that can be customized and changed. You can
                             start from scratch or by choosing one of the presets.
                         </Text>
@@ -123,16 +86,10 @@ export const HomePage = () => {
                         >
                             Browse collections
                         </Button>
-                        <Text
-                            paddingTop={16}
-                            fontFamily={'heading'}
-                            fontWeight="500"
-                            fontSize={{ base: 'xl', md: '2xl' }}
-                            color={'brand.50'}
-                        >
+                        <Text paddingTop={12} textStyle={'header2'} color={'brand.50'}>
                             / Not sure yet?
                         </Text>
-                        <Text maxW="xl" fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color="brand.50">
+                        <Text maxW="xl" textStyle="body" color={'brand.50'}>
                             Here are some of the examples that can be done in the configurator!
                         </Text>
 

@@ -1,6 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
 
-// see https://chakra-ui.com/docs/styled-system/theme
 const theme = extendTheme({
     config: {
         initialColorMode: 'light',
@@ -31,6 +30,49 @@ const theme = extendTheme({
     fonts: {
         body: "'Noto Sans Khmer', sans-serif",
         heading: "'Outfit', sans-serif",
+    },
+    textStyles: {
+        header1: {
+            fontFamily: 'heading',
+            fontSize: { base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' },
+            fontWeight: '500',
+        },
+        header2: {
+            fontFamily: 'heading',
+            fontSize: { base: 'rg', sm: 'lg', md: 'xl', lg: '2xl' },
+            fontWeight: '500',
+        },
+        header3: {
+            fontFamily: 'heading',
+            fontSize: { base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' },
+            fontWeight: '300',
+        },
+        header4: {
+            fontFamily: 'heading',
+            fontSize: { base: 'rg', sm: 'lg', md: 'xl', lg: '2xl' },
+            fontWeight: '300',
+        },
+        subheader: {
+            fontFamily: 'body',
+            fontSize: { base: 'rg', sm: 'lg', md: 'xl', lg: '2xl' },
+            fontWeight: '400',
+        },
+        button: {
+            fontFamily: 'heading',
+            fontSize: { base: '2xs', sm: 'xs', md: 'sm', lg: 'md' },
+            fontWeight: '400',
+        },
+        body: {
+            fontFamily: 'body',
+            fontSize: { base: '2xs', sm: 'xs', md: 'sm', lg: 'md' },
+            fontWeight: '400',
+            maxW: '2xl',
+        },
+        bodyHighlight: {
+            fontFamily: 'heading',
+            fontSize: { base: '2xs', sm: 'xs', md: 'sm', lg: 'md' },
+            fontWeight: '600',
+        },
     },
 });
 

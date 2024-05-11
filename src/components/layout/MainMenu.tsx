@@ -37,20 +37,9 @@ export const MainMenu = () => {
             paddingRight={{ base: 5, md: 6, lg: 7 }}
             bg="white"
             spacing={{ base: 4, md: 9, lg: 14 }}
-            fontFamily="heading"
             zIndex={10}
         >
             <Link to="/">
-                {location.pathname === '/' && (
-                    <Image
-                        w="auto"
-                        h="6"
-                        src={`${process.env.PUBLIC_URL}/images/logo/logo-o.svg`}
-                        alt="NEOTAKU JEWELRY"
-                        objectFit="contain"
-                    />
-                )}
-
                 {location.pathname !== '/' && (
                     <Image
                         w="auto"

@@ -3,18 +3,12 @@ import { Box, Button, HStack, Image, Text } from '@chakra-ui/react';
 export const Contacts = () => {
     return (
         <>
-            <Text
-                fontFamily={'heading'}
-                fontWeight="500"
-                color={'brand.50'}
-                fontSize={{ base: 'xl', md: '2xl' }}
-                paddingTop={12}
-            >
+            <Text color={'brand.50'} paddingTop={12} textStyle={'header2'}>
                 / Contacts
             </Text>
 
-            <Text fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
-                <Box as="strong" fontFamily="heading" fontWeight="600">
+            <Text color={'brand.50'} style={{ whiteSpace: 'nowrap' }}>
+                <Box as="strong" textStyle={'bodyHighlight'}>
                     Project repository:
                 </Box>{' '}
                 <Button
@@ -25,7 +19,7 @@ export const Contacts = () => {
                     variant="link"
                     color="brand.50"
                     fontWeight={400}
-                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                 >
                     github.com/hana-tokarova/master-thesis
                 </Button>
@@ -41,7 +35,7 @@ export const Contacts = () => {
                     variant="link"
                     color="brand.50"
                     fontWeight={400}
-                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
                 >
                     behance.net/hana-tokarova
                 </Button>
