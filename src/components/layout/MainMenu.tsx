@@ -1,11 +1,12 @@
 import { HStack, Image, Spacer } from '@chakra-ui/react';
 import { motion, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { MainMenuButton } from './MainMenuButton';
 
 export const MainMenu = () => {
     const { scrollY } = useScroll();
+    const location = useLocation();
     const [menuHeight, setMenuHeight] = useState('80px');
     const [menuShadow, setMenuShadow] = useState('0px 0px 20px rgba(0, 0, 0, 0)');
 
@@ -40,13 +41,25 @@ export const MainMenu = () => {
             zIndex={10}
         >
             <Link to="/">
-                <Image
-                    w="auto"
-                    h={{ base: '6', md: '7', lg: '8' }}
-                    src={`${process.env.PUBLIC_URL}/images/logo/logo-o.svg`}
-                    alt="NEOTAKU JEWELRY"
-                    objectFit="contain"
-                />
+                {location.pathname === '/' && (
+                    <Image
+                        w="auto"
+                        h="6"
+                        src={`${process.env.PUBLIC_URL}/images/logo/logo-o.svg`}
+                        alt="NEOTAKU JEWELRY"
+                        objectFit="contain"
+                    />
+                )}
+
+                {location.pathname !== '/' && (
+                    <Image
+                        w="auto"
+                        h="5"
+                        src={`${process.env.PUBLIC_URL}/images/logo/logo.svg`}
+                        alt="NEOTAKU JEWELRY"
+                        objectFit="contain"
+                    />
+                )}
             </Link>
 
             <Spacer />
