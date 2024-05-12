@@ -1,7 +1,7 @@
 import { Box, Flex, Select, Text } from '@chakra-ui/react';
 import { Material, materials } from '../components/collections/Collections';
-import { ColorPair, ColorPicker } from '../components/layout/ColorPicker';
 import { changeCurrentMaterial, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
+import { ColorPair, ColorPicker } from './ColorPicker';
 
 type VisualizeProps = {
     setSliderMinParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>;

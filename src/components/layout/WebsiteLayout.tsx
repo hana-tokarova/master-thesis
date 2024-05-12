@@ -5,7 +5,7 @@ import { MainMenu } from './MainMenu';
 
 export const WebsiteLayout = () => {
     return (
-        <Flex direction="column" w="100vw" h="100vh">
+        <Flex direction="column" w="100vw" minH="100vh" position="relative">
             <MainMenu />
 
             <Box pt="80px">
@@ -14,15 +14,14 @@ export const WebsiteLayout = () => {
                 </div>
             </Box>
 
-            <Center>
+            <Center position="absolute" bottom="0" w="full">
                 <Image
                     src={`${process.env.PUBLIC_URL}/images/bg/lowpoly.svg`}
                     alt="lowpoly-image"
                     w="80vw"
-                    objectFit={'cover'}
-                    bottom={0}
+                    h="auto"
+                    objectFit="cover"
                     zIndex={-1}
-                    position="fixed"
                 />
             </Center>
 

@@ -1,6 +1,6 @@
 import { Box, HStack, Tooltip } from '@chakra-ui/react';
 import { FaCheck } from 'react-icons/fa';
-import { changeMeshColor } from '../utils/mesh/ChangeMesh';
+import { changeMeshColor } from '../components/utils/mesh/ChangeMesh';
 
 export type ColorPair = [string, string];
 
