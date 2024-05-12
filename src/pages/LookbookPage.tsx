@@ -7,11 +7,9 @@ export const LookbookPage = () => {
         <Center>
             <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw">
-                    <Text textStyle={'header1'} color={'brand.50'}>
-                        / Showcase
-                    </Text>
+                    <Text textStyle={'header1'}>/ Showcase</Text>
 
-                    <Text textStyle={'body'} color={'brand.50'}>
+                    <Text textStyle={'body'}>
                         Here you can find showcase of renders and lookbooks from the different collections. If you fancy
                         some of the designs below, you can click on the specified jewelry and then you will be send to
                         the Neotaku configurator.

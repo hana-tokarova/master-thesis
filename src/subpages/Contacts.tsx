@@ -3,11 +3,11 @@ import { Box, Button, HStack, Image, Text } from '@chakra-ui/react';
 export const Contacts = () => {
     return (
         <>
-            <Text color={'brand.50'} paddingTop={12} textStyle={'header2'}>
+            <Text paddingTop={12} textStyle={'header2'}>
                 / Contacts
             </Text>
 
-            <Text color={'brand.50'} style={{ whiteSpace: 'nowrap' }}>
+            <Text style={{ whiteSpace: 'nowrap' }}>
                 <Box as="strong" textStyle={'bodyHighlight'}>
                     Project repository:
                 </Box>{' '}
@@ -37,13 +37,12 @@ export const Contacts = () => {
 
             <HStack paddingTop={5} paddingBottom={28} spacing={3} w="500px" align={'center'}>
                 <Image src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`} alt="ht-logo" h="16" />
-                <Text fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }} color="brand.50">
+                <Text textStyle={'body'}>
                     Neotaku Jewelry is a master thesis project created by
                     <Text as="span" textStyle={'bodyHighlight'}>
                         {' '}
-                        Hana Tokárová
+                        Hana Tokárová.
                     </Text>
-                    .
                 </Text>
             </HStack>
         </>

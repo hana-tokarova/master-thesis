@@ -113,6 +113,11 @@ const theme = extendTheme({
                 },
             },
         },
+        Text: {
+            baseStyle: {
+                color: 'green.500',
+            },
+        },
     },
 });
 
