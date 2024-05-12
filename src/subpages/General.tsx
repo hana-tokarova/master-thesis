@@ -47,41 +47,26 @@ export const General = ({
 }: GeneralProps) => {
     return (
         <Box>
-            <Text
-                fontFamily={'heading'}
-                fontWeight="500"
-                fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-                paddingTop={2}
-                color={'brand.50'}
-            >
+            <Text textStyle={'header2'} paddingTop={2}>
                 / General
             </Text>
 
             <Flex paddingTop="2" direction="row" rowGap={4} columnGap={4} wrap="wrap">
-                <Text
-                    as="div"
-                    fontFamily={'heading'}
-                    fontWeight="400"
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    color={'brand.50'}
-                >
+                <Text as="div" textStyle={'bodyHighlight'}>
                     Jewelry type
                     <Select
                         w={{ base: 36, md: 44 }}
-                        fontFamily={'body'}
-                        fontWeight="400"
-                        fontSize={{ base: 'xs', md: 'sm' }}
+                        textStyle={'body'}
+                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                         bg="brand.200"
                         border="none"
                         color="brand.50"
                         cursor="pointer"
-                        size="md"
                         shadow={'lg'}
                         paddingTop={2}
                         paddingBottom={4}
                         value={currentJewelryType}
                         _hover={{ bg: 'brand.400' }}
-                        _focus={{ bg: 'brand.400' }}
                         onChange={(event) => {
                             const selectedJewelryType = event.target.value as JewelryType;
                             changeJewelryType(setCurrentJewelryType, selectedJewelryType);
@@ -99,36 +84,25 @@ export const General = ({
                     currentJewelryType === JewelryType.Ring &&
                     Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
                         <Box key={parameterName + parameterDetails}>
-                            <Text fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'sm', md: 'md' }}>
+                            <Text textStyle={'bodyHighlight'}>
                                 {parameterDetails.name}
-                                <Box as="span" fontWeight="600" color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
-                                    {' (Diameter:'}
-                                    <Box
-                                        fontWeight="400"
-                                        color={'brand.50'}
-                                        as="span"
-                                        fontSize={{ base: 'xs', md: 'sm' }}
-                                    >
-                                        {' ' + dropdownParameters[parameterName]?.diameter + ' mm)'}
-                                    </Box>
+                                <Box as="span" textStyle={'body'}>
+                                    {' (Diameter: ' + dropdownParameters[parameterName]?.diameter + ' mm)'}
                                 </Box>
                             </Text>
                             <Select
                                 w={{ base: 36, md: 44 }}
-                                fontFamily={'body'}
-                                fontWeight="400"
-                                fontSize={{ base: 'xs', md: 'sm' }}
+                                textStyle={'body'}
+                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                                 value={dropdownParameters[parameterName]?.value}
                                 bg="brand.200"
                                 border="none"
                                 color="brand.50"
                                 cursor="pointer"
-                                size="md"
                                 shadow={'lg'}
                                 paddingTop={2}
                                 paddingBottom={4}
                                 _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.200' }}
                                 onChange={(event) => {
                                     const parsedValue = parseInt(event.target.value);
                                     const selectedSize = ringSizes.find((size) => size.value === parsedValue);
@@ -148,41 +122,25 @@ export const General = ({
                     currentJewelryType === JewelryType.Bracelet &&
                     Object.entries(mesh.dropdownParameters).map(([parameterName, parameterDetails]) => (
                         <Box key={parameterName + parameterDetails}>
-                            <Text
-                                fontFamily={'heading'}
-                                fontWeight="400"
-                                fontSize={{ base: 'sm', md: 'md' }}
-                                color={'brand.50'}
-                            >
+                            <Text textStyle={'bodyHighlight'}>
                                 {parameterDetails.name}
-                                <Box as="span" fontWeight="600" fontSize={{ base: 'xs', md: 'sm' }} color={'brand.50'}>
-                                    {' (Diameter:'}
-                                    <Box
-                                        fontWeight="400"
-                                        as="span"
-                                        fontSize={{ base: 'xs', md: 'sm' }}
-                                        color={'brand.50'}
-                                    >
-                                        {' ' + dropdownParameters[parameterName]?.diameter + ' mm)'}
-                                    </Box>
+                                <Box as="span" textStyle={'body'}>
+                                    {' (Diameter: ' + dropdownParameters[parameterName]?.diameter + ' mm)'}
                                 </Box>
                             </Text>
                             <Select
                                 w={{ base: 36, md: 44 }}
-                                fontFamily={'body'}
-                                fontWeight="400"
-                                fontSize={{ base: 'xs', md: 'sm' }}
+                                textStyle={'body'}
+                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                                 value={dropdownParameters[parameterName]?.value}
                                 bg="brand.200"
                                 border="none"
                                 cursor="pointer"
                                 color="brand.50"
-                                size="md"
                                 shadow={'lg'}
                                 paddingTop={2}
                                 paddingBottom={4}
                                 _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.200' }}
                                 onChange={(event) => {
                                     const parsedValue = parseInt(event.target.value);
                                     const selectedSize = braceletSizes.find((size) => size.value === parsedValue);
@@ -203,14 +161,9 @@ export const General = ({
                         ([parameterName, parameterDetails]) =>
                             parameterDetails.tag === 'general' && (
                                 <Box key={parameterName + parameterDetails}>
-                                    <Text
-                                        fontFamily={'heading'}
-                                        fontWeight="400"
-                                        fontSize={{ base: 'sm', md: 'md' }}
-                                        color={'brand.50'}
-                                    >
+                                    <Text textStyle={'bodyHighlight'}>
                                         {parameterDetails.name}
-                                        <Box as="span" fontSize={{ base: 'xs', md: 'sm' }} color={'brand.50'}>
+                                        <Box as="span" textStyle={'body'}>
                                             {parameterName === 'r' || 'scaleB' ? ' (in mm)' : ''}
                                         </Box>
                                     </Text>
@@ -229,16 +182,16 @@ export const General = ({
                                         <SliderMark
                                             value={sliderMinParameters[parameterName]}
                                             mt="3"
-                                            fontSize={{ base: 'xs', md: 'sm' }}
-                                            color={'brand.50'}
+                                            textStyle={'body'}
+                                            color="brand.50"
                                         >
                                             {sliderMinParameters[parameterName]}
                                         </SliderMark>
                                         <SliderMark
                                             value={parameterDetails.max}
                                             mt="3"
-                                            fontSize={{ base: 'xs', md: 'sm' }}
-                                            color={'brand.50'}
+                                            textStyle={'body'}
+                                            color="brand.50"
                                         >
                                             {parameterDetails.max}
                                         </SliderMark>
@@ -247,7 +200,7 @@ export const General = ({
                                         </SliderTrack>
                                         <Tooltip
                                             bg="brand.50"
-                                            color="white"
+                                            color="brand.200"
                                             placement="bottom"
                                             label={sliderParameters[parameterName] + ' mm'}
                                         >

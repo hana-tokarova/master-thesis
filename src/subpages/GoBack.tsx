@@ -39,54 +39,23 @@ export const GoBack = ({ isDirty, setIsDirty, navigate }: GoBackProps) => {
 
     return (
         <Box>
-            <Button
-                leftIcon={<MdKeyboardBackspace />}
-                onClick={handleBackClick}
-                size={{ base: 'xs', md: 'sm', lg: 'md' }}
-                fontFamily={'heading'}
-                fontWeight="400"
-                variant="link"
-                color={'brand.50'}
-                style={{ padding: 0 }}
-            >
+            <Button leftIcon={<MdKeyboardBackspace />} onClick={handleBackClick} variant="hyperlinkButton">
                 Back to collection types
             </Button>
 
             <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} motionPreset="slideInBottom">
                 <AlertDialogOverlay>
                     <AlertDialogContent>
-                        <AlertDialogHeader fontFamily={'heading'} fontSize="xl" fontWeight="500">
-                            Leave Configurator?
-                        </AlertDialogHeader>
-                        <AlertDialogBody fontFamily={'body'} fontSize="sm" fontWeight="400">
+                        <AlertDialogHeader textStyle="header3">Leave Configurator?</AlertDialogHeader>
+                        <AlertDialogBody textStyle="body">
                             Are you sure you want to leave? You will lose all progress if you didn't save the design
                             link.
                         </AlertDialogBody>
                         <AlertDialogFooter>
-                            <Button
-                                ref={cancelRef}
-                                onClick={onClose}
-                                fontFamily={'heading'}
-                                fontSize="md"
-                                fontWeight="500"
-                                bg="brand.200"
-                                color="brand.50"
-                                _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.400' }}
-                            >
+                            <Button ref={cancelRef} onClick={onClose} variant="cancelButton">
                                 Cancel
                             </Button>
-                            <Button
-                                fontFamily={'heading'}
-                                fontSize="md"
-                                fontWeight="500"
-                                bg="red.500"
-                                color="brand.200"
-                                onClick={handleLeave}
-                                ml={3}
-                                _hover={{ bg: 'red.400' }}
-                                _focus={{ bg: 'red.600' }}
-                            >
+                            <Button variant="warningButton" onClick={handleLeave} ml={3}>
                                 Leave Anyway
                             </Button>
                         </AlertDialogFooter>

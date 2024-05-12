@@ -102,15 +102,15 @@ export const Finalize = ({
                 toast({
                     position: 'bottom',
                     status: 'success',
-                    duration: 10000,
+                    duration: 7000,
                     render: () => (
                         <HStack color="white" p={3} bg="green.400" boxShadow={'md'} borderRadius="5" align="start">
                             <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
                             <Box>
-                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                <Text textStyle="subheaderHighlight" size={'lg'} color="brand.200">
                                     Your file has been successfully exported as {option.label}
                                 </Text>
-                                <Text fontFamily={'body'} fontWeight="400">
+                                <Text textStyle="body" color="brand.200">
                                     Happy 3D printing!
                                 </Text>
                             </Box>
@@ -121,17 +121,15 @@ export const Finalize = ({
                 toast({
                     position: 'bottom',
                     status: 'error',
-                    duration: 10000,
+                    duration: 7000,
                     render: () => (
                         <HStack color="white" p={3} bg="red.400" boxShadow={'md'} borderRadius="5" align="start">
                             <Icon as={FaBug} w={5} h={5} paddingTop={1} color="brand.200" />
                             <Box>
-                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                <Text textStyle="subheaderHighlight" size={'lg'}>
                                     An error occurred when exporting the file as {option.label}
                                 </Text>
-                                <Text fontFamily={'body'} fontWeight="400">
-                                    {(error as Error).message}
-                                </Text>
+                                <Text textStyle="body">{(error as Error).message}</Text>
                             </Box>
                         </HStack>
                     ),
@@ -143,32 +141,24 @@ export const Finalize = ({
 
     return (
         <Box>
-            <Text
-                fontFamily={'heading'}
-                fontWeight="500"
-                fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-                paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
-            >
+            <Text textStyle={'header2'} paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}>
                 / Finalize
             </Text>
             <Flex paddingTop="2" direction="row" rowGap={{ base: 2, sm: 3, md: 4, lg: 5 }} columnGap={4} wrap="wrap">
                 <Box>
                     <Select
                         w={44}
-                        fontFamily={'heading'}
-                        fontWeight="500"
-                        fontSize={{ base: 'sm', md: 'md' }}
+                        textStyle={'bodyHighlight'}
+                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                         placeholder="Save 3D model"
                         bg="brand.200"
                         border="none"
-                        color="brand.50"
                         size="md"
                         cursor="pointer"
                         shadow={'lg'}
                         paddingTop={2}
                         paddingBottom={4}
                         _hover={{ bg: 'brand.400' }}
-                        _focus={{ bg: 'brand.400' }}
                         onChange={handleChange}
                         value={selectedOption}
                     >
@@ -190,15 +180,11 @@ export const Finalize = ({
                             <Button
                                 rightIcon={<BiCopy />}
                                 size="md"
-                                fontFamily={'heading'}
-                                fontWeight="500"
-                                fontSize={{ base: 'sm', md: 'md' }}
+                                textStyle="bodyHighlight"
                                 bg="brand.200"
-                                color="brand.50"
                                 w={44}
                                 shadow={'lg'}
                                 _hover={{ bg: 'brand.400' }}
-                                _focus={{ bg: 'brand.400' }}
                                 onClick={async () => {
                                     try {
                                         const share =
@@ -207,7 +193,7 @@ export const Finalize = ({
                                         toast({
                                             position: 'bottom',
                                             status: 'success',
-                                            duration: 10000,
+                                            duration: 7000,
                                             render: () => (
                                                 <HStack
                                                     color="white"
@@ -219,10 +205,14 @@ export const Finalize = ({
                                                 >
                                                     <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
                                                     <Box>
-                                                        <Text fontFamily={'heading'} fontWeight="500" size={'lg'}>
+                                                        <Text
+                                                            textStyle="subheaderHighlight"
+                                                            size={'lg'}
+                                                            color="brand.200"
+                                                        >
                                                             Design saved!
                                                         </Text>
-                                                        <Text fontFamily={'body'} fontWeight="400">
+                                                        <Text textStyle="body" color="brand.200">
                                                             Design link saved to your clipboard.
                                                         </Text>
                                                     </Box>
@@ -234,7 +224,12 @@ export const Finalize = ({
                                     }
                                 }}
                             >
-                                <Text textAlign="left" w="full">
+                                <Text
+                                    textStyle={'bodyHighlight'}
+                                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                    textAlign="left"
+                                    w="full"
+                                >
                                     Copy Configuration
                                 </Text>
                             </Button>

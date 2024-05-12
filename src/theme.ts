@@ -39,7 +39,7 @@ const theme = extendTheme({
         },
         header2: {
             fontFamily: 'heading',
-            fontSize: { base: 'rg', sm: 'lg', md: 'xl', lg: '2xl' },
+            fontSize: { base: 'md', sm: 'lg', md: 'xl', lg: '2xl' },
             fontWeight: '500',
         },
         header3: {
@@ -49,13 +49,18 @@ const theme = extendTheme({
         },
         header4: {
             fontFamily: 'heading',
-            fontSize: { base: 'rg', sm: 'lg', md: 'xl', lg: '2xl' },
+            fontSize: { base: 'md', sm: 'lg', md: 'xl', lg: '2xl' },
             fontWeight: '300',
         },
         subheader: {
             fontFamily: 'body',
-            fontSize: { base: 'rg', sm: 'lg', md: 'xl', lg: '2xl' },
+            fontSize: { base: 'sm', sm: 'md', md: 'lg', lg: 'xl' },
             fontWeight: '400',
+        },
+        subheaderHighlight: {
+            fontFamily: 'heading',
+            fontSize: { base: 'sm', sm: 'md', md: 'lg', lg: 'xl' },
+            fontWeight: '500',
         },
         button: {
             fontFamily: 'heading',
@@ -64,14 +69,14 @@ const theme = extendTheme({
         },
         body: {
             fontFamily: 'body',
-            fontSize: { base: '2xs', sm: 'xs', md: 'sm', lg: 'md' },
+            fontSize: { base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' },
             fontWeight: '400',
             maxW: '2xl',
         },
         bodyHighlight: {
             fontFamily: 'heading',
             fontSize: { base: '2xs', sm: 'xs', md: 'sm', lg: 'md' },
-            fontWeight: '600',
+            fontWeight: '500',
         },
     },
     components: {
@@ -94,6 +99,44 @@ const theme = extendTheme({
                     },
                     _focus: {
                         bg: 'brand.50',
+                    },
+                },
+                cancelButton: {
+                    bg: 'brand.200',
+                    color: 'brand.50',
+                    fontWeight: '450',
+                    fontFamily: 'heading',
+                    fontSize: {
+                        base: '2xs',
+                        sm: 'xs',
+                        md: 'sm',
+                        lg: 'md',
+                    },
+                    shadow: 'none',
+                    _hover: {
+                        bg: 'brand.400',
+                    },
+                    _focus: {
+                        bg: 'brand.400',
+                    },
+                },
+                warningButton: {
+                    bg: 'red.500',
+                    color: 'brand.200',
+                    fontWeight: '450',
+                    fontFamily: 'heading',
+                    fontSize: {
+                        base: '2xs',
+                        sm: 'xs',
+                        md: 'sm',
+                        lg: 'md',
+                    },
+                    shadow: 'none',
+                    _hover: {
+                        bg: 'red.400',
+                    },
+                    _focus: {
+                        bg: 'red.600',
                     },
                 },
                 hyperlinkButton: {

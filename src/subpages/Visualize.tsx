@@ -22,47 +22,30 @@ export const Visualize = ({
 }: VisualizeProps) => {
     return (
         <Box>
-            <Text
-                fontFamily={'heading'}
-                fontWeight="500"
-                fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-                paddingTop="1"
-                color={'brand.50'}
-            >
+            <Text textStyle={'header2'} paddingTop="1">
                 / Visualize
             </Text>
 
             <Flex paddingTop="2" direction="row" rowGap={4} columnGap={4} wrap="wrap">
-                <Text
-                    as="span"
-                    paddingBottom="1"
-                    fontFamily={'heading'}
-                    fontWeight="400"
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    w={{ base: 36, md: 44 }}
-                    color={'brand.50'}
-                >
+                <Text as="span" paddingBottom="1" textStyle="bodyHighlight" w={{ base: 36, md: 44 }}>
                     Materials
                     <br />
-                    <Box as="span" fontWeight="400" color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
+                    <Box as="span" textStyle="body">
                         {' (Changes minimal wall thickness)'}
                     </Box>
                     <Box>
                         <Select
                             w={{ base: 36, md: 44 }}
-                            fontFamily={'body'}
-                            fontWeight="400"
+                            textStyle="body"
                             fontSize={{ base: 'xs', md: 'sm' }}
                             bg="brand.200"
                             border="none"
                             value={currentMaterial.name}
                             color="brand.50"
-                            size="md"
                             cursor="pointer"
                             shadow={'lg'}
                             paddingTop={2}
                             _hover={{ bg: 'brand.400' }}
-                            _focus={{ bg: 'brand.400' }}
                             onChange={(event) => {
                                 const newValue = event.target.value;
                                 changeCurrentMaterial(setCurrentMaterial, materials[newValue]);
@@ -87,18 +70,10 @@ export const Visualize = ({
                     </Box>
                 </Text>
 
-                <Text
-                    as="span"
-                    paddingBottom="1"
-                    fontFamily={'heading'}
-                    fontWeight="400"
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    w={{ base: 36, md: 48 }}
-                    color={'brand.50'}
-                >
+                <Text as="span" paddingBottom="1" textStyle="bodyHighlight" w={{ base: 36, md: 48 }}>
                     Colors
                     <br />
-                    <Box as="span" fontWeight="400" color={'brand.50'} fontSize={{ base: 'xs', md: 'sm' }}>
+                    <Box as="span" textStyle="body">
                         {' (Visualizes appearance of the mesh)'}
                     </Box>
                     <Box>

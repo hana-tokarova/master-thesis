@@ -5,7 +5,7 @@ import { CollectionType, JewelryType } from '../components/collections/Collectio
 type Project = {
     id: number;
     image: string | undefined;
-    material: 'PLA Filament' | 'Resin' | 'Metal' | 'Create Jewelry From Scratch';
+    material: 'Plastic' | 'Resin' | 'Metal' | 'Create from scratch';
     price: number | 'TBA';
     url: string;
     collection: CollectionType;
@@ -24,7 +24,7 @@ export const projects: Project[] = [
     },
     {
         id: 2,
-        material: 'PLA Filament',
+        material: 'Plastic',
         price: 0.01,
         image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeRing2.jpg`,
         collection: CollectionType.Lissajous,
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     },
     {
         id: 4,
-        material: 'PLA Filament',
+        material: 'Plastic',
         price: 0.01,
         image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionRing2.jpg`,
         collection: CollectionType.Torsion,
@@ -60,7 +60,7 @@ export const projects: Project[] = [
     },
     {
         id: 6,
-        material: 'PLA Filament',
+        material: 'Plastic',
         price: 0.01,
         image: `${process.env.PUBLIC_URL}/images/collections/lissajous/lissajeBracelet2.jpg`,
         collection: CollectionType.Lissajous,
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     },
     {
         id: 7,
-        material: 'PLA Filament',
+        material: 'Plastic',
         price: 0.01,
         image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionBracelet1.jpg`,
         collection: CollectionType.Torsion,
@@ -114,7 +114,7 @@ export const projects: Project[] = [
     },
     {
         id: 12,
-        material: 'PLA Filament',
+        material: 'Plastic',
         price: 0.01,
         image: `${process.env.PUBLIC_URL}/images/collections/torsion/torsionEarring2.jpg`,
         collection: CollectionType.Torsion,
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     },
     {
         id: 17,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -168,7 +168,7 @@ export const projects: Project[] = [
     },
     {
         id: 18,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     },
     {
         id: 19,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -186,7 +186,7 @@ export const projects: Project[] = [
     },
     {
         id: 20,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -195,7 +195,7 @@ export const projects: Project[] = [
     },
     {
         id: 21,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -204,7 +204,7 @@ export const projects: Project[] = [
     },
     {
         id: 22,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -213,7 +213,7 @@ export const projects: Project[] = [
     },
     {
         id: 23,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -222,7 +222,7 @@ export const projects: Project[] = [
     },
     {
         id: 24,
-        material: 'Create Jewelry From Scratch',
+        material: 'Create from scratch',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -236,16 +236,8 @@ export const CreatePage = () => {
         <Center>
             <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw">
-                    <Text
-                        fontFamily={'heading'}
-                        fontWeight="500"
-                        fontSize={{ base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' }}
-                        color={'brand.50'}
-                    >
-                        / Create
-                    </Text>
-
-                    <Text maxW="2xl" color={'brand.50'} fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}>
+                    <Text textStyle={'header1'}>/ Create</Text>
+                    <Text maxW="2xl" textStyle={'body'}>
                         Want to create something for yourself or your loved ones? This it the right place!
                         <br />
                         If you like any of the presets below, click on it and you will be able to customize it futher.
@@ -257,9 +249,8 @@ export const CreatePage = () => {
                             {Object.values(JewelryType).map((jewelryValue) => (
                                 <Tab
                                     key={jewelryValue}
-                                    fontFamily={'heading'}
+                                    textStyle={'header3'}
                                     fontSize={{ base: 'xs', sm: 'sm', md: 'md', lg: 'lg' }}
-                                    fontWeight="300"
                                     color={'brand.50'}
                                     sx={{
                                         borderBottom: '1px solid #B2B2B2',
@@ -279,19 +270,11 @@ export const CreatePage = () => {
                                 <TabPanel key={jewelryType} paddingLeft={0} paddingRight={0}>
                                     {Object.values(CollectionType).map((collectionType) => (
                                         <Box key={jewelryType + collectionType}>
-                                            <Text
-                                                fontFamily={'heading'}
-                                                fontSize={{ base: 'xl', md: '2xl' }}
-                                                fontWeight="500"
-                                                color={'brand.50'}
-                                            >
+                                            <Text textStyle={'header2'}>
                                                 / Collection{' '}
-                                                {collectionType.charAt(0).toUpperCase() + collectionType.slice(1)}
+                                                {collectionType.charAt(0).toUpperCase() + collectionType.slice(1)}{' '}
                                             </Text>
-                                            <Text
-                                                color="brand.100"
-                                                fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
-                                            >
+                                            <Text color="brand.100" textStyle="body">
                                                 {collectionType === CollectionType.Lissajous
                                                     ? 'Based on the Lissajous curves'
                                                     : 'Based on the twists of the torus geometry'}
@@ -370,40 +353,17 @@ export const CreatePage = () => {
                                                                 </Text>
                                                             )}
 
-                                                            <Text
-                                                                fontFamily={'heading'}
-                                                                fontSize={{ base: 'sm', sm: 'sm', md: 'md', lg: 'md' }}
-                                                                fontWeight="500"
-                                                            >
-                                                                {selectedProject.material}
+                                                            <Text textStyle={'subheaderHighlight'}>
+                                                                {selectedProject.material}{' '}
+                                                                {selectedProject.price === 'TBA'
+                                                                    ? ''
+                                                                    : selectedProject.jewelry}
                                                             </Text>
 
                                                             {selectedProject.price === 'TBA' ? (
-                                                                <Text
-                                                                    fontFamily={'heading'}
-                                                                    fontSize={{
-                                                                        base: 'xs',
-                                                                        sm: 'xs',
-                                                                        md: 'sm',
-                                                                        lg: 'sm',
-                                                                    }}
-                                                                    fontWeight="300"
-                                                                    color={'brand.50'}
-                                                                >
-                                                                    To be priced
-                                                                </Text>
+                                                                <Text textStyle={'body'}>To be priced</Text>
                                                             ) : (
-                                                                <Text
-                                                                    fontFamily={'heading'}
-                                                                    fontSize={{
-                                                                        base: 'xs',
-                                                                        sm: 'xs',
-                                                                        md: 'sm',
-                                                                        lg: 'sm',
-                                                                    }}
-                                                                    fontWeight="300"
-                                                                    color={'brand.50'}
-                                                                >
+                                                                <Text textStyle={'body'}>
                                                                     Approx. €{selectedProject.price!.toFixed(2)}
                                                                 </Text>
                                                             )}

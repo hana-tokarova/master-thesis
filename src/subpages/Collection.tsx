@@ -32,13 +32,7 @@ export const Collection = ({
 }: LissajousProps) => {
     return (
         <Box>
-            <Text
-                fontFamily={'heading'}
-                fontWeight="500"
-                fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-                paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                color="brand.50"
-            >
+            <Text textStyle={'header2'} paddingTop={{ base: 1, sm: 2, md: 3, lg: 4 }}>
                 / {collection.charAt(0).toUpperCase() + collection.slice(1)} properties
             </Text>
 
@@ -48,14 +42,7 @@ export const Collection = ({
                         ([parameterName, parameterDetails]) =>
                             parameterDetails.tag === 'collection' && (
                                 <Box key={parameterName + parameterDetails}>
-                                    <Text
-                                        fontFamily={'heading'}
-                                        fontWeight="400"
-                                        fontSize={{ base: 'sm', md: 'md' }}
-                                        color={'brand.50'}
-                                    >
-                                        {parameterDetails.name}
-                                    </Text>
+                                    <Text textStyle={'bodyHighlight'}>{parameterDetails.name}</Text>
                                     <Slider
                                         margin={2}
                                         mb={4}
@@ -112,14 +99,7 @@ export const Collection = ({
                         ([parameterName, parameterDetails]) =>
                             parameterDetails.tag === 'collection' && (
                                 <Box key={parameterName + parameterDetails}>
-                                    <Text
-                                        fontFamily={'heading'}
-                                        fontWeight="400"
-                                        fontSize={{ base: 'sm', md: 'md' }}
-                                        color={'brand.50'}
-                                    >
-                                        {parameterDetails.name}
-                                    </Text>
+                                    <Text textStyle={'bodyHighlight'}>{parameterDetails.name}</Text>
 
                                     <Tooltip
                                         bg="brand.50"
