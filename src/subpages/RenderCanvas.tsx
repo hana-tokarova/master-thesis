@@ -31,7 +31,7 @@ const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleF
         case JewelryType.Ring:
             return { offset: 40, scaleFactor: 1.0 };
         case JewelryType.Bracelet:
-            return { offset: 135, scaleFactor: 3 };
+            return { offset: 100, scaleFactor: 3 };
         case JewelryType.Earring:
             return { offset: 50, scaleFactor: 0.5 };
         case JewelryType.Pendant:
