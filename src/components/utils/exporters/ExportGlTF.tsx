@@ -1,7 +1,7 @@
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import { saveArrayBuffer, saveString } from './Saving';
 
-export const exportMeshGlTF = (mesh: THREE.Mesh) => {
+export const exportMeshGlTF = (mesh: THREE.Mesh, name: string) => {
     const clonedMesh = mesh.clone();
     const scene = mesh.parent!;
 
@@ -17,10 +17,10 @@ export const exportMeshGlTF = (mesh: THREE.Mesh) => {
         scene,
         function (data) {
             if (data instanceof ArrayBuffer) {
-                saveArrayBuffer(data, clonedMesh.uuid + '.glb');
+                saveArrayBuffer(data, name + '-' + clonedMesh.uuid + '.glb');
             } else {
                 const output = JSON.stringify(data, null, 2);
-                saveString(output, clonedMesh.uuid + '.gltf');
+                saveString(output, name + '-' + clonedMesh.uuid + '.gltf');
             }
         },
         function (error) {

@@ -224,6 +224,7 @@ export const ConfiguratorPage = () => {
                             meshRef={meshRef}
                             currentMaterial={currentMaterial}
                             currentJewelryType={currentJewelryType}
+                            currentCollection={currentCollection}
                             exportMeshSTL={exportMeshSTL}
                             exportMeshOBJ={exportMeshOBJ}
                             exportMeshGlTF={exportMeshGlTF}

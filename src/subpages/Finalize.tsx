@@ -6,16 +6,17 @@ import { FaBug, FaCheck } from 'react-icons/fa';
 import { ThreeVolume } from 'three-volume';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { forAnimationFrame } from 'waitasecond';
-import { JewelryType, Material } from '../components/collections/Collections';
+import { CollectionType, JewelryType, Material } from '../components/collections/Collections';
 
 type FinalizeProps = {
     parameters: any;
     meshRef: React.RefObject<THREE.Mesh>;
     currentJewelryType: JewelryType;
     currentMaterial: Material;
-    exportMeshSTL: (mesh: THREE.Mesh) => void;
-    exportMeshOBJ: (mesh: THREE.Mesh) => void;
-    exportMeshGlTF: (mesh: THREE.Mesh) => void;
+    currentCollection: CollectionType;
+    exportMeshSTL: (mesh: THREE.Mesh, name: string) => void;
+    exportMeshOBJ: (mesh: THREE.Mesh, name: string) => void;
+    exportMeshGlTF: (mesh: THREE.Mesh, name: string) => void;
 };
 
 export const Finalize = ({
@@ -26,6 +27,7 @@ export const Finalize = ({
     exportMeshGlTF,
     currentMaterial,
     currentJewelryType,
+    currentCollection,
 }: FinalizeProps) => {
     const exportOptions = [
         { value: 'stl', function: exportMeshSTL, label: '.STL' },
@@ -80,7 +82,7 @@ export const Finalize = ({
         const option = exportOptions.find((option) => option.value === newValue);
         if (option && meshRef.current) {
             try {
-                option.function(meshRef.current);
+                option.function(meshRef.current, currentCollection.toString() + '-' + currentJewelryType.toString());
                 toast({
                     position: 'bottom',
                     status: 'success',
