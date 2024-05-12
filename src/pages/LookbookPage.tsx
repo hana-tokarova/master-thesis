@@ -12,7 +12,7 @@ import { projects } from './CreatePage';
 export const LookbookPage = () => {
     return (
         <Center>
-            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
+            <Box paddingTop={9} paddingBottom={28}>
                 <Stack w="80vw">
                     <Text textStyle={'header1'}>/ Showcase</Text>
 

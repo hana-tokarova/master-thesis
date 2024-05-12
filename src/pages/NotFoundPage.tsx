@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 export const NotFoundPage = () => {
     return (
         <Center>
-            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
+            <Box paddingTop={9} paddingBottom={28}>
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                     <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text textStyle={'header1'}>/ 404 - Page Not Found</Text>
-                        <Text textStyle={'body'} maxW="xl">
+                        <Text textStyle={'body'} maxW="xl" paddingTop={2}>
                             {
                                 'Oooops! This page that you are trying to reach does not exist. Are you sure that you wanted to go here? Go to the'
                             }

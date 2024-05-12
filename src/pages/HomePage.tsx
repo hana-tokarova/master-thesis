@@ -11,7 +11,7 @@ import { projects } from './CreatePage';
 export const HomePage = () => {
     return (
         <Center>
-            <VStack paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
+            <VStack paddingTop={9} paddingBottom={28}>
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                     <Box w={{ base: '80vw', md: '35vw' }} minW={'35vw'}>
                         <Text paddingTop={15} paddingBottom={5} textStyle="header3">

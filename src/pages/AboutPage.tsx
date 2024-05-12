@@ -8,12 +8,12 @@ import { Contacts } from '../subpages/Contacts';
 export const AboutPage = () => {
     return (
         <Center>
-            <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
-                <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
-                    <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
+            <Box paddingTop={9} paddingBottom={28}>
+                <Stack w="80vw" direction={{ base: 'column', md: 'row' }}>
+                    <Box>
                         <Text textStyle={'header1'}>/ About</Text>
 
-                        <Text textStyle={'body'} maxW="xl">
+                        <Text textStyle={'body'} maxW="xl" paddingTop={2}>
                             {
                                 'Nowadays, customization is\u00A0becoming more popular in\u00A0the\u00A0e-commerce. Neotaku\u00A0configurator is\u00A0a\u00A0tool for everyone that likes and enjoys jewelry, and wants something more than ordinary jewelry.'
                             }

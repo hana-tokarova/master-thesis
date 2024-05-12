@@ -186,7 +186,7 @@ export const ConfiguratorPage = () => {
 
     return (
         <Center>
-            <Box paddingTop={6} paddingBottom={28}>
+            <Box paddingTop={3} paddingBottom={28}>
                 <Flex
                     w="80vw"
                     direction={{ base: 'column', md: 'row' }}
