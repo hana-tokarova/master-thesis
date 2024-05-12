@@ -1,11 +1,17 @@
 import { LissajousBracelet, LissajousEarring, LissajousPendant, LissajousRing } from './LissajousCollection';
 import { TorsionBracelet, TorsionEarring, TorsionPendant, TorsionRing } from './TorsionCollection';
 
+/**
+ * Represents the types of collections.
+ */
 export enum CollectionType {
     Lissajous = 'lissaje',
     Torsion = 'torsion',
 }
 
+/**
+ * Represents the types of jewelry.
+ */
 export enum JewelryType {
     Ring = 'ring',
     Bracelet = 'bracelet',
@@ -13,18 +19,30 @@ export enum JewelryType {
     Pendant = 'pendant',
 }
 
+/**
+ * Represents the type of parameter tags.
+ */
 export type ParameterTag = 'general' | 'collection';
 
+/**
+ * Represents a ring size.
+ */
 export type RingSize = {
     value: number;
     diameter: number;
 };
 
+/**
+ * Represents a bracelet size.
+ */
 export type BraceletSize = {
     value: number;
     diameter: number;
 };
 
+/**
+ * Represents the available bracelet sizes.
+ */
 export const braceletSizes: BraceletSize[] = [
     { value: 210, diameter: 33.5 },
     { value: 220, diameter: 35.1 },
@@ -46,6 +64,9 @@ export const braceletSizes: BraceletSize[] = [
     { value: 380, diameter: 60.7 },
 ];
 
+/**
+ * Represents the available ring sizes.
+ */
 export const ringSizes: RingSize[] = [
     { value: 43, diameter: 13.6 },
     { value: 44, diameter: 13.9 },
@@ -63,6 +84,9 @@ export const ringSizes: RingSize[] = [
     { value: 56, diameter: 17.8 },
 ];
 
+/**
+ * Represents a dropdown parameter.
+ */
 export type DropdownParameter = {
     name: string;
     tag: ParameterTag;
@@ -70,6 +94,9 @@ export type DropdownParameter = {
     size: RingSize;
 };
 
+/**
+ * Represents a slider parameter.
+ */
 export type SliderParameter = {
     name: string;
     tag: ParameterTag;
@@ -80,6 +107,9 @@ export type SliderParameter = {
     step: number;
 };
 
+/**
+ * Represents a toggle parameter.
+ */
 export type ToggleParameter = {
     name: string;
     tag: ParameterTag;
@@ -87,6 +117,9 @@ export type ToggleParameter = {
     value: boolean;
 };
 
+/**
+ * Represents a material.
+ */
 export type Material = {
     name: string;
     thicknessMinimum: number;
@@ -95,7 +128,9 @@ export type Material = {
     metalness: number;
 };
 
-// additionalCost = (density / density conversion) * price per kg
+/**
+ * Represents the available materials.
+ */
 export const materials: { [key: string]: Material } = {
     Metal: {
         name: 'Metal',
@@ -120,6 +155,9 @@ export const materials: { [key: string]: Material } = {
     },
 };
 
+/**
+ * Represents a jewelry mesh.
+ */
 export type JewelryMesh = {
     description: string;
     sliderParameters: {
@@ -142,6 +180,9 @@ export type JewelryMesh = {
     ) => JSX.Element;
 };
 
+/**
+ * Represents a jewelry.
+ */
 type Jewelry = {
     name: string;
     meshes: {
@@ -149,6 +190,9 @@ type Jewelry = {
     };
 };
 
+/**
+ * Represents the collections.
+ */
 export const collections: {
     [key in CollectionType]: Jewelry;
 } = {
