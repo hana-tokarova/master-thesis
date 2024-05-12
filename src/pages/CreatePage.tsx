@@ -248,11 +248,14 @@ export const CreatePage = () => {
             <Box paddingTop={{ base: 6, sm: 10, md: 12, lg: 16 }} paddingBottom={28}>
                 <Stack w="80vw">
                     <Text textStyle={'header1'}>/ Create</Text>
-                    <Text maxW="2xl" textStyle={'body'}>
-                        Want to create something for yourself or your loved ones? This it the right place!
+                    <Text maxW="xl" textStyle={'body'}>
+                        {
+                            'Want to\u00A0create something for yourself or\u00A0your loved ones? This is\u00A0the\u00A0right place!'
+                        }
                         <br />
-                        If you like any of the presets below, click on it and you will be able to customize it futher.
-                        If not, you can configure whatever jewelry type you want from scratch.
+                        {
+                            'If you like any of the presets below, click\u00A0on\u00A0it and\u00A0you will be\u00A0able\u00A0to\u00A0customize\u00A0it futher. If not, you\u00A0can configure any jewelry type you want from scratch.'
+                        }
                     </Text>
 
                     <Tabs defaultIndex={0} variant="unstyled" isFitted>

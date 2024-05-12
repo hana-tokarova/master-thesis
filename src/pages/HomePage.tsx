@@ -45,8 +45,9 @@ export const HomePage = () => {
                         </Text>
 
                         <Text maxW="xl" textStyle="body">
-                            The process is simple - just choose jewelry, customize it and export it to your device in
-                            preferred format to 3D print it!
+                            {
+                                'The process is simple — just choose jewelry, customize it and\u00A0export it to your device in\u00A0preferred format to\u00A03D print it!'
+                            }
                         </Text>
 
                         <Button marginTop={2} size="sm" as={Link} to={'/create'} w="40" variant="solidButton">
@@ -58,8 +59,9 @@ export const HomePage = () => {
                         </Text>
 
                         <Text maxW="xl" textStyle="body">
-                            Each collection has an unique set of parameters that can be customized and changed. You can
-                            start from scratch or by choosing one of the presets.
+                            {
+                                'Each collection has an unique set of parameters that can be\u00A0customized and changed. You can start from scratch or\u00A0by\u00A0choosing one of the presets.'
+                            }
                         </Text>
 
                         <Button marginTop={2} size="sm" as={Link} to={'/showcase'} w="40" variant="solidButton">
@@ -69,7 +71,7 @@ export const HomePage = () => {
                             / Not sure yet?
                         </Text>
                         <Text maxW="xl" textStyle="body">
-                            Here are some of the examples that can be done in the configurator!
+                            {'Here are some of the examples that can be done in\u00A0the\u00A0configurator!'}
                         </Text>
 
                         <Flex

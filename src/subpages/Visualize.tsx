@@ -46,7 +46,7 @@ export const Visualize = ({
                     Materials
                     <br />
                     <Box as="span" textStyle="body">
-                        {' (Changes minimal wall thickness)'}
+                        {' (Changes minimal wall\u00A0thickness)'}
                     </Box>
                     <Box>
                         <Select
@@ -89,7 +89,7 @@ export const Visualize = ({
                     Colors
                     <br />
                     <Box as="span" textStyle="body">
-                        {' (Visualizes appearance of the mesh)'}
+                        {' (Visualizes appearance of\u00A0the\u00A0mesh)'}
                     </Box>
                     <Box>
                         <ColorPicker activeColor={meshColor} colors={colors} setMeshColor={setMeshColor} />

@@ -13,10 +13,10 @@ export const AboutPage = () => {
                     <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text textStyle={'header1'}>/ About</Text>
 
-                        <Text textStyle={'body'}>
-                            Nowadays, customization is becoming more popular in the e-commerce. It is widely used among
-                            the car and furniture industries, so why not try it in other ways? Neotaku Jewelry is a tool
-                            for everyone that likes and enjoys jewelry, and wants something more than ordinary jewelry.
+                        <Text textStyle={'body'} maxW="xl">
+                            {
+                                'Nowadays, customization is\u00A0becoming more popular in\u00A0the\u00A0e-commerce. Neotaku\u00A0configurator is\u00A0a\u00A0tool for everyone that likes and enjoys jewelry, and wants something more than ordinary jewelry.'
+                            }
                         </Text>
                         <Text paddingTop={5} textStyle={'body'}>
                             Users are able to:
@@ -35,9 +35,10 @@ export const AboutPage = () => {
                                 visualize different material types on the jewelry model
                             </ListItem>
                         </UnorderedList>
-                        <Text paddingTop={5} textStyle={'body'}>
-                            All models from the Neotaku Jewelry were created by generative and algorithmic ideas that
-                            can help create non-ordinary pieces of jewelry and that can be later manipulated by users.
+                        <Text paddingTop={5} textStyle={'body'} maxW="xl">
+                            {
+                                'All models from the Neotaku\u00A0configurator were created by\u00A0generative and\u00A0algorithmic ideas that can help create non-ordinary pieces of\u00A0jewelry and\u00A0that\u00A0can\u00A0be\u00A0later manipulated by\u00A0users.'
+                            }
                         </Text>
                         <Contacts />
                     </Box>

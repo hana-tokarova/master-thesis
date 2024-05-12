@@ -201,7 +201,7 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 description:
-                    'Lissaje ring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
+                    'Lissaje ring is\u00A0a\u00A0generativelly created pattern from the\u00A0Lissajous\u00A0curves. By adjusting the parameters for\u00A0the\u00A0horizontal and vertical segments, the curve changes its\u00A0shape.',
                 sliderParameters: {
                     a: {
                         name: 'Horizontal segments',
@@ -253,7 +253,7 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 description:
-                    'Lissaje bracelet is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
+                    'Lissaje bracelet is\u00A0a\u00A0generativelly created pattern from the\u00A0Lissajous\u00A0curves. By adjusting the parameters for\u00A0the\u00A0horizontal and vertical segments, the curve changes its\u00A0shape.',
                 sliderParameters: {
                     a: {
                         name: 'Horizontal segments',
@@ -305,7 +305,7 @@ export const collections: {
             },
             [JewelryType.Earring]: {
                 description:
-                    'Lissaje earring is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal, vertical and twisting segments, the curve changes its shape.',
+                    'Lissaje earring is\u00A0a\u00A0generativelly created pattern from the\u00A0Lissajous\u00A0curves. By adjusting the parameters for\u00A0the\u00A0horizontal and vertical segments, the curve changes its\u00A0shape.',
                 sliderParameters: {
                     a: {
                         name: 'Horizontal segments',
@@ -368,7 +368,7 @@ export const collections: {
             },
             [JewelryType.Pendant]: {
                 description:
-                    'Lissaje pendant is a generativelly created pattern from the Lissajous curves. By adjusting the parameters for the horizontal and vertical segments, the curve changes its shape.',
+                    'Lissaje pendant is\u00A0a\u00A0generativelly created pattern from the\u00A0Lissajous\u00A0curves. By adjusting the parameters for\u00A0the\u00A0horizontal and vertical segments, the curve changes its\u00A0shape.',
                 sliderParameters: {
                     a: {
                         name: 'Horizontal segments',
@@ -424,7 +424,7 @@ export const collections: {
         meshes: {
             [JewelryType.Ring]: {
                 description:
-                    'Torsion ring is a generativelly created pattern from the twisted torus. By adjusting the twist and inflate parameters, the torus changes its shape.',
+                    'Torsion ring is\u00A0a\u00A0generativelly created pattern from the\u00A0twisted\u00A0torus. By\u00A0adjusting the\u00A0twist and\u00A0inflate parameters, the torus changes its shape.',
                 sliderParameters: {
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 3, min: 1, max: 5, step: 0.1 },
                     minorR: {
@@ -481,7 +481,7 @@ export const collections: {
             },
             [JewelryType.Bracelet]: {
                 description:
-                    'Torsion bracelet is a generativelly created pattern from the twisted torus. By adjusting the twist and screw parameters, the torus changes its shape.',
+                    'Torsion bracelet is\u00A0a\u00A0generativelly created pattern from the\u00A0twisted\u00A0torus. By\u00A0adjusting the\u00A0twist and\u00A0screw parameters, the torus changes its shape.',
                 sliderParameters: {
                     scaleC: { name: 'Height', tag: 'general', type: 'slider', value: 7, min: 3, max: 10, step: 0.1 },
                     minorR: {
@@ -538,7 +538,7 @@ export const collections: {
             },
             [JewelryType.Earring]: {
                 description:
-                    'Torsion earring is a generativelly created pattern from the twisted torus. By adjusting the twist and inflate parameters, the torus changes its shape.',
+                    'Torsion earring is\u00A0a\u00A0generativelly created pattern from the\u00A0twisted\u00A0torus. By adjusting the\u00A0twist and\u00A0inflate parameters, the\u00A0torus changes its\u00A0shape.',
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 13, min: 5, max: 20, step: 0.1 },
                     minorR: {
@@ -595,7 +595,7 @@ export const collections: {
             },
             [JewelryType.Pendant]: {
                 description:
-                    'Torsion pendant is a generativelly created pattern from the twisted torus. By adjusting the twist parameters, the torus changes its shape.',
+                    'Torsion pendant is\u00A0a\u00A0generativelly created pattern from the\u00A0twisted\u00A0torus. By adjusting the\u00A0twist\u00A0parameters, the torus changes its\u00A0shape.',
                 sliderParameters: {
                     majorR: { name: 'Width', type: 'slider', tag: 'general', value: 8, min: 3, max: 9, step: 0.1 },
                     minorR: {

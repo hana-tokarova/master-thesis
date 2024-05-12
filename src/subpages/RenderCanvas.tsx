@@ -35,7 +35,7 @@ const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleF
         case JewelryType.Earring:
             return { offset: 50, scaleFactor: 0.5 };
         case JewelryType.Pendant:
-            return { offset: 40, scaleFactor: 0.5 };
+            return { offset: 60, scaleFactor: 0.5 };
         default:
             throw new Error('Unknown Jewelry Type');
     }

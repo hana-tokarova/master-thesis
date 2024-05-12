@@ -24,7 +24,9 @@ export const Info = ({ collection, jewelry, mesh }: InfoProps) => {
                 {jewelry.charAt(0).toUpperCase() + jewelry.slice(1)}
             </Text>
 
-            <Text textStyle="body">{mesh.description}</Text>
+            <Text textStyle="body" maxW="xl">
+                {mesh.description}
+            </Text>
         </Box>
     );
 };

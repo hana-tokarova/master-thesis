@@ -43,10 +43,9 @@ export const Contacts = () => {
             <HStack paddingTop={5} paddingBottom={28} spacing={3} w="500px" align={'center'}>
                 <Image src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`} alt="ht-logo" h="16" />
                 <Text textStyle={'body'}>
-                    Neotaku Jewelry is a master thesis project created by
+                    {'Neotaku Jewelry is a master thesis project created\u00A0by'}
                     <Text as="span" textStyle={'bodyHighlight'}>
-                        {' '}
-                        Hana Tokárová.
+                        {'\u00A0Hana\u00A0Tokárová'}.
                     </Text>
                 </Text>
             </HStack>

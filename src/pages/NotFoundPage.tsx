@@ -14,9 +14,10 @@ export const NotFoundPage = () => {
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }} align="flex-start">
                     <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text textStyle={'header1'}>/ 404 - Page Not Found</Text>
-                        <Text textStyle={'body'}>
-                            Oooops! This page that you are trying to reach does not exist. Are you sure that you wanted
-                            to go here? Go to the
+                        <Text textStyle={'body'} maxW="xl">
+                            {
+                                'Oooops! This page that you are trying to reach does not exist. Are you sure that you wanted to go here? Go to the'
+                            }
                             <Link to="/">
                                 <Text as="span" textStyle={'bodyHighlight'} variant="link">
                                     {' '}

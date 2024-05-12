@@ -16,10 +16,10 @@ export const LookbookPage = () => {
                 <Stack w="80vw">
                     <Text textStyle={'header1'}>/ Showcase</Text>
 
-                    <Text textStyle={'body'}>
-                        Here you can find showcase of renders and lookbooks from the different collections. If you fancy
-                        some of the designs below, you can click on the specified jewelry and then you will be send to
-                        the Neotaku configurator.
+                    <Text textStyle={'body'} maxW="xl">
+                        {
+                            'Here you can find showcase of\u00A0renders and\u00A0lookbooks from the\u00A0different collections. If\u00A0you fancy some of\u00A0the\u00A0designs below, you can click on\u00A0the\u00A0specified jewelry and\u00A0then\u00A0you will be\u00A0send\u00A0to\u00A0the\u00A0Neotaku\u00A0configurator.'
+                        }
                     </Text>
 
                     <Box
