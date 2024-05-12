@@ -2,6 +2,13 @@ import { Box, Center, Image, Stack, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { projects } from './CreatePage';
 
+/**
+ * Represents the LookbookPage component.
+ * This component displays a showcase of renders and lookbooks from different collections.
+ * Each render or lookbook can be clicked to navigate to the Neotaku configurator.
+ *
+ * @returns The LookbookPage component.
+ */
 export const LookbookPage = () => {
     return (
         <Center>

@@ -24,6 +24,9 @@ import {
     changeNumericParameter,
 } from '../components/utils/mesh/ChangeMesh';
 
+/**
+ * Props for the General component.
+ */
 type GeneralProps = {
     mesh: JewelryMesh;
     currentJewelryType: JewelryType;
@@ -35,6 +38,12 @@ type GeneralProps = {
     sliderMinParameters: { [key: string]: number };
 };
 
+/**
+ * Renders the General component.
+ *
+ * @param props - The component props.
+ * @returns The rendered General component.
+ */
 export const General = ({
     mesh,
     currentJewelryType,

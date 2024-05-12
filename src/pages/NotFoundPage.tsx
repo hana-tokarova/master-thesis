@@ -1,6 +1,12 @@
 import { Box, Center, Image, Stack, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Renders the NotFoundPage component.
+ * This component displays a 404 - Page Not Found message along with a link to the homepage.
+ *
+ * @returns The NotFoundPage component.
+ */
 export const NotFoundPage = () => {
     return (
         <Center>

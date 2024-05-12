@@ -1,5 +1,10 @@
 import { Box, Button, HStack, Image, Text } from '@chakra-ui/react';
 
+/**
+ * Renders the Contacts component.
+ *
+ * @returns The Contacts component.
+ */
 export const Contacts = () => {
     return (
         <>

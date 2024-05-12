@@ -13,12 +13,27 @@ import React from 'react';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { NavigateFunction } from 'react-router-dom';
 
+/**
+ * Props for the GoBack component.
+ */
 type GoBackProps = {
     isDirty: boolean;
+
+    /**
+     * Callback function to set the dirty state of the component.
+     * @param isDirty - The new dirty state.
+     */
     setIsDirty: (isDirty: boolean) => void;
+
     navigate: NavigateFunction;
 };
 
+/**
+ * Renders a "Go Back" component.
+ *
+ * @param props - The component props.
+ * @returns The rendered "Go Back" component.
+ */
 export const GoBack = ({ isDirty, setIsDirty, navigate }: GoBackProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 

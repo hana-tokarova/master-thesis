@@ -1,6 +1,11 @@
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import { saveArrayBuffer, saveString } from './Saving';
 
+/**
+ * Export a mesh as a glTF file.
+ * @param mesh - The mesh to export.
+ * @param name - The name of the exported file.
+ */
 export const exportMeshGlTF = (mesh: THREE.Mesh, name: string) => {
     const clonedMesh = mesh.clone();
     const scene = mesh.parent!;

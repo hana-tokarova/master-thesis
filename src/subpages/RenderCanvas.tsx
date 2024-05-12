@@ -6,6 +6,9 @@ import * as THREE from 'three';
 import { Vector3 } from 'three';
 import { JewelryMesh, JewelryType, Material, RingSize } from '../components/collections/Collections';
 
+/**
+ * Props for the RenderCanvas component.
+ */
 type RenderCanvasProps = {
     currentJewelry: JewelryType;
     mesh: JewelryMesh;
@@ -16,6 +19,13 @@ type RenderCanvasProps = {
     currentMaterial: Material;
 };
 
+/**
+ * Sets the camera parameters for rendering a specific jewelry type.
+ *
+ * @param jewelryType - The type of jewelry.
+ * @returns An object containing the camera offset and scale factor.
+ * @throws Error if the jewelry type is unknown.
+ */
 const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleFactor: number } => {
     switch (jewelryType) {
         case JewelryType.Ring:
@@ -31,6 +41,13 @@ const setCameraForJewelry = (jewelryType: JewelryType): { offset: number; scaleF
     }
 };
 
+/**
+ * Initializes the camera position based on the given offset and scaleFactor.
+ *
+ * @param offset - The offset value.
+ * @param scaleFactor - The scale factor value.
+ * @returns The initialized camera position as a THREE.Vector3 object.
+ */
 const initializeCameraPosition = (offset: number, scaleFactor: number): THREE.Vector3 => {
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -40,6 +57,20 @@ const initializeCameraPosition = (offset: number, scaleFactor: number): THREE.Ve
     return new Vector3(x, y, z);
 };
 
+/**
+ * Renders a canvas with 3D objects using Three.js library.
+ *
+ * @param props - The component props.
+ * @param props.currentJewelry - The current jewelry object.
+ * @param props.mesh - The mesh object.
+ * @param props.color - The color of the object.
+ * @param props.sliderParams - The slider parameters.
+ * @param props.switchParams - The switch parameters.
+ * @param props.dropdownParams - The dropdown parameters.
+ * @param props.currentMaterial - The current material object.
+ * @param ref - The ref object.
+ * @returns The rendered canvas component.
+ */
 export const RenderCanvas = React.forwardRef<THREE.Mesh, RenderCanvasProps>(
     ({ currentJewelry, mesh, color, sliderParams, switchParams, dropdownParams, currentMaterial }, ref) => {
         const cameraRef = useRef<THREE.PerspectiveCamera>(null);

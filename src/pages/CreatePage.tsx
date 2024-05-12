@@ -2,6 +2,9 @@ import { Box, Center, Flex, Image, Stack, Tab, TabList, TabPanel, TabPanels, Tab
 import { Link } from 'react-router-dom';
 import { CollectionType, JewelryType } from '../components/collections/Collections';
 
+/**
+ * Represents a project.
+ */
 type Project = {
     id: number;
     image: string | undefined;
@@ -12,6 +15,9 @@ type Project = {
     jewelry: JewelryType;
 };
 
+/**
+ * Represents all projects.
+ */
 export const projects: Project[] = [
     {
         id: 1,
@@ -231,6 +237,11 @@ export const projects: Project[] = [
     },
 ];
 
+/**
+ * Renders the CreatePage component.
+ *
+ * @returns The rendered CreatePage component.
+ */
 export const CreatePage = () => {
     return (
         <Center>

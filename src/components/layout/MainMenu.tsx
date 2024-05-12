@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MainMenuButton } from './MainMenuButton';
 
+/**
+ * Represents the main menu component.
+ * @returns The main menu component.
+ */
 export const MainMenu = () => {
     const { scrollY } = useScroll();
     const location = useLocation();
@@ -11,6 +15,9 @@ export const MainMenu = () => {
     const [menuShadow, setMenuShadow] = useState('0px 0px 20px rgba(0, 0, 0, 0)');
 
     useEffect(() => {
+        /**
+         * Updates the styles of the main menu based on the scroll position.
+         */
         const updateStyles = () => {
             const yValue = scrollY.get();
             const newOpacity = Math.min(0.3, (yValue / 100) * 0.3);

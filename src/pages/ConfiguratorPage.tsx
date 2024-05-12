@@ -25,6 +25,20 @@ import { StartupOverlay } from '../subpages/Overlay';
 import { RenderCanvas } from '../subpages/RenderCanvas';
 import { Visualize } from '../subpages/Visualize';
 
+/**
+ * Represents the state of the parameters in the configurator.
+ *
+ * @param sliderParameters - A dictionary of slider parameters with their corresponding values.
+ * @param sliderMinParameters - A dictionary of slider parameters with their corresponding minimum values.
+ * @param switchParameters - A dictionary of switch parameters with their corresponding boolean values.
+ * @param dropdownParameters - A dictionary of dropdown parameters with their corresponding ring or bracelet sizes.
+ * @param currentCollection - The current collection type.
+ * @param currentJewelryType - The current jewelry type.
+ * @param currentMaterial - The current material.
+ * @param meshColor - The color of the mesh.
+ *
+ * @returns The state of the parameters in the configurator.
+ */
 type ParameterState = {
     sliderParameters: { [key: string]: number };
     sliderMinParameters: { [key: string]: number };
@@ -36,6 +50,11 @@ type ParameterState = {
     meshColor: string;
 };
 
+/**
+ * Renders the ConfiguratorPage component.
+ *
+ * @returns The rendered ConfiguratorPage component.
+ */
 export const ConfiguratorPage = () => {
     const meshRef = React.useRef<THREE.Mesh>(null);
 
@@ -114,6 +133,10 @@ export const ConfiguratorPage = () => {
     ]);
 
     useEffect(() => {
+        /**
+         * Checks if there are any changes in the current parameters compared to the initial parameters.
+         * If there are changes, sets the 'isDirty' state to true. Otherwise, sets it to false.
+         */
         const checkForChanges = () => {
             const currentParams = {
                 sliderParameters,

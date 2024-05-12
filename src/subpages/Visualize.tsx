@@ -3,6 +3,9 @@ import { Material, materials } from '../components/collections/Collections';
 import { changeCurrentMaterial, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
 import { ColorPair, ColorPicker } from './ColorPicker';
 
+/**
+ * Props for the Visualize component.
+ */
 type VisualizeProps = {
     setSliderMinParameters: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>;
     currentMaterial: Material;
@@ -12,6 +15,18 @@ type VisualizeProps = {
     setMeshColor: (color: string) => void;
 };
 
+/**
+ * Renders the Visualize component.
+ *
+ * @param props - The component props.
+ * @param props.setSliderMinParameters - The function to set the slider minimum parameters.
+ * @param props.currentMaterial - The current material object.
+ * @param props.setCurrentMaterial - The function to set the current material.
+ * @param props.colors - The array of colors.
+ * @param props.meshColor - The mesh color.
+ * @param props.setMeshColor - The function to set the mesh color.
+ * @returns The rendered Visualize component.
+ */
 export const Visualize = ({
     setSliderMinParameters,
     currentMaterial,

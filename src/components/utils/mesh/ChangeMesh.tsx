@@ -11,6 +11,7 @@ import {
 
 /**
  * Function to change the color of a mesh.
+ *
  * @param setMeshColor - The React state setter function for setting the color.
  * @param color - The new color value as a string.
  */
@@ -20,6 +21,7 @@ export const changeMeshColor = (setMeshColor: (color: string) => void, color: st
 
 /**
  * Function to update a numeric parameter's value in the state.
+ *
  * @param setNumericParameters - The React state setter function for numeric parameters.
  * @param parameterName - The name of the parameter to update.
  * @param newValue - The new value for the parameter.
@@ -37,6 +39,7 @@ export const changeNumericParameter = (
 
 /**
  * Function to update a dropdown parameter's value in the state.
+ *
  * @param setDropdownParameters - The React state setter function for dropdown parameters.
  * @param parameterName - The name of the parameter to update.
  * @param newValue - The new value for the parameter.
@@ -57,6 +60,7 @@ export const changeDropdownParameter = (
 
 /**
  * Function to update a boolean parameter's value in the state.
+ *
  * @param setBooleanParameters - The React state setter function for boolean parameters.
  * @param parameterName - The name of the parameter to update.
  * @param newValue - The new boolean value for the parameter.
@@ -74,6 +78,7 @@ export const changeBooleanParameter = (
 
 /**
  * Function to change the jewelry type in the state.
+ *
  * @param setJewelryType - The React state setter function for the jewelry type.
  * @param jewelryType - The new jewelry type.
  */
@@ -83,6 +88,7 @@ export const changeJewelryType = (setJewelryType: (type: JewelryType) => void, j
 
 /**
  * Function to change the current material in the state.
+ *
  * @param setCurrentMaterial - The React state setter function for the current material.
  * @param currentMaterial - The new material.
  */
@@ -95,6 +101,7 @@ export const changeCurrentMaterial = (
 
 /**
  * Function to set current mesh in the state.
+ *
  * @param collection - The collection type.
  * @param jewelry - The jewelry type.
  * @param material - The material type.

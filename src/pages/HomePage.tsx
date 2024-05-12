@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { Contacts } from '../subpages/Contacts';
 import { projects } from './CreatePage';
 
+/**
+ * Renders the home page component.
+ *
+ * @returns The HomePage component.
+ */
 export const HomePage = () => {
     return (
         <Center>

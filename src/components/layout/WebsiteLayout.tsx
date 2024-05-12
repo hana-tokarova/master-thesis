@@ -3,6 +3,10 @@ import { Outlet } from 'react-router-dom';
 import { Footer } from './Footer';
 import { MainMenu } from './MainMenu';
 
+/**
+ * Represents the layout of the website.
+ * This component includes the main menu, content outlet, background image, and footer.
+ */
 export const WebsiteLayout = () => {
     return (
         <Flex direction="column" w="100vw" minH="100vh" position="relative">

@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
+/**
+ * Props for the Torsion component.
+ */
 type TorsionProps = {
     mesh: React.Ref<THREE.Mesh>;
     meshColor: string;
@@ -20,6 +23,12 @@ type TorsionProps = {
     screw?: number;
 };
 
+/**
+ * Generates a circle curve in 2D.
+ *
+ * @param nbSteps - The number of steps to create the curve.
+ * @returns An array of THREE.Vector3 representing the points on the circle curve.
+ */
 const makeCircleCurve2D = (nbSteps: number) => {
     const points = [];
     const stepSize = (Math.PI * 2) / nbSteps;
@@ -34,11 +43,25 @@ const makeCircleCurve2D = (nbSteps: number) => {
     return points;
 };
 
+/**
+ * Calculates the smooth step interpolation between two values.
+ * @param edge0 - The lower edge value.
+ * @param edge1 - The upper edge value.
+ * @param x - The input value to interpolate.
+ * @returns The interpolated value between edge0 and edge1.
+ */
 const smoothStep = (edge0: number, edge1: number, x: number) => {
     x = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
     return x * x * x * (x * (x * 6 - 15) + 10);
 };
 
+/**
+ * Calculates the inflation factor for a mesh based on the given parameters.
+ *
+ * @param i - The inflation factor when `u` is between Math.PI / 2 and 3 * (Math.PI / 2).
+ * @param u - The angle in radians.
+ * @returns The calculated inflation factor.
+ */
 const inflateMesh = (i: number, u: number) => {
     let inflate;
 
@@ -51,6 +74,16 @@ const inflateMesh = (i: number, u: number) => {
     return inflate;
 };
 
+/**
+ * Calculates the twist value for a given range of values.
+ *
+ * @param twistAll - A boolean indicating whether to apply the twist to all values.
+ * @param u - The current value.
+ * @param twist - The twist value to apply.
+ * @param start - The start value of the range.
+ * @param end - The end value of the range.
+ * @returns The calculated twist value.
+ */
 const twistMesh = (twistAll: boolean, u: number, twist: number, start: number, end: number) => {
     let smoothTwist;
 
@@ -73,11 +106,26 @@ const twistMesh = (twistAll: boolean, u: number, twist: number, start: number, e
     return smoothTwist;
 };
 
+/**
+ * Calculates the detail for a 2D shape based on the major radius and twist.
+ *
+ * @param majorR - The major radius of the shape.
+ * @param twist - The twist value of the shape.
+ * @returns The calculated detail for the 2D shape.
+ */
 const calculateDetail2D = (majorR: number, twist: number) => {
     const detail = Math.floor(majorR * 2 * Math.PI * Math.abs(twist === 0 ? 1 : twist));
     return detail > 1000 ? 1000 : detail;
 };
 
+/**
+ * Calculates the taper edge value based on the given parameters.
+ *
+ * @param u - The input value.
+ * @param lowerFallOff - The lower fall-off value.
+ * @param upperFallOff - The upper fall-off value.
+ * @returns The calculated edge taper value.
+ */
 const taperEdge = (u: number, lowerFallOff: number, upperFallOff: number) => {
     let edgeTaper = 1;
 
@@ -93,6 +141,19 @@ const taperEdge = (u: number, lowerFallOff: number, upperFallOff: number) => {
     return edgeTaper === 1 ? 1 : Math.sqrt(1 - edgeTaper * edgeTaper); //1 - Math.pow(majorR, -5 * edgeTaper));
 };
 
+/**
+ * Creates a torsion function that generates a 3D vector based on the given parameters.
+ *
+ * @param scaleA - The scaling factor for the x-axis.
+ * @param scaleB - The scaling factor for the y-axis.
+ * @param scaleC - The scaling factor for the z-axis.
+ * @param majorR - The major radius of the torsion.
+ * @param minorR - The minor radius of the torsion.
+ * @param twist - The amount of twist applied to the torsion.
+ * @param twistAll - A boolean indicating whether to apply the twist to the entire torsion.
+ * @param inflate - The amount of inflation applied to the torsion.
+ * @returns A function that generates a 3D vector based on the given parameters.
+ */
 const torsion = (
     scaleA: number,
     scaleB: number,
@@ -120,6 +181,19 @@ const torsion = (
     };
 };
 
+/**
+ * Creates a tapered torsion function that generates a 3D vector based on the given parameters.
+ *
+ * @param scaleA - The scaling factor for the x-axis.
+ * @param scaleB - The scaling factor for the y-axis.
+ * @param scaleC - The scaling factor for the z-axis.
+ * @param majorR - The major radius of the torsion.
+ * @param minorR - The minor radius of the torsion.
+ * @param twist - The amount of twist applied to the torsion.
+ * @param twistAll - A boolean indicating whether the twist should be applied to all points.
+ * @param screw - The amount of screw applied to the torsion.
+ * @returns A function that generates a 3D vector based on the given parameters.
+ */
 const taperedTorsion = (
     scaleA: number,
     scaleB: number,
@@ -147,6 +221,23 @@ const taperedTorsion = (
     };
 };
 
+/**
+ * Renders a torsion ring mesh.
+ *
+ * @param mesh - The reference to the mesh object.
+ * @param meshColor - The color of the mesh.
+ * @param majorR - The major radius of the torsion ring.
+ * @param minorR - The minor radius of the torsion ring.
+ * @param twistAll - A flag indicating whether to twist all sections of the ring.
+ * @param twist - The amount of twist to apply to the ring.
+ * @param inflate - The amount of inflation to apply to the ring.
+ * @param scaleA - The scale factor for the A dimension of the ring.
+ * @param scaleB - The scale factor for the B dimension of the ring.
+ * @param scaleC - The scale factor for the C dimension of the ring.
+ * @param stacks - The number of stacks in the ring geometry.
+ * @param roughness - The roughness of the material.
+ * @param metalness - The metalness of the material.
+ */
 export const TorsionRing = ({
     mesh,
     meshColor,
@@ -184,6 +275,23 @@ export const TorsionRing = ({
     );
 };
 
+/**
+ * Renders a torsion bracelet mesh.
+ *
+ * @param mesh - The reference to the mesh object.
+ * @param meshColor - The color of the mesh.
+ * @param majorR - The major radius of the bracelet.
+ * @param minorR - The minor radius of the bracelet.
+ * @param twistAll - The twist applied to all sections of the bracelet.
+ * @param twist - The twist applied to each section of the bracelet.
+ * @param scaleA - The scale factor for the A dimension of the bracelet.
+ * @param scaleB - The scale factor for the B dimension of the bracelet.
+ * @param scaleC - The scale factor for the C dimension of the bracelet.
+ * @param stacks - The number of stacks in the bracelet.
+ * @param screw - The screw parameter for the bracelet.
+ * @param roughness - The roughness of the material.
+ * @param metalness - The metalness of the material.
+ */
 export const TorsionBracelet = ({
     mesh,
     meshColor,
@@ -221,6 +329,23 @@ export const TorsionBracelet = ({
     );
 };
 
+/**
+ * Renders a torsion earring mesh.
+ *
+ * @param mesh - The reference to the mesh object.
+ * @param meshColor - The color of the mesh.
+ * @param majorR - The major radius of the earring.
+ * @param minorR - The minor radius of the earring.
+ * @param twistAll - The overall twist of the earring.
+ * @param twist - The twist of each segment of the earring.
+ * @param inflate - The amount of inflation of the earring.
+ * @param scaleA - The scale factor along the x-axis.
+ * @param scaleB - The scale factor along the y-axis.
+ * @param scaleC - The scale factor along the z-axis.
+ * @param stacks - The number of stacks in the earring.
+ * @param roughness - The roughness of the material.
+ * @param metalness - The metalness of the material.
+ */
 export const TorsionEarring = ({
     mesh,
     meshColor,
@@ -274,6 +399,23 @@ export const TorsionEarring = ({
     );
 };
 
+/**
+ * Renders a torsion pendant.
+ *
+ * @param mesh - The reference to the mesh.
+ * @param meshColor - The color of the mesh.
+ * @param majorR - The major radius.
+ * @param minorR - The minor radius.
+ * @param twistAll - The twist for all sections.
+ * @param twist - The twist for each section.
+ * @param inflate - The inflation factor.
+ * @param scaleA - The scale factor for the x-axis.
+ * @param scaleB - The scale factor for the y-axis.
+ * @param scaleC - The scale factor for the z-axis.
+ * @param stacks - The number of stacks.
+ * @param metalness - The metalness of the material.
+ * @param roughness - The roughness of the material.
+ */
 export const TorsionPendant = ({
     mesh,
     meshColor,

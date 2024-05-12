@@ -13,6 +13,9 @@ import {
 import { CollectionType, JewelryMesh } from '../components/collections/Collections';
 import { changeBooleanParameter, changeNumericParameter } from '../components/utils/mesh/ChangeMesh';
 
+/**
+ * Props for the Lissajous component.
+ */
 type LissajousProps = {
     collection: CollectionType;
     mesh: JewelryMesh;
@@ -22,6 +25,17 @@ type LissajousProps = {
     setSwitchParameters: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
 };
 
+/**
+ * Renders a collection of properties for a given collection and mesh.
+ *
+ * @param collection - The name of the collection.
+ * @param mesh - The mesh object containing slider and switch parameters.
+ * @param sliderParameters - The current values of the slider parameters.
+ * @param setSliderParameters - A function to update the slider parameters.
+ * @param switchParameters - The current values of the switch parameters.
+ * @param setSwitchParameters - A function to update the switch parameters.
+ * @returns The rendered collection component.
+ */
 export const Collection = ({
     collection,
     mesh,

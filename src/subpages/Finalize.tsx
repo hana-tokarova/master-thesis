@@ -8,6 +8,9 @@ import { useCopyToClipboard } from 'usehooks-ts';
 import { forAnimationFrame } from 'waitasecond';
 import { CollectionType, JewelryType, Material } from '../components/collections/Collections';
 
+/**
+ * Props for the Finalize component.
+ */
 type FinalizeProps = {
     parameters: any;
     meshRef: React.RefObject<THREE.Mesh>;
@@ -19,6 +22,12 @@ type FinalizeProps = {
     exportMeshGlTF: (mesh: THREE.Mesh, name: string) => void;
 };
 
+/**
+ * Renders the Finalize component.
+ *
+ * @param props - The component props.
+ * @returns The Finalize component.
+ */
 export const Finalize = ({
     parameters,
     meshRef,

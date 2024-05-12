@@ -2,6 +2,10 @@ import { Box, Icon, keyframes, Text, useBoolean } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { MdMouse } from 'react-icons/md';
 
+/**
+ * Animation keyframes for the half arc animation.
+ * The animation moves an element in a half arc shape.
+ */
 const halfArcAnimation = keyframes`
   0% { 
     transform: translateX(0) translateY(0) rotate(0deg);
@@ -20,6 +24,11 @@ const halfArcAnimation = keyframes`
   }
 `;
 
+/**
+ * Renders a startup overlay component.
+ *
+ * @param onClose - Callback function to be called when the overlay is closed.
+ */
 export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const [isVisible, setIsVisible] = useBoolean(true);
 
@@ -31,6 +40,9 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onClose, setIsVisible]);
 
+    /**
+     * Fades out the overlay and closes it.
+     */
     const fadeOutAndClose = () => {
         setIsVisible.off();
         setTimeout(() => {

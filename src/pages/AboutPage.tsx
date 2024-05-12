@@ -1,6 +1,10 @@
 import { Box, Center, Image, ListItem, Stack, Text, UnorderedList } from '@chakra-ui/react';
 import { Contacts } from '../subpages/Contacts';
 
+/**
+ * Renders the About page component.
+ * @returns The rendered About page component.
+ */
 export const AboutPage = () => {
     return (
         <Center>
