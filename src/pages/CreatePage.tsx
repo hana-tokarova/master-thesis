@@ -8,7 +8,7 @@ import { CollectionType, JewelryType } from '../components/collections/Collectio
 type Project = {
     id: number;
     image: string | undefined;
-    material: 'Plastic' | 'Resin' | 'Metal' | 'Create from scratch';
+    material: 'Plastic' | 'Resin' | 'Metal' | 'Create new';
     price: number | 'TBA';
     url: string;
     collection: CollectionType;
@@ -165,7 +165,7 @@ export const projects: Project[] = [
     },
     {
         id: 17,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -174,7 +174,7 @@ export const projects: Project[] = [
     },
     {
         id: 18,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -183,7 +183,7 @@ export const projects: Project[] = [
     },
     {
         id: 19,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     },
     {
         id: 20,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -201,7 +201,7 @@ export const projects: Project[] = [
     },
     {
         id: 21,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -210,7 +210,7 @@ export const projects: Project[] = [
     },
     {
         id: 22,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -219,7 +219,7 @@ export const projects: Project[] = [
     },
     {
         id: 23,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Lissajous,
@@ -228,7 +228,7 @@ export const projects: Project[] = [
     },
     {
         id: 24,
-        material: 'Create from scratch',
+        material: 'Create new',
         price: 'TBA',
         image: undefined,
         collection: CollectionType.Torsion,
@@ -310,7 +310,8 @@ export const CreatePage = () => {
                                                             as={Link}
                                                             to={`/configurator?config=${selectedProject.url}`}
                                                             key={selectedProject.id}
-                                                            h={{ base: '52', sm: '56', md: '60', lg: '80' }}
+                                                            w={{ base: '32', sm: '36', md: '40', lg: '44' }}
+                                                            h={{ base: '44', sm: '48', md: '52', lg: '56' }}
                                                             position="relative"
                                                             borderRadius="sm"
                                                             shadow="lg"
@@ -326,8 +327,8 @@ export const CreatePage = () => {
                                                                     }}
                                                                 >
                                                                     <Image
-                                                                        w={{ base: '28', sm: '36', md: '40', lg: '60' }}
-                                                                        h={{ base: '36', sm: '40', md: '44', lg: '60' }}
+                                                                        w={{ base: '24', sm: '28', md: '32', lg: '36' }}
+                                                                        h={{ base: '24', sm: '28', md: '32', lg: '36' }}
                                                                         objectFit="cover"
                                                                         src={selectedProject.image}
                                                                         alt={'Project' + selectedProject.id}
@@ -347,15 +348,15 @@ export const CreatePage = () => {
                                                                 </Box>
                                                             ) : (
                                                                 <Text
-                                                                    w={{ base: '28', sm: '36', md: '40', lg: '60' }}
-                                                                    h={{ base: '36', sm: '40', md: '44', lg: '60' }}
+                                                                    w={{ base: '24', sm: '28', md: '32', lg: '36' }}
+                                                                    h={{ base: '24', sm: '28', md: '32', lg: '36' }}
                                                                     paddingTop={10}
                                                                     fontFamily={'heading'}
                                                                     fontSize={{
-                                                                        base: '5xl',
-                                                                        sm: '6xl',
-                                                                        md: '7xl',
-                                                                        lg: '8xl',
+                                                                        base: '3xl',
+                                                                        sm: '4xl',
+                                                                        md: '5xl',
+                                                                        lg: '6xl',
                                                                     }}
                                                                     fontWeight="300"
                                                                     display="flex"
