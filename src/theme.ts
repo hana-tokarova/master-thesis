@@ -74,6 +74,46 @@ const theme = extendTheme({
             fontWeight: '600',
         },
     },
+    components: {
+        Button: {
+            variants: {
+                solidButton: {
+                    bg: 'brand.50',
+                    color: 'brand.200',
+                    fontWeight: '450',
+                    fontFamily: 'heading',
+                    fontSize: {
+                        base: '2xs',
+                        sm: 'xs',
+                        md: 'sm',
+                        lg: 'md',
+                    },
+                    shadow: 'lg',
+                    _hover: {
+                        bg: 'brand.300',
+                    },
+                    _focus: {
+                        bg: 'brand.50',
+                    },
+                },
+                hyperlinkButton: {
+                    color: 'brand.50',
+                    fontWeight: '400',
+                    fontSize: {
+                        base: '2xs',
+                        sm: 'xs',
+                        md: 'sm',
+                        lg: 'md',
+                    },
+                    _hover: {
+                        textDecoration: 'underline',
+                    },
+                    p: 0,
+                    height: 'auto',
+                },
+            },
+        },
+    },
 });
 
 export default theme;

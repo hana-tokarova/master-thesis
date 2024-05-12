@@ -43,8 +43,8 @@ export const MainMenu = () => {
                 {location.pathname !== '/' && (
                     <Image
                         w="auto"
-                        h="5"
-                        src={`${process.env.PUBLIC_URL}/images/logo/logo.svg`}
+                        h="8"
+                        src={`${process.env.PUBLIC_URL}/images/logo/logo-o.svg`}
                         alt="NEOTAKU JEWELRY"
                         objectFit="contain"
                     />

@@ -44,20 +44,7 @@ export const HomePage = () => {
                             preferred format to 3D print it!
                         </Text>
 
-                        <Button
-                            marginTop={2}
-                            size="sm"
-                            as={Link}
-                            to={'/create'}
-                            fontFamily={'heading'}
-                            fontWeight="450"
-                            bg="brand.50"
-                            color="brand.200"
-                            w="36"
-                            shadow={'lg'}
-                            _hover={{ bg: 'brand.300' }}
-                            _focus={{ bg: 'brand.50' }}
-                        >
+                        <Button marginTop={2} size="sm" as={Link} to={'/create'} w="40" variant="solidButton">
                             Create your jewelry
                         </Button>
 
@@ -70,20 +57,7 @@ export const HomePage = () => {
                             start from scratch or by choosing one of the presets.
                         </Text>
 
-                        <Button
-                            marginTop={2}
-                            size="sm"
-                            as={Link}
-                            to={'/showcase'}
-                            fontFamily={'heading'}
-                            fontWeight="450"
-                            bg="brand.50"
-                            color="brand.200"
-                            w="36"
-                            shadow={'lg'}
-                            _hover={{ bg: 'brand.300' }}
-                            _focus={{ bg: 'brand.50' }}
-                        >
+                        <Button marginTop={2} size="sm" as={Link} to={'/showcase'} w="40" variant="solidButton">
                             Browse collections
                         </Button>
                         <Text paddingTop={12} textStyle={'header2'} color={'brand.50'}>
@@ -101,7 +75,7 @@ export const HomePage = () => {
                             columnGap={4}
                         >
                             {projects
-                                .filter((project) => project.id === 2 || project.id === 5 || project.id === 9)
+                                .filter((project) => project.id === 2 || project.id === 8 || project.id === 9)
                                 .map((selectedProject) => (
                                     <Box
                                         as={Link}
@@ -110,7 +84,6 @@ export const HomePage = () => {
                                         position="relative"
                                         borderRadius="sm"
                                         shadow="lg"
-                                        padding={4}
                                         bg={'brand.200'}
                                     >
                                         <Box
@@ -122,7 +95,6 @@ export const HomePage = () => {
                                         >
                                             <Image
                                                 key={selectedProject.id}
-                                                w={{ base: '32', md: '40' }}
                                                 objectFit="cover"
                                                 h={{ base: '32', md: '40' }}
                                                 src={selectedProject.image}
@@ -150,12 +122,10 @@ export const HomePage = () => {
 
                     <Image
                         w={{ base: '90%', lg: '80%' }}
-                        // h={{ base: '30%', lg: '70%' }}
                         marginTop={{ base: 0, md: 16 }}
                         marginRight="5%"
                         src={`${process.env.PUBLIC_URL}/images/visuals/visuals1.png`}
                         alt="Visuals2"
-                        // objectFit="fill"
                     />
                 </Stack>
             </VStack>

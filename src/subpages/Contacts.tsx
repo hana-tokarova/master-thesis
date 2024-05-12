@@ -16,15 +16,12 @@ export const Contacts = () => {
                     href="https://github.com/hana-tokarova/master-thesis"
                     target="_blank"
                     rel="noopener noreferrer"
-                    variant="link"
-                    color="brand.50"
-                    fontWeight={400}
-                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                    variant="hyperlinkButton"
                 >
                     github.com/hana-tokarova/master-thesis
                 </Button>
                 <br />
-                <Box as="strong" fontFamily="heading" fontWeight="600">
+                <Box as="strong" textStyle={'bodyHighlight'}>
                     Portfolio:
                 </Box>{' '}
                 <Button
@@ -32,10 +29,7 @@ export const Contacts = () => {
                     href="https://behance.net/hana-tokarova"
                     target="_blank"
                     rel="noopener noreferrer"
-                    variant="link"
-                    color="brand.50"
-                    fontWeight={400}
-                    fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }}
+                    variant="hyperlinkButton"
                 >
                     behance.net/hana-tokarova
                 </Button>
@@ -45,7 +39,7 @@ export const Contacts = () => {
                 <Image src={`${process.env.PUBLIC_URL}/images/logo/ht-logo.svg`} alt="ht-logo" h="16" />
                 <Text fontSize={{ base: '2xs', sm: 'xs', md: 'sm', lg: 'md' }} color="brand.50">
                     Neotaku Jewelry is a master thesis project created by
-                    <Text as="span" fontFamily={'heading'} fontWeight={600}>
+                    <Text as="span" textStyle={'bodyHighlight'}>
                         {' '}
                         Hana Tokárová
                     </Text>
