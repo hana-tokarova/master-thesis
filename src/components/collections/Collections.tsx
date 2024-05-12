@@ -44,10 +44,6 @@ export const braceletSizes: BraceletSize[] = [
     { value: 360, diameter: 57.5 },
     { value: 370, diameter: 59.1 },
     { value: 380, diameter: 60.7 },
-    { value: 390, diameter: 62.3 },
-    { value: 400, diameter: 63.9 },
-    { value: 410, diameter: 65.5 },
-    { value: 420, diameter: 67.1 },
 ];
 
 export const ringSizes: RingSize[] = [

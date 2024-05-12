@@ -97,9 +97,6 @@ const theme = extendTheme({
                     _hover: {
                         bg: 'brand.300',
                     },
-                    _focus: {
-                        bg: 'brand.50',
-                    },
                 },
                 cancelButton: {
                     bg: 'brand.200',
@@ -114,9 +111,6 @@ const theme = extendTheme({
                     },
                     shadow: 'none',
                     _hover: {
-                        bg: 'brand.400',
-                    },
-                    _focus: {
                         bg: 'brand.400',
                     },
                 },
@@ -143,10 +137,10 @@ const theme = extendTheme({
                     color: 'brand.50',
                     fontWeight: '400',
                     fontSize: {
-                        base: '2xs',
-                        sm: 'xs',
-                        md: 'sm',
-                        lg: 'md',
+                        base: '3xs',
+                        sm: '2xs',
+                        md: 'xs',
+                        lg: 'sm',
                     },
                     _hover: {
                         textDecoration: 'underline',
@@ -158,7 +152,7 @@ const theme = extendTheme({
         },
         Text: {
             baseStyle: {
-                color: 'green.500',
+                color: 'brand.50',
             },
         },
     },

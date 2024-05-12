@@ -58,22 +58,11 @@ export const StartupOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) =
             userSelect="none"
             pointerEvents="none"
         >
-            <Text
-                fontFamily={'heading'}
-                fontSize={{
-                    base: 'sm',
-                    sm: 'md',
-                    md: 'lg',
-                    lg: 'xl',
-                }}
-                fontWeight={400}
-                mb={4}
-                pointerEvents="auto"
-            >
+            <Text textStyle={'subheaderHighlight'} mb={4} pointerEvents="auto">
                 Rotate the model by dragging.
             </Text>
             <Box p={5} as="div" animation={`${halfArcAnimation} infinite 3s ease-in-out`}>
-                <Icon as={MdMouse} boxSize={{ base: 4, md: 6 }} />
+                <Icon as={MdMouse} boxSize={{ base: 4, md: 6 }} color={'brand.50'} />
             </Box>
         </Box>
     );

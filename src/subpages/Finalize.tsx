@@ -1,20 +1,4 @@
-import {
-    Box,
-    Button,
-    Flex,
-    HStack,
-    Icon,
-    Input,
-    Popover,
-    PopoverBody,
-    PopoverCloseButton,
-    PopoverContent,
-    PopoverTrigger,
-    Select,
-    Text,
-    useDisclosure,
-    useToast,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Icon, Select, Text, useToast } from '@chakra-ui/react';
 import { useForceUpdate } from 'framer-motion';
 import React, { ChangeEvent, useEffect } from 'react';
 import { BiCopy } from 'react-icons/bi';
@@ -51,8 +35,6 @@ export const Finalize = ({
 
     const [, copy] = useCopyToClipboard();
     const toast = useToast();
-
-    const { isOpen, onToggle, onClose } = useDisclosure();
 
     const [volume, setVolume] = React.useState<number | null>(null);
     const [reload, i] = useForceUpdate();
@@ -93,7 +75,7 @@ export const Finalize = ({
 
     const [selectedOption, setSelectedOption] = React.useState('');
 
-    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const handleSaving = (e: ChangeEvent<HTMLSelectElement>) => {
         const newValue = e.target.value;
         const option = exportOptions.find((option) => option.value === newValue);
         if (option && meshRef.current) {
@@ -126,10 +108,12 @@ export const Finalize = ({
                         <HStack color="white" p={3} bg="red.400" boxShadow={'md'} borderRadius="5" align="start">
                             <Icon as={FaBug} w={5} h={5} paddingTop={1} color="brand.200" />
                             <Box>
-                                <Text textStyle="subheaderHighlight" size={'lg'}>
+                                <Text textStyle="subheaderHighlight" size={'lg'} color="brand.200">
                                     An error occurred when exporting the file as {option.label}
                                 </Text>
-                                <Text textStyle="body">{(error as Error).message}</Text>
+                                <Text textStyle="body" color="brand.200">
+                                    {(error as Error).message}
+                                </Text>
                             </Box>
                         </HStack>
                     ),
@@ -137,6 +121,50 @@ export const Finalize = ({
             }
         }
         setSelectedOption('');
+    };
+
+    const handleCopying = async () => {
+        try {
+            const share = window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
+            await copy(share);
+            toast({
+                position: 'bottom',
+                status: 'success',
+                duration: 7000,
+                render: () => (
+                    <HStack color="white" p={3} bg="green.400" boxShadow={'md'} borderRadius="5" align="start">
+                        <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
+                        <Box>
+                            <Text textStyle="subheaderHighlight" size={'lg'} color="brand.200">
+                                Design saved!
+                            </Text>
+                            <Text textStyle="body" color="brand.200">
+                                Design link saved to your clipboard.
+                            </Text>
+                        </Box>
+                    </HStack>
+                ),
+            });
+        } catch (error) {
+            toast({
+                position: 'bottom',
+                status: 'error',
+                duration: 7000,
+                render: () => (
+                    <HStack color="white" p={3} bg="red.400" boxShadow={'md'} borderRadius="5" align="start">
+                        <Icon as={FaBug} w={5} h={5} paddingTop={1} color="brand.200" />
+                        <Box>
+                            <Text textStyle="subheaderHighlight" size={'lg'} color="brand.200">
+                                An error occurred when copying the design link!
+                            </Text>
+                            <Text textStyle="body" color="brand.200">
+                                {(error as Error).message}
+                            </Text>
+                        </Box>
+                    </HStack>
+                ),
+            });
+        }
     };
 
     return (
@@ -152,14 +180,14 @@ export const Finalize = ({
                         fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                         placeholder="Save 3D model"
                         bg="brand.200"
+                        color="brand.50"
                         border="none"
-                        size="md"
                         cursor="pointer"
                         shadow={'lg'}
                         paddingTop={2}
                         paddingBottom={4}
                         _hover={{ bg: 'brand.400' }}
-                        onChange={handleChange}
+                        onChange={handleSaving}
                         value={selectedOption}
                     >
                         {exportOptions.map((option) => (
@@ -169,109 +197,36 @@ export const Finalize = ({
                         ))}
                     </Select>
 
-                    <Popover
-                        returnFocusOnClose={false}
-                        isOpen={isOpen}
-                        onClose={onClose}
-                        placement="bottom-end"
-                        closeOnBlur={false}
+                    <Button
+                        rightIcon={<BiCopy />}
+                        size="md"
+                        textStyle="bodyHighlight"
+                        bg="brand.200"
+                        w={44}
+                        shadow={'lg'}
+                        _hover={{ bg: 'brand.400' }}
+                        onClick={handleCopying}
                     >
-                        <PopoverTrigger>
-                            <Button
-                                rightIcon={<BiCopy />}
-                                size="md"
-                                textStyle="bodyHighlight"
-                                bg="brand.200"
-                                w={44}
-                                shadow={'lg'}
-                                _hover={{ bg: 'brand.400' }}
-                                onClick={async () => {
-                                    try {
-                                        const share =
-                                            window.location.href + `?config=${btoa(JSON.stringify(parameters))}`;
-                                        await copy(share);
-                                        toast({
-                                            position: 'bottom',
-                                            status: 'success',
-                                            duration: 7000,
-                                            render: () => (
-                                                <HStack
-                                                    color="white"
-                                                    p={3}
-                                                    bg="green.400"
-                                                    boxShadow={'md'}
-                                                    borderRadius="5"
-                                                    align="start"
-                                                >
-                                                    <Icon as={FaCheck} w={5} h={5} paddingTop={1} color="brand.200" />
-                                                    <Box>
-                                                        <Text
-                                                            textStyle="subheaderHighlight"
-                                                            size={'lg'}
-                                                            color="brand.200"
-                                                        >
-                                                            Design saved!
-                                                        </Text>
-                                                        <Text textStyle="body" color="brand.200">
-                                                            Design link saved to your clipboard.
-                                                        </Text>
-                                                    </Box>
-                                                </HStack>
-                                            ),
-                                        });
-                                    } catch (error) {
-                                        onToggle();
-                                    }
-                                }}
-                            >
-                                <Text
-                                    textStyle={'bodyHighlight'}
-                                    fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                                    textAlign="left"
-                                    w="full"
-                                >
-                                    Copy Configuration
-                                </Text>
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                            <PopoverCloseButton color={'brand.200'} />
-                            <PopoverBody bg="brand.400" boxShadow={'md'} borderRadius="5">
-                                <Text fontFamily={'heading'} fontWeight="500" size={'lg'} color="white">
-                                    Design saved!
-                                </Text>
-                                <Text
-                                    fontFamily={'body'}
-                                    fontWeight="400"
-                                    color="white"
-                                    align="start"
-                                    paddingBottom={2}
-                                >
-                                    Here you can copy the link to your design.
-                                    <br />
-                                    Don't forget to set dimensions to 'mm' before printing.
-                                </Text>
-                                <Input
-                                    bg={'brand.200'}
-                                    focusBorderColor="brand.200"
-                                    value={window.location.href + `?config=${btoa(JSON.stringify(parameters))}`}
-                                    isDisabled
-                                    cursor="text !important"
-                                />
-                            </PopoverBody>
-                        </PopoverContent>
-                    </Popover>
+                        <Text
+                            textStyle={'bodyHighlight'}
+                            fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                            textAlign="left"
+                            w="full"
+                        >
+                            Copy Configuration
+                        </Text>
+                    </Button>
                 </Box>
 
                 <Box>
-                    <Text paddingTop={2} fontFamily={'heading'} fontWeight="500" fontSize={{ base: 'sm', md: 'md' }}>
+                    <Text paddingTop={2} textStyle={'bodyHighlight'}>
                         Dimensions
-                        <Text as="span" fontFamily={'heading'} fontWeight="400" fontSize={{ base: 'xs', md: 'sm' }}>
+                        <Text as="span" textStyle={'body'}>
                             <br />
                             (width x depth x height)
                         </Text>
                     </Text>
-                    <Text fontSize={{ base: 'xs', md: 'sm' }}>
+                    <Text textStyle={'body'}>
                         {boundingBox !== null
                             ? `${boundingBox.width.toFixed(1)} x ${boundingBox.depth.toFixed(
                                   1,
@@ -281,29 +236,14 @@ export const Finalize = ({
 
                     {volume !== null && (
                         <>
-                            <Text
-                                paddingTop={2}
-                                fontFamily={'heading'}
-                                fontWeight="500"
-                                fontSize={{ base: 'sm', md: 'md' }}
-                            >
+                            <Text paddingTop={2} textStyle={'bodyHighlight'}>
                                 Estimated {currentMaterial.name} price
-                                <Text
-                                    as="span"
-                                    fontFamily={'heading'}
-                                    fontWeight="400"
-                                    fontSize={{ base: 'xs', md: 'sm' }}
-                                >
+                                <Text as="span" textStyle={'body'}>
                                     <br />
                                     (based on volume)
                                 </Text>
                             </Text>
-                            <Text
-                                fontFamily={'heading'}
-                                fontWeight="400"
-                                fontSize={{ base: 'lg', md: '2xl' }}
-                                paddingBottom={10}
-                            >
+                            <Text textStyle={'header2'} paddingBottom={10}>
                                 Approx. €{(volume * currentMaterial.additionalCost + 0.01).toFixed(2)}
                             </Text>
                         </>
