@@ -33,7 +33,11 @@ export const LookbookPage = () => {
                         {projects
                             .filter((project) => project.price !== 'TBA')
                             .map((selectedProject) => (
-                                <Box as={Link} to={`/configurator?config=${selectedProject.url}`}>
+                                <Box
+                                    key={selectedProject.id}
+                                    as={Link}
+                                    to={`/configurator?config=${selectedProject.url}`}
+                                >
                                     <Box
                                         _hover={{
                                             '.image-overlay': {
@@ -48,7 +52,7 @@ export const LookbookPage = () => {
                                         bg="brand.200"
                                     >
                                         <Image
-                                            key={selectedProject.id}
+                                            key={selectedProject.id + '-image'}
                                             display="inline-block"
                                             src={selectedProject.image}
                                             alt={selectedProject.id.toString()}
