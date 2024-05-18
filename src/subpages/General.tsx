@@ -66,7 +66,7 @@ export const General = ({
                     <Select
                         w={{ base: 36, md: 44 }}
                         textStyle={'body'}
-                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                        fontSize={{ base: '2xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                         bg="brand.200"
                         border="none"
                         color="brand.50"
@@ -102,7 +102,7 @@ export const General = ({
                             <Select
                                 w={{ base: 36, md: 44 }}
                                 textStyle={'body'}
-                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                fontSize={{ base: '2xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                                 value={dropdownParameters[parameterName]?.value}
                                 bg="brand.200"
                                 border="none"
@@ -140,7 +140,7 @@ export const General = ({
                             <Select
                                 w={{ base: 36, md: 44 }}
                                 textStyle={'body'}
-                                fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                                fontSize={{ base: '2xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                                 value={dropdownParameters[parameterName]?.value}
                                 bg="brand.200"
                                 border="none"

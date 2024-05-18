@@ -64,12 +64,12 @@ const theme = extendTheme({
         },
         button: {
             fontFamily: 'heading',
-            fontSize: { base: '2xs', sm: 'xs', md: 'sm', lg: 'md' },
+            fontSize: { base: 'xs', sm: 'xs', md: 'sm', lg: 'md' },
             fontWeight: '400',
         },
         body: {
             fontFamily: 'body',
-            fontSize: { base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' },
+            fontSize: { base: '2xs', sm: 'xs', md: 'xs', lg: 'sm' },
             fontWeight: '400',
             maxW: '2xl',
         },
@@ -88,7 +88,7 @@ const theme = extendTheme({
                     fontWeight: '450',
                     fontFamily: 'heading',
                     fontSize: {
-                        base: '2xs',
+                        base: 'xs',
                         sm: 'xs',
                         md: 'sm',
                         lg: 'md',
@@ -137,7 +137,7 @@ const theme = extendTheme({
                     color: 'brand.50',
                     fontWeight: '400',
                     fontSize: {
-                        base: '3xs',
+                        base: '2xs',
                         sm: '2xs',
                         md: 'xs',
                         lg: 'sm',

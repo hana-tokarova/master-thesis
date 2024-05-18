@@ -40,7 +40,7 @@ export const HomePage = () => {
                             Tool for customizable jewelry creation.
                         </Text>
 
-                        <Text textStyle="header1" paddingTop={16} style={{ whiteSpace: 'nowrap' }}>
+                        <Text textStyle="header1" paddingTop={16} whiteSpace={{ base: 'normal', md: 'nowrap' }}>
                             / Choose / Customize / Export
                         </Text>
 
@@ -54,7 +54,7 @@ export const HomePage = () => {
                             Create your jewelry
                         </Button>
 
-                        <Text textStyle="header1" paddingTop={12} style={{ whiteSpace: 'nowrap' }}>
+                        <Text textStyle="header1" paddingTop={12} whiteSpace={{ base: 'normal', md: 'nowrap' }}>
                             / Multiple collections / Multiple possibilities
                         </Text>
 
@@ -130,7 +130,7 @@ export const HomePage = () => {
                     <Image
                         w={{ base: '90%', lg: '80%' }}
                         marginTop={{ base: 0, md: 16 }}
-                        marginRight="5%"
+                        marginRight={{ base: '0%', md: '5%' }}
                         src={`${process.env.PUBLIC_URL}/images/visuals/visuals1.png`}
                         alt="Visuals2"
                     />

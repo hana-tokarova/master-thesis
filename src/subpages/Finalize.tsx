@@ -188,8 +188,8 @@ export const Finalize = ({
                     <Select
                         w={44}
                         textStyle={'bodyHighlight'}
-                        fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
-                        placeholder="Save 3D model"
+                        fontSize={{ base: '2xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                        placeholder="Save 3D Model"
                         bg="brand.200"
                         color="brand.50"
                         border="none"
@@ -220,7 +220,7 @@ export const Finalize = ({
                     >
                         <Text
                             textStyle={'bodyHighlight'}
-                            fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                            fontSize={{ base: '2xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                             textAlign="left"
                             w="full"
                         >

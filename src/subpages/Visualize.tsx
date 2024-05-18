@@ -52,7 +52,7 @@ export const Visualize = ({
                         <Select
                             w={{ base: 36, md: 44 }}
                             textStyle="body"
-                            fontSize={{ base: '3xs', sm: '2xs', md: 'xs', lg: 'sm' }}
+                            fontSize={{ base: '2xs', sm: '2xs', md: 'xs', lg: 'sm' }}
                             bg="brand.200"
                             border="none"
                             value={currentMaterial.name}
