@@ -10,7 +10,7 @@ export const AboutPage = () => {
         <Center>
             <Box paddingTop={9} paddingBottom={28}>
                 <Stack w="80vw" direction={{ base: 'column', md: 'row' }}>
-                    <Box>
+                    <Box w={{ base: '80vw', md: '40vw' }} minW={'40vw'}>
                         <Text textStyle={'header1'}>/ About</Text>
 
                         <Text textStyle={'body'} maxW="xl" paddingTop={2}>
